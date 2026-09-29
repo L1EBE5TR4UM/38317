@@ -168,7 +168,7 @@
 
 <header>
   <h1>LOG LIBRARY</h1>
-  <p class="header-sub">Last Updated &middot; September 10, 2026</p>
+  <p class="header-sub">Last Updated &middot; September 29, 2026</p>
 </header>
 
 <main>
@@ -200,7 +200,7 @@
           <div class="full a-only"><label>Hero Subtitle (A 타입 전용, HTML 가능)</label>
             <input id="f-subtitle" type="text" value="a brief tale captures a moment trembling in secrecy." />
           </div>
-          <div class="full"><label>Footer 텍스트 (HTML 가능, 비우면 © Your Name 자동 생성)</label>
+          <div class="full"><label>Footer 텍스트 (HTML 가능, 비우면 Your Name 자동 생성)</label>
             <input id="f-footer" type="text" placeholder="예: &copy; 2025 Your Name &middot; do not repost" />
           </div>
         </div>
@@ -840,7 +840,7 @@ ${tags.map(t=>`<span style="display:inline-block;padding:3px 10px;margin:0 4px 4
     const footerCustom = ($('f-footer').value || '').trim();
     const footerText = footerCustom
       ? footerCustom
-      : (author ? `&copy; ${escapeHtml(author)} &middot; All rights reserved` : '');
+      : (author ? escapeHtml(author) : '');
     const footer = footerText ? `
   <div style="margin-top:28px;padding:14px 0 30px 0;border-top:1px solid ${hexToRgba(v.muted,0.35)};text-align:center;color:${v.muted};">
     <div style="font-size:12px;">
@@ -920,7 +920,7 @@ ${tagsHTML}${bodyHTML}
   const footerCustomA = ($('f-footer').value || '').trim();
   const footerTextA = footerCustomA
     ? footerCustomA
-    : (author ? `&copy; ${escapeHtml(author)} &middot; All rights reserved` : '');
+    : (author ? escapeHtml(author) : '');
   const footerB = footerTextA ? `
 <div style="margin-top: 22px; padding: 14px 0 30px 0; border-top: 1px solid ${hexToRgba(v.muted,0.35)}; text-align: center; color: ${v.muted};">
 <div style="font-size: 12px; line-height: 1.2;"><span style="font-size: 12px;">${footerTextA}</span></div>
