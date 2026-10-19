@@ -127,7 +127,7 @@
   /* preview / output */
   .preview-wrap{padding:18px}
   .preview-frame{
-    background:#1f1d1a; border-radius:14px; overflow:auto; max-height:680px;
+    background:#1f1d1a; border-radius:14px; overflow:visible;
     border:1px solid var(--line); padding:18px;
     box-shadow: inset 0 1px 0 rgba(255,235,200,.05), 0 20px 60px rgba(0,0,0,.5);
   }
@@ -168,7 +168,7 @@
 
 <header>
   <h1>LOG LIBRARY</h1>
-  <p class="header-sub">Last Updated &middot; September 29, 2026</p>
+  <p class="header-sub">Last Updated &middot; October 19, 2026</p>
 </header>
 
 <main>
@@ -238,6 +238,7 @@
           <div><label>Body Font Size (px)</label><input id="f-fs" type="number" step="0.1" value="15.5" /></div>
           <div><label>Line Height</label><input id="f-lh" type="number" step="0.05" value="2" /></div>
           <div><label>Letter Spacing (px)</label><input id="f-ls" type="number" step="0.1" value="-0.9" /></div>
+          <div><label>Card Body Height (px)</label><input id="f-cardh" type="number" value="420" /></div>
           <div><label>Body Font</label>
             <select id="f-font">
               <option value="'Noto Serif KR','Nanum Myeongjo','Apple Myungjo',Batang, Georgia, serif" selected>Noto Serif KR (기본)</option>
@@ -285,6 +286,9 @@ She laughs—pink silk catching the sun. "Playfulness," I whisper, "masks a code
         </label>
         <label class="check" style="margin-top:8px">
           <input id="f-smartquote" type="checkbox" checked /> 스마트 따옴표 / 말줄임표 자동 변환 (<code>"</code>→<code>“ ”</code>, <code>'</code>→<code>‘ ’</code>, <code>...</code>→<code>…</code>)
+        </label>
+        <label class="check" style="margin-top:8px">
+          <input id="f-boxscroll" type="checkbox" checked /> 박스 스크롤 <span style="opacity:.7">(카드 높이 고정, 본문만 스크롤)</span>
         </label>
       </div>
     </div>
@@ -710,6 +714,8 @@ function buildHTML(){
   const progress = progressEl ? Math.min(100, Math.max(0, parseInt(progressEl.value || 0, 10))) : 0;
 
   const mw    = parseInt($('f-mw').value || 650, 10);
+  const boxScroll = $('f-boxscroll').checked;
+  const cardH = parseInt($('f-cardh').value || 420, 10);
   const fs    = parseFloat($('f-fs').value || 15);
   const lh    = parseFloat($('f-lh').value || 2);
   const ls    = parseFloat($('f-ls').value || -0.9);
@@ -832,9 +838,19 @@ function buildHTML(){
 ${tags.map(t=>`<span style="display:inline-block;padding:3px 10px;margin:0 4px 4px 0;border-radius:999px;background:${v.hl};color:${blockInk};font-size:11px;letter-spacing:0.06em;" data-dia="1">${escapeHtml(t)}</span>`).join('')}
 </div>` : '';
 
+    const scrollUid = eqToken(v.muted + '|' + v.card);
+    const scrollStyleB = boxScroll ? `<div><style>
+.la-scroll-${scrollUid}{scrollbar-width:thin;scrollbar-color:${hexToRgba(v.muted,0.45)} transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar{width:6px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-track{background:transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb{background:${hexToRgba(v.muted,0.45)};border-radius:999px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb:hover{background:${hexToRgba(v.muted,0.7)};}
+</style></div>` : '';
     const cardBlock = `
   <div style="background-color:${v.card};border-radius:12px;padding:36px 30px;margin-top:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05); color:${v.text};">
-    ${tagsHTML}${bodyHTML}
+    ${boxScroll ? `${tagsHTML}<div class="la-scroll-${scrollUid}" style="max-height: ${cardH}px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+${bodyHTML}
+</div>` : `${tagsHTML}${bodyHTML}`}
   </div>`;
 
     const footerCustom = ($('f-footer').value || '').trim();
@@ -848,7 +864,7 @@ ${tags.map(t=>`<span style="display:inline-block;padding:3px 10px;margin:0 4px 4
     </div>
   </div>` : '';
 
-    return `${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;font-family:${font};color:${v.text};background-color:${v.outerBg};border-radius:14px;">
+    return `${scrollStyleB}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;font-family:${font};color:${v.text};background-color:${v.outerBg};border-radius:14px;">
   <div style="border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 ${heroBlock}
   </div>
@@ -912,9 +928,12 @@ ${playTable}
 ${tags.map(t=>`<span style="display:inline-block; padding:3px 10px; margin:0 4px 4px 0; border-radius:999px; background:${v.hl}; color:${blockInk}; font-size:11px; letter-spacing:0.06em;" data-dia="1">${escapeHtml(t)}</span>`).join('')}
 </div>` : '';
 
+  const scrollUid = eqToken(v.muted + '|' + v.card);
   const cardBlockB = `
 <div style="background-color: ${v.card}; border-radius: 12px; padding: 25px 20px; margin: -45px 18px 0 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.2); color: ${v.text};">
-${tagsHTML}${bodyHTML}
+${boxScroll ? `${tagsHTML}<div class="la-scroll-${scrollUid}" style="max-height: ${cardH}px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+${bodyHTML}
+</div>` : `${tagsHTML}${bodyHTML}`}
 </div>`;
 
   const footerCustomA = ($('f-footer').value || '').trim();
@@ -934,7 +953,12 @@ ${tagsHTML}${bodyHTML}
 .${eqBar}:nth-child(3){height:7px;animation-delay:0.36s;}
 .${eqBar}:nth-child(4){height:13px;animation-delay:0.09s;}
 .${eqBar}:nth-child(5){height:5px;animation-delay:0.27s;}
-@keyframes ${eqAnim}{from{transform:scaleY(0.35)}to{transform:scaleY(1)}}
+@keyframes ${eqAnim}{from{transform:scaleY(0.35)}to{transform:scaleY(1)}}${boxScroll ? `
+.la-scroll-${scrollUid}{scrollbar-width:thin;scrollbar-color:${hexToRgba(v.muted,0.45)} transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar{width:6px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-track{background:transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb{background:${hexToRgba(v.muted,0.45)};border-radius:999px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb:hover{background:${hexToRgba(v.muted,0.7)};}` : ''}
 </style></div>`;
 
   return `${styleBlock}${thumbImg}\n<div style="max-width: ${mw}px; margin: 0 auto; padding: 0; font-family: ${font}; color: ${v.text}; background-color: ${v.outerBg}; border-radius: 14px;">
