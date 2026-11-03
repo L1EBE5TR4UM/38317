@@ -131,6 +131,11 @@
     border:1px solid var(--line); padding:18px;
     box-shadow: inset 0 1px 0 rgba(255,235,200,.05), 0 20px 60px rgba(0,0,0,.5);
   }
+  .preview-frame.is-transparent{
+    background-color:#ffffff;
+    background-image:linear-gradient(45deg,#ececec 25%,transparent 25%),linear-gradient(-45deg,#ececec 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ececec 75%),linear-gradient(-45deg,transparent 75%,#ececec 75%);
+    background-size:20px 20px; background-position:0 0,0 10px,10px -10px,-10px 0;
+  }
   .output-wrap{padding:0 18px 18px}
   .output-head{display:flex; justify-content:space-between; align-items:center; margin:6px 0 8px}
   .output-head strong{
@@ -235,22 +240,25 @@
           <div><label>스토리 항목명</label><input id="f-cstory" type="text" value="INTRODUCTION" /></div>
         </div>
         <label class="check" style="margin-top:12px">
+          <input id="f-ctransparent" type="checkbox" checked /> 완전 투명 배경 <span style="opacity:.7">(해제하면 테마의 바깥 배경색을 깔아줌)</span>
+        </label>
+        <label class="check" style="margin-top:8px">
           <input id="f-cswap" type="checkbox" /> 이름 색 반전 <span style="opacity:.7">(기본: USER = 대사 강조 배경색, CHAR = 플레이 버튼 배경색)</span>
         </label>
         <div class="cast-grid" style="margin-top:16px">
           <div class="cast-col">
             <h4>USER</h4>
             <div><label>분류</label><input id="f-u-role" type="text" value="USER" /></div>
-            <div><label>이름</label><input id="f-u-name" type="text" value="William" /></div>
+            <div><label>이름</label><input id="f-u-name" type="text" value="Name" /></div>
             <div><label>사진 URL</label><input id="f-u-img" type="url" placeholder="https://..." /></div>
-            <div><label>소개</label><textarea id="f-u-desc">가세가 기울고도 발레를 시키던 집에서 진로를 바꾸겠다고 했다가 회피 성향이 터져 가출했다. 박사 진학까지 혼자 벌어서 학비를 대는 중. 로잘린드를 악덕 부르주아라 부르며 막 대한다.</textarea></div>
+            <div><label>소개</label><textarea id="f-u-desc" placeholder="인물 소개"></textarea></div>
           </div>
           <div class="cast-col">
             <h4>CHAR</h4>
             <div><label>분류</label><input id="f-c-role" type="text" value="CHAR" /></div>
-            <div><label>이름</label><input id="f-c-name" type="text" value="Rosalind" /></div>
+            <div><label>이름</label><input id="f-c-name" type="text" value="Name" /></div>
             <div><label>사진 URL</label><input id="f-c-img" type="url" placeholder="https://..." /></div>
-            <div><label>소개</label><textarea id="f-c-desc">취임하자마자 브렉시트가 터져 회사를 정리해고했고, 다음 날 이사회 성과급 파티를 연 걸로 죄책감을 안고 산다. 불행을 당연한 것처럼 받아들이며 살다가 자신을 함부로 대하는 윌리엄이 좋아졌다.</textarea></div>
+            <div><label>소개</label><textarea id="f-c-desc" placeholder="인물 소개"></textarea></div>
           </div>
         </div>
         <div class="help" style="margin-top:6px">
@@ -905,7 +913,9 @@ ${bodyHTML}
 </div>
 </div>` : '';
 
-    return `<div style="max-width:${mw}px;margin:0 auto;padding:8px 0;font-family:${sans};color:${ink};word-break:keep-all;">
+    const transparent = $('f-ctransparent').checked;
+    const bgRule = transparent ? 'padding:8px 0;' : `padding:32px 24px;background-color:${v.outerBg};border-radius:14px;box-sizing:border-box;`;
+    return `<div style="max-width:${mw}px;margin:0 auto;${bgRule}font-family:${sans};color:${ink};word-break:keep-all;">
 ${head}
 ${castTable}
 ${storyBlock}
@@ -1124,8 +1134,8 @@ function readableInk(bgHex, preferred){
 /* ---------- RENDER ---------- */
 function render(){
   const html = buildHTML();
-  // C TYPE은 배경이 투명하므로, 미리보기에서는 테마의 바깥 배경색 위에 보여준다
-  $('previewFrame').style.background = (state.type === 'C') ? state.themeVars.outerBg : '';
+  // C TYPE 미리보기: 배경색 없이 투명 체크무늬 위에 표시 (출력 HTML에는 영향 없음)
+  $('previewFrame').classList.toggle('is-transparent', state.type === 'C');
   $('previewFrame').innerHTML = html;
   $('outputCode').textContent = html;
 }
