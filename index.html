@@ -247,11 +247,11 @@
           <input id="f-ctransparent" type="checkbox" checked /> 완전 투명 배경 <span style="opacity:.7">(해제하면 테마의 바깥 배경색을 깔아줌)</span>
         </label>
         <label class="check" style="margin-top:8px">
-          <input id="f-cswap" type="checkbox" /> 이름 색 반전 <span style="opacity:.7">(기본: USER = 대사 강조 배경색, CHAR = 플레이 버튼 배경색)</span>
+          <input id="f-cswap" type="checkbox" /> 이름 색 반전 <span style="opacity:.7">(기본: CAST 1 = 대사 강조 배경색, CAST 2 = 플레이 버튼 배경색)</span>
         </label>
         <div class="cast-grid" style="margin-top:16px">
           <div class="cast-col">
-            <h4>USER</h4>
+            <h4>CAST 1</h4>
             <div><label>분류</label><input id="f-u-role" type="text" value="USER" /></div>
             <div><label>이름</label><input id="f-u-name" type="text" value="Name" /></div>
             <div><label>사진 URL</label><input id="f-u-img" type="url" placeholder="https://..." /></div>
@@ -263,7 +263,7 @@
             <div><label>소개</label><textarea id="f-u-desc" placeholder="인물 소개"></textarea></div>
           </div>
           <div class="cast-col">
-            <h4>CHAR</h4>
+            <h4>CAST 2</h4>
             <div><label>분류</label><input id="f-c-role" type="text" value="CHAR" /></div>
             <div><label>이름</label><input id="f-c-name" type="text" value="Name" /></div>
             <div><label>사진 URL</label><input id="f-c-img" type="url" placeholder="https://..." /></div>
@@ -276,8 +276,8 @@
           </div>
         </div>
         <div class="help" style="margin-top:6px">
-          바탕은 투명합니다(블로그 배경이 그대로 보임). 소개글은 항상 양쪽 정렬이고, 이름 색은 테마를 따릅니다 (USER = 대사 강조 배경색, CHAR = 플레이 버튼 배경색, 반전 가능).<br>
-          소개글과 아래 본문(INTRODUCTION)에도 <code>"대사"</code> · <code>'속마음'</code> · <code>**굵게**</code> 규칙이 그대로 적용됩니다.
+          바탕은 투명합니다(블로그 배경이 그대로 보임). 소개글은 항상 양쪽 정렬이고, 이름 색은 테마를 따릅니다 (CAST 1 = 대사 강조 배경색, CAST 2 = 플레이 버튼 배경색, 반전 가능).<br>
+          C TYPE에서는 <code>"대사"</code> · <code>'속마음'</code>에 강조 배경을 씌우지 않고 일반 글자로 표시합니다. <code>**굵게**</code> · <code>*기울임*</code>은 그대로 적용됩니다.
         </div>
       </div>
 
@@ -734,7 +734,7 @@ function escapeHtml(s){
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function processInline(text, v){
+function processInline(text, v, plainQuotes){
   let h = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -746,6 +746,8 @@ function processInline(text, v){
   h = h.replace(/\*\*\*([^*\n]+?)\*\*\*/g, '<b><i>$1</i></b>');
   h = h.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
+  // plainQuotes: C TYPE 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
+  if (plainQuotes) return h.replace(/\n/g, '<br>');
   const diaInk = readableInk(v.hl, v.text);
   h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, inner)=>{
     return `<span data-dia="1" style="background-color:${v.hl};color:${diaInk};padding:0 6px;border-radius:4px;">&quot;${inner}&quot;</span>`;
@@ -829,7 +831,7 @@ function buildHTML(){
       name = tokens[1];
       message = '';
     }
-    const messageHTML = message ? processInline(message, v) : '';
+    const messageHTML = message ? processInline(message, v, T === 'C') : '';
 
     const isSent = (kind === 'sent');
     const bubbleBg     = isSent ? '#007aff' : '#e5e5ea';
@@ -874,7 +876,7 @@ function buildHTML(){
       const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
       return `<p style="${pStyle}"${dataKe}><span style="display:inline-block;width:100%;border-top:1px solid ${hexToRgba(v.muted,0.35)};margin:6px 0">&nbsp;</span></p>`;
     }
-    const inner = processInline(trimmed, v);
+    const inner = processInline(trimmed, v, T === 'C');
     const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
     return `<p style="${pStyle}"${dataKe}>${inner}</p>`;
   }).filter(Boolean);
@@ -912,7 +914,7 @@ function buildHTML(){
 ${avatar(c)}
 <div style="font-size:11px;font-weight:700;letter-spacing:0.16em;color:${roleInk};margin:0 0 4px 0;">${escapeHtml(c.role||'')}</div>
 <div style="font-size:15px;font-weight:900;letter-spacing:0.06em;color:${c.color};margin:0 0 10px 0;">${escapeHtml((c.name||'').toUpperCase())}</div>
-<div style="font-size:13.5px;line-height:1.85;color:${ink};text-align:justify;text-align-last:left;word-break:normal;">${processInline(c.desc.trim(), v)}</div>
+<div style="font-size:13.5px;line-height:1.85;color:${ink};text-align:justify;text-align-last:left;word-break:normal;">${processInline(c.desc.trim(), v, true)}</div>
 </td>`;
 
     const head = `<div style="text-align:center;margin:0 0 36px 0;">
