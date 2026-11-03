@@ -76,8 +76,11 @@
     font-family:inherit; font-size:13px; letter-spacing:.05em; transition:.2s;
   }
   .tabs button.active{background:var(--ink); color:#1a1612; box-shadow:0 2px 10px rgba(0,0,0,.4)}
-  .type-toggle button.active{background:#2c2620; color:var(--ink)}
-  .type-toggle button{font-size:12px; letter-spacing:.12em; padding:8px 14px}
+  .type-picker{display:inline-flex; align-items:center; gap:10px}
+  .type-label{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:12px; letter-spacing:.28em; color:var(--ink-mute)}
+  .type-toggle{gap:2px}
+  .type-toggle button{width:34px; height:30px; padding:0; font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:600; letter-spacing:0}
+  .type-toggle button.active{background:#2c2620; color:var(--ink); box-shadow:inset 0 0 0 1px rgba(217,200,156,.35)}
 
   .section{padding:18px 22px; border-bottom:1px solid var(--line)}
   .section:last-child{border-bottom:0}
@@ -131,11 +134,6 @@
     border:1px solid var(--line); padding:18px;
     box-shadow: inset 0 1px 0 rgba(255,235,200,.05), 0 20px 60px rgba(0,0,0,.5);
   }
-  .preview-frame.is-transparent{
-    background-color:#ffffff;
-    background-image:linear-gradient(45deg,#ececec 25%,transparent 25%),linear-gradient(-45deg,#ececec 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ececec 75%),linear-gradient(-45deg,transparent 75%,#ececec 75%);
-    background-size:20px 20px; background-position:0 0,0 10px,10px -10px,-10px 0;
-  }
   .output-wrap{padding:0 18px 18px}
   .output-head{display:flex; justify-content:space-between; align-items:center; margin:6px 0 8px}
   .output-head strong{
@@ -180,7 +178,7 @@
 
 <header>
   <h1>LOG LIBRARY</h1>
-  <p class="header-sub">Last Updated &middot; October 19, 2026</p>
+  <p class="header-sub">Last Updated &middot; November 3, 2026</p>
 </header>
 
 <main>
@@ -191,10 +189,13 @@
         <button class="active" data-tab="inputs">Inputs</button>
         <button data-tab="styles">Styles &amp; Presets</button>
       </div>
-      <div class="type-toggle" id="typeToggle">
-        <button class="active" data-type="A">A TYPE</button>
-        <button data-type="B">B TYPE</button>
-        <button data-type="C">C TYPE</button>
+      <div class="type-picker">
+        <span class="type-label">TYPE</span>
+        <div class="type-toggle" id="typeToggle">
+          <button class="active" data-type="A" title="A TYPE · 자막 + Play/EQ 바 (서사 로그 / 스토리 게시용)" aria-label="A TYPE">A</button>
+          <button data-type="B" title="B TYPE · Prompt·Model·Info 메타 바 (봇 카탈로그 / 캐릭터 소개용)" aria-label="B TYPE">B</button>
+          <button data-type="C" title="C TYPE · 투명 배경 인물 소개 헤더 (USER/CHAR + INTRODUCTION)" aria-label="C TYPE">C</button>
+        </div>
       </div>
     </div>
 
@@ -1134,9 +1135,12 @@ function readableInk(bgHex, preferred){
 /* ---------- RENDER ---------- */
 function render(){
   const html = buildHTML();
-  // C TYPE 미리보기: 배경색 없이 투명 체크무늬 위에 표시 (출력 HTML에는 영향 없음)
-  $('previewFrame').classList.toggle('is-transparent', state.type === 'C');
-  $('previewFrame').innerHTML = html;
+  // C TYPE + 완전 투명 배경: A/B 미리보기처럼 보이도록 미리보기에서만 테마 바깥 배경 카드 위에 얹어 보여줌
+  // (복사되는 출력 HTML에는 배경이 들어가지 않음)
+  const previewTransparentC = state.type === 'C' && $('f-ctransparent').checked;
+  $('previewFrame').innerHTML = previewTransparentC
+    ? `<div style="background-color:${state.themeVars.outerBg};border-radius:14px;padding:32px 24px;">${html}</div>`
+    : html;
   $('outputCode').textContent = html;
 }
 
