@@ -234,6 +234,9 @@
           </div>
           <div><label>스토리 항목명</label><input id="f-cstory" type="text" value="INTRODUCTION" /></div>
         </div>
+        <label class="check" style="margin-top:12px">
+          <input id="f-cswap" type="checkbox" /> 이름 색 반전 <span style="opacity:.7">(기본: USER = 대사 강조 배경색, CHAR = 플레이 버튼 배경색)</span>
+        </label>
         <div class="cast-grid" style="margin-top:16px">
           <div class="cast-col">
             <h4>USER</h4>
@@ -251,7 +254,7 @@
           </div>
         </div>
         <div class="help" style="margin-top:6px">
-          바탕은 투명합니다(블로그 배경이 그대로 보임). 소개글은 항상 양쪽 정렬이고, 이름 색은 테마를 따릅니다 (USER = Accent, CHAR = Muted).<br>
+          바탕은 투명합니다(블로그 배경이 그대로 보임). 소개글은 항상 양쪽 정렬이고, 이름 색은 테마를 따릅니다 (USER = 대사 강조 배경색, CHAR = 플레이 버튼 배경색, 반전 가능).<br>
           소개글과 아래 본문(INTRODUCTION)에도 <code>"대사"</code> · <code>'속마음'</code> · <code>**굵게**</code> 규칙이 그대로 적용됩니다.
         </div>
       </div>
@@ -853,20 +856,24 @@ function buildHTML(){
   //  C TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
   //  · 배경색 없음  · 두 인물은 2단 테이블로 모바일에서도 나란히
   //  · 사진 위치 옵션은 사진만 이동, 소개는 항상 양쪽 정렬
-  //  · 이름 색: USER = accent, CHAR = muted (테마 연동)
+  //  · 이름 색: USER = hl(대사 강조 배경), CHAR = accent(플레이 버튼 배경), 반전 가능
   // ===================================================================
   if (T === 'C'){
     const ink = v.text;
     const roleInk = hexToRgba(v.text, 0.5);
     const photoLeft = $('f-cphoto').value === 'left';
+    // 이름 색: USER = 대사 강조 배경(hl), CHAR = 플레이 버튼 배경(accent). 반전 체크 시 서로 바꿈
+    const swapName = $('f-cswap').checked;
+    const nameUser = swapName ? v.accent : v.hl;
+    const nameChar = swapName ? v.hl : v.accent;
     const cTitle = $('f-ctitle').value || '';
     const cSub   = $('f-csub').value || '';
     const cStory = $('f-cstory').value || '';
     const serif  = `'Noto Serif KR','Nanum Myeongjo',Georgia,serif`;
     const sans   = `Pretendard,'Pretendard Variable','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif`;
     const people = [
-      { role:$('f-u-role').value, name:$('f-u-name').value, img:($('f-u-img').value||'').trim(), desc:$('f-u-desc').value||'', color:v.accent },
-      { role:$('f-c-role').value, name:$('f-c-name').value, img:($('f-c-img').value||'').trim(), desc:$('f-c-desc').value||'', color:v.muted },
+      { role:$('f-u-role').value, name:$('f-u-name').value, img:($('f-u-img').value||'').trim(), desc:$('f-u-desc').value||'', color:nameUser },
+      { role:$('f-c-role').value, name:$('f-c-name').value, img:($('f-c-img').value||'').trim(), desc:$('f-c-desc').value||'', color:nameChar },
     ];
     const imgMargin = photoLeft ? 'margin:0 0 16px 0;' : 'margin:0 auto 16px auto;';
     const avatar = (c) => c.img
