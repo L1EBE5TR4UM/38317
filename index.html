@@ -165,6 +165,9 @@
   .cast-grid textarea{min-height:120px}
   .cast-col h4{margin:0 0 10px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:.24em; color:var(--ink-dim); font-weight:600}
   .cast-col > div{margin-bottom:10px}
+  .photo-adjust > div{margin-bottom:6px}
+  .photo-adjust label{text-transform:none; letter-spacing:.06em; font-size:12.5px; margin-bottom:2px}
+  .photo-adjust .rv{color:var(--accent); letter-spacing:0; font-weight:700; margin-left:4px}
   @media (max-width: 560px){ .cast-grid{grid-template-columns:1fr} }
   .help code{
     background:#0a0907; border:1px solid var(--line); padding:1px 5px;
@@ -252,6 +255,11 @@
             <div><label>분류</label><input id="f-u-role" type="text" value="USER" /></div>
             <div><label>이름</label><input id="f-u-name" type="text" value="Name" /></div>
             <div><label>사진 URL</label><input id="f-u-img" type="url" placeholder="https://..." /></div>
+            <div class="photo-adjust">
+              <div><label>Zoom <span class="rv"><span id="f-u-zoom-v">100</span>%</span></label><input id="f-u-zoom" type="range" min="100" max="300" step="1" value="100" /></div>
+              <div><label>Focus X (좌우) <span class="rv"><span id="f-u-fx-v">50</span>%</span></label><input id="f-u-fx" type="range" min="0" max="100" step="1" value="50" /></div>
+              <div><label>Focus Y (상하) <span class="rv"><span id="f-u-fy-v">50</span>%</span></label><input id="f-u-fy" type="range" min="0" max="100" step="1" value="50" /></div>
+            </div>
             <div><label>소개</label><textarea id="f-u-desc" placeholder="인물 소개"></textarea></div>
           </div>
           <div class="cast-col">
@@ -259,6 +267,11 @@
             <div><label>분류</label><input id="f-c-role" type="text" value="CHAR" /></div>
             <div><label>이름</label><input id="f-c-name" type="text" value="Name" /></div>
             <div><label>사진 URL</label><input id="f-c-img" type="url" placeholder="https://..." /></div>
+            <div class="photo-adjust">
+              <div><label>Zoom <span class="rv"><span id="f-c-zoom-v">100</span>%</span></label><input id="f-c-zoom" type="range" min="100" max="300" step="1" value="100" /></div>
+              <div><label>Focus X (좌우) <span class="rv"><span id="f-c-fx-v">50</span>%</span></label><input id="f-c-fx" type="range" min="0" max="100" step="1" value="50" /></div>
+              <div><label>Focus Y (상하) <span class="rv"><span id="f-c-fy-v">50</span>%</span></label><input id="f-c-fy" type="range" min="0" max="100" step="1" value="50" /></div>
+            </div>
             <div><label>소개</label><textarea id="f-c-desc" placeholder="인물 소개"></textarea></div>
           </div>
         </div>
@@ -634,6 +647,12 @@ THEME_KEYS.forEach(k=>{
   }
 });
 
+/* ---------- C TYPE 사진 조정 슬라이더 값 표시 ---------- */
+['u','c'].forEach(pre => ['zoom','fx','fy'].forEach(k => {
+  const el = $(`f-${pre}-${k}`), lbl = $(`f-${pre}-${k}-v`);
+  if (el && lbl) el.addEventListener('input', () => { lbl.textContent = el.value; });
+}));
+
 /* ---------- INPUT WIRING ---------- */
 document.querySelectorAll('input, select, textarea').forEach(el=>{
   el.addEventListener('input', render);
@@ -881,12 +900,13 @@ function buildHTML(){
     const serif  = `'Noto Serif KR','Nanum Myeongjo',Georgia,serif`;
     const sans   = `Pretendard,'Pretendard Variable','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif`;
     const people = [
-      { role:$('f-u-role').value, name:$('f-u-name').value, img:($('f-u-img').value||'').trim(), desc:$('f-u-desc').value||'', color:nameUser },
-      { role:$('f-c-role').value, name:$('f-c-name').value, img:($('f-c-img').value||'').trim(), desc:$('f-c-desc').value||'', color:nameChar },
+      { role:$('f-u-role').value, name:$('f-u-name').value, img:($('f-u-img').value||'').trim(), zoom:+$('f-u-zoom').value, fx:+$('f-u-fx').value, fy:+$('f-u-fy').value, desc:$('f-u-desc').value||'', color:nameUser },
+      { role:$('f-c-role').value, name:$('f-c-name').value, img:($('f-c-img').value||'').trim(), zoom:+$('f-c-zoom').value, fx:+$('f-c-fx').value, fy:+$('f-c-fy').value, desc:$('f-c-desc').value||'', color:nameChar },
     ];
     const imgMargin = photoLeft ? 'margin:0 0 16px 0;' : 'margin:0 auto 16px auto;';
+    // 사진 조정: 원형 틀(overflow:hidden) 안에서 object-position으로 초점, scale로 확대 (확대 기준점 = 초점)
     const avatar = (c) => c.img
-      ? `<img src="${escapeHtml(c.img)}" alt="${escapeHtml(c.name||'')}" style="width:64px;height:64px;max-width:100%;border-radius:50%;object-fit:cover;display:block;${imgMargin}">`
+      ? `<div style="width:64px;height:64px;border-radius:50%;overflow:hidden;${imgMargin}"><img src="${escapeHtml(c.img)}" alt="${escapeHtml(c.name||'')}" style="width:64px;height:64px;max-width:none;object-fit:cover;object-position:${c.fx}% ${c.fy}%;transform:scale(${(c.zoom/100).toFixed(2)});transform-origin:${c.fx}% ${c.fy}%;display:block;margin:0;border-radius:0;"></div>`
       : `<div style="width:64px;height:64px;border-radius:50%;background:${v.hl};${imgMargin}">&nbsp;</div>`;
     const cell = (c, i) => `<td style="width:50%;vertical-align:top;text-align:left;padding:0 ${i?0:22}px 0 ${i?22:0}px;border:0;">
 ${avatar(c)}
