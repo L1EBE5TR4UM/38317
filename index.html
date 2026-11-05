@@ -536,12 +536,14 @@ const THEMES = {
     muted:'#7d7d7d',
     title:'#ffffff', subtitle:'#e9e9e9', char:'#d0d0d0'
   },
+  // 가독성 보정: 카드 순백, 본문 진갈색(#331400), 속마음 배경을 카드와 구분되는 앰버 베이지로,
+  // 푸터 글자 대비 확보(#8f5f12), 정지 버튼은 연한 꿀색으로 재생 버튼과 분리
   Honeypot: {
-    outerBg:'#fbe9b8', card:'#fffdf4', text:'#4e1f00',
-    hl:'#ffe08a', hl2:'#fff1c6', playBg:'#4e1f00',
+    outerBg:'#fbe9b8', card:'#ffffff', text:'#331400',
+    hl:'#ffd96a', hl2:'#f8e3b8', playBg:'#f6dc94',
     accent:'#4e1f00', accentText:'#ffd45e',
-    muted:'#c2912f',
-    title:'#ffffff', subtitle:'#fbe9b8', char:'#fbe9b8'
+    muted:'#8f5f12',
+    title:'#ffffff', subtitle:'#fff4d6', char:'#ffd45e'
   },
   // #FAFAFA / #E1EEFF / #C2CFD8 / #543A3A 시티 팔레트 (플레이 버튼 포인트 = #543A3A, 본문 글자는 순검정)
   City: {
@@ -550,6 +552,22 @@ const THEMES = {
     accent:'#543a3a', accentText:'#fafafa',
     muted:'#8a9aa8',
     title:'#ffffff', subtitle:'#fafafa', char:'#e1eeff'
+  },
+  // 귤빛 바탕 + 연두 잎 Play 버튼(#7fb558)에 진초록 아이콘(#173a10), 정지 버튼은 연한 귤색, 본문 글자는 순검정
+  Tangerine: {
+    outerBg:'#ffeedd', card:'#ffffff', text:'#000000',
+    hl:'#ffd2a8', hl2:'#fde6d2', playBg:'#ffd2a8',
+    accent:'#7fb558', accentText:'#173a10',
+    muted:'#9a5a2c',
+    title:'#ffffff', subtitle:'#fff6ee', char:'#ffc27a'
+  },
+  // 아쿠아 바탕 + 산호 Play 버튼(#ff7f6a)에 적산호 아이콘(#6b1e14), 정지 버튼은 청록, 본문 글자는 순검정
+  Lagoon: {
+    outerBg:'#d8f1f1', card:'#ffffff', text:'#000000',
+    hl:'#a9e0e0', hl2:'#dcf0f0', playBg:'#0b6e74',
+    accent:'#ff7f6a', accentText:'#6b1e14',
+    muted:'#3b7c80',
+    title:'#ffffff', subtitle:'#eefafa', char:'#ffb4a2'
   },
 };
 const THEME_KEYS = ['outerBg','card','text','hl','hl2','accent','accentText','muted','title','subtitle','char'];
