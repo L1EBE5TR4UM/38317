@@ -821,7 +821,7 @@ function buildHTML(){
     ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;`
     : `background:${v.muted};`;
   const authorLine = author
-    ? `<div style="font-size:13px;letter-spacing:0.08em;text-align:${validAlign};">by <span style="font-weight:600;">${escapeHtml(author.toUpperCase())}</span></div>`
+    ? `<div style="font-size:13px;letter-spacing:0.08em;text-align:${validAlign};">by <span style="font-weight:600;text-transform:uppercase;">${escapeHtml(author)}</span></div>`
     : '';
 
   const thumbImg = (useHero && img)
