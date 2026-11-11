@@ -1053,10 +1053,10 @@ ${footer}
 <tbody>
 <tr>
 <td style="padding: 0; vertical-align: middle; border: 0;">
-<div style="display: inline-block; word-break: keep-all; padding: 6px 14px; border-radius: 999px; background-color: ${v.accent}; color: ${v.accentText}; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 3px 10px rgba(0,0,0,0.3); white-space: nowrap; line-height: 1;">&#9654;</div>
+<div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.accent}; color: ${v.accentText}; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 3px 10px rgba(0,0,0,0.3); white-space: nowrap; line-height: 26px;">&#9654;</div>
 </td>
 <td style="padding: 0; vertical-align: middle; border: 0;">
-<div style="display: inline-block; word-break: keep-all; padding: 6px 14px; border-radius: 999px; background-color: ${v.playBg || v.hl}; color: ${readableInk(v.playBg || v.hl, v.muted)}; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid ${hexToRgba(v.muted,0.2)}; margin-left: 6px; white-space: nowrap; line-height: 1;">&#10074;&#10074;</div>
+<div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.playBg || v.hl}; color: ${readableInk(v.playBg || v.hl, v.muted)}; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid ${hexToRgba(v.muted,0.2)}; margin-left: 6px; white-space: nowrap; line-height: 24px;">&#10074;&#10074;</div>
 </td>
 <td style="padding: 0 0 0 14px; vertical-align: middle; width: 100%; border: 0; text-align: left;">
 ${eqHtml}
@@ -1100,14 +1100,17 @@ ${bodyHTML}
 </div>` : '';
 
   const styleBlock = `<div><style>
-.${eqWrap}{display:flex;align-items:flex-end;gap:3px;height:14px;}
-.${eqBar}{width:3px;background:${eqColor};border-radius:2px 2px 0 0;transform-origin:bottom;animation:${eqAnim} 0.9s ease-in-out infinite alternate;}
-.${eqBar}:nth-child(1){height:5px;animation-delay:0s;}
-.${eqBar}:nth-child(2){height:11px;animation-delay:0.18s;}
-.${eqBar}:nth-child(3){height:7px;animation-delay:0.36s;}
-.${eqBar}:nth-child(4){height:13px;animation-delay:0.09s;}
-.${eqBar}:nth-child(5){height:5px;animation-delay:0.27s;}
-@keyframes ${eqAnim}{from{transform:scaleY(0.35)}to{transform:scaleY(1)}}${boxScroll ? `
+.${eqWrap}{display:flex;align-items:flex-end;gap:3px;width:27px;height:14px;overflow:hidden;}
+.${eqBar}{flex:none;width:3px;background:${eqColor};border-radius:2px 2px 0 0;font-size:0;line-height:0;overflow:hidden;animation:0.9s ease-in-out infinite alternate;}
+.${eqBar}:nth-child(1){height:5px;animation-name:${eqAnim}-a;animation-delay:0s;}
+.${eqBar}:nth-child(2){height:11px;animation-name:${eqAnim}-b;animation-delay:0.18s;}
+.${eqBar}:nth-child(3){height:7px;animation-name:${eqAnim}-c;animation-delay:0.36s;}
+.${eqBar}:nth-child(4){height:13px;animation-name:${eqAnim}-d;animation-delay:0.09s;}
+.${eqBar}:nth-child(5){height:5px;animation-name:${eqAnim}-a;animation-delay:0.27s;}
+@keyframes ${eqAnim}-a{from{height:1.75px}to{height:5px}}
+@keyframes ${eqAnim}-b{from{height:3.85px}to{height:11px}}
+@keyframes ${eqAnim}-c{from{height:2.45px}to{height:7px}}
+@keyframes ${eqAnim}-d{from{height:4.55px}to{height:13px}}${boxScroll ? `
 .la-scroll-${scrollUid}{scrollbar-width:thin;scrollbar-color:${hexToRgba(v.muted,0.45)} transparent;}
 .la-scroll-${scrollUid}::-webkit-scrollbar{width:6px;}
 .la-scroll-${scrollUid}::-webkit-scrollbar-track{background:transparent;}
