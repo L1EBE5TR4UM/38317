@@ -157,10 +157,11 @@
   }
   .help{font-size:11px; color:var(--ink-mute); margin-top:8px; line-height:1.6}
   /* Type-specific field visibility — toggled by body[data-type] */
-  body[data-type="A"] .b-only{ display:none }
-  body[data-type="B"] .a-only{ display:none }
-  body[data-type="A"] .c-only, body[data-type="B"] .c-only{ display:none }
-  body[data-type="C"] .a-only, body[data-type="C"] .b-only, body[data-type="C"] .ab-only{ display:none }
+  /* a-only: A · b-only: B · ac-only: A·C · ab-only: A·B · abc-only: A·B·C · not-c: C 제외 · d-only: D */
+  body[data-type="A"] .b-only, body[data-type="A"] .d-only{ display:none }
+  body[data-type="B"] .a-only, body[data-type="B"] .ac-only, body[data-type="B"] .d-only{ display:none }
+  body[data-type="C"] .a-only, body[data-type="C"] .b-only, body[data-type="C"] .ab-only, body[data-type="C"] .not-c, body[data-type="C"] .d-only{ display:none }
+  body[data-type="D"] .a-only, body[data-type="D"] .ac-only, body[data-type="D"] .b-only, body[data-type="D"] .ab-only, body[data-type="D"] .abc-only{ display:none }
   .cast-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   .cast-grid textarea{min-height:120px}
   .cast-col h4{margin:0 0 10px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:.24em; color:var(--ink-dim); font-weight:600}
@@ -181,7 +182,7 @@
 
 <header>
   <h1>LOG LIBRARY</h1>
-  <p class="header-sub">Last Updated &middot; November 5, 2026</p>
+  <p class="header-sub">Last Updated &middot; November 12, 2026</p>
 </header>
 
 <main>
@@ -197,24 +198,25 @@
         <div class="type-toggle" id="typeToggle">
           <button class="active" data-type="A" title="A TYPE · 자막 + Play/EQ 바 (서사 로그 / 스토리 게시용)" aria-label="A TYPE">A</button>
           <button data-type="B" title="B TYPE · Prompt·Model·Info 메타 바 (봇 카탈로그 / 캐릭터 소개용)" aria-label="B TYPE">B</button>
-          <button data-type="C" title="C TYPE · 투명 배경 인물 소개 헤더 (USER/CHAR + INTRODUCTION)" aria-label="C TYPE">C</button>
+          <button data-type="C" title="C TYPE · 매거진 커버 (이미지 표지 + 큰 제목)" aria-label="C TYPE">C</button>
+          <button data-type="D" title="D TYPE · 투명 배경 인물 소개 헤더 (USER/CHAR + INTRODUCTION)" aria-label="D TYPE">D</button>
         </div>
       </div>
     </div>
 
     <!-- ========== INPUTS TAB ========== -->
     <div data-pane="inputs">
-      <div class="section ab-only">
+      <div class="section abc-only">
         <h3 class="section-title">Meta</h3>
         <div class="grid">
           <div><label>Your Name (by ___)</label><input id="f-author" type="text" value="Your Name" /></div>
           <div><label>Character Name (영문 표기)</label><input id="f-character" type="text" value="Character Name" /></div>
           <div><label>Title (hero, 큰 글씨)</label><input id="f-title" type="text" value="Short Story Title" /></div>
-          <div><label>Tags (선택, 쉼표로 구분)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
+          <div class="not-c"><label>Tags (선택, 쉼표로 구분)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
           <div class="b-only"><label>Prompt Name (B 타입)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
           <div class="b-only"><label>Model (B 타입)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
           <div class="full b-only"><label>Info (B 타입, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
-          <div class="full a-only"><label>Hero Subtitle (A 타입 전용, HTML 가능)</label>
+          <div class="full ac-only"><label>Hero Subtitle (A·C 타입, HTML 가능)</label>
             <input id="f-subtitle" type="text" value="a brief tale captures a moment trembling in secrecy." />
           </div>
           <div class="full"><label>Footer 텍스트 (HTML 가능, 비우면 Your Name 자동 생성)</label>
@@ -222,15 +224,16 @@
           </div>
         </div>
         <div class="help" style="margin-top:10px">
-          상단 우측에서 <b>A TYPE</b> / <b>B TYPE</b>을 전환할 수 있어요.<br>
+          상단 우측에서 <b>A</b> / <b>B</b> / <b>C</b> / <b>D</b> TYPE을 전환할 수 있어요.<br>
           <b>A TYPE</b> = 자막 + Play/EQ 바 표시 (서사 로그 / 스토리 게시용)<br>
           <b>B TYPE</b> = Prompt·Model·Info 메타 바 표시 (봇 카탈로그 / 캐릭터 소개용)<br>
-          <b>C TYPE</b> = 투명 배경 인물 소개 헤더 (USER/CHAR 2인 + INTRODUCTION)
+          <b>C TYPE</b> = 매거진 커버 (히어로 이미지 표지 + 큰 제목 + 캐릭터명·소제목)<br>
+          <b>D TYPE</b> = 투명 배경 인물 소개 헤더 (USER/CHAR 2인 + INTRODUCTION)
         </div>
       </div>
 
-      <!-- ========== C TYPE: CAST ========== -->
-      <div class="section c-only">
+      <!-- ========== D TYPE: CAST ========== -->
+      <div class="section d-only">
         <h3 class="section-title">Cast</h3>
         <div class="grid">
           <div><label>대제목</label><input id="f-ctitle" type="text" value="DRAMATIS PERSONAE" /></div>
@@ -277,11 +280,11 @@
         </div>
         <div class="help" style="margin-top:6px">
           바탕은 투명합니다(블로그 배경이 그대로 보임). 소개글은 항상 양쪽 정렬이고, 이름 색은 테마를 따릅니다 (CAST 1 = 대사 강조 배경색, CAST 2 = 플레이 버튼 배경색, 반전 가능).<br>
-          C TYPE에서는 <code>"대사"</code> · <code>'속마음'</code>에 강조 배경을 씌우지 않고 일반 글자로 표시합니다. <code>**굵게**</code> · <code>*기울임*</code>은 그대로 적용됩니다.
+          D TYPE에서는 <code>"대사"</code> · <code>'속마음'</code>에 강조 배경을 씌우지 않고 일반 글자로 표시합니다. <code>**굵게**</code> · <code>*기울임*</code>은 그대로 적용됩니다.
         </div>
       </div>
 
-      <div class="section ab-only">
+      <div class="section abc-only">
         <h3 class="section-title">Hero</h3>
         <label class="check" style="margin-bottom:12px">
           <input id="f-usehero" type="checkbox" checked /> Use Hero Image
@@ -291,7 +294,7 @@
           <div><label>Focus X (%)</label><input id="f-fx" type="number" value="50" /></div>
           <div><label>Focus Y (%)</label><input id="f-fy" type="number" value="70" /></div>
           <div><label>Hero Height (px)</label><input id="f-hheight" type="number" value="350" /></div>
-          <div><label>Title 정렬 (3줄 텍스트)</label>
+          <div class="not-c"><label>Title 정렬 (3줄 텍스트)</label>
             <select id="f-tpos">
               <option value="left" selected>Left</option>
               <option value="center">Center</option>
@@ -308,7 +311,7 @@
           <div><label>Body Font Size (px)</label><input id="f-fs" type="number" step="0.1" value="15.5" /></div>
           <div><label>Line Height</label><input id="f-lh" type="number" step="0.05" value="2" /></div>
           <div><label>Letter Spacing (px)</label><input id="f-ls" type="number" step="0.1" value="-0.9" /></div>
-          <div class="ab-only"><label>Card Body Height (px)</label><input id="f-cardh" type="number" value="420" /></div>
+          <div class="abc-only"><label>Card Body Height (px)</label><input id="f-cardh" type="number" value="420" /></div>
           <div><label>Body Font</label>
             <select id="f-font">
               <option value="'Noto Serif KR','Nanum Myeongjo','Apple Myungjo',Batang, Georgia, serif" selected>Noto Serif KR (기본)</option>
@@ -326,7 +329,7 @@
 
       <div class="section">
         <h3 class="section-title">Paste Your Text</h3>
-        <div class="help c-only" style="margin:-6px 0 10px">C TYPE에서는 이 글이 아래 <b>INTRODUCTION</b> 항목의 본문이 됩니다. 글꼴은 프리텐다드로 고정, 크기·줄 간격·자간·양쪽 정렬 설정이 적용됩니다.</div>
+        <div class="help d-only" style="margin:-6px 0 10px">D TYPE에서는 이 글이 아래 <b>INTRODUCTION</b> 항목의 본문이 됩니다. 글꼴은 프리텐다드로 고정, 크기·줄 간격·자간·양쪽 정렬 설정이 적용됩니다.</div>
         <textarea id="f-body">**Fragonard's "The Swing"** greets you with a powder-soft, *Rococo* glow, the garden trimmed like theater scenery and the air sugared with light.
 
 "As you look closer," I say, "notice how the foliage forms a proscenium around the secret." A slipper arcs midair; a hidden lover reclines in shadow; a chaperone dutifully pushes, seeing only what he wishes.
@@ -359,7 +362,7 @@ She laughs—pink silk catching the sun. "Playfulness," I whisper, "masks a code
         <label class="check" style="margin-top:8px">
           <input id="f-smartquote" type="checkbox" checked /> 스마트 따옴표 / 말줄임표 자동 변환 (<code>"</code>→<code>“ ”</code>, <code>'</code>→<code>‘ ’</code>, <code>...</code>→<code>…</code>)
         </label>
-        <label class="check ab-only" style="margin-top:8px">
+        <label class="check abc-only" style="margin-top:8px">
           <input id="f-boxscroll" type="checkbox" checked /> 박스 스크롤 <span style="opacity:.7">(카드 높이 고정, 본문만 스크롤)</span>
         </label>
       </div>
@@ -658,7 +661,7 @@ THEME_KEYS.forEach(k=>{
   }
 });
 
-/* ---------- C TYPE 사진 조정 슬라이더 값 표시 ---------- */
+/* ---------- D TYPE 사진 조정 슬라이더 값 표시 ---------- */
 ['u','c'].forEach(pre => ['zoom','fx','fy'].forEach(k => {
   const el = $(`f-${pre}-${k}`), lbl = $(`f-${pre}-${k}-v`);
   if (el && lbl) el.addEventListener('input', () => { lbl.textContent = el.value; });
@@ -757,7 +760,7 @@ function processInline(text, v, plainQuotes){
   h = h.replace(/\*\*\*([^*\n]+?)\*\*\*/g, '<b><i>$1</i></b>');
   h = h.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
-  // plainQuotes: C TYPE 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
+  // plainQuotes: D TYPE 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
   if (plainQuotes) return h.replace(/\n/g, '<br>');
   const diaInk = readableInk(v.hl, v.text);
   h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, inner)=>{
@@ -780,7 +783,7 @@ function processInline(text, v, plainQuotes){
 
 function buildHTML(){
   const v = state.themeVars;
-  const T = state.type; // 'A' | 'B'
+  const T = state.type; // 'A' | 'B' | 'C' | 'D'
   const blockInk = readableInk(v.hl, v.text);
 
   const title     = $('f-title').value || '';
@@ -842,7 +845,7 @@ function buildHTML(){
       name = tokens[1];
       message = '';
     }
-    const messageHTML = message ? processInline(message, v, T === 'C') : '';
+    const messageHTML = message ? processInline(message, v, T === 'D') : '';
 
     const isSent = (kind === 'sent');
     const bubbleBg     = isSent ? '#007aff' : '#e5e5ea';
@@ -865,7 +868,7 @@ function buildHTML(){
   const blocks = raw.split(/\n{2,}/);
 
   let pStyle, spacer;
-  if (T === 'B' || T === 'C'){
+  if (T !== 'A'){
     pStyle = `margin:0;line-height:${lh};letter-spacing:${ls}px;font-size:${fs}px;text-indent:${indent?'1em':'0'}${justify?';text-align:justify':''}`;
     spacer = `<p><br></p>`;
   } else {
@@ -887,19 +890,76 @@ function buildHTML(){
       const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
       return `<p style="${pStyle}"${dataKe}><span style="display:inline-block;width:100%;border-top:1px solid ${hexToRgba(v.muted,0.35)};margin:6px 0">&nbsp;</span></p>`;
     }
-    const inner = processInline(trimmed, v, T === 'C');
+    const inner = processInline(trimmed, v, T === 'D');
     const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
     return `<p style="${pStyle}"${dataKe}>${inner}</p>`;
   }).filter(Boolean);
   const bodyHTML = paragraphHTMLs.join('\n' + spacer + '\n');
 
   // ===================================================================
-  //  C TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
+  //  C TYPE — 매거진 커버 (히어로 이미지 전체를 표지로, 큰 제목 + 캐릭터명·소제목)
+  //  · 위아래만 어둡게(Overlay Dark 값) 하고 가운데 그림은 살림
+  //  · 표지 글자색: Title 색 / Character Name 색 / Subtitle 색
+  // ===================================================================
+  if (T === 'C'){
+    const disp = `'Cormorant Garamond','Noto Serif KR',Georgia,serif`;
+    const coverBg = (useHero && img)
+      ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${v.muted};`
+      : `background-color:${v.muted};`;
+    const od = overlayDark;
+    const coverGrad = `linear-gradient(to bottom,rgba(0,0,0,${od.toFixed(2)}) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 52%,rgba(0,0,0,${Math.min(1, od*1.3).toFixed(2)}) 100%)`;
+    const coverLine = hexToRgba(v.title, 0.6);
+    const authorTop = author
+      ? `<div style="text-align:right;font-size:9.5px;letter-spacing:0.2em;color:${v.title};">by <b style="text-transform:uppercase;">${escapeHtml(author)}</b></div>
+<div style="border-top:1px solid ${coverLine};margin:8px 0 6px 0;height:1px;font-size:0;line-height:0;">&nbsp;</div>`
+      : '';
+    const cover = `<div style="${coverBg}border-radius:12px;overflow:hidden;">
+<div style="background:${coverGrad};height:${hh + 60}px;padding:18px 22px 22px 22px;box-sizing:border-box;display:table;width:100%;">
+<div style="display:table-row;"><div style="display:table-cell;vertical-align:top;">
+${authorTop}
+<div style="font-family:${disp};font-size:44px;font-weight:600;line-height:0.95;letter-spacing:-0.01em;color:${v.title};text-shadow:0 2px 14px rgba(0,0,0,0.35);">${escapeHtml(title)}</div>
+</div></div>
+<div style="display:table-row;"><div style="display:table-cell;vertical-align:bottom;">
+<div style="width:28px;height:3px;background-color:${v.hl};margin-bottom:10px;font-size:0;line-height:0;">&nbsp;</div>
+<div style="font-size:19px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${v.char};text-shadow:0 1px 8px rgba(0,0,0,0.5);">${escapeHtml(character)}</div>
+${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.45;margin-top:6px;max-width:80%;color:${v.subtitle};text-shadow:0 1px 8px rgba(0,0,0,0.5);">${subtitle}</div>` : ''}
+</div></div>
+</div>
+</div>`;
+
+    const scrollUid = eqToken(v.muted + '|' + v.card);
+    const scrollStyleC = boxScroll ? `<div><style>
+.la-scroll-${scrollUid}{scrollbar-width:thin;scrollbar-color:${hexToRgba(v.muted,0.45)} transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar{width:6px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-track{background:transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb{background:${hexToRgba(v.muted,0.45)};border-radius:999px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb:hover{background:${hexToRgba(v.muted,0.7)};}
+</style></div>` : '';
+    const cardC = `<div style="background-color:${v.card};color:${v.text};border-radius:12px;padding:28px 24px;margin-top:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+${boxScroll ? `<div class="la-scroll-${scrollUid}" style="max-height: ${cardH}px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+${bodyHTML}
+</div>` : bodyHTML}
+</div>`;
+
+    const footerCustomC = ($('f-footer').value || '').trim();
+    const footerTextC = footerCustomC ? footerCustomC : (author ? escapeHtml(author) : '');
+    const footerC = footerTextC ? `
+<div style="margin-top:22px;padding:14px 0 12px 0;border-top:1px solid ${hexToRgba(v.muted,0.35)};text-align:center;color:${v.muted};font-size:12px;">${footerTextC}</div>` : '';
+
+    return `${scrollStyleC}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:18px;box-sizing:border-box;font-family:${font};color:${v.text};background-color:${v.outerBg};border-radius:14px;">
+${cover}
+${cardC}
+${footerC}
+</div>`;
+  }
+
+  // ===================================================================
+  //  D TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
   //  · 배경색 없음  · 두 인물은 2단 테이블로 모바일에서도 나란히
   //  · 사진 위치 옵션은 사진만 이동, 소개는 항상 양쪽 정렬
   //  · 이름 색: USER = hl(대사 강조 배경), CHAR = accent(플레이 버튼 배경), 반전 가능
   // ===================================================================
-  if (T === 'C'){
+  if (T === 'D'){
     const ink = v.text;
     const roleInk = hexToRgba(v.text, 0.5);
     const photoLeft = $('f-cphoto').value === 'left';
@@ -1171,9 +1231,9 @@ function readableInk(bgHex, preferred){
 /* ---------- RENDER ---------- */
 function render(){
   const html = buildHTML();
-  // C TYPE + 완전 투명 배경: 출력에 배경이 없으므로 미리보기도 테마 색을 깔지 않고
+  // D TYPE + 완전 투명 배경: 출력에 배경이 없으므로 미리보기도 테마 색을 깔지 않고
   // 블로그에 붙여넣었을 때처럼 흰 바탕 위에 그대로 보여줌 (어두운 틀 위에서는 글자가 안 보이기 때문)
-  const previewTransparentC = state.type === 'C' && $('f-ctransparent').checked;
+  const previewTransparentC = state.type === 'D' && $('f-ctransparent').checked;
   $('previewFrame').style.background = previewTransparentC ? '#ffffff' : '';
   $('previewFrame').innerHTML = html;
   $('outputCode').textContent = html;
@@ -1199,7 +1259,7 @@ const PRESET_KEY = 'log-atelier-presets-v2';
 function loadPresets(){ try{ return JSON.parse(localStorage.getItem(PRESET_KEY)||'{}'); }catch{ return {}; } }
 function savePresets(o){ localStorage.setItem(PRESET_KEY, JSON.stringify(o)); }
 function snapshot(){
-  const s = { type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
+  const s = { v: 2, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
   document.querySelectorAll('[id^="f-"], [id^="t-"]').forEach(el=>{
     if(el.type==='checkbox') s.fields[el.id] = el.checked;
     else if(el.type==='color' || el.type==='text' || el.type==='url' || el.type==='number' || el.tagName==='SELECT' || el.tagName==='TEXTAREA') s.fields[el.id] = el.value;
@@ -1209,8 +1269,10 @@ function snapshot(){
 function restore(snap){
   if(!snap || typeof snap !== 'object') return;
 
-  if(snap.type === 'A' || snap.type === 'B' || snap.type === 'C'){
-    state.type = snap.type;
+  // 스냅샷 v2 이전의 'C'는 지금의 D TYPE(인물 소개)이므로 D로 옮겨 불러옴
+  const snapType = (snap.type === 'C' && !(snap.v >= 2)) ? 'D' : snap.type;
+  if(snapType === 'A' || snapType === 'B' || snapType === 'C' || snapType === 'D'){
+    state.type = snapType;
     for (const btn of $('typeToggle').children){
       btn.classList.toggle('active', btn.dataset.type===state.type);
     }
