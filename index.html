@@ -10,41 +10,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0e0d0c;
-    --panel:#1c1813;
-    --line:#2c2620;
-    --ink:#e9e1cf;
-    --ink-dim:#b3a890;
-    --ink-mute:#7a715f;
-    --accent:#d9c89c;
-    --accent-soft:#c8b685;
-    --field:#0f0d0a;
-    --field-line:#34291f;
-    --well:#0a0907;
+    --bg:#17130f;
+    --panel:#211b15;
+    --line:#3e342a;
+    --ink:#f5eedf;
+    --ink-dim:#ddd1b8;
+    --ink-mute:#a19479;
+    --accent:#ecd9a8;
+    --accent-soft:#dcc68f;
+    --field:#120f0b;
+    --field-line:#54463a;
+    --well:#0f0c09;
     --on-ink:#1a1612;
     --btn-hover:#ffffff;
-    --btn-2:#2c2620;
-    --btn-del:#3a2c22;
-    --toggle-on:#2c2620;
-    --frame:#1f1d1a;
-    --code-ink:#cfc3a8;
-    --bg-glow1:rgba(120,90,60,.18);
-    --bg-glow2:rgba(60,40,30,.25);
-    --bg-top:#0a0908; --bg-mid:#100e0b; --bg-bot:#0c0a08;
-    --panel-top:rgba(28,24,19,.7); --panel-bot:rgba(20,17,13,.7);
-    --noise:.45;
+    --btn-2:#3a3026;
+    --btn-del:#4a3527;
+    --toggle-on:#3a3026;
+    --frame:#26211b;
+    --code-ink:#e6dbc2;
+    --noise:.3;
     --title-shadow:0 2px 30px rgba(0,0,0,.6);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Noto Serif KR','Cormorant Garamond',serif;}
-  body{
-    min-height:100vh;
-    background:
-      radial-gradient(1200px 700px at 20% -10%, var(--bg-glow1), transparent 60%),
-      radial-gradient(900px 500px at 90% 110%, var(--bg-glow2), transparent 60%),
-      linear-gradient(180deg,var(--bg-top) 0%, var(--bg-mid) 30%, var(--bg-bot) 100%);
-    background-attachment:fixed;
-  }
+  body{min-height:100vh}
   body::after{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .9 0 0 0 0 .85 0 0 0 0 .75 0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
@@ -74,9 +63,8 @@
   @media (max-width: 1100px){ main{grid-template-columns:1fr; padding:16px} }
 
   .panel{
-    background:linear-gradient(180deg, var(--panel-top), var(--panel-bot));
+    background:var(--panel);
     border:1px solid var(--line); border-radius:14px;
-    backdrop-filter: blur(6px);
     box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,235,200,.04);
   }
   .toolbar{
@@ -226,7 +214,7 @@
           <div><label>Your Name (by ___)</label><input id="f-author" type="text" value="Your Name" /></div>
           <div><label>Character Name (영문 표기)</label><input id="f-character" type="text" value="Character Name" /></div>
           <div><label>Title (hero, 큰 글씨)</label><input id="f-title" type="text" value="Short Story Title" /></div>
-          <div><label>Tags (선택, 쉼표로 구분 · C는 그림 왼쪽 위에 #태그로 표시)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
+          <div><label>Tags (선택, 쉼표로 구분)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
           <div class="b-only"><label>Prompt Name (B 타입)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
           <div class="b-only"><label>Model (B 타입)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
           <div class="full b-only"><label>Info (B 타입, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
@@ -1239,9 +1227,13 @@ function buildCoverC(o){
 ${tagCell}
 <td style="${tdZ}text-align:right;vertical-align:bottom;font-size:9.5px;letter-spacing:0.2em;color:${v.title};white-space:nowrap;${sh2}">${byAu || '&nbsp;'}</td>
 </tr></tbody></table>`;
-  return `<div style="border-radius:12px 12px 0 0;overflow:hidden;background-color:${v.card};">
+  // 모바일(600px 이하)에서는 표지 그림 세로를 60%로 줄여 본문 영역을 넓힌다
+  const hhM = Math.max(140, Math.round(hh * 0.6));
+  const heroCls = 'la-cvh-' + eqToken(hh + '|' + hhM);
+  const mobileStyle = `<div><style>@media (max-width:600px){.${heroCls}{height:${hhM}px !important;}}</style></div>`;
+  return `${mobileStyle}<div style="border-radius:12px 12px 0 0;overflow:hidden;background-color:${v.card};">
 <div style="${coverBg}">
-<div style="background:${grad};height:${hh}px;padding:14px 20px;box-sizing:border-box;">
+<div class="${heroCls}" style="background:${grad};height:${hh}px;padding:14px 20px;box-sizing:border-box;">
 ${topRow}
 </div>
 </div>
