@@ -162,7 +162,6 @@
   body[data-type="B"] .a-only, body[data-type="B"] .ac-only, body[data-type="B"] .d-only{ display:none }
   body[data-type="C"] .a-only, body[data-type="C"] .b-only, body[data-type="C"] .ab-only, body[data-type="C"] .not-c, body[data-type="C"] .d-only{ display:none }
   body[data-type="D"] .a-only, body[data-type="D"] .ac-only, body[data-type="D"] .b-only, body[data-type="D"] .ab-only, body[data-type="D"] .abc-only{ display:none }
-  body[data-type="A"] .c-only, body[data-type="B"] .c-only, body[data-type="D"] .c-only{ display:none }
   .cast-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   .cast-grid textarea{min-height:120px}
   .cast-col h4{margin:0 0 10px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:.24em; color:var(--ink-dim); font-weight:600}
@@ -183,7 +182,7 @@
 
 <header>
   <h1>LOG LIBRARY</h1>
-  <p class="header-sub">Last Updated &middot; November 12, 2026</p>
+  <p class="header-sub">Last Updated &middot; November 15, 2026</p>
 </header>
 
 <main>
@@ -199,7 +198,7 @@
         <div class="type-toggle" id="typeToggle">
           <button class="active" data-type="A" title="A TYPE · 자막 + Play/EQ 바 (서사 로그 / 스토리 게시용)" aria-label="A TYPE">A</button>
           <button data-type="B" title="B TYPE · Prompt·Model·Info 메타 바 (봇 카탈로그 / 캐릭터 소개용)" aria-label="B TYPE">B</button>
-          <button data-type="C" title="C TYPE · 매거진 커버 (이미지 표지 + 큰 제목)" aria-label="C TYPE">C</button>
+          <button data-type="C" title="C TYPE · 북 재킷 커버 (이미지 표지 + 제목 밴드)" aria-label="C TYPE">C</button>
           <button data-type="D" title="D TYPE · 투명 배경 인물 소개 헤더 (USER/CHAR + INTRODUCTION)" aria-label="D TYPE">D</button>
         </div>
       </div>
@@ -213,7 +212,7 @@
           <div><label>Your Name (by ___)</label><input id="f-author" type="text" value="Your Name" /></div>
           <div><label>Character Name (영문 표기)</label><input id="f-character" type="text" value="Character Name" /></div>
           <div><label>Title (hero, 큰 글씨)</label><input id="f-title" type="text" value="Short Story Title" /></div>
-          <div><label>Tags (선택, 쉼표로 구분 · C는 커버 상단에 표시)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
+          <div><label>Tags (선택, 쉼표로 구분 · C는 그림 왼쪽 위에 #태그로 표시)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
           <div class="b-only"><label>Prompt Name (B 타입)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
           <div class="b-only"><label>Model (B 타입)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
           <div class="full b-only"><label>Info (B 타입, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
@@ -228,7 +227,7 @@
           상단 우측에서 <b>A</b> / <b>B</b> / <b>C</b> / <b>D</b> TYPE을 전환할 수 있어요.<br>
           <b>A TYPE</b> = 자막 + Play/EQ 바 표시 (서사 로그 / 스토리 게시용)<br>
           <b>B TYPE</b> = Prompt·Model·Info 메타 바 표시 (봇 카탈로그 / 캐릭터 소개용)<br>
-          <b>C TYPE</b> = 매거진 커버 (히어로 이미지 표지 + 큰 제목 + 캐릭터명·소제목)<br>
+          <b>C TYPE</b> = 북 재킷 커버 (이미지 표지 + 제목 밴드 + 본문, 푸터 띠로 마감)<br>
           <b>D TYPE</b> = 투명 배경 인물 소개 헤더 (USER/CHAR 2인 + INTRODUCTION)
         </div>
       </div>
@@ -295,16 +294,6 @@
           <div><label>Focus X (%)</label><input id="f-fx" type="number" value="50" /></div>
           <div><label>Focus Y (%)</label><input id="f-fy" type="number" value="70" /></div>
           <div><label>Hero Height (px)</label><input id="f-hheight" type="number" value="350" /></div>
-          <div class="c-only"><label>C 커버 스타일</label>
-            <select id="f-cstyle">
-              <option value="base" selected>기본 (현행)</option>
-              <option value="masthead">C-1 마스트헤드</option>
-              <option value="frame">C-2 인셋 프레임</option>
-              <option value="vertical">C-3 세로쓰기</option>
-              <option value="split">C-4 북 재킷 (하단 밴드)</option>
-              <option value="coverlines">C-5 커버라인</option>
-            </select>
-          </div>
           <div class="not-c"><label>Title 정렬 (3줄 텍스트)</label>
             <select id="f-tpos">
               <option value="left" selected>Left</option>
@@ -908,9 +897,9 @@ function buildHTML(){
   const bodyHTML = paragraphHTMLs.join('\n' + spacer + '\n');
 
   // ===================================================================
-  //  C TYPE — 매거진 커버 (히어로 이미지 전체를 표지로, 큰 제목 + 캐릭터명·소제목)
-  //  · 위아래만 어둡게(Overlay Dark 값) 하고 가운데 그림은 살림
-  //  · 표지 글자색: Title 색 / Character Name 색 / Subtitle 색
+  //  C TYPE — 북 재킷 커버 (이미지 표지 + 아래 제목 밴드 + 본문 + 푸터 띠)
+  //  · 바깥 프레임 없이 한 장으로 이어짐, 푸터는 바깥 배경색(outerBg) 띠
+  //  · 그림 위에는 왼쪽 #태그 / 오른쪽 작성자만
   // ===================================================================
   if (T === 'C'){
     const disp = `'Cormorant Garamond','Noto Serif KR',Georgia,serif`;
@@ -918,11 +907,7 @@ function buildHTML(){
       ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${v.muted};`
       : `background-color:${v.muted};`;
     const od = overlayDark;
-    const coverGrad = `linear-gradient(to bottom,rgba(0,0,0,${od.toFixed(2)}) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 52%,rgba(0,0,0,${Math.min(1, od*1.3).toFixed(2)}) 100%)`;
-    const cs = ($('f-cstyle') && $('f-cstyle').value) || 'base';
-    const cover = buildCoverC(cs, { v, disp, coverBg, od, hh, title, character, subtitle, author, tags });
-    const isSplit = (cs === 'split');
-    const cardGap = isSplit ? 0 : 18;
+    const cover = buildCoverC({ v, disp, coverBg, od, hh, title, character, subtitle, author, tags });
 
     const scrollUid = eqToken(v.muted + '|' + v.card);
     const scrollStyleC = boxScroll ? `<div><style>
@@ -934,22 +919,17 @@ function buildHTML(){
 </style></div>` : '';
     const footerCustomC = ($('f-footer').value || '').trim();
     const footerTextC = footerCustomC ? footerCustomC : (author ? escapeHtml(author) : '');
-    const splitHasFooter = isSplit && !!footerTextC;
-    const cardC = `<div style="background-color:${v.card};color:${v.text};border-radius:${isSplit ? (splitHasFooter ? '0' : '0 0 12px 12px') : '12px'};padding:${isSplit?'6px 24px 28px 24px':'28px 24px'};margin-top:${cardGap}px;${isSplit ? '' : 'box-shadow:0 2px 8px rgba(0,0,0,0.05);'}">
+    const hasFooterC = !!footerTextC;
+    const cardC = `<div style="background-color:${v.card};color:${v.text};border-radius:${hasFooterC ? '0' : '0 0 12px 12px'};padding:6px 24px 28px 24px;">
 ${boxScroll ? `<div class="la-scroll-${scrollUid}" style="max-height: ${cardH}px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
 ${bodyHTML}
 </div>` : bodyHTML}
 </div>`;
 
-    // C-4 북 재킷: 바깥 프레임 없이 표지·본문·푸터가 한 장으로 이어지고, 푸터는 바깥 배경색 띠로 마감
-    const footerC = !footerTextC ? '' : isSplit ? `
-<div style="padding:13px 0;border-radius:0 0 12px 12px;background-color:${v.outerBg};text-align:center;color:${v.muted};font-size:12px;letter-spacing:0.08em;">${footerTextC}</div>` : `
-<div style="margin-top:22px;padding:14px 0 12px 0;border-top:1px solid ${hexToRgba(v.muted,0.35)};text-align:center;color:${v.muted};font-size:12px;">${footerTextC}</div>`;
+    const footerC = hasFooterC ? `
+<div style="padding:13px 0;border-radius:0 0 12px 12px;background-color:${v.outerBg};text-align:center;color:${v.muted};font-size:12px;letter-spacing:0.08em;">${footerTextC}</div>` : '';
 
-    const wrapC = isSplit
-      ? `max-width:${mw}px;margin:0 auto;padding:0;box-sizing:border-box;font-family:${font};color:${v.text};`
-      : `max-width:${mw}px;margin:0 auto;padding:18px;box-sizing:border-box;font-family:${font};color:${v.text};background-color:${v.outerBg};border-radius:14px;`;
-    return `${scrollStyleC}${thumbImg}<div style="${wrapC}">
+    return `${scrollStyleC}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;box-sizing:border-box;font-family:${font};color:${v.text};">
 ${cover}
 ${cardC}
 ${footerC}
@@ -1221,103 +1201,31 @@ ${footerB}
 }
 
 /* ===================================================================
-   C TYPE 커버 빌더 — cs: base | masthead | frame | vertical | split | coverlines
+   C TYPE 커버 빌더 — 북 재킷
+   · 이미지는 깨끗하게 (왼쪽 위 #태그, 오른쪽 위 작성자만)
+   · 제목·캐릭터명·소제목은 아래 카드색 밴드에, 본문 카드와 한 장으로 이어짐
    =================================================================== */
-function buildCoverC(cs, o){
+function buildCoverC(o){
   const { v, disp, coverBg, od, hh, title, character, subtitle, author, tags } = o;
   const T  = escapeHtml(title);
   const CH = escapeHtml(character);
   const AU = escapeHtml(author);
-  const tagStr = tags.map(escapeHtml).join(' &middot; ');
-  const rule = (a)=>hexToRgba(v.title, a);
   const a = (x)=>Math.min(1, x).toFixed(2);
-  const sh1 = 'text-shadow:0 2px 14px rgba(0,0,0,0.35);';
   const sh2 = 'text-shadow:0 1px 8px rgba(0,0,0,0.5);';
   const tdZ = 'padding:0;border:0;';
-  const metaRow = (left, right) => `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;"><tbody><tr>
-<td style="${tdZ}text-align:left;vertical-align:bottom;font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:${v.title};${sh2}">${left || '&nbsp;'}</td>
-<td style="${tdZ}text-align:right;vertical-align:bottom;font-size:9.5px;letter-spacing:0.2em;color:${v.title};white-space:nowrap;${sh2}">${right || '&nbsp;'}</td>
-</tr></tbody></table>`;
   const byAu = AU ? `by <b style="text-transform:uppercase;">${AU}</b>` : '';
-
-  // ---------- C-1 마스트헤드: 잡지 제호처럼 가운데 큰 제목 + 상하 괘선, 하단 좌측 커버라인 ----------
-  if (cs === 'masthead'){
-    const grad = `linear-gradient(to bottom,rgba(0,0,0,${a(od*1.15)}) 0%,rgba(0,0,0,${a(od*0.35)}) 30%,rgba(0,0,0,0) 46%,rgba(0,0,0,0) 56%,rgba(0,0,0,${a(od*1.35)}) 100%)`;
-    return `<div style="${coverBg}border-radius:12px;overflow:hidden;">
-<div style="background:${grad};height:${hh + 70}px;padding:16px 22px 22px 22px;box-sizing:border-box;display:table;width:100%;">
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:top;">
-${metaRow(tagStr, byAu)}
-<div style="border-top:1px solid ${rule(0.65)};margin:7px 0 10px 0;height:1px;font-size:0;line-height:0;">&nbsp;</div>
-<div style="font-family:${disp};font-size:54px;font-weight:600;line-height:1;letter-spacing:0.04em;text-align:center;color:${v.title};${sh1}">${T}</div>
-<div style="border-top:3px double ${rule(0.65)};margin:10px 0 0 0;height:1px;font-size:0;line-height:0;">&nbsp;</div>
-</div></div>
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:bottom;">
-<div style="width:28px;height:3px;background-color:${v.hl};margin-bottom:10px;font-size:0;line-height:0;">&nbsp;</div>
-<div style="font-size:17px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;line-height:1.3;color:${v.char};${sh2}">${CH}</div>
-${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.45;margin-top:6px;max-width:80%;color:${v.subtitle};${sh2}">${subtitle}</div>` : ''}
-</div></div>
-</div>
-</div>`;
-  }
-
-  // ---------- C-2 인셋 프레임: 안쪽 얇은 테두리 + 모든 텍스트 가운데, 고전 표지 느낌 ----------
-  if (cs === 'frame'){
-    const grad = `linear-gradient(to bottom,rgba(0,0,0,${a(od*0.7)}) 0%,rgba(0,0,0,${a(od*0.12)}) 28%,rgba(0,0,0,${a(od*0.12)}) 45%,rgba(0,0,0,${a(od*1.4)}) 100%)`;
-    return `<div style="${coverBg}border-radius:12px;overflow:hidden;">
-<div style="background:${grad};padding:12px;box-sizing:border-box;">
-<div style="border:1px solid ${rule(0.55)};border-radius:6px;height:${hh + 46}px;padding:14px 20px 22px 20px;box-sizing:border-box;display:table;width:100%;text-align:center;">
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:top;">
-${AU ? `<div style="font-size:9.5px;letter-spacing:0.28em;color:${v.title};${sh2}">&#10022;&ensp;by <b style="text-transform:uppercase;">${AU}</b>&ensp;&#10022;</div>` : ''}
-${tagStr ? `<div style="font-size:9px;letter-spacing:0.24em;text-transform:uppercase;margin-top:4px;color:${rule(0.8)};${sh2}">${tagStr}</div>` : ''}
-</div></div>
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:bottom;">
-<div style="font-family:${disp};font-size:48px;font-weight:600;line-height:1.02;letter-spacing:0.02em;color:${v.title};${sh1}">${T}</div>
-<div style="font-size:11.5px;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;line-height:1.5;margin-top:12px;color:${v.char};${sh2}"><span style="color:${v.hl};">&mdash;&ensp;</span>${CH}<span style="color:${v.hl};">&ensp;&mdash;</span></div>
-${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;margin:10px auto 0 auto;max-width:86%;color:${v.subtitle};${sh2}">${subtitle}</div>` : ''}
-</div></div>
-</div>
-</div>
-</div>`;
-  }
-
-  // ---------- C-3 세로쓰기: 우측에 세로 제목 + 캐릭터명, 좌하단에 소제목 ----------
-  if (cs === 'vertical'){
-    const H = hh + 60;
-    const grad = `linear-gradient(to left,rgba(0,0,0,${a(od*1.1)}) 0%,rgba(0,0,0,${a(od*0.4)}) 22%,rgba(0,0,0,0) 45%),linear-gradient(to top,rgba(0,0,0,${a(od*1.25)}) 0%,rgba(0,0,0,0) 45%)`;
-    return `<div style="${coverBg}border-radius:12px;overflow:hidden;">
-<div style="background:${grad};">
-<table style="width:100%;height:${H}px;border-collapse:collapse;border:0;border-spacing:0;"><tbody><tr>
-<td style="${tdZ}vertical-align:bottom;text-align:left;padding:20px 8px 22px 22px;">
-${tagStr ? `<div style="font-size:9px;letter-spacing:0.24em;text-transform:uppercase;margin-bottom:8px;color:${rule(0.85)};${sh2}">${tagStr}</div>` : ''}
-<div style="width:28px;height:3px;background-color:${v.hl};margin-bottom:10px;font-size:0;line-height:0;">&nbsp;</div>
-${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;max-width:92%;color:${v.subtitle};${sh2}">${subtitle}</div>` : ''}
-${AU ? `<div style="font-size:9.5px;letter-spacing:0.2em;margin-top:10px;color:${v.title};${sh2}">by <b style="text-transform:uppercase;">${AU}</b></div>` : ''}
-</td>
-<td style="${tdZ}width:1%;vertical-align:top;text-align:right;padding:20px 18px 20px 0;">
-<div style="writing-mode:vertical-rl;-webkit-writing-mode:vertical-rl;text-orientation:mixed;height:${H - 40}px;display:inline-block;text-align:left;">
-<div style="font-family:${disp};font-size:46px;font-weight:600;line-height:1.05;letter-spacing:0.08em;color:${v.title};${sh1}">${T}</div>
-<div style="font-size:11px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;line-height:1.4;margin-right:10px;padding-top:4px;border-right:1px solid ${rule(0.5)};padding-right:8px;color:${v.char};${sh2}">${CH}</div>
-</div>
-</td>
-</tr></tbody></table>
-</div>
-</div>`;
-  }
-
-  // ---------- C-4 북 재킷: 이미지는 깨끗하게, 제목은 아래 카드색 밴드에 (본문 카드와 한 장으로 이어짐) ----------
-  if (cs === 'split'){
-    const grad = `linear-gradient(to bottom,rgba(0,0,0,${a(od*0.9)}) 0%,rgba(0,0,0,0) 26%)`;
-    const ink = v.text, mute = v.muted;
-    // 태그: 그림 왼쪽 위에 # 붙여 알약 배경 없이 하나씩
-    const hashTags = tags.map(t=>`<span style="margin-right:10px;white-space:nowrap;">#${escapeHtml(t)}</span>`).join('');
-    const tagCell = tags.length
-      ? `<td style="${tdZ}text-align:left;vertical-align:bottom;font-size:10.5px;letter-spacing:0.08em;color:${v.title};${sh2}">${hashTags}</td>`
-      : `<td style="${tdZ}">&nbsp;</td>`;
-    const topRow = `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;"><tbody><tr>
+  const grad = `linear-gradient(to bottom,rgba(0,0,0,${a(od*0.9)}) 0%,rgba(0,0,0,0) 26%)`;
+  const ink = v.text, mute = v.muted;
+  // 태그: 그림 왼쪽 위에 # 붙여 알약 배경 없이 하나씩
+  const hashTags = tags.map(t=>`<span style="margin-right:10px;white-space:nowrap;">#${escapeHtml(t)}</span>`).join('');
+  const tagCell = tags.length
+    ? `<td style="${tdZ}text-align:left;vertical-align:bottom;font-size:10.5px;letter-spacing:0.08em;color:${v.title};${sh2}">${hashTags}</td>`
+    : `<td style="${tdZ}">&nbsp;</td>`;
+  const topRow = `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;"><tbody><tr>
 ${tagCell}
 <td style="${tdZ}text-align:right;vertical-align:bottom;font-size:9.5px;letter-spacing:0.2em;color:${v.title};white-space:nowrap;${sh2}">${byAu || '&nbsp;'}</td>
 </tr></tbody></table>`;
-    return `<div style="border-radius:12px 12px 0 0;overflow:hidden;background-color:${v.card};">
+  return `<div style="border-radius:12px 12px 0 0;overflow:hidden;background-color:${v.card};">
 <div style="${coverBg}">
 <div style="background:${grad};height:${hh}px;padding:14px 20px;box-sizing:border-box;">
 ${topRow}
@@ -1328,45 +1236,6 @@ ${topRow}
 <div style="font-family:${disp};font-size:42px;font-weight:600;line-height:1.05;letter-spacing:0.01em;color:${ink};">${T}</div>
 <div style="font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;line-height:1.5;margin-top:10px;color:${mute};">${CH}</div>
 ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid ${hexToRgba(mute,0.3)};color:${ink};">${subtitle}</div>` : ''}
-</div>
-</div>`;
-  }
-
-  // ---------- C-5 커버라인: 캐릭터명 칩 + 하단 초대형 제목 + 세로선 인용 소제목 ----------
-  if (cs === 'coverlines'){
-    const grad = `linear-gradient(to bottom,rgba(0,0,0,${a(od*0.95)}) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 38%,rgba(0,0,0,${a(od*1.5)}) 100%)`;
-    return `<div style="${coverBg}border-radius:12px;overflow:hidden;">
-<div style="background:${grad};height:${hh + 70}px;padding:16px 22px 22px 22px;box-sizing:border-box;display:table;width:100%;">
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:top;">
-${metaRow(byAu, tagStr)}
-</div></div>
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:bottom;">
-<span style="display:inline-block;padding:4px 10px;border-radius:2px;background-color:${v.hl};color:${readableInk(v.hl, v.text)};font-size:10.5px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;line-height:1.4;">${CH}</span>
-<div style="font-family:${disp};font-size:60px;font-weight:600;line-height:0.95;letter-spacing:-0.01em;margin:12px 0 14px 0;color:${v.title};${sh1}">${T}</div>
-${subtitle ? `<div style="border-left:2px solid ${v.hl};padding-left:12px;font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;max-width:82%;color:${v.subtitle};${sh2}">${subtitle}</div>` : ''}
-</div></div>
-</div>
-</div>`;
-  }
-
-  // ---------- 기본 (현행) ----------
-  const coverGrad = `linear-gradient(to bottom,rgba(0,0,0,${od.toFixed(2)}) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 52%,rgba(0,0,0,${Math.min(1, od*1.3).toFixed(2)}) 100%)`;
-  const coverLine = rule(0.6);
-  const authorTop = author
-    ? `<div style="text-align:right;font-size:9.5px;letter-spacing:0.2em;color:${v.title};">${byAu}</div>
-<div style="border-top:1px solid ${coverLine};margin:8px 0 6px 0;height:1px;font-size:0;line-height:0;">&nbsp;</div>`
-    : '';
-  return `<div style="${coverBg}border-radius:12px;overflow:hidden;">
-<div style="background:${coverGrad};height:${hh + 60}px;padding:18px 22px 22px 22px;box-sizing:border-box;display:table;width:100%;">
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:top;">
-${authorTop}
-<div style="font-family:${disp};font-size:44px;font-weight:600;line-height:0.95;letter-spacing:-0.01em;color:${v.title};${sh1}">${T}</div>
-</div></div>
-<div style="display:table-row;"><div style="display:table-cell;vertical-align:bottom;">
-<div style="width:28px;height:3px;background-color:${v.hl};margin-bottom:10px;font-size:0;line-height:0;">&nbsp;</div>
-<div style="font-size:19px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:${v.char};${sh2}">${CH}</div>
-${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.45;margin-top:6px;max-width:80%;color:${v.subtitle};${sh2}">${subtitle}</div>` : ''}
-</div></div>
 </div>
 </div>`;
 }
