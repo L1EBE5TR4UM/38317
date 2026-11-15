@@ -31,6 +31,8 @@
     --noise:.3;
     --bg-photo:none;
     --bg-dim:.78;
+    --bg-pos:center;
+    --bg-blur:0px;
     --title-shadow:0 2px 30px rgba(0,0,0,.6);
   }
   *{box-sizing:border-box}
@@ -38,10 +40,11 @@
   body{min-height:100vh}
   /* 맨 뒷배경 사진: 진갈색 막을 덮어 글자 대비를 유지 */
   body::before{
-    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    content:""; position:fixed; inset:calc(var(--bg-blur) * -3); pointer-events:none; z-index:0;
     background:
       linear-gradient(rgba(23,19,15,var(--bg-dim)), rgba(23,19,15,var(--bg-dim))),
-      var(--bg-photo) center / cover no-repeat;
+      var(--bg-photo) var(--bg-pos) / cover no-repeat;
+    filter:blur(var(--bg-blur));
   }
   body::after{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
