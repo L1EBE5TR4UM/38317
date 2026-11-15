@@ -295,6 +295,13 @@
           <div><label>Focus X (%)</label><input id="f-fx" type="number" value="50" /></div>
           <div><label>Focus Y (%)</label><input id="f-fy" type="number" value="70" /></div>
           <div><label>Hero Height (px)</label><input id="f-hheight" type="number" value="350" /></div>
+          <div class="c-only"><label>C-4 태그 위치</label>
+            <select id="f-ctagpos">
+              <option value="top">제목 위</option>
+              <option value="char">캐릭터명 아래</option>
+              <option value="sub" selected>소제목 아래 (본문 바로 위)</option>
+            </select>
+          </div>
           <div class="c-only"><label>C 커버 스타일</label>
             <select id="f-cstyle">
               <option value="base" selected>기본 (현행)</option>
@@ -1308,17 +1315,25 @@ ${AU ? `<div style="font-size:9.5px;letter-spacing:0.2em;margin-top:10px;color:$
   if (cs === 'split'){
     const grad = `linear-gradient(to bottom,rgba(0,0,0,${a(od*0.9)}) 0%,rgba(0,0,0,0) 26%)`;
     const ink = v.text, mute = v.muted;
+    const tagPos = ($('f-ctagpos') && $('f-ctagpos').value) || 'sub';
+    // 태그: # 붙여 알약 배경 없이 한 줄로
+    const tagLine = (mt, mb) => tags.length
+      ? `<div style="margin:${mt}px 0 ${mb}px 0;font-size:12px;line-height:1.6;letter-spacing:0.04em;color:${mute};">${tags.map(t=>`<span style="margin-right:10px;white-space:nowrap;">#${escapeHtml(t)}</span>`).join('')}</div>`
+      : '';
     return `<div style="border-radius:12px 12px 0 0;overflow:hidden;background-color:${v.card};">
 <div style="${coverBg}">
 <div style="background:${grad};height:${hh}px;padding:14px 20px;box-sizing:border-box;">
-${metaRow(tagStr, byAu)}
+${metaRow('', byAu)}
 </div>
 </div>
 <div style="padding:22px 24px 18px 24px;background-color:${v.card};">
 <div style="width:28px;height:3px;background-color:${v.hl};margin-bottom:12px;font-size:0;line-height:0;">&nbsp;</div>
+${tagPos === 'top' ? tagLine(0, 4) : ''}
 <div style="font-family:${disp};font-size:42px;font-weight:600;line-height:1.05;letter-spacing:0.01em;color:${ink};">${T}</div>
 <div style="font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;line-height:1.5;margin-top:10px;color:${mute};">${CH}</div>
+${tagPos === 'char' ? tagLine(6, 0) : ''}
 ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid ${hexToRgba(mute,0.3)};color:${ink};">${subtitle}</div>` : ''}
+${tagPos === 'sub' ? tagLine(12, 0) : ''}
 </div>
 </div>`;
   }
