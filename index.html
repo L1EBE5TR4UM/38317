@@ -20,21 +20,35 @@
     --accent-soft:#c8b685;
     --field:#0f0d0a;
     --field-line:#34291f;
+    --well:#0a0907;
+    --on-ink:#1a1612;
+    --btn-hover:#ffffff;
+    --btn-2:#2c2620;
+    --btn-del:#3a2c22;
+    --toggle-on:#2c2620;
+    --frame:#1f1d1a;
+    --code-ink:#cfc3a8;
+    --bg-glow1:rgba(120,90,60,.18);
+    --bg-glow2:rgba(60,40,30,.25);
+    --bg-top:#0a0908; --bg-mid:#100e0b; --bg-bot:#0c0a08;
+    --panel-top:rgba(28,24,19,.7); --panel-bot:rgba(20,17,13,.7);
+    --noise:.45;
+    --title-shadow:0 2px 30px rgba(0,0,0,.6);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:'Noto Serif KR','Cormorant Garamond',serif;}
   body{
     min-height:100vh;
     background:
-      radial-gradient(1200px 700px at 20% -10%, rgba(120,90,60,.18), transparent 60%),
-      radial-gradient(900px 500px at 90% 110%, rgba(60,40,30,.25), transparent 60%),
-      linear-gradient(180deg,#0a0908 0%, #100e0b 30%, #0c0a08 100%);
+      radial-gradient(1200px 700px at 20% -10%, var(--bg-glow1), transparent 60%),
+      radial-gradient(900px 500px at 90% 110%, var(--bg-glow2), transparent 60%),
+      linear-gradient(180deg,var(--bg-top) 0%, var(--bg-mid) 30%, var(--bg-bot) 100%);
     background-attachment:fixed;
   }
   body::after{
     content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .9 0 0 0 0 .85 0 0 0 0 .75 0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-    opacity:.45; mix-blend-mode:overlay;
+    opacity:var(--noise); mix-blend-mode:overlay;
   }
 
   header{position:relative; z-index:2; text-align:center; padding:48px 24px 18px;}
@@ -42,7 +56,7 @@
     font-family:'Cormorant Garamond', serif; font-weight:500;
     letter-spacing:.32em; font-size:clamp(34px, 5.6vw, 64px);
     color:var(--ink); margin:0;
-    text-shadow:0 2px 30px rgba(0,0,0,.6);
+    text-shadow:var(--title-shadow);
   }
   .header-sub{
     font-family:'Cormorant Garamond', serif; font-weight:400;
@@ -60,7 +74,7 @@
   @media (max-width: 1100px){ main{grid-template-columns:1fr; padding:16px} }
 
   .panel{
-    background:linear-gradient(180deg, rgba(28,24,19,.7), rgba(20,17,13,.7));
+    background:linear-gradient(180deg, var(--panel-top), var(--panel-bot));
     border:1px solid var(--line); border-radius:14px;
     backdrop-filter: blur(6px);
     box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,235,200,.04);
@@ -69,18 +83,18 @@
     display:flex; justify-content:space-between; align-items:center;
     padding:14px 18px; gap:12px; flex-wrap:wrap; border-bottom:1px solid var(--line);
   }
-  .tabs, .type-toggle{display:inline-flex; background:#0a0907; border:1px solid var(--line); border-radius:999px; padding:4px}
+  .tabs, .type-toggle{display:inline-flex; background:var(--well); border:1px solid var(--line); border-radius:999px; padding:4px}
   .tabs button, .type-toggle button{
     background:transparent; border:0; color:var(--ink-dim);
     padding:8px 16px; border-radius:999px; cursor:pointer;
-    font-family:inherit; font-size:13px; letter-spacing:.05em; transition:.2s;
+    font-family:inherit; font-size:13.5px; letter-spacing:.05em; transition:.2s;
   }
-  .tabs button.active{background:var(--ink); color:#1a1612; box-shadow:0 2px 10px rgba(0,0,0,.4)}
+  .tabs button.active{background:var(--ink); color:var(--on-ink); box-shadow:0 2px 10px rgba(0,0,0,.4)}
   .type-picker{display:inline-flex; align-items:center; gap:10px}
-  .type-label{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:12px; letter-spacing:.28em; color:var(--ink-mute)}
+  .type-label{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:13px; letter-spacing:.28em; color:var(--ink-mute)}
   .type-toggle{gap:2px}
   .type-toggle button{width:34px; height:30px; padding:0; font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:600; letter-spacing:0}
-  .type-toggle button.active{background:#2c2620; color:var(--ink); box-shadow:inset 0 0 0 1px rgba(217,200,156,.35)}
+  .type-toggle button.active{background:var(--toggle-on); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(217,200,156,.35)}
 
   .section{padding:18px 22px; border-bottom:1px solid var(--line)}
   .section:last-child{border-bottom:0}
@@ -93,7 +107,7 @@
   .full{grid-column:1 / -1}
 
   label{
-    display:block; font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
     color:var(--ink-mute); margin-bottom:6px;
     font-family:'Cormorant Garamond', serif; font-weight:600;
   }
@@ -113,15 +127,15 @@
     background:transparent; border-radius:6px; cursor:pointer;
   }
   .color-row{display:flex; align-items:center; gap:10px}
-  .color-row span{font-size:11px; color:var(--ink-mute); letter-spacing:.06em}
-  .check{display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-dim); cursor:pointer}
+  .color-row span{font-size:12px; color:var(--ink-mute); letter-spacing:.06em}
+  .check{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-dim); cursor:pointer}
   .check input{width:16px; height:16px; accent-color:var(--accent)}
 
   .theme-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
   .theme-chip{
     padding:9px 8px; border-radius:999px; border:1px solid var(--line);
-    background:#0a0907; color:var(--ink-dim);
-    font-size:12px; letter-spacing:.06em; cursor:pointer; text-align:center;
+    background:var(--well); color:var(--ink-dim);
+    font-size:12.5px; letter-spacing:.06em; cursor:pointer; text-align:center;
     transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
     white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
   }
@@ -130,7 +144,7 @@
   /* preview / output */
   .preview-wrap{padding:18px}
   .preview-frame{
-    background:#1f1d1a; border-radius:14px; overflow:visible;
+    background:var(--frame); border-radius:14px; overflow:visible;
     border:1px solid var(--line); padding:18px;
     box-shadow: inset 0 1px 0 rgba(255,235,200,.05), 0 20px 60px rgba(0,0,0,.5);
   }
@@ -141,21 +155,21 @@
     color:var(--accent); font-weight:500; font-size:13px; text-transform:uppercase;
   }
   .copy-btn{
-    background:var(--ink); color:#1a1612; border:0;
+    background:var(--ink); color:var(--on-ink); border:0;
     padding:7px 16px; border-radius:999px; cursor:pointer;
     font-family:inherit; font-size:12px; letter-spacing:.1em; transition:.2s;
   }
-  .copy-btn:hover{background:#fff}
+  .copy-btn:hover{background:var(--btn-hover)}
   .copy-btn.copied{background:#a8c89c}
   .output-code{
-    background:#0a0907; border:1px solid var(--line); border-radius:10px;
-    padding:12px; color:#cfc3a8;
+    background:var(--well); border:1px solid var(--line); border-radius:10px;
+    padding:12px; color:var(--code-ink);
     font-family: ui-monospace, 'SF Mono', Consolas, monospace;
-    font-size:11px; line-height:1.55;
+    font-size:11.5px; line-height:1.6;
     max-height:280px; overflow:auto;
     white-space:pre-wrap; word-break:break-all;
   }
-  .help{font-size:11px; color:var(--ink-mute); margin-top:8px; line-height:1.6}
+  .help{font-size:12px; color:var(--ink-dim); margin-top:8px; line-height:1.7}
   /* Type-specific field visibility — toggled by body[data-type] */
   /* a-only: A · b-only: B · ac-only: A·C · ab-only: A·B · abc-only: A·B·C · not-c: C 제외 · d-only: D */
   body[data-type="A"] .b-only, body[data-type="A"] .d-only{ display:none }
@@ -171,8 +185,8 @@
   .photo-adjust .rv{color:var(--accent); letter-spacing:0; font-weight:700; margin-left:4px}
   @media (max-width: 560px){ .cast-grid{grid-template-columns:1fr} }
   .help code{
-    background:#0a0907; border:1px solid var(--line); padding:1px 5px;
-    border-radius:4px; color:var(--accent-soft); font-size:11px;
+    background:var(--well); border:1px solid var(--line); padding:1px 5px;
+    border-radius:4px; color:var(--accent-soft); font-size:11.5px;
   }
 
   input[type=range]{width:100%; accent-color:var(--accent)}
@@ -351,7 +365,7 @@ She laughs—pink silk catching the sun. "Playfulness," I whisper, "masks a code
           <b style="color:var(--accent)">메시지 버블 (카카오톡/iMessage 스타일)</b><br>
           <code>[[메시지 내용 00:29 상대방]]</code> → 파란 버블 (내가 보낸)<br>
           <code>[[[메시지 내용 00:39 상대방]]]</code> → 회색 버블 (받은 메시지)<br>
-          <span style="color:var(--ink-mute); font-size:10.5px;">※ 둘 다 가운데 정렬. 시간은 <code>HH:MM</code> 형식, 이름은 마지막 단어. 그 사이는 모두 메시지 본문.</span>
+          <span style="color:var(--ink-mute); font-size:11.5px;">※ 둘 다 가운데 정렬. 시간은 <code>HH:MM</code> 형식, 이름은 마지막 단어. 그 사이는 모두 메시지 본문.</span>
         </div>
         <label class="check" style="margin-top:12px">
           <input id="f-indent" type="checkbox" /> 각 문단 첫 줄 들여쓰기
@@ -411,13 +425,13 @@ She laughs—pink silk catching the sun. "Playfulness," I whisper, "masks a code
           <div><label>Preset Name</label><input id="p-name" type="text" placeholder="My Sage v1" /></div>
           <div style="display:flex; gap:8px; align-items:flex-end">
             <button class="copy-btn" id="p-save">Save</button>
-            <button class="copy-btn" id="p-delete" style="background:#3a2c22;color:var(--ink)">Delete</button>
+            <button class="copy-btn" id="p-delete" style="background:var(--btn-del);color:var(--ink)">Delete</button>
           </div>
           <div class="full"><label>Load Preset</label>
             <select id="p-load"><option value="">— 저장된 preset 선택 —</option></select>
           </div>
-          <div><button class="copy-btn" id="p-export" style="background:#2c2620;color:var(--ink); width:100%">Export JSON</button></div>
-          <div><button class="copy-btn" id="p-import" style="background:#2c2620;color:var(--ink); width:100%">Import JSON</button></div>
+          <div><button class="copy-btn" id="p-export" style="background:var(--btn-2);color:var(--ink); width:100%">Export JSON</button></div>
+          <div><button class="copy-btn" id="p-import" style="background:var(--btn-2);color:var(--ink); width:100%">Import JSON</button></div>
         </div>
         <div class="help">Preset는 브라우저 로컬에 저장됩니다. 백업하려면 JSON으로 내보내세요.</div>
       </div>
