@@ -154,13 +154,130 @@ const THEMES = {
     muted:'#8f8256',
     title:'#fdf8e7', subtitle:'#ffffff', char:'#fdf8e7'
   },
+  // 블러시 핑크 바탕 + 콘플라워 Play 버튼(#7088d8), 본문 글자는 순검정
+  Blush: {
+    outerBg:'#fff0f0', card:'#ffffff', text:'#000000',
+    hl:'#ffd3d6', hl2:'#ffe8ea', playBg:'#ffd3d6',
+    accent:'#7088d8', accentText:'#ffffff',
+    muted:'#9a5a63',
+    title:'#fff3f4', subtitle:'#ffffff', char:'#d3dcff'
+  },
+  // 하늘색 바탕 + 병아리 노랑 Play 버튼(#ffc93c)에 진갈색 아이콘, 본문 글자는 순검정
+  'Baby Blue': {
+    outerBg:'#e8f3fc', card:'#ffffff', text:'#000000',
+    hl:'#c6e2f7', hl2:'#e1eff9', playBg:'#c6e2f7',
+    accent:'#ffc93c', accentText:'#3d2a00',
+    muted:'#4f7699',
+    title:'#f0f8ff', subtitle:'#ffffff', char:'#ffe29a'
+  },
+  // 피스타치오 바탕 + 라즈베리 Play 버튼(#e0577e), 본문 글자는 순검정
+  Pistachio: {
+    outerBg:'#f1f6e4', card:'#ffffff', text:'#000000',
+    hl:'#d6e8b5', hl2:'#e9f2d6', playBg:'#d6e8b5',
+    accent:'#e0577e', accentText:'#ffffff',
+    muted:'#5f7340',
+    title:'#f6faec', subtitle:'#ffffff', char:'#ffc1d3'
+  },
+  // 페리윙클 바탕 + 피치 코랄 Play 버튼(#ff9e7d)에 적갈색 아이콘, 본문 글자는 순검정
+  Periwinkle: {
+    outerBg:'#ecedff', card:'#ffffff', text:'#000000',
+    hl:'#cfd2ff', hl2:'#e4e6ff', playBg:'#cfd2ff',
+    accent:'#ff9e7d', accentText:'#4a1a0c',
+    muted:'#5a5fa3',
+    title:'#f3f4ff', subtitle:'#ffffff', char:'#ffd6c8'
+  },
+  // 리넨 바탕·아이보리 카드 + 포레스트 그린 Play 버튼(#3f5a4a), 본문 글자는 순검정
+  Linen: {
+    outerBg:'#f4efe6', card:'#fbf8f2', text:'#000000',
+    hl:'#e4d9c6', hl2:'#eee7da', playBg:'#e4d9c6',
+    accent:'#3f5a4a', accentText:'#f4efe6',
+    muted:'#7a6a52',
+    title:'#f8f3ea', subtitle:'#fbf8f2', char:'#cfe0d2'
+  },
+  // 유목 그레이지 바탕 + 슬레이트 블루 Play 버튼(#4f6d8a), 본문 글자는 순검정
+  Driftwood: {
+    outerBg:'#e9e6e1', card:'#ffffff', text:'#000000',
+    hl:'#d3cbc0', hl2:'#e4dfd8', playBg:'#d3cbc0',
+    accent:'#4f6d8a', accentText:'#ffffff',
+    muted:'#6f655b',
+    title:'#f3f0eb', subtitle:'#ffffff', char:'#c8d6e4'
+  },
+  // 라테 폼 바탕 + 에스프레소 Play 버튼(#6b3e26), 본문 글자는 진갈색(#2a1a10)
+  Latte: {
+    outerBg:'#f3ebe1', card:'#ffffff', text:'#2a1a10',
+    hl:'#e2cdb4', hl2:'#efe3d4', playBg:'#e2cdb4',
+    accent:'#6b3e26', accentText:'#f3ebe1',
+    muted:'#86664c',
+    title:'#f8f1e8', subtitle:'#ffffff', char:'#e8cfae'
+  },
+  // 바닷가 회청 바탕 + 모래 금색 Play 버튼(#e0b04a), 본문 글자는 순검정
+  Seaside: {
+    outerBg:'#eaf0f0', card:'#ffffff', text:'#000000',
+    hl:'#cfdcdc', hl2:'#e3ebeb', playBg:'#cfdcdc',
+    accent:'#e0b04a', accentText:'#3a2a00',
+    muted:'#566f6f',
+    title:'#f3f8f8', subtitle:'#ffffff', char:'#f2d898'
+  },
+  // Seaside의 청량한 변형: 아쿠아 바탕, 대사 = 바닷물(#a8e6f0), 속마음 = 모래(#f5ecd7),
+  // Play 버튼은 모래 금빛(#e6c98f), 정지 버튼은 연한 바닷물색에 청회색 ❚❚(#4f8590), 본문 글자는 순검정
+  Surf: {
+    outerBg:'#e3f6fa', card:'#ffffff', text:'#000000',
+    hl:'#a8e6f0', hl2:'#f5ecd7', playBg:'#d6f2f7', pauseText:'#4f8590',
+    accent:'#e6c98f', accentText:'#4f3a16',
+    muted:'#2a6f80',
+    title:'#effbfd', subtitle:'#ffffff', char:'#f5e3bd'
+  },
+  // 수박 껍질 연두 바탕 + 대사 = 수박 과육(#ffb0b0), Play 버튼 = 껍질 초록(#2f9e44), 본문 글자는 순검정
+  Watermelon: {
+    outerBg:'#eaf8e6', card:'#ffffff', text:'#000000',
+    hl:'#ffb0b0', hl2:'#d7f2cf', playBg:'#ffb0b0',
+    accent:'#2f9e44', accentText:'#ffffff',
+    muted:'#3f7036',
+    title:'#fff1f1', subtitle:'#ffffff', char:'#ffb0b0'
+  },
+  // 버건디 바탕 + 샴페인 골드 Play 버튼(#e8b86b), 블록은 카드와 구분되게 밝힌 와인색(대사 #7e2f40 / 속마음 #522631)
+  Wine: {
+    outerBg:'#1e0f12', card:'#28151a', text:'#f0e3e3',
+    hl:'#7e2f40', hl2:'#522631', playBg:'#3d1c23',
+    accent:'#e8b86b', accentText:'#1e0f12',
+    muted:'#a98288',
+    title:'#fff4f0', subtitle:'#f0e3e3', char:'#e8b86b'
+  },
+  // 플럼 바탕 + 핑크 Play 버튼(#ff8fb8), 블록은 카드와 구분되게 밝힌 자두색(대사 #6c3f82 / 속마음 #4a2f5a)
+  Plum: {
+    outerBg:'#1b1220', card:'#24182b', text:'#eee4f2',
+    hl:'#6c3f82', hl2:'#4a2f5a', playBg:'#352340',
+    accent:'#ff8fb8', accentText:'#1b1220',
+    muted:'#a58bb0',
+    title:'#fff3f8', subtitle:'#eee4f2', char:'#ffb8d2'
+  },
+  // 심해 청록 바탕 + 레몬 Play 버튼(#ffd166), 본문 글자는 연한 물빛
+  'Deep Sea': {
+    outerBg:'#0b1a1f', card:'#10242b', text:'#e1f0f2',
+    hl:'#1f4a55', hl2:'#18363f', playBg:'#18363f',
+    accent:'#ffd166', accentText:'#0b1a1f',
+    muted:'#7fa3ab',
+    title:'#f2fbfc', subtitle:'#e1f0f2', char:'#ffe19a'
+  },
+  // Deep Sea에서 이어지는 남색 바다 바탕 + 물빛 아쿠아 Play 버튼(#5fd8ff)
+  Marine: {
+    outerBg:'#0a1628', card:'#0f1f38', text:'#e3ecf8',
+    hl:'#244a85', hl2:'#1a3460', playBg:'#1a3460',
+    accent:'#5fd8ff', accentText:'#0a1628',
+    muted:'#7f97bd',
+    title:'#f2f7ff', subtitle:'#e3ecf8', char:'#a8e8ff'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
 const THEME_GROUP_OF = {
   Default:'내추럴', Sage:'내추럴', 'Old Money Light':'내추럴', City:'내추럴',
+  Linen:'내추럴', Driftwood:'내추럴', Latte:'내추럴', Seaside:'내추럴', Surf:'내추럴',
   Peony:'파스텔', Lavender:'파스텔', Sky:'파스텔', 'Cotton Candy':'파스텔', Apricot:'파스텔',
+  Blush:'파스텔', 'Baby Blue':'파스텔', Pistachio:'파스텔', Periwinkle:'파스텔',
   Lime:'비비드', 'Mint Choco':'비비드', Honeypot:'비비드', Tangerine:'비비드', Lagoon:'비비드', Butter:'비비드',
+  Watermelon:'비비드',
   Noir:'다크', 'Old Money Dark':'다크', Monochrome:'다크', 'Dark Olive':'다크',
+  Wine:'다크', Plum:'다크', 'Deep Sea':'다크', Marine:'다크',
 };
 const THEME_KEYS = ['outerBg','card','text','hl','hl2','accent','accentText','muted','title','subtitle','char'];
