@@ -132,15 +132,53 @@
   .check{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-dim); cursor:pointer}
   .check input{width:16px; height:16px; accent-color:var(--accent)}
 
-  .theme-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:10px}
-  .theme-chip{
-    padding:9px 8px; border-radius:999px; border:1px solid var(--line);
-    background:var(--well); color:var(--ink-dim);
-    font-size:12.5px; letter-spacing:.06em; cursor:pointer; text-align:center;
-    transition:transform .15s ease, box-shadow .2s ease, filter .2s ease;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  /* 테마 선택: 상자 없이 글자·선으로만 (왼쪽 분류 메뉴 + 오른쪽 아이콘 목록) */
+  .tp-now{display:flex; align-items:center; gap:12px}
+  .tp-name{flex:1; min-width:0; display:flex; align-items:baseline; gap:10px;
+    background:none; border:0; padding:0; color:var(--ink); font:inherit; text-align:left; cursor:pointer}
+  .tp-name b{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:24px; letter-spacing:.04em; line-height:1.1;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border-bottom:1px solid transparent}
+  .tp-name:hover b{border-bottom-color:var(--ink-mute)}
+  .tp-name small{color:var(--ink-mute); font-size:12px; white-space:nowrap}
+  .tp-arrows{display:flex; gap:2px}
+  .tp-arrow{background:none; border:0; color:var(--ink-mute); font-size:20px; line-height:1; padding:4px 8px; cursor:pointer; border-radius:6px}
+  .tp-arrow:hover{color:var(--ink)}
+  .tp-body{margin-top:14px; display:grid; grid-template-columns:auto minmax(0,1fr)}
+  .tp-side{display:flex; flex-direction:column; gap:2px; padding-right:16px; border-right:1px solid rgba(221,209,184,.14)}
+  .tp-tab{background:none; border:0; padding:5px 0; color:var(--ink-mute); font:inherit; font-size:12.5px; cursor:pointer; text-align:left; white-space:nowrap}
+  .tp-tab sup{font-size:9.5px; margin-left:2px; opacity:.7}
+  .tp-tab:hover{color:var(--ink-dim)}
+  .tp-tab[aria-pressed="true"]{color:var(--accent)}
+  .tp-tab[aria-pressed="true"]::before{content:'— '}
+  .tp-main{padding-left:16px; min-width:0; display:grid; gap:8px; align-content:start}
+  .tp-search{width:100%; background:transparent; border:0; border-bottom:1px solid var(--field-line); border-radius:0;
+    color:var(--ink); padding:8px 2px; font:inherit; font-size:13px; box-shadow:none}
+  .tp-search:focus{outline:none; border-color:var(--accent); box-shadow:none}
+  .tp-search::placeholder{color:var(--ink-mute)}
+  .tp-list{max-height:300px; overflow:auto; scrollbar-width:thin; scrollbar-color:var(--line) transparent}
+  .tp-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:2px 12px}
+  .tp-cell{display:flex; align-items:center; gap:8px; padding:5px 0; cursor:pointer; min-width:0}
+  .tp-cell .tp-n{flex:1; min-width:0; font-size:12.5px; color:var(--ink-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .tp-cell:hover .tp-n{color:var(--ink)}
+  .tp-cell[aria-selected="true"] .tp-n{color:var(--accent); font-weight:700}
+  .tp-cell[aria-selected="true"] .tp-m{box-shadow:0 0 0 1.5px var(--accent)}
+  .tp-star{background:none; border:0; color:var(--ink-mute); font-size:12px; cursor:pointer; padding:0 2px; line-height:1; opacity:.5}
+  .tp-star:hover{opacity:1}
+  .tp-star[aria-pressed="true"]{color:var(--accent); opacity:1}
+  .tp-empty{padding:14px 2px; color:var(--ink-mute); font-size:12.5px; line-height:1.6}
+  /* 미니 카드 아이콘: 바탕 / 카드 / 대사·본문·속마음 줄 / Play 버튼 점 */
+  .tp-m{display:inline-flex; flex-direction:column; flex:none; width:30px; height:21px; border-radius:5px; padding:3px; box-shadow:0 0 0 1px rgba(255,255,255,.12)}
+  .tp-m.lg{width:46px; height:32px; border-radius:7px; padding:4px}
+  .tp-mc{flex:1; border-radius:3px; padding:2px 3px; display:flex; flex-direction:column; gap:2px; position:relative}
+  .tp-l{height:2.5px; border-radius:2px}
+  .tp-m.lg .tp-l{height:3px}
+  .tp-dot{position:absolute; right:2px; bottom:2px; width:6px; height:6px; border-radius:50%}
+  .tp-m.lg .tp-dot{width:8px; height:8px; right:3px; bottom:3px}
+  @media (max-width:520px){
+    .tp-body{grid-template-columns:1fr}
+    .tp-side{flex-direction:row; flex-wrap:wrap; gap:4px 14px; padding:0 0 8px; border-right:0; border-bottom:1px solid rgba(221,209,184,.14)}
+    .tp-main{padding:10px 0 0}
   }
-  .theme-chip:hover{transform:translateY(-1px); filter:brightness(1.06)}
 
   /* preview / output */
   .preview-wrap{padding:18px}
@@ -237,13 +275,6 @@
           <div class="full"><label>Footer 텍스트 (HTML 가능, 비우면 Your Name 자동 생성)</label>
             <input id="f-footer" type="text" placeholder="예: &copy; 2025 Your Name &middot; do not repost" />
           </div>
-        </div>
-        <div class="help" style="margin-top:10px">
-          상단 우측에서 <b>A</b> / <b>B</b> / <b>C</b> / <b>D</b> TYPE을 전환할 수 있어요.<br>
-          <b>A TYPE</b> = 자막 + Play/EQ 바 표시 (서사 로그 / 스토리 게시용)<br>
-          <b>B TYPE</b> = Prompt·Model·Info 메타 바 표시 (봇 카탈로그 / 캐릭터 소개용)<br>
-          <b>C TYPE</b> = 북 재킷 커버 (이미지 표지 + 제목 밴드 + 본문, 푸터 띠로 마감)<br>
-          <b>D TYPE</b> = 투명 배경 인물 소개 헤더 (USER/CHAR 2인 + INTRODUCTION)
         </div>
       </div>
 
@@ -387,7 +418,7 @@ She laughs—pink silk catching the sun. "Playfulness," I whisper, "masks a code
     <div data-pane="styles" style="display:none">
       <div class="section">
         <h3 class="section-title">Themes</h3>
-        <div class="theme-grid" id="themeGrid"></div>
+        <div class="theme-picker" id="themePicker"></div>
       </div>
 
       <div class="section">
@@ -589,6 +620,38 @@ const THEMES = {
     muted:'#3b7c80',
     title:'#ffe0d6', subtitle:'#eefafa', char:'#ffb4a2'
   },
+  // 다크 올리브: 갈색 기운 올리브 바탕 + 마른 올리브 잎 Play 버튼(#b8c17e), 본문 글자는 아이보리
+  'Dark Olive': {
+    outerBg:'#1b1d14', card:'#24271c', text:'#ebe7d6',
+    hl:'#4b5333', hl2:'#363a27', playBg:'#363a27',
+    accent:'#b8c17e', accentText:'#1b1d14',
+    muted:'#9c9a7c',
+    title:'#f2efdf', subtitle:'#e4e0cc', char:'#cdd29f'
+  },
+  // 살구 크림 바탕 + 살구 강조 + 딥 로즈 Play 버튼(#c9566c), 본문 글자는 순검정
+  Apricot: {
+    outerBg:'#fdeee1', card:'#ffffff', text:'#000000',
+    hl:'#f8cba4', hl2:'#fde3cd', playBg:'#f8cba4',
+    accent:'#c9566c', accentText:'#fff4ee',
+    muted:'#9a5f3c',
+    title:'#fff1e4', subtitle:'#fff8f0', char:'#f8cba4'
+  },
+  // 버터 바: 버터 노랑 강조(#f7e097) + 포장지 파랑 Play 버튼(#3b8ece), 정지 버튼 ❚❚만 황갈색(#8a6a1c), 본문 글자는 순검정
+  Butter: {
+    outerBg:'#fcf5de', card:'#ffffff', text:'#000000',
+    hl:'#f7e097', hl2:'#fcf2d5', pauseText:'#8a6a1c',
+    accent:'#3b8ece', accentText:'#ffffff',
+    muted:'#8f8256',
+    title:'#fdf8e7', subtitle:'#ffffff', char:'#fdf8e7'
+  },
+};
+/* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
+const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
+const THEME_GROUP_OF = {
+  Default:'내추럴', Sage:'내추럴', 'Old Money Light':'내추럴', City:'내추럴',
+  Peony:'파스텔', Lavender:'파스텔', Sky:'파스텔', 'Cotton Candy':'파스텔', Apricot:'파스텔',
+  Lime:'비비드', 'Mint Choco':'비비드', Honeypot:'비비드', Tangerine:'비비드', Lagoon:'비비드', Butter:'비비드',
+  Noir:'다크', 'Old Money Dark':'다크', Monochrome:'다크', 'Dark Olive':'다크',
 };
 const THEME_KEYS = ['outerBg','card','text','hl','hl2','accent','accentText','muted','title','subtitle','char'];
 
@@ -615,54 +678,118 @@ $('typeToggle').addEventListener('click', (e)=>{
   render();
 });
 
-/* ---------- THEME CHIP PAINTING ----------
-   각 버튼을 해당 테마의 실제 색으로 칠한다.
-   - 비선택: 테마의 outerBg 배경 + 대비 좋은 글자색 + accent 테두리
-   - 선택:   테마의 accent 배경 + accentText 글자색            */
-function paintChip(chip, t, active){
-  const bg = active ? t.accent : t.outerBg;
-  const fg = active
-    ? readableInk(bg, t.accentText)
-    : readableInk(bg, t.text);
-  chip.style.background   = bg;
-  chip.style.color        = fg;
-  chip.style.borderColor  = active ? hexToRgba(fg, 0.55) : t.accent;
-  chip.style.borderWidth  = active ? '2px' : '1.5px';
-  chip.style.borderStyle  = 'solid';
-  chip.style.fontWeight   = active ? '700' : '500';
-  chip.style.boxShadow    = active
-    ? '0 0 0 2px rgba(217,200,156,.55), 0 4px 14px rgba(0,0,0,.45)'
-    : '0 1px 4px rgba(0,0,0,.35)';
-}
-function repaintChips(){
-  document.querySelectorAll('.theme-chip').forEach(c=>{
-    const t = THEMES[c.dataset.theme];
-    if(t) paintChip(c, t, c.dataset.theme === state.theme);
-  });
-}
+/* ---------- THEMES UI ----------
+   현재 테마 줄(미니 카드 + 이름 + ‹ ›) 아래에
+   왼쪽 분류 메뉴(전체 / ★ 즐겨찾기 / 분위기 묶음)와 오른쪽 검색 + 아이콘 목록.
+   즐겨찾기는 이 브라우저의 localStorage에만 저장된다. */
+const FAV_KEY = 'log-library-theme-favs';
+let themeFavs = new Set();
+try{ themeFavs = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]')); }catch(e){}
+function saveThemeFavs(){ try{ localStorage.setItem(FAV_KEY, JSON.stringify([...themeFavs])); }catch(e){} }
 
-/* ---------- THEMES UI ---------- */
-const themeGrid = $('themeGrid');
-Object.keys(THEMES).forEach(name=>{
-  const t = THEMES[name];
-  const chip = document.createElement('div');
-  chip.className = 'theme-chip';
-  chip.dataset.theme = name;
-  chip.textContent = name;
-  chip.title = name;
-  paintChip(chip, t, name === state.theme);
-  chip.addEventListener('click', ()=>{
-    state.theme = name;
-    state.themeVars = {...THEMES[name]};
-    for (const k of THEME_KEYS){
-      const el = $('t-'+k); if(el){ el.value = state.themeVars[k]; }
-      const lbl = $('t-'+k+'-v'); if(lbl){ lbl.textContent = state.themeVars[k]; }
-    }
-    repaintChips();
-    render();
-  });
-  themeGrid.appendChild(chip);
+const tp = { open:true, filter:'전체', q:'' };
+const TP_FILTERS = ['전체','★', ...THEME_GROUPS];
+const themePicker = $('themePicker');
+themePicker.innerHTML = `
+  <div class="tp-now">
+    <span data-tp-icon></span>
+    <button type="button" class="tp-name" data-tp-act="toggle"><b></b><small></small></button>
+    <div class="tp-arrows">
+      <button type="button" class="tp-arrow" data-tp-act="prev" aria-label="이전 테마">&#8249;</button>
+      <button type="button" class="tp-arrow" data-tp-act="next" aria-label="다음 테마">&#8250;</button>
+    </div>
+  </div>
+  <div class="tp-body">
+    <div class="tp-side" data-tp-tabs></div>
+    <div class="tp-main">
+      <input type="search" class="tp-search" id="tp-search" placeholder="이름 검색" autocomplete="off" />
+      <div class="tp-list" data-tp-list role="listbox" aria-label="테마 목록"></div>
+    </div>
+  </div>`;
+
+function themeMini(t, big){
+  return `<span class="tp-m${big?' lg':''}" style="background:${t.outerBg}"><span class="tp-mc" style="background:${t.card}">`
+    + `<span class="tp-l" style="background:${t.hl};width:80%"></span>`
+    + `<span class="tp-l" style="background:${t.text};opacity:.35;width:95%"></span>`
+    + `<span class="tp-l" style="background:${t.hl2 || t.hl};width:55%"></span>`
+    + `<span class="tp-dot" style="background:${t.accent}"></span></span></span>`;
+}
+function tpMatches(name, filter){
+  if (filter === '전체') return true;
+  if (filter === '★') return themeFavs.has(name);
+  return THEME_GROUP_OF[name] === filter;
+}
+function tpVisible(){
+  return Object.keys(THEMES).filter(n =>
+    (!tp.q || n.toLowerCase().includes(tp.q)) && tpMatches(n, tp.filter));
+}
+function applyTheme(name){
+  if (!THEMES[name]) return;
+  state.theme = name;
+  state.themeVars = {...THEMES[name]};
+  for (const k of THEME_KEYS){
+    const el = $('t-'+k); if(el){ el.value = state.themeVars[k]; }
+    const lbl = $('t-'+k+'-v'); if(lbl){ lbl.textContent = state.themeVars[k]; }
+  }
+  repaintChips();
+  render();
+}
+// 테마 선택 UI 다시 그리기 (프리셋 불러오기 등에서도 호출)
+function repaintChips(){
+  const cur = THEMES[state.theme] ? state.theme : null;
+  const t = cur ? THEMES[cur] : state.themeVars;
+  themePicker.querySelector('[data-tp-icon]').innerHTML = themeMini(t, true);
+  themePicker.querySelector('.tp-name b').textContent = cur || 'Custom';
+  themePicker.querySelector('.tp-name small').textContent = tp.open ? '접기 ▴' : '펼치기 ▾';
+  themePicker.querySelector('.tp-name').setAttribute('aria-expanded', tp.open);
+  themePicker.querySelector('.tp-body').hidden = !tp.open;
+
+  const names = Object.keys(THEMES);
+  themePicker.querySelector('[data-tp-tabs]').innerHTML = TP_FILTERS.map(f => {
+    const n = names.filter(x => tpMatches(x, f)).length;
+    return `<button type="button" class="tp-tab" data-tp-filter="${f}" aria-pressed="${f===tp.filter}">${f==='★'?'★ 즐겨찾기':f}<sup>${n}</sup></button>`;
+  }).join('');
+
+  const list = tpVisible();
+  const box = themePicker.querySelector('[data-tp-list]');
+  if (!list.length){
+    box.innerHTML = `<div class="tp-empty">${tp.filter==='★' && !tp.q
+      ? '즐겨찾기한 테마가 없습니다. 이름 옆 ☆를 눌러 추가하세요.'
+      : '맞는 테마가 없습니다. 검색어나 분류를 바꿔 보세요.'}</div>`;
+    return;
+  }
+  box.innerHTML = `<div class="tp-grid">${list.map(n => {
+    const fav = themeFavs.has(n), esc = escapeHtml(n);
+    return `<div class="tp-cell" role="option" data-tp-theme="${esc}" aria-selected="${n===state.theme}" title="${esc}">`
+      + themeMini(THEMES[n]) + `<span class="tp-n">${esc}</span>`
+      + `<button type="button" class="tp-star" data-tp-star="${esc}" aria-pressed="${fav}" aria-label="${esc} 즐겨찾기">${fav?'★':'☆'}</button></div>`;
+  }).join('')}</div>`;
+}
+function tpStep(d){
+  const list = tpVisible().length ? tpVisible() : Object.keys(THEMES);
+  let i = list.indexOf(state.theme);
+  i = i < 0 ? 0 : (i + d + list.length) % list.length;
+  applyTheme(list[i]);
+}
+themePicker.addEventListener('click', e=>{
+  const act = e.target.closest('[data-tp-act]');
+  if (act){
+    if (act.dataset.tpAct === 'toggle'){ tp.open = !tp.open; repaintChips(); }
+    else tpStep(act.dataset.tpAct === 'next' ? 1 : -1);
+    return;
+  }
+  const star = e.target.closest('[data-tp-star]');
+  if (star){
+    const n = star.dataset.tpStar;
+    themeFavs.has(n) ? themeFavs.delete(n) : themeFavs.add(n);
+    saveThemeFavs(); repaintChips(); return;
+  }
+  const tab = e.target.closest('[data-tp-filter]');
+  if (tab){ tp.filter = tab.dataset.tpFilter; repaintChips(); return; }
+  const cell = e.target.closest('[data-tp-theme]');
+  if (cell) applyTheme(cell.dataset.tpTheme);
 });
+$('tp-search').addEventListener('input', e=>{ tp.q = e.target.value.trim().toLowerCase(); repaintChips(); });
 
 /* ---------- COLOR PICKERS ---------- */
 THEME_KEYS.forEach(k=>{
@@ -1115,7 +1242,7 @@ ${footer}
 <div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.accent}; color: ${v.accentText}; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 3px 10px rgba(0,0,0,0.3); white-space: nowrap; line-height: 26px;">&#9654;</div>
 </td>`;
   const pauseCell = `<td style="${tdBase}">
-<div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.playBg || v.hl}; color: ${readableInk(v.playBg || v.hl, v.muted)}; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid ${hexToRgba(v.muted,0.2)}; margin-left: 6px; white-space: nowrap; line-height: 24px;">&#10074;&#10074;</div>
+<div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.playBg || v.hl}; color: ${readableInk(v.playBg || v.hl, v.pauseText || v.muted)}; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid ${hexToRgba(v.muted,0.2)}; margin-left: 6px; white-space: nowrap; line-height: 24px;">&#10074;&#10074;</div>
 </td>`;
   let playCells, tableWidth, keAlign;
   if (validAlign === 'center'){
