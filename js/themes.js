@@ -531,6 +531,214 @@ const THEMES = {
     muted:'#a8907f',
     title:'#fdf4ee', subtitle:'#f1e7e0', char:'#c3d9e8'
   },
+  // 발레: 토슈즈 핑크 대사 + 연회색 속마음 + 차콜 Play (Play #3a3340)
+  Ballet: {
+    outerBg:'#fbf1f2', card:'#ffffff', text:'#000000',
+    hl:'#f3d3d9', hl2:'#ecebef', playBg:'#ecebef',
+    accent:'#3a3340', accentText:'#fbf1f2',
+    muted:'#8a5f68',
+    title:'#fff8f9', subtitle:'#ffffff', char:'#f3d3d9'
+  },
+  // 오팔: 아쿠아 대사 + 연보라 속마음 + 분홍 섬광 Play (Play #e2a3b8)
+  Opal: {
+    outerBg:'#f2f4f8', card:'#ffffff', text:'#000000',
+    hl:'#cfe9ea', hl2:'#e7def3', playBg:'#e7def3',
+    accent:'#e2a3b8', accentText:'#4a1a2b',
+    muted:'#5f6f85',
+    title:'#f8fafc', subtitle:'#ffffff', char:'#f3d3de'
+  },
+  // 마시멜로: 말랑한 분홍 대사 + 크림 속마음 + 구운 갈색 Play (Play #b9875f)
+  Marshmallow: {
+    outerBg:'#fbf6f4', card:'#ffffff', text:'#000000',
+    hl:'#f5dfe1', hl2:'#f2e9dd', playBg:'#f2e9dd',
+    accent:'#b9875f', accentText:'#3a2412',
+    muted:'#8a6a62',
+    title:'#fffbf9', subtitle:'#ffffff', char:'#f0dcc8'
+  },
+  // 로즈메리: 회녹색 잎 대사 + 연보라 꽃 속마음 + 보라 꽃 Play (Play #7d6aa6)
+  Rosemary: {
+    outerBg:'#eff1ec', card:'#ffffff', text:'#000000',
+    hl:'#d3dccb', hl2:'#e6e1ef', playBg:'#e6e1ef',
+    accent:'#7d6aa6', accentText:'#ffffff',
+    muted:'#5d6a55',
+    title:'#f6f8f3', subtitle:'#ffffff', char:'#ddd6ee'
+  },
+  // 코코아: 코코아 블록 + 더스티 로즈 Play (Play #e8a9a3)
+  Cocoa: {
+    outerBg:'#1e1714', card:'#271e1a', text:'#f0e6e0',
+    hl:'#6a4838', hl2:'#45332a', playBg:'#45332a',
+    accent:'#e8a9a3', accentText:'#1e1714',
+    muted:'#a8928a',
+    title:'#fdf4ef', subtitle:'#f0e6e0', char:'#f2c9c4'
+  },
+  // 옥스퍼드: 버건디 대사 + 네이비 그레이 속마음 + 양피지 Play (Play #d8c7a3)
+  Oxford: {
+    outerBg:'#151821', card:'#1c202b', text:'#e9eaf0',
+    hl:'#763a4c', hl2:'#333a4d', playBg:'#333a4d',
+    accent:'#d8c7a3', accentText:'#151821',
+    muted:'#9298a8',
+    title:'#ffffff', subtitle:'#e9eaf0', char:'#e6d9bd'
+  },
+  // 로즈쿼츠: 분홍빛 카드 + 장미 대사 + 세레니티 블루 속마음 + 블루 Play (Play #7f8fbf)
+  'Rose Quartz': {
+    outerBg:'#f1e1e4', card:'#fbf2f4', text:'#000000',
+    hl:'#eecdd5', hl2:'#dde2f1', playBg:'#dde2f1',
+    accent:'#7f8fbf', accentText:'#172042',
+    muted:'#8c5a68',
+    title:'#fff6f8', subtitle:'#ffffff', char:'#f3d4dc'
+  },
+  // 라일락 편지지: 연보라 카드 + 라일락 대사 + 분홍 속마음 + 장미 Play (Play #c4889c)
+  'Lilac Note': {
+    outerBg:'#e8e3f1', card:'#f6f3fa', text:'#000000',
+    hl:'#dcd1ee', hl2:'#f1e3e8', playBg:'#f1e3e8',
+    accent:'#c4889c', accentText:'#3e1424',
+    muted:'#6a5e8a',
+    title:'#f9f6fd', subtitle:'#ffffff', char:'#e7def5'
+  },
+  // 복숭아 우유: 복숭아빛 카드 + 복숭아 대사 + 연보라 속마음 + 보라 Play (Play #8a7aaa)
+  'Peach Milk': {
+    outerBg:'#f5e2d8', card:'#fdf4ef', text:'#000000',
+    hl:'#f6cfbe', hl2:'#e9e3f0', playBg:'#e9e3f0',
+    accent:'#8a7aaa', accentText:'#ffffff',
+    muted:'#98604a',
+    title:'#fff8f4', subtitle:'#ffffff', char:'#f8d9cb'
+  },
+  // 진주: 진줏빛 회색 카드 + 회보라 대사 + 분홍 속마음 + 차콜 Play (Ballet 계열) (Play #3e3a48)
+  Pearl: {
+    outerBg:'#e4e3e6', card:'#f3f2f4', text:'#000000',
+    hl:'#dbd7e0', hl2:'#f0e5e6', playBg:'#f0e5e6',
+    accent:'#3e3a48', accentText:'#f3f2f4',
+    muted:'#67636e',
+    title:'#fbfbfc', subtitle:'#ffffff', char:'#e6e2ec'
+  },
+  // 조개껍데기: 분홍 베이지 카드 + 조개 대사 + 아쿠아 속마음 + 바다 블루 Play (Opal 계열) (Play #6d8ea3)
+  Seashell: {
+    outerBg:'#f0e5e0', card:'#fbf5f2', text:'#000000',
+    hl:'#f1d8ce', hl2:'#d8ebeb', playBg:'#d8ebeb',
+    accent:'#6d8ea3', accentText:'#ffffff',
+    muted:'#8c6458',
+    title:'#fffaf8', subtitle:'#ffffff', char:'#f3ddd4'
+  },
+  // 월장석: 푸른 회색 카드 + 라일락 블루 대사 + 복숭아 속마음 + 더스티 바이올렛 Play (Play #8a84b8)
+  Moonstone: {
+    outerBg:'#e3e7ef', card:'#f3f5f9', text:'#000000',
+    hl:'#d9dcf0', hl2:'#f5e1d8', playBg:'#f5e1d8',
+    accent:'#8a84b8', accentText:'#1e1a3e',
+    muted:'#5d6680',
+    title:'#f8f9fc', subtitle:'#ffffff', char:'#e2e4f5'
+  },
+  // 꽃잎: 분홍 카드 + 복숭아 대사 + 라일락 속마음 + 슬레이트 블루 Play (Play #6c7fa0)
+  Petal: {
+    outerBg:'#f2e3e6', card:'#fcf4f5', text:'#000000',
+    hl:'#f6d6c8', hl2:'#e3dcf0', playBg:'#e3dcf0',
+    accent:'#6c7fa0', accentText:'#ffffff',
+    muted:'#8e5f68',
+    title:'#fff8f9', subtitle:'#ffffff', char:'#f8ddd1'
+  },
+  // 튈 스커트: 연분홍 카드 + 블러시 대사 + 샴페인 그레이 속마음 + 더스티 라일락 Play (Play #9c8cc4)
+  Tulle: {
+    outerBg:'#f1e5e8', card:'#fcf3f5', text:'#000000',
+    hl:'#f3d6dc', hl2:'#ebe6e2', playBg:'#ebe6e2',
+    accent:'#9c8cc4', accentText:'#241a44',
+    muted:'#86606a',
+    title:'#fff8f9', subtitle:'#ffffff', char:'#f3d6dc'
+  },
+  // 리본: 분홍 카드 + 모브 핑크 대사 + 회색 속마음 + 소프트 네이비 Play (Play #4a5878)
+  Ribbon: {
+    outerBg:'#f1e4ea', card:'#fbf3f6', text:'#000000',
+    hl:'#ead0de', hl2:'#e6e4ea', playBg:'#e6e4ea',
+    accent:'#4a5878', accentText:'#fbf3f6',
+    muted:'#875a72',
+    title:'#fff8fb', subtitle:'#ffffff', char:'#efd8e4'
+  },
+  // 모브 안개: 분홍 회색 카드 + 모브 대사 + 회청 속마음 + 슬레이트 바이올렛 Play (Play #6e6a96)
+  'Mauve Mist': {
+    outerBg:'#ebe3e7', card:'#f6f1f3', text:'#000000',
+    hl:'#e2cfd9', hl2:'#dbe1ea', playBg:'#dbe1ea',
+    accent:'#6e6a96', accentText:'#ffffff',
+    muted:'#7a6070',
+    title:'#fbf8fa', subtitle:'#ffffff', char:'#e8dae2'
+  },
+  // 비둘기: 회색 카드 + 블루 그레이 대사 + 분홍 속마음 + 모브 Play (Pearl 계열) (Play #a07890)
+  Dove: {
+    outerBg:'#e4e4e8', card:'#f3f3f5', text:'#000000',
+    hl:'#d8dfe8', hl2:'#f2e0e4', playBg:'#f2e0e4',
+    accent:'#a07890', accentText:'#ffffff',
+    muted:'#646873',
+    title:'#fbfbfc', subtitle:'#ffffff', char:'#e2e7ee'
+  },
+  // 재: 회색 카드 + 회라일락 대사 + 회청록 속마음 + 플럼 Play (Pearl 계열) (Play #7d5f78)
+  Ash: {
+    outerBg:'#e3e2e6', card:'#f2f2f4', text:'#000000',
+    hl:'#dcd7e6', hl2:'#d9e6e6', playBg:'#d9e6e6',
+    accent:'#7d5f78', accentText:'#ffffff',
+    muted:'#64626e',
+    title:'#fafafb', subtitle:'#ffffff', char:'#e3dfec'
+  },
+  // 라벤더 우유: 연보라 카드 + 라벤더 대사 + 하늘 속마음 + 페리윙클 Play (Lilac Note 계열) (Play #7f8fbf)
+  'Lavender Milk': {
+    outerBg:'#e7e3f1', card:'#f6f3fa', text:'#000000',
+    hl:'#ddd5ef', hl2:'#dce9f4', playBg:'#dce9f4',
+    accent:'#7f8fbf', accentText:'#172042',
+    muted:'#665e88',
+    title:'#faf8fd', subtitle:'#ffffff', char:'#e5dff4'
+  },
+  // 백일몽: 연보라 카드 + 분홍 대사 + 하늘 속마음 + 바이올렛 Play (Lilac Note 계열) (Play #8a7aaa)
+  Daydream: {
+    outerBg:'#ebe4f0', card:'#f7f3fa', text:'#000000',
+    hl:'#f2d4de', hl2:'#d8e8f4', playBg:'#d8e8f4',
+    accent:'#8a7aaa', accentText:'#ffffff',
+    muted:'#6e5f86',
+    title:'#fbf8fd', subtitle:'#ffffff', char:'#f3dbe3'
+  },
+  // 자두 우유: 분홍 라일락 카드 + 자두 핑크 대사 + 아쿠아 속마음 + 플럼 Play (Play #8e6a8c)
+  'Plum Milk': {
+    outerBg:'#efe3ec', card:'#f8f2f7', text:'#000000',
+    hl:'#e6cfe2', hl2:'#d6ebea', playBg:'#d6ebea',
+    accent:'#8e6a8c', accentText:'#ffffff',
+    muted:'#7d5c78',
+    title:'#fcf8fb', subtitle:'#ffffff', char:'#ecdbea'
+  },
+  // 블루벨: 연청보라 카드 + 블루벨 대사 + 아쿠아 속마음 + 로즈 Play (Play #c88a9e)
+  Bluebell: {
+    outerBg:'#e3e5f3', card:'#f4f5fc', text:'#000000',
+    hl:'#d3d8f3', hl2:'#d8ecec', playBg:'#d8ecec',
+    accent:'#c88a9e', accentText:'#3e1424',
+    muted:'#5e6592',
+    title:'#f8f9fd', subtitle:'#ffffff', char:'#f2d2dc'
+  },
+  // Ash의 다크 버전: 회라일락 대사 + 회청록 속마음 + 진주빛 회청록 Play (Play #b6d3d2)
+  'Ash Night': {
+    outerBg:'#1b1b1f', card:'#232328', text:'#ecebef',
+    hl:'#57516c', hl2:'#3d4b4d', playBg:'#36363e',
+    accent:'#b6d3d2', accentText:'#1b1b1f',
+    muted:'#9b99a4',
+    title:'#ffffff', subtitle:'#ecebef', char:'#cfe3e2'
+  },
+  // 히아신스: 옅은 페리윙클 바탕 + 흰 카드 + 연페리윙클 대사 + 분홍 라일락 속마음 + 페리윙클 Play (Play #6f7cc6)
+  Hyacinth: {
+    outerBg:'#dfe3f7', card:'#f8f8fd', text:'#000000',
+    hl:'#dfe2f8', hl2:'#f1dde8', playBg:'#dfe2f8', pauseText:'#565e98',
+    accent:'#6f7cc6', accentText:'#ffffff',
+    muted:'#565e98',
+    title:'#fafaff', subtitle:'#ffffff', char:'#e4e7fa'
+  },
+  // 해 질 녘: 진주 회색 카드 + 페리윙클 대사 + 회분홍 속마음 + 짙은 페리윙클 Play (Dove 계열) (Play #4f5890)
+  Dusk: {
+    outerBg:'#e3e4ea', card:'#f3f3f6', text:'#000000',
+    hl:'#d6daf2', hl2:'#ece2e6', playBg:'#ece2e6', pauseText:'#4f5890',
+    accent:'#4f5890', accentText:'#f3f3f6',
+    muted:'#5e6276',
+    title:'#fafafc', subtitle:'#ffffff', char:'#dfe2f5'
+  },
+  // 바다 유리: 옅은 아쿠아 카드 + 아쿠아 대사 + 복숭아 속마음 + 슬레이트 바이올렛 Play, 정지 버튼은 연아쿠아에 바이올렛 ❚❚ (Play #7a7aa8)
+  'Sea Glass': {
+    outerBg:'#e3f0f0', card:'#f6fbfb', text:'#000000',
+    hl:'#cfe8e7', hl2:'#f5e0d6', playBg:'#d6ecea', pauseText:'#5f5f8e',
+    accent:'#7a7aa8', accentText:'#ffffff',
+    muted:'#4f7474',
+    title:'#f6fbfb', subtitle:'#ffffff', char:'#d8eeed'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
@@ -550,6 +758,9 @@ const THEME_GROUP_OF = {
   Chiffon:'파스텔', Bellini:'파스텔', Champagne:'파스텔', Orchid:'파스텔', Yuzu:'파스텔', Sorbet:'파스텔', Snowberry:'파스텔',
   Provence:'내추럴', Willow:'내추럴', Wheat:'내추럴', Maple:'내추럴', Pear:'내추럴',
   Royal:'다크', Rust:'다크',
+  Ballet:'파스텔', Opal:'파스텔', Marshmallow:'파스텔', 'Rose Quartz':'파스텔', 'Lilac Note':'파스텔', 'Peach Milk':'파스텔', Pearl:'파스텔', Seashell:'파스텔', Moonstone:'파스텔', Petal:'파스텔', Tulle:'파스텔', Ribbon:'파스텔', 'Mauve Mist':'파스텔', Dove:'파스텔', Ash:'파스텔', 'Lavender Milk':'파스텔', Daydream:'파스텔', 'Plum Milk':'파스텔', Bluebell:'파스텔', Hyacinth:'파스텔', Dusk:'파스텔', 'Sea Glass':'파스텔',
+  Rosemary:'내추럴',
+  Cocoa:'다크', Oxford:'다크', 'Ash Night':'다크',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
