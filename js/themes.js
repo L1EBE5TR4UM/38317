@@ -267,6 +267,158 @@ const THEMES = {
     muted:'#7f97bd',
     title:'#f2f7ff', subtitle:'#e3ecf8', char:'#a8e8ff'
   },
+  // 수국: 푸른 보라 대사 + 연보라 속마음 + 더스티 로즈 Play (Play #d696aa)
+  Hydrangea: {
+    outerBg:'#eef0f8', card:'#ffffff', text:'#000000',
+    hl:'#cbd1f0', hl2:'#e9e3f4', playBg:'#cbd1f0',
+    accent:'#d696aa', accentText:'#4a1526',
+    muted:'#5d6596',
+    title:'#f4f5ff', subtitle:'#ffffff', char:'#f4cfda'
+  },
+  // 마카롱: 딸기 대사 + 민트 속마음 + 라벤더 Play (Play #b8a3e0)
+  Macaron: {
+    outerBg:'#fdf4f4', card:'#ffffff', text:'#000000',
+    hl:'#f8d3da', hl2:'#d7efe5', playBg:'#d7efe5',
+    accent:'#b8a3e0', accentText:'#2e1f4f',
+    muted:'#9a6170',
+    title:'#fff7f8', subtitle:'#ffffff', char:'#e3d8f6'
+  },
+  // 새벽 안개 회청 + 말린 장미 Play (Play #c98f99)
+  Mist: {
+    outerBg:'#eef1f4', card:'#ffffff', text:'#000000',
+    hl:'#d5dde7', hl2:'#e8ecf1', playBg:'#d5dde7',
+    accent:'#c98f99', accentText:'#4a1c24',
+    muted:'#5f6d7d',
+    title:'#f5f8fb', subtitle:'#ffffff', char:'#efd3d8'
+  },
+  // 멜론: 허니듀 초록 대사 + 캔털루프 속마음 + 멜론 주황 Play (Play #efa47c)
+  Melon: {
+    outerBg:'#f0f7e9', card:'#ffffff', text:'#000000',
+    hl:'#d4eac0', hl2:'#fde3cf', playBg:'#d4eac0',
+    accent:'#efa47c', accentText:'#4a1f08',
+    muted:'#5b7646',
+    title:'#f6fbf0', subtitle:'#ffffff', char:'#fde3cf'
+  },
+  // 등나무 꽃 보라 + 연둣빛 잎 Play (Play #b4cc80)
+  Wisteria: {
+    outerBg:'#f3f0f8', card:'#ffffff', text:'#000000',
+    hl:'#dbcfeb', hl2:'#ede8f4', playBg:'#dbcfeb',
+    accent:'#b4cc80', accentText:'#283a0c',
+    muted:'#6d5d8a',
+    title:'#f8f5fc', subtitle:'#ffffff', char:'#dfeac0'
+  },
+  // 아기방: 분홍 대사 + 하늘 속마음 + 연노랑 Play (Play #f1d27e)
+  Lullaby: {
+    outerBg:'#f7f3f8', card:'#ffffff', text:'#000000',
+    hl:'#f6d6de', hl2:'#d9e7f6', playBg:'#d9e7f6',
+    accent:'#f1d27e', accentText:'#4a3600',
+    muted:'#7d6a85',
+    title:'#fcf8fd', subtitle:'#ffffff', char:'#f9e5ad'
+  },
+  // 청자: 비색 녹청 + 나뭇결 갈색 Play (Play #8a6d4b)
+  Celadon: {
+    outerBg:'#eaf0ea', card:'#ffffff', text:'#000000',
+    hl:'#c9ddd0', hl2:'#e2ece5', playBg:'#c9ddd0',
+    accent:'#8a6d4b', accentText:'#f5efe4',
+    muted:'#5c7465',
+    title:'#f3f8f4', subtitle:'#ffffff', char:'#d9e9de'
+  },
+  // 무화과: 껍질 모브 대사 + 과육 베이지 속마음 + 무화과 보라 Play (Play #6a4b6e)
+  Fig: {
+    outerBg:'#f4ece8', card:'#ffffff', text:'#000000',
+    hl:'#ddc4c8', hl2:'#efe3dc', playBg:'#ddc4c8',
+    accent:'#6a4b6e', accentText:'#f4ece8',
+    muted:'#86606a',
+    title:'#faf3f0', subtitle:'#ffffff', char:'#e3cfe3'
+  },
+  // 사막 모래언덕 + 해 질 녘 로즈 Play (Play #c4706a)
+  Dune: {
+    outerBg:'#f3e7d8', card:'#ffffff', text:'#000000',
+    hl:'#e9cca8', hl2:'#f2e2cd', playBg:'#e9cca8',
+    accent:'#c4706a', accentText:'#ffffff',
+    muted:'#8e6844',
+    title:'#faf2e8', subtitle:'#ffffff', char:'#f3cfc2'
+  },
+  // 삼나무 결 + 이끼 낀 청록 Play (Play #4f7069)
+  Cedar: {
+    outerBg:'#f2ebe1', card:'#ffffff', text:'#000000',
+    hl:'#dcc8ab', hl2:'#ece2d3', playBg:'#dcc8ab',
+    accent:'#4f7069', accentText:'#f2ebe1',
+    muted:'#7e6448',
+    title:'#f9f4ec', subtitle:'#ffffff', char:'#cfe1db'
+  },
+  // 얼그레이 밀크티: 베르가못 회보라 대사 + 우유 속마음 + 찻빛 Play (Play #a77b5a)
+  'Earl Grey': {
+    outerBg:'#eeebe8', card:'#ffffff', text:'#000000',
+    hl:'#d8d0d8', hl2:'#eee7dc', playBg:'#eee7dc',
+    accent:'#a77b5a', accentText:'#fff7ef',
+    muted:'#6f6670',
+    title:'#f6f3f1', subtitle:'#ffffff', char:'#ecd8c6'
+  },
+  // 키위: 과육 연두 대사 + 껍질 베이지 속마음 + 씨앗 갈색 Play (Play #5e4426)
+  Kiwi: {
+    outerBg:'#f2f7e5', card:'#ffffff', text:'#000000',
+    hl:'#cbe59b', hl2:'#efe7d6', playBg:'#efe7d6',
+    accent:'#5e4426', accentText:'#eaf4d2',
+    muted:'#5a6e30',
+    title:'#f8fbef', subtitle:'#ffffff', char:'#dcefbb'
+  },
+  // 노을: 살구 대사 + 라일락 속마음 + 저녁 보라 Play (Play #7d5fab)
+  Sunset: {
+    outerBg:'#fff0e8', card:'#ffffff', text:'#000000',
+    hl:'#ffc8ae', hl2:'#efdcef', playBg:'#efdcef',
+    accent:'#7d5fab', accentText:'#ffffff',
+    muted:'#a05e48',
+    title:'#fff6f0', subtitle:'#ffffff', char:'#ffd2bf'
+  },
+  // 비취 녹색 + 장신구 금빛 Play (Play #c9a24a)
+  Jade: {
+    outerBg:'#e6f4ef', card:'#ffffff', text:'#000000',
+    hl:'#acdcc9', hl2:'#dcefe7', playBg:'#dcefe7',
+    accent:'#c9a24a', accentText:'#3a2a00',
+    muted:'#3d7562',
+    title:'#f1faf6', subtitle:'#ffffff', char:'#f1dca3'
+  },
+  // 먹: 청흑 바탕 + 회청 블록 + 주홍 낙관 Play (Play #e07a5f)
+  Ink: {
+    outerBg:'#121418', card:'#191c22', text:'#e7e9ee',
+    hl:'#465063', hl2:'#2b313c', playBg:'#2b313c',
+    accent:'#e07a5f', accentText:'#121418',
+    muted:'#8a909c',
+    title:'#ffffff', subtitle:'#e7e9ee', char:'#f0b4a3'
+  },
+  // 다크 초콜릿 + 민트 Play (Play #93d6c2)
+  Truffle: {
+    outerBg:'#1f1613', card:'#281d19', text:'#f0e6df',
+    hl:'#6c4736', hl2:'#433026', playBg:'#433026',
+    accent:'#93d6c2', accentText:'#1f1613',
+    muted:'#a58f82',
+    title:'#fbf3ee', subtitle:'#f0e6df', char:'#bfe8db'
+  },
+  // 해 진 직후 보랏빛 남색 + 복숭아 Play (Play #ffb894)
+  Twilight: {
+    outerBg:'#16152a', card:'#1e1c38', text:'#ebe9f7',
+    hl:'#4c488c', hl2:'#2f2c5a', playBg:'#2f2c5a',
+    accent:'#ffb894', accentText:'#16152a',
+    muted:'#9590c0',
+    title:'#ffffff', subtitle:'#ebe9f7', char:'#ffd2bd'
+  },
+  // 안개 낀 회보라 + 연보라 Play (Play #c8b8ff)
+  Smoke: {
+    outerBg:'#1c1b20', card:'#24232a', text:'#ecebf0',
+    hl:'#585369', hl2:'#393644', playBg:'#393644',
+    accent:'#c8b8ff', accentText:'#1c1b20',
+    muted:'#99949f',
+    title:'#ffffff', subtitle:'#ecebf0', char:'#dcd2ff'
+  },
+  // 세쿼이아 붉은 나무껍질 + 세이지 Play (Play #a9c89b)
+  Sequoia: {
+    outerBg:'#1c1311', card:'#251a17', text:'#f1e5e0',
+    hl:'#6e3c2e', hl2:'#4a2b22', playBg:'#4a2b22',
+    accent:'#a9c89b', accentText:'#1c1311',
+    muted:'#a88d84',
+    title:'#fdf3ef', subtitle:'#f1e5e0', char:'#cfe2c5'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
@@ -279,5 +431,9 @@ const THEME_GROUP_OF = {
   Watermelon:'비비드',
   Noir:'다크', 'Old Money Dark':'다크', Monochrome:'다크', 'Dark Olive':'다크',
   Wine:'다크', Plum:'다크', 'Deep Sea':'다크', Marine:'다크',
+  Hydrangea:'파스텔', Macaron:'파스텔', Mist:'파스텔', Melon:'파스텔', Wisteria:'파스텔', Lullaby:'파스텔',
+  Celadon:'내추럴', Fig:'내추럴', Dune:'내추럴', Cedar:'내추럴', 'Earl Grey':'내추럴',
+  Kiwi:'비비드', Sunset:'비비드', Jade:'비비드',
+  Ink:'다크', Truffle:'다크', Twilight:'다크', Smoke:'다크', Sequoia:'다크',
 };
 const THEME_KEYS = ['outerBg','card','text','hl','hl2','accent','accentText','muted','title','subtitle','char'];
