@@ -27,7 +27,7 @@ $('typeToggle').addEventListener('click', (e)=>{
    즐겨찾기는 이 브라우저의 localStorage에만 저장된다. */
 const FAV_KEY = 'log-library-theme-favs';
 let themeFavs = new Set();
-try{ themeFavs = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]')); }catch(e){}
+try{ themeFavs = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || '[]').map(n => THEME_RENAMED[n] || n)); }catch(e){}
 function saveThemeFavs(){ try{ localStorage.setItem(FAV_KEY, JSON.stringify([...themeFavs])); }catch(e){} }
 
 const tp = { open:true, filter:'전체', q:'' };
@@ -278,7 +278,8 @@ function restore(snap){
   }
 
   if(snap.theme){
-    state.theme = snap.theme;
+    // 이름이 바뀐 테마는 새 이름으로 (THEME_RENAMED)
+    state.theme = THEME_RENAMED[snap.theme] || snap.theme;
   }
 
   let vars = null;

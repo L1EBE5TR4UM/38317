@@ -147,7 +147,7 @@ const THEMES = {
     title:'#fff1e4', subtitle:'#fff8f0', char:'#f8cba4'
   },
   // 버터 바: 버터 노랑 강조(#f7e097) + 포장지 파랑 Play 버튼(#3b8ece), 정지 버튼 ❚❚만 황갈색(#8a6a1c), 본문 글자는 순검정
-  Butter: {
+  'Butter Bar': {
     outerBg:'#fcf5de', card:'#ffffff', text:'#000000',
     hl:'#f7e097', hl2:'#fcf2d5', pauseText:'#8a6a1c',
     accent:'#3b8ece', accentText:'#ffffff',
@@ -419,6 +419,118 @@ const THEMES = {
     muted:'#a88d84',
     title:'#fdf3ef', subtitle:'#f1e5e0', char:'#cfe2c5'
   },
+  // 레몬 시폰: 연노랑 대사 + 연보라 속마음 + 라벤더 Play (Play #a08bd0)
+  Chiffon: {
+    outerBg:'#fdfae8', card:'#ffffff', text:'#000000',
+    hl:'#f6eba6', hl2:'#ebe4f6', playBg:'#ebe4f6',
+    accent:'#a08bd0', accentText:'#2a1d4f',
+    muted:'#7a6c2e',
+    title:'#fffdf2', subtitle:'#ffffff', char:'#e4dbf6'
+  },
+  // 벨리니 칵테일: 복숭아 대사 + 하늘 속마음 + 물빛 블루 Play (Play #86acd8)
+  Bellini: {
+    outerBg:'#fff3ec', card:'#ffffff', text:'#000000',
+    hl:'#ffd9c4', hl2:'#dcebf6', playBg:'#dcebf6',
+    accent:'#86acd8', accentText:'#132f50',
+    muted:'#9a6248',
+    title:'#fff8f3', subtitle:'#ffffff', char:'#ffe0cf'
+  },
+  // 샴페인 골드 대사 + 로즈 속마음 + 금빛 Play (Play #c4a15a)
+  Champagne: {
+    outerBg:'#f8f2ea', card:'#ffffff', text:'#000000',
+    hl:'#ecdcc2', hl2:'#f6e6e3', playBg:'#f6e6e3',
+    accent:'#c4a15a', accentText:'#2e2208',
+    muted:'#86704c',
+    title:'#fdf8f1', subtitle:'#ffffff', char:'#f0dfbd'
+  },
+  // 난초 핑크퍼플 + 청록 잎 Play (Play #5fa48f)
+  Orchid: {
+    outerBg:'#f8f0f7', card:'#ffffff', text:'#000000',
+    hl:'#edcbe7', hl2:'#f4e8f1', playBg:'#edcbe7',
+    accent:'#5fa48f', accentText:'#0f3329',
+    muted:'#8a5a83',
+    title:'#fdf6fc', subtitle:'#ffffff', char:'#f3d6ee'
+  },
+  // 유자: 노란 껍질 대사 + 연두 속마음 + 유자 잎 Play (Play #6f9150)
+  Yuzu: {
+    outerBg:'#fdf9e6', card:'#ffffff', text:'#000000',
+    hl:'#f5e48e', hl2:'#eef2d9', playBg:'#eef2d9',
+    accent:'#6f9150', accentText:'#ffffff',
+    muted:'#7a6a1e',
+    title:'#fffcef', subtitle:'#ffffff', char:'#f7eaa8'
+  },
+  // 셔벗 세 스쿱: 라즈베리 대사 + 레몬 속마음 + 민트 Play (Play #7cc8b0)
+  Sorbet: {
+    outerBg:'#fdf2f5', card:'#ffffff', text:'#000000',
+    hl:'#f7c9d6', hl2:'#fbf0c4', playBg:'#fbf0c4',
+    accent:'#7cc8b0', accentText:'#103a2e',
+    muted:'#9c5670',
+    title:'#fff7f9', subtitle:'#ffffff', char:'#c9ecdf'
+  },
+  // 눈 덮인 겨울 숲: 얼음빛 블록 + 겨울 열매 붉은 Play (Play #b8475a)
+  Snowberry: {
+    outerBg:'#f2f6f8', card:'#ffffff', text:'#000000',
+    hl:'#d9e6ee', hl2:'#eef1f3', playBg:'#d9e6ee',
+    accent:'#b8475a', accentText:'#ffffff',
+    muted:'#5f7480',
+    title:'#f8fbfc', subtitle:'#ffffff', char:'#f2cdd3'
+  },
+  // 프로방스: 라벤더 밭 대사 + 밀 이삭 속마음 + 올리브 금빛 Play (Play #8f7f3f)
+  Provence: {
+    outerBg:'#f3f1f5', card:'#ffffff', text:'#000000',
+    hl:'#d9d1ea', hl2:'#f2e8d0', playBg:'#f2e8d0',
+    accent:'#8f7f3f', accentText:'#ffffff',
+    muted:'#6a6082',
+    title:'#f9f7fb', subtitle:'#ffffff', char:'#ece0bc'
+  },
+  // 버드나무: 연둣빛 버들 대사 + 냇물 속마음 + 강물 파랑 Play (Play #5a86a2)
+  Willow: {
+    outerBg:'#f1f4e7', card:'#ffffff', text:'#000000',
+    hl:'#dbe5bb', hl2:'#e0ebf1', playBg:'#e0ebf1',
+    accent:'#5a86a2', accentText:'#ffffff',
+    muted:'#5f6f3e',
+    title:'#f7f9ef', subtitle:'#ffffff', char:'#d3e5f0'
+  },
+  // 밀밭: 익은 밀 대사 + 여름 하늘 속마음 + 수레국화 Play (Play #5470a8)
+  Wheat: {
+    outerBg:'#f7f2e0', card:'#ffffff', text:'#000000',
+    hl:'#ecdba6', hl2:'#e6ecf4', playBg:'#e6ecf4',
+    accent:'#5470a8', accentText:'#ffffff',
+    muted:'#86723a',
+    title:'#fcf8ec', subtitle:'#ffffff', char:'#f1e3b7'
+  },
+  // 단풍: 단풍잎 대사 + 은행잎 속마음 + 나무껍질 Play (Play #6e3a2e)
+  Maple: {
+    outerBg:'#f8eee5', card:'#ffffff', text:'#000000',
+    hl:'#f1c6a8', hl2:'#f3e6c6', playBg:'#f3e6c6',
+    accent:'#6e3a2e', accentText:'#fbefe6',
+    muted:'#93593a',
+    title:'#fdf5ee', subtitle:'#ffffff', char:'#f6d6bd'
+  },
+  // 서양배: 연둣빛 과육 대사 + 크림 속마음 + 껍질 적갈색 Play (Play #b06a40)
+  Pear: {
+    outerBg:'#f6f7e6', card:'#ffffff', text:'#000000',
+    hl:'#e3e9b7', hl2:'#f3ecdb', playBg:'#f3ecdb',
+    accent:'#b06a40', accentText:'#ffffff',
+    muted:'#6c7232',
+    title:'#fbfcef', subtitle:'#ffffff', char:'#ecefc8'
+  },
+  // 로열 퍼플 + 왕관 금빛 Play (Play #e6c27a)
+  Royal: {
+    outerBg:'#15111d', card:'#1d1828', text:'#eeeaf5',
+    hl:'#54427e', hl2:'#30284a', playBg:'#30284a',
+    accent:'#e6c27a', accentText:'#15111d',
+    muted:'#9d93b3',
+    title:'#ffffff', subtitle:'#eeeaf5', char:'#ecd29c'
+  },
+  // 녹슨 철 주황 블록 + 강철 하늘색 Play (Play #9cc0d8)
+  Rust: {
+    outerBg:'#1b1512', card:'#241c18', text:'#f1e7e0',
+    hl:'#74432a', hl2:'#4b3222', playBg:'#4b3222',
+    accent:'#9cc0d8', accentText:'#1b1512',
+    muted:'#a8907f',
+    title:'#fdf4ee', subtitle:'#f1e7e0', char:'#c3d9e8'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
@@ -427,7 +539,7 @@ const THEME_GROUP_OF = {
   Linen:'내추럴', Driftwood:'내추럴', Latte:'내추럴', Seaside:'내추럴', Surf:'내추럴',
   Peony:'파스텔', Lavender:'파스텔', Sky:'파스텔', 'Cotton Candy':'파스텔', Apricot:'파스텔',
   Blush:'파스텔', 'Baby Blue':'파스텔', Pistachio:'파스텔', Periwinkle:'파스텔',
-  Lime:'비비드', 'Mint Choco':'비비드', Honeypot:'비비드', Tangerine:'비비드', Lagoon:'비비드', Butter:'비비드',
+  Lime:'비비드', 'Mint Choco':'비비드', Honeypot:'비비드', Tangerine:'비비드', Lagoon:'비비드', 'Butter Bar':'비비드',
   Watermelon:'비비드',
   Noir:'다크', 'Old Money Dark':'다크', Monochrome:'다크', 'Dark Olive':'다크',
   Wine:'다크', Plum:'다크', 'Deep Sea':'다크', Marine:'다크',
@@ -435,5 +547,10 @@ const THEME_GROUP_OF = {
   Celadon:'내추럴', Fig:'내추럴', Dune:'내추럴', Cedar:'내추럴', 'Earl Grey':'내추럴',
   Kiwi:'비비드', Sunset:'비비드', Jade:'비비드',
   Ink:'다크', Truffle:'다크', Twilight:'다크', Smoke:'다크', Sequoia:'다크',
+  Chiffon:'파스텔', Bellini:'파스텔', Champagne:'파스텔', Orchid:'파스텔', Yuzu:'파스텔', Sorbet:'파스텔', Snowberry:'파스텔',
+  Provence:'내추럴', Willow:'내추럴', Wheat:'내추럴', Maple:'내추럴', Pear:'내추럴',
+  Royal:'다크', Rust:'다크',
 };
+/* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
+const THEME_RENAMED = { Butter:'Butter Bar' };
 const THEME_KEYS = ['outerBg','card','text','hl','hl2','accent','accentText','muted','title','subtitle','char'];
