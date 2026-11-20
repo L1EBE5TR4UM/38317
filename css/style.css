@@ -145,15 +145,19 @@
   .tp-search:focus{outline:none; border-color:var(--accent); box-shadow:none}
   .tp-search::placeholder{color:var(--ink-mute)}
   .tp-list{max-height:300px; overflow:auto; scrollbar-width:thin; scrollbar-color:var(--line) transparent}
-  .tp-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:2px 12px}
-  .tp-cell{display:flex; align-items:center; gap:8px; padding:5px 0; cursor:pointer; min-width:0}
-  .tp-cell .tp-n{flex:1; min-width:0; font-size:12.5px; color:var(--ink-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .tp-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:2px 10px}
+  .tp-cell{display:flex; align-items:center; gap:8px; padding:5px 0; cursor:pointer; min-width:0; position:relative}
+  .tp-cell .tp-n{flex:1; min-width:0; font-size:12px; letter-spacing:-.01em; color:var(--ink-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
   .tp-cell:hover .tp-n{color:var(--ink)}
   .tp-cell[aria-selected="true"] .tp-n{color:var(--accent); font-weight:700}
   .tp-cell[aria-selected="true"] .tp-m{box-shadow:0 0 0 1.5px var(--accent)}
-  .tp-star{background:none; border:0; color:var(--ink-mute); font-size:12px; cursor:pointer; padding:0 2px; line-height:1; opacity:.5}
+  /* 즐겨찾기 별은 이름 칸을 차지하지 않도록 썸네일 왼쪽 위 모서리에 겹쳐 둠.
+     즐겨찾기한 별만 늘 보이고, 나머지는 마우스를 올리거나 키보드로 고를 때 보임 (터치 기기는 흐리게 항상 표시) */
+  .tp-star{position:absolute; left:-5px; top:1px; background:none; border:0; color:var(--ink-mute); font-size:10px; cursor:pointer; padding:0; line-height:1; opacity:0; text-shadow:0 0 3px #000,0 0 3px #000}
+  .tp-cell:hover .tp-star, .tp-star:focus-visible{opacity:.9}
   .tp-star:hover{opacity:1}
   .tp-star[aria-pressed="true"]{color:var(--accent); opacity:1}
+  @media (hover:none){ .tp-star{opacity:.55} }
   .tp-empty{padding:14px 2px; color:var(--ink-mute); font-size:12.5px; line-height:1.6}
   /* 미니 카드 아이콘: 바탕 / 카드 / 대사·본문·속마음 줄 / Play 버튼 점 */
   .tp-m{display:inline-flex; flex-direction:column; flex:none; width:30px; height:21px; border-radius:5px; padding:3px; box-shadow:0 0 0 1px rgba(255,255,255,.12)}
@@ -167,6 +171,7 @@
     .tp-body{grid-template-columns:1fr}
     .tp-side{flex-direction:row; flex-wrap:wrap; gap:4px 14px; padding:0 0 8px; border-right:0; border-bottom:1px solid rgba(221,209,184,.14)}
     .tp-main{padding:10px 0 0}
+    .tp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   }
 
   /* preview / output */
