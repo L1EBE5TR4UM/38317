@@ -739,6 +739,102 @@ const THEMES = {
     muted:'#4f7474',
     title:'#f6fbfb', subtitle:'#ffffff', char:'#d8eeed'
   },
+  // 야상곡: 라일락 대사 + 분홍 속마음 + 장미 Play (Play #e3aec0)
+  Nocturne: {
+    outerBg:'#1b1822', card:'#232030', text:'#ece8f4',
+    hl:'#584c78', hl2:'#5c3f4e', playBg:'#5c3f4e', pauseText:'#ddd3f2',
+    accent:'#e3aec0', accentText:'#1b1822',
+    muted:'#a29cb4',
+    title:'#ffffff', subtitle:'#ece8f4', char:'#ddd3f2'
+  },
+  // 백랍: 블루 그레이 대사 + 회분홍 속마음 + 모브 핑크 Play (Play #e0b8cc)
+  Pewter: {
+    outerBg:'#1b1c20', card:'#24252a', text:'#eeeef2',
+    hl:'#4a576e', hl2:'#5a4651', playBg:'#5a4651', pauseText:'#dfe4ee',
+    accent:'#e0b8cc', accentText:'#1b1c20',
+    muted:'#9c9ca6',
+    title:'#ffffff', subtitle:'#eeeef2', char:'#dfe4ee'
+  },
+  // 베르가못(Earl Grey의 밤): 회보라 대사 + 홍차 속마음 + 밀크티 Play (Play #e2c9ae)
+  Bergamot: {
+    outerBg:'#1c1a1d', card:'#252227', text:'#efebef',
+    hl:'#544a5c', hl2:'#5b4a3c', playBg:'#5b4a3c', pauseText:'#e9dcc9',
+    accent:'#e2c9ae', accentText:'#1c1a1d',
+    muted:'#a199a2',
+    title:'#ffffff', subtitle:'#efebef', char:'#e9dcc9'
+  },
+  // 밍크: 따뜻한 회갈색 바탕 + 토프 모브 대사 + 회청 속마음 + 연블러시 Play (Play #e8cfd2)
+  Mink: {
+    outerBg:'#1d1b1b', card:'#262323', text:'#f0eaea',
+    hl:'#5c4c51', hl2:'#414853', playBg:'#414853', pauseText:'#ecdcde',
+    accent:'#e8cfd2', accentText:'#1d1b1b',
+    muted:'#a59c9c',
+    title:'#ffffff', subtitle:'#f0eaea', char:'#ecdcde'
+  },
+  // 나방 날개: 회라일락 대사 + 돌빛 속마음 + 아이보리 Play (Play #ece4d6)
+  Moth: {
+    outerBg:'#1c1b1e', card:'#252428', text:'#eeecf0',
+    hl:'#564f60', hl2:'#4d4943', playBg:'#4d4943', pauseText:'#e3dcea',
+    accent:'#ece4d6', accentText:'#1c1b1e',
+    muted:'#a19ca4',
+    title:'#ffffff', subtitle:'#eeecf0', char:'#e3dcea'
+  },
+  // 캐시미어: 코코아 로즈 대사 + 오트밀 그레이 속마음 + 우유 Play (Play #efe4d8)
+  Cashmere: {
+    outerBg:'#1d1a19', card:'#272322', text:'#f2ebe8',
+    hl:'#61484a', hl2:'#4c4742', playBg:'#4c4742', pauseText:'#eedbd8',
+    accent:'#efe4d8', accentText:'#1d1a19',
+    muted:'#a89e98',
+    title:'#ffffff', subtitle:'#f2ebe8', char:'#eedbd8'
+  },
+  // 비구름: 스틸 블루 그레이 대사 + 더스티 모브 속마음 + 은빛 하늘 Play (Play #c9d4e2)
+  Storm: {
+    outerBg:'#191c20', card:'#22252a', text:'#ecedf1',
+    hl:'#47525f', hl2:'#56474f', playBg:'#56474f', pauseText:'#dce2ea',
+    accent:'#c9d4e2', accentText:'#191c20',
+    muted:'#9ca0a8',
+    title:'#ffffff', subtitle:'#ecedf1', char:'#dce2ea'
+  },
+  // 말린 장미: 마른 장미 대사 + 회색 속마음 + 로즈 골드 Play (Play #e6c4b6)
+  'Pressed Rose': {
+    outerBg:'#1e1a1b', card:'#282324', text:'#f2eaeb',
+    hl:'#664950', hl2:'#48464b', playBg:'#48464b', pauseText:'#efd6d8',
+    accent:'#e6c4b6', accentText:'#1e1a1b',
+    muted:'#a89a9c',
+    title:'#ffffff', subtitle:'#f2eaeb', char:'#efd6d8'
+  },
+  // 자수정: 회보라 대사 + 슬레이트 속마음 + 연자수정 Play (Play #cfc6ea)
+  Amethyst: {
+    outerBg:'#1c1a21', card:'#24222b', text:'#eeebf3',
+    hl:'#5a4e6c', hl2:'#444a5a', playBg:'#444a5a', pauseText:'#e0daef',
+    accent:'#cfc6ea', accentText:'#1c1a21',
+    muted:'#a19cad',
+    title:'#ffffff', subtitle:'#eeebf3', char:'#e0daef'
+  },
+  // 티라미수: 코코아 가루 대사 + 회모브 속마음 + 마스카포네 Play (Play #efe6d6)
+  Tiramisu: {
+    outerBg:'#1d1917', card:'#272220', text:'#f2ebe5',
+    hl:'#5f4b41', hl2:'#4b4449', playBg:'#4b4449', pauseText:'#ead9c8',
+    accent:'#efe6d6', accentText:'#1d1917',
+    muted:'#a99c94',
+    title:'#ffffff', subtitle:'#f2ebe5', char:'#ead9c8'
+  },
+  // 오래된 필름: 세피아 대사 + 회색 속마음 + 은염 Play (Play #d8d6d0)
+  Sepia: {
+    outerBg:'#1b1a18', card:'#242321', text:'#efece6',
+    hl:'#5c4e40', hl2:'#45454a', playBg:'#45454a', pauseText:'#e6dccd',
+    accent:'#d8d6d0', accentText:'#1b1a18',
+    muted:'#a29d94',
+    title:'#ffffff', subtitle:'#efece6', char:'#e6dccd'
+  },
+  // 수묵: 먹 회색 대사 + 따뜻한 회색 속마음 + 화선지 Play (Play #ede6d8)
+  Sumi: {
+    outerBg:'#19191b', card:'#222224', text:'#eeeeee',
+    hl:'#4c4c53', hl2:'#504a44', playBg:'#504a44', pauseText:'#e6e3dc',
+    accent:'#ede6d8', accentText:'#19191b',
+    muted:'#9f9fa3',
+    title:'#ffffff', subtitle:'#eeeeee', char:'#e6e3dc'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
@@ -761,6 +857,7 @@ const THEME_GROUP_OF = {
   Ballet:'파스텔', Opal:'파스텔', Marshmallow:'파스텔', 'Rose Quartz':'파스텔', 'Lilac Note':'파스텔', 'Peach Milk':'파스텔', Pearl:'파스텔', Seashell:'파스텔', Moonstone:'파스텔', Petal:'파스텔', Tulle:'파스텔', Ribbon:'파스텔', 'Mauve Mist':'파스텔', Dove:'파스텔', Ash:'파스텔', 'Lavender Milk':'파스텔', Daydream:'파스텔', 'Plum Milk':'파스텔', Bluebell:'파스텔', Hyacinth:'파스텔', Dusk:'파스텔', 'Sea Glass':'파스텔',
   Rosemary:'내추럴',
   Cocoa:'다크', Oxford:'다크', 'Ash Night':'다크',
+  Nocturne:'다크', Pewter:'다크', Bergamot:'다크', Mink:'다크', Moth:'다크', Cashmere:'다크', Storm:'다크', 'Pressed Rose':'다크', Amethyst:'다크', Tiramisu:'다크', Sepia:'다크', Sumi:'다크',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
