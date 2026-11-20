@@ -835,6 +835,134 @@ const THEMES = {
     muted:'#9f9fa3',
     title:'#ffffff', subtitle:'#eeeeee', char:'#e6e3dc'
   },
+  // 풍선껌: 분홍 카드 + 풍선껌 핑크 대사 + 소다 아쿠아 속마음 + 페리윙클 Play (Play #6e78dc)
+  Bubblegum: {
+    outerBg:'#ffe3ef', card:'#fff5fa', text:'#000000',
+    hl:'#ffb6d4', hl2:'#a9e9ee', playBg:'#a9e9ee', pauseText:'#4f58b8',
+    accent:'#6e78dc', accentText:'#ffffff',
+    muted:'#a0446e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffc9df'
+  },
+  // 라일락 팝: 연보라 카드 + 선명한 라일락 대사 + 핑크 속마음 + 바이올렛 Play (Play #7d5fd6)
+  'Lilac Pop': {
+    outerBg:'#eee3ff', card:'#fbf7ff', text:'#000000',
+    hl:'#d4bcff', hl2:'#ffc6de', playBg:'#ffc6de', pauseText:'#6a4aa6',
+    accent:'#7d5fd6', accentText:'#ffffff',
+    muted:'#6a4aa6',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e2d2ff'
+  },
+  // 블루 라즈베리 슬러시: 블루 대사 + 라즈베리 속마음 + 코발트 Play (Play #4a68d4)
+  'Blue Raspberry': {
+    outerBg:'#e2eaff', card:'#f6f8ff', text:'#000000',
+    hl:'#adc8ff', hl2:'#ffbccd', playBg:'#ffbccd', pauseText:'#3f5698',
+    accent:'#4a68d4', accentText:'#ffffff',
+    muted:'#3f5698',
+    title:'#ffffff', subtitle:'#ffffff', char:'#c4d6ff'
+  },
+  // 복숭아 소다: 복숭아 대사 + 소다 아쿠아 속마음 + 보라 Play (Play #7a68cc)
+  'Peach Soda': {
+    outerBg:'#ffe8da', card:'#fff8f3', text:'#000000',
+    hl:'#ffc4a4', hl2:'#b4edf0', playBg:'#b4edf0', pauseText:'#5a4aa8',
+    accent:'#7a68cc', accentText:'#ffffff',
+    muted:'#a0532e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd3bd'
+  },
+  // 피튜니아: 선명한 페리윙클 대사 + 자홍 핑크 속마음 + 짙은 페리윙클 Play (Play #5866d4)
+  Petunia: {
+    outerBg:'#e6e8ff', card:'#f7f7ff', text:'#000000',
+    hl:'#bcc4ff', hl2:'#f6bbe6', playBg:'#f6bbe6', pauseText:'#4a52a0',
+    accent:'#5866d4', accentText:'#ffffff',
+    muted:'#4a52a0',
+    title:'#ffffff', subtitle:'#ffffff', char:'#cfd4ff'
+  },
+  // 자두 소다: 자두 핑크 대사 + 라임 속마음 + 자두 Play (Play #8a3fa0)
+  'Plum Soda': {
+    outerBg:'#f8e4f6', card:'#fdf7fd', text:'#000000',
+    hl:'#e8b6e6', hl2:'#d9f1a4', playBg:'#d9f1a4', pauseText:'#8a3fa0',
+    accent:'#8a3fa0', accentText:'#ffffff',
+    muted:'#7d3d84',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f0cdee'
+  },
+  // 베리 요거트: 라즈베리 대사 + 블루베리 속마음 + 베리 퍼플 Play (Play #7a4aa6)
+  'Berry Yogurt': {
+    outerBg:'#ffe6ee', card:'#fff7fa', text:'#000000',
+    hl:'#ffb4c8', hl2:'#c2c9f6', playBg:'#c2c9f6', pauseText:'#7a4aa6',
+    accent:'#7a4aa6', accentText:'#ffffff',
+    muted:'#9c4462',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffc9d6'
+  },
+  // 양귀비: 양귀비 다홍 대사 + 라벤더 속마음 + 보랏빛 Play (Play #6a58c4)
+  Poppy: {
+    outerBg:'#ffe5e2', card:'#fff7f6', text:'#000000',
+    hl:'#ffb3aa', hl2:'#d8cbf6', playBg:'#d8cbf6', pauseText:'#6a58c4',
+    accent:'#6a58c4', accentText:'#ffffff',
+    muted:'#a04238',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffc8c1'
+  },
+  // 블루베리 레모네이드: 하늘빛 카드 + 블루 대사 + 레몬 시폰 속마음 + 블루베리 Play (Play #3f56c8)
+  Lemonade: {
+    outerBg:'#e6edff', card:'#fbfcff', text:'#000000',
+    hl:'#b9ccff', hl2:'#fcefc0', playBg:'#fcefc0', pauseText:'#3f56c8',
+    accent:'#3f56c8', accentText:'#ffffff',
+    muted:'#405a94',
+    title:'#ffffff', subtitle:'#ffffff', char:'#cad8ff'
+  },
+  // 보랏빛 하늘: 블루 대사 + 바이올렛 속마음 + 짙은 바이올렛 Play (Play #6a50d0)
+  'Violet Sky': {
+    outerBg:'#e8e8ff', card:'#ffffff', text:'#000000',
+    hl:'#b8c8ff', hl2:'#dcc6ff', playBg:'#dcc6ff', pauseText:'#4e3aa8',
+    accent:'#6a50d0', accentText:'#ffffff',
+    muted:'#4f5aa0',
+    title:'#ffffff', subtitle:'#ffffff', char:'#cad6ff'
+  },
+  // 라임 소다: 라임 대사 + 탄산 블루 속마음 + 블루 Play (Play #3d62c8)
+  'Lime Soda': {
+    outerBg:'#eef8e0', card:'#ffffff', text:'#000000',
+    hl:'#d4f0a0', hl2:'#b9d4ff', playBg:'#b9d4ff', pauseText:'#2c4a9e',
+    accent:'#3d62c8', accentText:'#ffffff',
+    muted:'#4f6e28',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e2f5c0'
+  },
+  // 마멀레이드: 오렌지 대사 + 페리윙클 속마음 + 페리윙클 Play (Play #5a62c8)
+  Marmalade: {
+    outerBg:'#fff0e0', card:'#ffffff', text:'#000000',
+    hl:'#ffc79a', hl2:'#c4caff', playBg:'#c4caff', pauseText:'#3f46a0',
+    accent:'#5a62c8', accentText:'#ffffff',
+    muted:'#a05a20',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd8b8'
+  },
+  // 라일락 라임: 라일락 대사 + 라임 속마음 + 바이올렛 Play (Play #6a4ec8)
+  'Lilac Lime': {
+    outerBg:'#efe9ff', card:'#ffffff', text:'#000000',
+    hl:'#d6c2ff', hl2:'#dbf2a6', playBg:'#dbf2a6', pauseText:'#6a4ec8',
+    accent:'#6a4ec8', accentText:'#ffffff',
+    muted:'#5a47a0',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e2d4ff'
+  },
+  // 셔벗 하늘: 오렌지 셔벗 대사 + 핑크 속마음 + 페리윙클 Play (Play #5a62c8)
+  'Sherbet Sky': {
+    outerBg:'#ffece0', card:'#fffaf6', text:'#000000',
+    hl:'#ffcca4', hl2:'#ffc4da', playBg:'#ffc4da', pauseText:'#4c53aa',
+    accent:'#5a62c8', accentText:'#ffffff',
+    muted:'#a0582a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd9bd'
+  },
+  // 민트 하늘: 민트 대사 + 하늘 속마음 + 블루 Play (Play #3a5cc8)
+  'Mint Sky': {
+    outerBg:'#e2f6f0', card:'#ffffff', text:'#000000',
+    hl:'#b6efda', hl2:'#b4d6ff', playBg:'#b4d6ff', pauseText:'#3757be',
+    accent:'#3a5cc8', accentText:'#ffffff',
+    muted:'#2f7260',
+    title:'#ffffff', subtitle:'#ffffff', char:'#c9f3e4'
+  },
+  // 라벤더 민트: 라벤더 대사 + 민트 속마음 + 바이올렛 Play (Play #5a48c0)
+  'Lavender Mint': {
+    outerBg:'#ebe6ff', card:'#f9f7ff', text:'#000000',
+    hl:'#cfc0ff', hl2:'#b8efd8', playBg:'#b8efd8', pauseText:'#5a48c0',
+    accent:'#5a48c0', accentText:'#ffffff',
+    muted:'#56489a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ddd3ff'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
@@ -858,6 +986,7 @@ const THEME_GROUP_OF = {
   Rosemary:'내추럴',
   Cocoa:'다크', Oxford:'다크', 'Ash Night':'다크',
   Nocturne:'다크', Pewter:'다크', Bergamot:'다크', Mink:'다크', Moth:'다크', Cashmere:'다크', Storm:'다크', 'Pressed Rose':'다크', Amethyst:'다크', Tiramisu:'다크', Sepia:'다크', Sumi:'다크',
+  Bubblegum:'비비드', 'Lilac Pop':'비비드', 'Blue Raspberry':'비비드', 'Peach Soda':'비비드', Petunia:'비비드', 'Plum Soda':'비비드', 'Berry Yogurt':'비비드', Poppy:'비비드', Lemonade:'비비드', 'Violet Sky':'비비드', 'Lime Soda':'비비드', Marmalade:'비비드', 'Lilac Lime':'비비드', 'Sherbet Sky':'비비드', 'Mint Sky':'비비드', 'Lavender Mint':'비비드',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
