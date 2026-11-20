@@ -582,6 +582,30 @@ const THEMES = {
     muted:'#3b7c80',
     title:'#ffe0d6', subtitle:'#eefafa', char:'#ffb4a2'
   },
+  // 다크 올리브: 갈색 기운 올리브 바탕 + 마른 올리브 잎 Play 버튼(#b8c17e), 본문 글자는 아이보리
+  'Dark Olive': {
+    outerBg:'#1b1d14', card:'#24271c', text:'#ebe7d6',
+    hl:'#4b5333', hl2:'#363a27', playBg:'#363a27',
+    accent:'#b8c17e', accentText:'#1b1d14',
+    muted:'#9c9a7c',
+    title:'#f2efdf', subtitle:'#e4e0cc', char:'#cdd29f'
+  },
+  // 살구 크림 바탕 + 살구 강조 + 딥 로즈 Play 버튼(#c9566c), 본문 글자는 순검정
+  Apricot: {
+    outerBg:'#fdeee1', card:'#ffffff', text:'#000000',
+    hl:'#f8cba4', hl2:'#fde3cd', playBg:'#f8cba4',
+    accent:'#c9566c', accentText:'#fff4ee',
+    muted:'#9a5f3c',
+    title:'#fff1e4', subtitle:'#fff8f0', char:'#f8cba4'
+  },
+  // 버터 바: 버터 노랑 강조(#f7e097) + 포장지 파랑 Play 버튼(#3b8ece), 정지 버튼 ❚❚만 황갈색(#8a6a1c), 본문 글자는 순검정
+  Butter: {
+    outerBg:'#fcf5de', card:'#ffffff', text:'#000000',
+    hl:'#f7e097', hl2:'#fcf2d5', pauseText:'#8a6a1c',
+    accent:'#3b8ece', accentText:'#ffffff',
+    muted:'#8f8256',
+    title:'#fdf8e7', subtitle:'#ffffff', char:'#fdf8e7'
+  },
 };
 const THEME_KEYS = ['outerBg','card','text','hl','hl2','accent','accentText','muted','title','subtitle','char'];
 
@@ -1108,7 +1132,7 @@ ${footer}
 <div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.accent}; color: ${v.accentText}; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; box-shadow: 0 3px 10px rgba(0,0,0,0.3); white-space: nowrap; line-height: 26px;">&#9654;</div>
 </td>`;
   const pauseCell = `<td style="${tdBase}">
-<div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.playBg || v.hl}; color: ${readableInk(v.playBg || v.hl, v.muted)}; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid ${hexToRgba(v.muted,0.2)}; margin-left: 6px; white-space: nowrap; line-height: 24px;">&#10074;&#10074;</div>
+<div style="display: inline-block; box-sizing: border-box; width: 44px; height: 26px; padding: 0; text-align: center; overflow: hidden; word-break: keep-all; border-radius: 999px; background-color: ${v.playBg || v.hl}; color: ${readableInk(v.playBg || v.hl, v.pauseText || v.muted)}; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; border: 1px solid ${hexToRgba(v.muted,0.2)}; margin-left: 6px; white-space: nowrap; line-height: 24px;">&#10074;&#10074;</div>
 </td>`;
   let playCells, tableWidth, keAlign;
   if (validAlign === 'center'){
