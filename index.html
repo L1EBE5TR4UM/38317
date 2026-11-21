@@ -37,7 +37,7 @@
             <button type="button" role="option" aria-selected="false" data-type="B" data-name="메타 바" data-use="봇 카탈로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:56%"></i><i class="dk" style="left:14%;top:46%;width:72%;height:14%"></i><i class="card" style="left:6%;top:66%;width:88%;height:34%"></i><i class="ln" style="left:14%;top:78%;width:60%"></i></span><span class="type-t"><b>B · 메타 바</b><small>봇 카탈로그</small></span></button>
             <button type="button" role="option" aria-selected="false" data-type="C" data-name="북 재킷" data-use="표지 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:58%"></i><i class="card" style="left:0;top:58%;width:100%;height:42%"></i><i class="ln" style="left:10%;top:68%;width:44%;height:4px"></i><i class="ln" style="left:10%;top:84%;width:62%"></i></span><span class="type-t"><b>C · 북 재킷</b><small>표지 로그</small></span></button>
             <button type="button" role="option" aria-selected="false" data-type="D" data-name="배너 + 배지" data-use="그림 위 제목 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:52%"></i><i class="card" style="left:0;top:52%;width:100%;height:48%"></i><i class="ln" style="left:10%;top:28%;width:40%;height:4px"></i><i class="dk" style="left:58%;top:45%;width:32%;height:14%"></i><i class="ln" style="left:10%;top:74%;width:72%"></i><i class="ln" style="left:10%;top:86%;width:56%"></i></span><span class="type-t"><b>D · 배너 + 배지</b><small>그림 위 제목 로그</small></span></button>
-            <button type="button" role="option" aria-selected="false" data-type="F" data-name="레터 로그" data-use="책 펼침면 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:50%;opacity:.45"></i><i class="ln" style="left:56%;top:14%;width:34%"></i><i class="ln" style="left:40%;top:30%;width:50%;height:4px"></i><i class="ln" style="left:10%;top:62%;width:26%"></i><i class="ln" style="left:38%;top:74%;width:52%"></i><i class="ln" style="left:38%;top:86%;width:44%"></i></span><span class="type-t"><b>F · 레터 로그</b><small>책 펼침면 로그</small></span></button>
+            <button type="button" role="option" aria-selected="false" data-type="F" data-name="레터 로그" data-use="편지형 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:50%;opacity:.45"></i><i class="ln" style="left:56%;top:14%;width:34%"></i><i class="ln" style="left:40%;top:30%;width:50%;height:4px"></i><i class="ln" style="left:10%;top:62%;width:26%"></i><i class="ln" style="left:38%;top:74%;width:52%"></i><i class="ln" style="left:38%;top:86%;width:44%"></i></span><span class="type-t"><b>F · 레터 로그</b><small>편지형 로그</small></span></button>
       </div>
       <div class="type-group">CAST</div>
       <div class="type-list">
@@ -122,20 +122,13 @@
       <div class="section f-only">
         <h3 class="section-title">Letter</h3>
         <div class="grid">
-          <div><label>스타일</label>
-            <select id="f-fstyle">
-              <option value="folio" selected>Folio · 원본형</option>
-              <option value="margin">Margin · 여백 주석형</option>
-              <option value="letter">Letter · 편지형</option>
-            </select>
-          </div>
           <div><label>목차 라벨 (비우면 숨김)</label><input id="f-fsec" type="text" value="목차" /></div>
           <div><label>장 번호</label><input id="f-fno" type="text" value="01" /></div>
           <div><label>장 제목 (비우면 Title)</label><input id="f-fchap" type="text" placeholder="비우면 Title과 같음" /></div>
-          <div class="full"><label>인용문 (그림 오른쪽 위 한 줄)</label><input id="f-fepi" type="text" value="a single line that opens the letter." /></div>
-          <div><label>서명 (오른쪽 아래 작은 글씨)</label><input id="f-fmark" type="text" value="LETTER LOG" /></div>
+          <div class="full"><label>인용문 (제목 아래 가운데, 비우면 숨김)</label><input id="f-fepi" type="text" value="a single line that opens the letter." /></div>
+          <div><label>서명 (본문 끝 오른쪽 작은 글씨)</label><input id="f-fmark" type="text" value="LETTER LOG" /></div>
         </div>
-        <div class="help">그림 왼쪽 위 두 줄은 Your Name · Character Name, 바탕은 테마의 바깥 배경색입니다. <code>"대사"</code>·<code>'속마음'</code>은 강조 박스 없이 글자색으로 표시됩니다. Footer를 비우면 <code>작성자 · 제목</code>이 자동으로 들어갑니다.</div>
+        <div class="help">제목 위 두 줄은 Your Name · Character Name, 본문 끝 서명 줄은 “— Your Name”, 바탕은 테마의 바깥 배경색입니다. <code>"대사"</code>·<code>'속마음'</code>은 강조 박스 없이 글자색으로 표시됩니다. Footer를 비우면 <code>작성자 · 제목</code>이 자동으로 들어갑니다.</div>
       </div>
 
       <div class="section abc-only">
