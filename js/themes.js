@@ -2036,7 +2036,7 @@ const THEMES = {
     muted:'#7a3a3a',
     title:'#ffffff', subtitle:'#ffffff', char:'#f2c8c0'
   },
-  // [보석] 청금석: 남색 + 금 반점
+  // [비비드] 청금석: 남색 + 금 반점
   Lapis: {
     outerBg:'#1a2a6c', card:'#f4f6fd', text:'#0b1238',
     hl:'#c4cdf2', hl2:'#e2e6f9',
@@ -2044,7 +2044,7 @@ const THEMES = {
     muted:'#8594d2',
     title:'#fef7e4', subtitle:'#fefaef', char:'#ffffff'
   },
-  // [보석] 연수정
+  // [다크] 연수정
   'Smoky Quartz': {
     outerBg:'#2a2420', card:'#342d28', text:'#f0e8e0',
     hl:'#5a4a3c', hl2:'#463b32',
@@ -2052,7 +2052,7 @@ const THEMES = {
     muted:'#968a7f',
     title:'#ffffff', subtitle:'#ffffff', char:'#f1e9e1'
   },
-  // [보석] 비취 + 금
+  // [내추럴] 비취 + 금
   'Imperial Jade': {
     outerBg:'#e2f2e6', card:'#fbfffc', text:'#062214',
     hl:'#9ad8b0', hl2:'#d4f0de',
@@ -2060,7 +2060,7 @@ const THEMES = {
     muted:'#407756',
     title:'#ffffff', subtitle:'#ffffff', char:'#f5d76a'
   },
-  // [보석] 남동석 + 공작석 얼룩
+  // [파스텔] 남동석 + 공작석 얼룩
   Azurite: {
     outerBg:'#eaf0f8', card:'#ffffff', text:'#0a1630',
     hl:'#c6d8f0', hl2:'#d8ece6',
@@ -2068,7 +2068,7 @@ const THEMES = {
     muted:'#4e6488',
     title:'#ffffff', subtitle:'#ffffff', char:'#d8ece6'
   },
-  // [전통] 단청: 뇌록·주홍·석간주
+  // [내추럴] 단청: 뇌록·주홍·석간주
   Dancheong: {
     outerBg:'#e8f0ea', card:'#fffdf6', text:'#1a1a14',
     hl:'#f2c2b0', hl2:'#c8e2d4',
@@ -2076,7 +2076,7 @@ const THEMES = {
     muted:'#2f6a5a',
     title:'#ffffff', subtitle:'#ffffff', char:'#f5d76a'
   },
-  // [전통] 매화
+  // [파스텔] 매화
   Maehwa: {
     outerBg:'#fbeff2', card:'#ffffff', text:'#1e0a10',
     hl:'#f0c0cc', hl2:'#e8ecd8',
@@ -2084,7 +2084,7 @@ const THEMES = {
     muted:'#866666',
     title:'#ffffff', subtitle:'#ffffff', char:'#f0c0cc'
   },
-  // [실험] 칠판 + 분필
+  // [다크] 칠판 + 분필
   Chalkboard: {
     outerBg:'#1f2c25', card:'#34463a', text:'#f0f4ea',
     hl:'#45624d', hl2:'#575849',
@@ -2094,7 +2094,7 @@ const THEMES = {
   },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
-const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로','보석','전통','실험'];
+const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로'];
 const THEME_GROUP_OF = {
   Default:'내추럴', Sage:'내추럴', 'Old Money Light':'내추럴', City:'내추럴',
   Linen:'내추럴', Driftwood:'내추럴', Latte:'내추럴', Seaside:'내추럴', Surf:'내추럴',
@@ -2120,7 +2120,7 @@ const THEME_GROUP_OF = {
   'Grape Soda':'비비드', 'Ultramarine Pop':'비비드', Holographic:'비비드', 'Melon Soda':'비비드', 'Klein Mono':'비비드', 'Cobalt Mono':'비비드', Highlighter:'비비드', Bauhaus:'비비드',
   'Navy Velvet':'다크', 'Charcoal Rose':'다크', Starlight:'다크', Obsidian:'다크', Lunar:'다크', Velvet:'다크', Graphite:'다크', 'Indigo Ink':'다크', 'Silver Night':'다크', 'Night Frost':'다크', 'Red Dot Night':'다크', Negative:'다크', 'Negative Sand':'다크', 'Green Cloth':'다크', 'Slate Cloth':'다크', 'Wine Cloth':'다크',
   Hanji:'내추럴', Chestnut:'내추럴', Stone:'내추럴', 'Ivory Ink':'내추럴', Sandstone:'내추럴', Inverse:'내추럴', 'Red Dot':'내추럴', 'Sepia Photo':'내추럴', Newsprint:'내추럴', 'Paper White':'내추럴', 'Graph Paper':'내추럴', Letterpress:'내추럴', Airmail:'내추럴', Washi:'내추럴', 'Inverse Navy':'내추럴', 'Half Moon':'내추럴', 'Sage Mono':'내추럴', 'Inverse Slate':'내추럴', 'Index Card':'내추럴', Ledger:'내추럴', 'Manila Folder':'내추럴', Spreadsheet:'내추럴', Verdigris:'내추럴', 'Olive Leaf':'내추럴', Passport:'내추럴', 'Bank Note':'내추럴', 'Topo Map':'내추럴', Clipboard:'내추럴', Terrazzo:'내추럴', 'Sage Frame':'내추럴',
-  'Lavender Fog':'파스텔', 'Aqua Milk':'파스텔', Pudding:'파스텔', 'Bubble Bath':'파스텔', 'Sweet Pea':'파스텔', Unicorn:'파스텔', 'Cream Soda':'파스텔', 'Peach Cloud':'파스텔', Custard:'파스텔', 'Hazy Rose':'파스텔', Clay:'내추럴', Birch:'내추럴', Walnut:'내추럴', Fern:'내추럴', Rye:'내추럴', Mudflat:'내추럴', Herbarium:'내추럴', Meadow:'내추럴', 'Dried Lavender':'내추럴', 'Pool Party':'비비드', Crayon:'비비드', Sprinkles:'비비드', 'Fruit Salad':'비비드', 'Dark Chocolate':'다크', 'Oil Slick':'다크', Rosewood:'다크', Petrol:'다크', Diner:'레트로', 'Avocado Kitchen':'레트로', Polaroid:'레트로', Arcade:'레트로', Sunbleached:'레트로', Kodachrome:'레트로', 'Bowling Alley':'레트로', 'Y2K Chrome':'레트로', 'Mid Century':'레트로', Motel:'레트로', 'Game Boy':'레트로', Postcard:'레트로', Milkshake:'레트로', 'Drive-in':'레트로', 'Vinyl Record':'레트로', 'Super 8':'레트로', Tupperware:'레트로', 'Ice Cream Parlor':'레트로', 'Pop Bottle':'레트로', 'Slide Film':'레트로', Laundromat:'레트로', Tiki:'레트로', Atomic:'레트로', Varsity:'레트로', Lapis:'보석', 'Smoky Quartz':'보석', 'Imperial Jade':'보석', Azurite:'보석', Dancheong:'전통', Maehwa:'전통', Chalkboard:'실험',
+  'Lavender Fog':'파스텔', 'Aqua Milk':'파스텔', Pudding:'파스텔', 'Bubble Bath':'파스텔', 'Sweet Pea':'파스텔', Unicorn:'파스텔', 'Cream Soda':'파스텔', 'Peach Cloud':'파스텔', Custard:'파스텔', 'Hazy Rose':'파스텔', Clay:'내추럴', Birch:'내추럴', Walnut:'내추럴', Fern:'내추럴', Rye:'내추럴', Mudflat:'내추럴', Herbarium:'내추럴', Meadow:'내추럴', 'Dried Lavender':'내추럴', 'Pool Party':'비비드', Crayon:'비비드', Sprinkles:'비비드', 'Fruit Salad':'비비드', 'Dark Chocolate':'다크', 'Oil Slick':'다크', Rosewood:'다크', Petrol:'다크', Diner:'레트로', 'Avocado Kitchen':'레트로', Polaroid:'레트로', Arcade:'레트로', Sunbleached:'레트로', Kodachrome:'레트로', 'Bowling Alley':'레트로', 'Y2K Chrome':'레트로', 'Mid Century':'레트로', Motel:'레트로', 'Game Boy':'레트로', Postcard:'레트로', Milkshake:'레트로', 'Drive-in':'레트로', 'Vinyl Record':'레트로', 'Super 8':'레트로', Tupperware:'레트로', 'Ice Cream Parlor':'레트로', 'Pop Bottle':'레트로', 'Slide Film':'레트로', Laundromat:'레트로', Tiki:'레트로', Atomic:'레트로', Varsity:'레트로', Lapis:'비비드', 'Smoky Quartz':'다크', 'Imperial Jade':'내추럴', Azurite:'파스텔', Dancheong:'내추럴', Maehwa:'파스텔', Chalkboard:'다크',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
