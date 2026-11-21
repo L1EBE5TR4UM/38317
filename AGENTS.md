@@ -87,7 +87,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 1. `js/themes.js`의 `THEMES`에 항목을 추가합니다.
    - 필수 키(`THEME_KEYS`): `outerBg`(바깥 배경), `card`(본문 카드), `text`(본문 글자), `hl`(대사 강조 배경), `hl2`(속마음 배경), `accent`, `accentText`, `muted`, `title`, `subtitle`, `char`
    - 선택 키: `pauseText`(일시정지 버튼 글자), `playBg`(플레이 버튼 배경)
-2. `THEME_GROUP_OF`에 분류(파스텔·내추럴·비비드·다크)를 지정합니다.
+2. `THEME_GROUP_OF`에 분류(파스텔·내추럴·비비드·다크·레트로·보석·전통·실험)를 지정합니다. 분류를 늘리거나 합칠 때는 `THEME_GROUPS`도 함께 고칩니다.
 3. 테마 메뉴 ‘전체’의 순서는 `THEMES`에 적힌 순서입니다.
 4. 모든 TYPE에서 대사·속마음·제목 글자가 읽히는지 확인합니다.
 5. 테마 이름을 바꿀 때는 `THEME_RENAMED`에 `예전 이름: '새 이름'`을 추가합니다. 저장된 프리셋과 즐겨찾기가 새 이름으로 옮겨집니다.
