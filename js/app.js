@@ -13,11 +13,31 @@ $('tabs').addEventListener('click', (e)=>{
     p.style.display = (p.dataset.pane===tab) ? '' : 'none';
   });
 });
-$('typeToggle').addEventListener('click', (e)=>{
-  const b = e.target.closest('button'); if(!b) return;
-  for (const btn of $('typeToggle').children) btn.classList.toggle('active', btn===b);
-  state.type = b.dataset.type;
+/* TYPE 선택 (접이식): #typeBtn을 누르면 툴바 아래 #typeToggle 목록이 펼쳐지고, 고르면 접힘 */
+function syncTypeUI(){
+  $('typeToggle').querySelectorAll('[data-type]').forEach(btn=>{
+    const on = btn.dataset.type === state.type;
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    if (on){
+      $('typeBtnName').textContent = btn.dataset.name || '';
+      $('typeBtnUse').textContent = btn.dataset.use ? '· ' + btn.dataset.use : '';
+    }
+  });
+  $('typeBtnKey').textContent = state.type;
   document.body.setAttribute('data-type', state.type);
+}
+function setTypeMenu(open){
+  $('typeToggle').hidden = !open;
+  $('typeBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+$('typeBtn').addEventListener('click', ()=> setTypeMenu($('typeToggle').hidden));
+$('typeToggle').addEventListener('click', (e)=>{
+  const b = e.target.closest('[data-type]'); if(!b) return;
+  state.type = b.dataset.type;
+  syncTypeUI();
+  setTypeMenu(false);
+  $('typeBtn').focus();
   render();
 });
 
@@ -227,7 +247,7 @@ THEME_KEYS.forEach(k=>{
   }
 });
 
-/* ---------- D TYPE 사진 조정 슬라이더 값 표시 ---------- */
+/* ---------- E TYPE(인물 소개) 사진 조정 슬라이더 값 표시 ---------- */
 ['u','c'].forEach(pre => ['zoom','fx','fy'].forEach(k => {
   const el = $(`f-${pre}-${k}`), lbl = $(`f-${pre}-${k}-v`);
   if (el && lbl) el.addEventListener('input', () => { lbl.textContent = el.value; });
@@ -310,9 +330,9 @@ document.querySelectorAll('input, select, textarea').forEach(el=>{
 /* ---------- RENDER ---------- */
 function render(){
   const html = buildHTML();
-  // D TYPE + 완전 투명 배경: 출력에 배경이 없으므로 미리보기도 테마 색을 깔지 않고
+  // E TYPE(인물 소개) + 완전 투명 배경: 출력에 배경이 없으므로 미리보기도 테마 색을 깔지 않고
   // 블로그에 붙여넣었을 때처럼 흰 바탕 위에 그대로 보여줌 (어두운 틀 위에서는 글자가 안 보이기 때문)
-  const previewTransparentC = state.type === 'D' && $('f-ctransparent').checked;
+  const previewTransparentC = state.type === 'E' && $('f-ctransparent').checked;
   $('previewFrame').style.background = previewTransparentC ? '#ffffff' : '';
   $('previewFrame').innerHTML = html;
   $('outputCode').textContent = html;
@@ -334,28 +354,29 @@ $('copyBtn').addEventListener('click', async ()=>{
 });
 
 /* ---------- PRESETS ---------- */
-const PRESET_KEY = 'log-atelier-presets-v2';
+/* 프리셋 = 지금 TYPE·테마 색·모든 입력란(f-, t-) 값을 이름 붙여 이 브라우저에 저장한 것.
+   v3에서 새로 시작: 예전(log-atelier-presets-v2, Log Atelier 내보내기) 형식은 읽지 않음 */
+const PRESET_KEY = 'log-library-presets-v3';
+const PRESET_VERSION = 3;
 function loadPresets(){ try{ return JSON.parse(localStorage.getItem(PRESET_KEY)||'{}'); }catch{ return {}; } }
 function savePresets(o){ localStorage.setItem(PRESET_KEY, JSON.stringify(o)); }
 function snapshot(){
-  const s = { v: 2, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
+  const s = { app: 'log-library', kind: 'preset', v: PRESET_VERSION, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
   document.querySelectorAll('[id^="f-"], [id^="t-"]').forEach(el=>{
     if(el.type==='checkbox') s.fields[el.id] = el.checked;
     else if(el.type==='color' || el.type==='text' || el.type==='url' || el.type==='number' || el.tagName==='SELECT' || el.tagName==='TEXTAREA') s.fields[el.id] = el.value;
   });
   return s;
 }
+function isPreset(snap){
+  return !!snap && typeof snap === 'object' && snap.app === 'log-library' && snap.kind === 'preset' && snap.v === PRESET_VERSION;
+}
 function restore(snap){
-  if(!snap || typeof snap !== 'object') return;
+  if(!isPreset(snap)) return false;
 
-  // 스냅샷 v2 이전의 'C'는 지금의 D TYPE(인물 소개)이므로 D로 옮겨 불러옴
-  const snapType = (snap.type === 'C' && !(snap.v >= 2)) ? 'D' : snap.type;
-  if(snapType === 'A' || snapType === 'B' || snapType === 'C' || snapType === 'D'){
-    state.type = snapType;
-    for (const btn of $('typeToggle').children){
-      btn.classList.toggle('active', btn.dataset.type===state.type);
-    }
-    document.body.setAttribute('data-type', state.type);
+  if($('typeToggle').querySelector(`[data-type="${snap.type}"]`)){
+    state.type = snap.type;
+    syncTypeUI();
   }
 
   if(snap.theme){
@@ -363,20 +384,7 @@ function restore(snap){
     state.theme = THEME_RENAMED[snap.theme] || snap.theme;
   }
 
-  let vars = null;
-  if (snap.vars && typeof snap.vars === 'object') vars = snap.vars;
-  else if (snap.themeVars && typeof snap.themeVars === 'object') vars = snap.themeVars;
-  else if (snap.fields){
-    const reconstructed = {};
-    let foundAny = false;
-    for(const k of THEME_KEYS){
-      if (snap.fields['t-'+k] !== undefined){
-        reconstructed[k] = snap.fields['t-'+k];
-        foundAny = true;
-      }
-    }
-    if (foundAny) vars = reconstructed;
-  }
+  const vars = (snap.vars && typeof snap.vars === 'object') ? snap.vars : null;
   if (vars){
     state.themeVars = { ...THEMES.Default, ...state.themeVars, ...vars };
     for (const k of THEME_KEYS){
@@ -407,6 +415,7 @@ function restore(snap){
 
   repaintChips();
   render();
+  return true;
 }
 function refreshPresetList(){
   const sel = $('p-load'); const data = loadPresets();
@@ -427,7 +436,7 @@ $('p-delete').addEventListener('click', ()=>{
 });
 $('p-load').addEventListener('change', ()=>{
   const name = $('p-load').value; if(!name) return;
-  restore(loadPresets()[name]);
+  if(!restore(loadPresets()[name])) alert('이 preset을 불러오지 못했습니다.');
 });
 $('p-export').addEventListener('click', ()=>{
   try{
@@ -437,7 +446,7 @@ $('p-export').addEventListener('click', ()=>{
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = (($('p-name').value || '').trim() || 'log-atelier-theme') + '.json';
+    a.download = (($('p-name').value || '').trim() || 'log-library-preset') + '.json';
     a.style.position = 'fixed';
     a.style.left = '-9999px';
     document.body.appendChild(a);
@@ -473,30 +482,7 @@ $('p-import').addEventListener('click', ()=>{
         return;
       }
       try{
-        let normalised;
-        const isLogAtelierExport = snap && typeof snap === 'object' &&
-          ('cardBg' in snap || 'textColor' in snap || 'hiColor' in snap || 'footerColor' in snap);
-        if (isLogAtelierExport){
-          const mapped = {};
-          if (snap.outerBg !== undefined)            mapped.outerBg = snap.outerBg;
-          if (snap.cardBg !== undefined)             mapped.card = snap.cardBg;
-          if (snap.textColor !== undefined)          mapped.text = snap.textColor;
-          if (snap.hiColor !== undefined)            mapped.hl = snap.hiColor;
-          if (snap.hiColorB !== undefined)           mapped.hl2 = snap.hiColorB;
-          if (snap.playBtnBgVal !== undefined)       mapped.accent = snap.playBtnBgVal;
-          if (snap.playBtnTextVal !== undefined)     mapped.accentText = snap.playBtnTextVal;
-          if (snap.footerColor !== undefined)        mapped.muted = snap.footerColor;
-          if (snap.titleClusterColor !== undefined){ mapped.title = snap.titleClusterColor; mapped.char = snap.titleClusterColor; }
-          if (snap.heroSubtitleColor !== undefined)  mapped.subtitle = snap.heroSubtitleColor;
-          normalised = { vars: mapped };
-        } else if (snap && (snap.fields || snap.vars || snap.type || snap.theme)){
-          normalised = snap;
-        } else if (snap && typeof snap === 'object'){
-          normalised = { vars: snap };
-        } else {
-          throw new Error('알 수 없는 JSON 형식');
-        }
-        restore(normalised);
+        if(!restore(snap)) throw new Error('LOG LIBRARY v' + PRESET_VERSION + ' preset 파일이 아닙니다. (예전 형식은 지원하지 않음)');
         alert('Preset을 불러왔습니다.');
       }catch(err){
         alert('Preset 적용 중 오류가 발생했습니다.\n' + err.message);
@@ -516,6 +502,6 @@ $('p-import').addEventListener('click', ()=>{
 });
 
 refreshPresetList();
-document.body.setAttribute('data-type', state.type);
+syncTypeUI();
 repaintChips();
 render();

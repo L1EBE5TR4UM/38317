@@ -13,7 +13,7 @@ function processInline(text, v, plainQuotes){
   h = h.replace(/\*\*\*([^*\n]+?)\*\*\*/g, '<b><i>$1</i></b>');
   h = h.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
-  // plainQuotes: D TYPE 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
+  // plainQuotes: E TYPE(인물 소개) 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
   if (plainQuotes) return h.replace(/\n/g, '<br>');
   const diaInk = readableInk(v.hl, v.text);
   h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, inner)=>{
@@ -36,7 +36,7 @@ function processInline(text, v, plainQuotes){
 
 function buildHTML(){
   const v = state.themeVars;
-  const T = state.type; // 'A' | 'B' | 'C' | 'D'
+  const T = state.type; // 'A' | 'B' | 'C' | 'D' | 'E'
   const blockInk = readableInk(v.hl, v.text);
 
   const title     = $('f-title').value || '';
@@ -98,7 +98,7 @@ function buildHTML(){
       name = tokens[1];
       message = '';
     }
-    const messageHTML = message ? processInline(message, v, T === 'D') : '';
+    const messageHTML = message ? processInline(message, v, T === 'E') : '';
 
     const isSent = (kind === 'sent');
     const bubbleBg     = isSent ? '#007aff' : '#e5e5ea';
@@ -143,7 +143,7 @@ function buildHTML(){
       const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
       return `<p style="${pStyle}"${dataKe}><span style="display:inline-block;width:100%;border-top:1px solid ${hexToRgba(v.muted,0.35)};margin:6px 0">&nbsp;</span></p>`;
     }
-    const inner = processInline(trimmed, v, T === 'D');
+    const inner = processInline(trimmed, v, T === 'E');
     const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
     return `<p style="${pStyle}"${dataKe}>${inner}</p>`;
   }).filter(Boolean);
@@ -190,12 +190,12 @@ ${footerC}
   }
 
   // ===================================================================
-  //  D TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
+  //  E TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
   //  · 배경색 없음  · 두 인물은 2단 테이블로 모바일에서도 나란히
   //  · 사진 위치 옵션은 사진만 이동, 소개는 항상 양쪽 정렬
   //  · 이름 색: USER = hl(대사 강조 배경), CHAR = accent(플레이 버튼 배경), 반전 가능
   // ===================================================================
-  if (T === 'D'){
+  if (T === 'E'){
     const ink = v.text;
     const roleInk = hexToRgba(v.text, 0.5);
     const photoLeft = $('f-cphoto').value === 'left';
@@ -250,6 +250,14 @@ ${head}
 ${castTable}
 ${storyBlock}
 </div>`;
+  }
+
+  // ===================================================================
+  //  D TYPE — 배너 제목 + 캐릭터 배지 (입력값은 A와 같음)
+  // ===================================================================
+  if (T === 'D'){
+    return buildTypeD({ v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
+      useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign });
   }
 
   // ===================================================================
@@ -494,5 +502,75 @@ ${topRow}
 <div style="font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;line-height:1.5;margin-top:10px;color:${mute};">${CH}</div>
 ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid ${hexToRgba(mute,0.3)};color:${ink};">${subtitle}</div>` : ''}
 </div>
+</div>`;
+}
+
+/* ===================================================================
+   D TYPE 빌더 — 배너 제목 + 캐릭터 배지
+   · 배너: Hero 이미지(아래쪽 어둡게) 또는 Muted 단색, 위에 작성자·제목·소제목
+   · 배지 = Character Name (배너 아래 경계에 반쯤 걸침, 제목과 반대쪽)
+   · 입력값은 A TYPE과 같음
+   · 대사/속마음은 A·B·C와 같은 강조 박스
+   =================================================================== */
+function buildTypeD(o){
+  const { v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
+          useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign } = o;
+  const hasImg = useHero && img;
+
+  const scrollUid = eqToken(v.muted + '|' + v.card);
+  const scrollStyle = boxScroll ? `<div><style>
+.la-scroll-${scrollUid}{scrollbar-width:thin;scrollbar-color:${hexToRgba(v.muted,0.45)} transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar{width:6px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-track{background:transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb{background:${hexToRgba(v.muted,0.45)};border-radius:999px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb:hover{background:${hexToRgba(v.muted,0.7)};}
+</style></div>` : '';
+  const bodyBox = boxScroll
+    ? `<div class="la-scroll-${scrollUid}" style="max-height: ${cardH}px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+${bodyHTML}
+</div>` : bodyHTML;
+
+  const footerCustom = ($('f-footer').value || '').trim();
+  const footerText = footerCustom ? footerCustom : (author ? escapeHtml(author) : '');
+  const footer = footerText ? `
+<div style="padding:14px 0 18px 0;margin:0 30px;border-top:1px solid ${hexToRgba(v.muted,0.25)};text-align:center;color:${v.muted};font-size:12px;letter-spacing:0.06em;">${footerText}</div>` : '';
+
+  const hashTags = tags.length
+    ? `<div style="margin:0 0 14px 0;font-size:11.5px;letter-spacing:0.06em;color:${v.muted};">${tags.map(t=>`<span style="margin-right:10px;white-space:nowrap;">#${escapeHtml(t)}</span>`).join('')}</div>` : '';
+  const byAu = author ? `by <b style="text-transform:uppercase;">${escapeHtml(author)}</b>` : '';
+
+  // 배너: 이미지가 있으면 A·B처럼 아래쪽을 어둡게, 없으면 Muted 단색
+  const od = overlayDark;
+  const bandH = Math.max(160, Math.round(hh * 0.9)); // A·B보다 배너를 조금 낮게 (기본 350 → 315)
+  const bandBg = hasImg
+    ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${v.muted};`
+    : `background-color:${v.muted};`;
+  const shade = hasImg ? `background:linear-gradient(to top,rgba(0,0,0,${od}),rgba(0,0,0,${(od*0.15).toFixed(2)}));` : '';
+  const sh = hasImg ? 'text-shadow:0 1px 7px rgba(0,0,0,0.6);' : '';
+  const titleInk = hasImg ? v.title : readableInk(v.muted, v.title);
+  const subInk = hasImg ? v.subtitle : titleInk;
+  const banner = `<div style="${bandBg}border-radius:14px 14px 0 0;">
+<div style="${shade}height:${bandH}px;display:table;width:100%;box-sizing:border-box;border-radius:14px 14px 0 0;">
+<div style="display:table-cell;vertical-align:bottom;padding:24px 30px 42px 30px;text-align:${validAlign};color:${titleInk};${sh}">
+${byAu ? `<div style="font-size:11px;letter-spacing:0.16em;margin-bottom:8px;">${byAu}</div>` : ''}
+<div style="font-size:28px;font-weight:800;letter-spacing:-0.01em;line-height:1.2;color:${titleInk};">${escapeHtml(title)}</div>
+${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:8px;color:${subInk};">${subtitle}</div>` : ''}
+</div>
+</div>
+</div>`;
+
+  // 배지: Play 버튼 색 단색. 제목과 반대쪽에 두어 정보가 한쪽으로 쏠리지 않게 함 (가운데 정렬이면 가운데)
+  const badgeStyle = `background-color:${v.accent};color:${v.accentText};`;
+  const badgeAlign = validAlign === 'left' ? 'right' : (validAlign === 'right' ? 'left' : 'center');
+  const badge = `<div style="display:inline-block;padding:6px 16px;border-radius:999px;${badgeStyle}font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;line-height:1.5;box-shadow:0 3px 10px rgba(0,0,0,0.18);">${escapeHtml(character)}</div>`;
+
+  const row = `<div style="margin-top:-17px;padding:0 26px;text-align:${badgeAlign};">${badge}</div>`;
+
+  return `${scrollStyle}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;box-sizing:border-box;font-family:${font};color:${v.text};background-color:${v.card};border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+${banner}
+${row}
+<div style="padding:20px 30px 28px 30px;">
+${hashTags}${bodyBox}
+</div>${footer}
 </div>`;
 }

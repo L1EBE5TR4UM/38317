@@ -10,13 +10,16 @@ LOG LIBRARY는 블로그(티스토리 등)에 붙여넣을 로그(소설·롤플
 - GitHub Pages로 배포하는 **정적 페이지**입니다. 서버도 빌드 과정도 없고, 저장소의 파일이 그대로 서비스됩니다.
 - 검색 노출을 막기 위해 `<meta name="robots" content="noindex, nofollow">`를 유지합니다.
 
-### TYPE 4종
+### TYPE 5종
 | TYPE | 모양 | 용도 |
 |---|---|---|
 | A | 자막 + Play/EQ 바 | 서사 로그, 스토리 게시 |
 | B | Prompt·Model·Info 메타 바 | 봇 카탈로그, 캐릭터 소개 |
 | C | 북 재킷 커버 (이미지 표지 + 제목 밴드) | 표지가 있는 로그 |
-| D | 투명 배경 인물 소개 (CAST 1/CAST 2 + INTRODUCTION) | 인물 소개 헤더 |
+| D | 배너 제목 + 캐릭터 배지 (입력값은 A와 같음) | 그림 위에 제목을 얹는 로그 |
+| E | 투명 배경 인물 소개 (CAST 1/CAST 2 + INTRODUCTION) | 인물 소개 헤더 |
+
+TYPE은 접이식 메뉴에서 고릅니다. 평소엔 툴바에 지금 TYPE 한 줄(`#typeBtn`)만 있고, 누르면 툴바 아래로 목록(`#typeToggle`)이 펼쳐집니다. 목록은 로그(LOG)와 인물 소개(CAST) 두 묶음이고, 인물 소개는 늘 맨 아래에 있습니다. 새 로그 TYPE은 다음 글자(F, G…)를 붙여 LOG 묶음 끝에 `data-type`·`data-name`·`data-use`와 모양 도식(`.type-mini`)을 가진 버튼으로 추가합니다. 이미 있는 TYPE의 글자는 바꾸지 않습니다.
 
 ## 2. 파일 구조
 
@@ -42,8 +45,8 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 ### 파일별 상세
 - **`js/utils.js`**: `$(id)`, `escapeHtml`, `eqToken`(문자열로 짧은 고유값 생성), `hexToRgba`, `relLuminance`, `contrastRatio`, `readableInk`(배경색 위에서 읽히는 글자색 선택).
 - **`js/themes.js`**: `THEMES`, `THEME_GROUPS`, `THEME_GROUP_OF`, `THEME_RENAMED`(바뀐 테마 이름), `THEME_KEYS`. 데이터만 있고 실행 코드는 없다.
-- **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
-- **`js/app.js`**: `state`, 탭·TYPE 전환, 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
+- **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지), `buildTypeD`(D TYPE 전체). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
+- **`js/app.js`**: `state`, 탭·TYPE 전환(접이식 메뉴, `syncTypeUI()`), 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
 
 ## 3. 꼭 지킬 규칙
 
@@ -68,10 +71,12 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - 사용자 입력을 HTML에 넣을 때는 `escapeHtml`을 거칩니다.
 
 ### 3-5. 프리셋 호환성
-- 프리셋은 `f-`, `t-`로 시작하는 `id`의 값을 자동으로 저장합니다(`snapshot()`).
+- 프리셋은 지금 TYPE·테마 색과 `f-`, `t-`로 시작하는 `id`의 값을 이름 붙여 이 브라우저에 저장한 것입니다(`snapshot()`).
+- 형식: `{"app":"log-library","kind":"preset","v":3,"type":…,"theme":…,"vars":{…},"fields":{…}}`. `restore()`와 Import JSON은 이 형식(`PRESET_VERSION`과 같은 `v`)만 받습니다.
+- v3에서 새로 시작했습니다. 예전 형식(`log-atelier-presets-v2`, Log Atelier 내보내기)은 읽지 않습니다.
 - 기존 `id`의 이름을 바꾸거나 지우면 저장된 프리셋에서 그 값이 사라집니다.
-- `PRESET_KEY`(`log-atelier-presets-v2`)를 바꾸면 모든 프리셋이 사라진 것처럼 보입니다.
-- 예전 프리셋의 TYPE `C`는 지금의 `D`로 옮겨 불러옵니다(`restore()`). 이 변환을 지우지 않습니다.
+- `PRESET_KEY`(`log-library-presets-v3`)를 바꾸면 모든 프리셋이 사라진 것처럼 보입니다.
+- 이미 있는 TYPE의 글자는 바꾸지 않습니다. 저장된 프리셋이 엉뚱한 TYPE으로 열립니다.
 - 이름을 바꾼 테마는 `THEME_RENAMED`(js/themes.js)로 새 이름에 연결합니다. 항목을 지우면 예전 프리셋이 테마를 못 찾습니다.
 - 즐겨찾기 백업 JSON의 형식(`{"app":"log-library","kind":"theme-favs","version":1,"favs":[…]}`)을 바꾸면 예전에 내보낸 백업을 못 읽습니다. 가져오기는 `favs` 배열이나 이름 배열 그대로를 받습니다.
 
@@ -83,21 +88,21 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
    - 선택 키: `pauseText`(일시정지 버튼 글자), `playBg`(플레이 버튼 배경)
 2. `THEME_GROUP_OF`에 분류(파스텔·내추럴·비비드·다크)를 지정합니다.
 3. 테마 메뉴 ‘전체’의 순서는 `THEMES`에 적힌 순서입니다.
-4. 4개 TYPE 모두에서 대사·속마음·제목 글자가 읽히는지 확인합니다.
+4. 모든 TYPE에서 대사·속마음·제목 글자가 읽히는지 확인합니다.
 5. 테마 이름을 바꿀 때는 `THEME_RENAMED`에 `예전 이름: '새 이름'`을 추가합니다. 저장된 프리셋과 즐겨찾기가 새 이름으로 옮겨집니다.
 
 ### 입력란 추가
 1. `index.html`에 `id="f-이름"`으로 추가합니다(프리셋에 자동 저장).
-2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `d-only`, `ab-only`, `ac-only`, `abc-only`, `not-c` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다.
+2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `e-only`, `ab-only`, `ac-only`, `abc-only`, `not-c` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다. D TYPE은 A와 같은 입력란을 쓰므로 `b-only`, `e-only`만 숨깁니다.
 3. `js/builder.js`의 `buildHTML()`에서 `$('f-이름').value`로 읽어 씁니다.
 
 ### 로그 모양 수정
-`js/builder.js`의 `buildHTML()` 안에서 `if (T === 'C')`, `if (T === 'D')`처럼 TYPE별로 나뉘어 있습니다. 해당 TYPE 부분만 고칩니다.
+`js/builder.js`의 `buildHTML()` 안에서 `if (T === 'C')`, `if (T === 'E')`처럼 TYPE별로 나뉘어 있습니다. 해당 TYPE 부분만 고칩니다. D TYPE은 `buildTypeD()`에 따로 있습니다.
 
 ## 5. 수정 후 확인
 
 - [ ] `index.html`을 브라우저로 열었을 때 콘솔 오류가 없다
-- [ ] TYPE A·B·C·D 미리보기와 생성 코드가 모두 나온다
+- [ ] TYPE A·B·C·D·E 미리보기와 생성 코드가 모두 나온다
 - [ ] 테마를 바꾸면 미리보기 색이 바뀐다
 - [ ] 저장해 둔 프리셋을 불러와도 값이 들어간다
 - [ ] Copy 버튼이 작동한다
