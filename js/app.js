@@ -45,7 +45,19 @@ themePicker.innerHTML = `
   <div class="tp-body">
     <div class="tp-side" data-tp-tabs></div>
     <div class="tp-main">
-      <input type="search" class="tp-search" id="tp-search" placeholder="이름 검색" autocomplete="off" />
+      <div class="tp-search-row">
+        <input type="search" class="tp-search" id="tp-search" placeholder="이름 검색" autocomplete="off" />
+        <button type="button" class="tp-more" data-tp-more aria-haspopup="menu" aria-expanded="false" aria-label="즐겨찾기 백업 메뉴" hidden>&#8943;</button>
+        <div class="tp-menu" data-tp-menu role="menu" hidden>
+          <button type="button" role="menuitem" data-fav-act="export">즐겨찾기 JSON 내보내기</button>
+          <button type="button" role="menuitem" data-fav-act="import">즐겨찾기 JSON 가져오기</button>
+          <hr>
+          <button type="button" role="menuitem" data-fav-act="copy">즐겨찾기 코드로 복사</button>
+          <button type="button" role="menuitem" data-fav-act="paste">즐겨찾기 코드 붙여넣기</button>
+          <hr>
+          <button type="button" role="menuitem" data-fav-act="clear">즐겨찾기 모두 지우기</button>
+        </div>
+      </div>
       <div class="tp-list" data-tp-list role="listbox" aria-label="테마 목록"></div>
     </div>
   </div>`;
@@ -86,6 +98,9 @@ function repaintChips(){
   themePicker.querySelector('.tp-name small').textContent = tp.open ? '접기 ▴' : '펼치기 ▾';
   themePicker.querySelector('.tp-name').setAttribute('aria-expanded', tp.open);
   themePicker.querySelector('.tp-body').hidden = !tp.open;
+  // 즐겨찾기 백업 메뉴(⋯)는 ‘★ 즐겨찾기’ 탭에서만 보임
+  themePicker.querySelector('[data-tp-more]').hidden = tp.filter !== '★';
+  if (tp.filter !== '★') favMenu(false);
 
   const names = Object.keys(THEMES);
   themePicker.querySelector('[data-tp-tabs]').innerHTML = TP_FILTERS.map(f => {
@@ -115,6 +130,9 @@ function tpStep(d){
   applyTheme(list[i]);
 }
 themePicker.addEventListener('click', e=>{
+  if (e.target.closest('[data-tp-more]')){ favMenu(themePicker.querySelector('[data-tp-menu]').hidden); return; }
+  const favAct = e.target.closest('[data-fav-act]');
+  if (favAct){ favMenu(false); favAction(favAct.dataset.favAct); return; }
   const act = e.target.closest('[data-tp-act]');
   if (act){
     if (act.dataset.tpAct === 'toggle'){ tp.open = !tp.open; repaintChips(); }
@@ -133,6 +151,69 @@ themePicker.addEventListener('click', e=>{
   if (cell) applyTheme(cell.dataset.tpTheme);
 });
 $('tp-search').addEventListener('input', e=>{ tp.q = e.target.value.trim().toLowerCase(); repaintChips(); });
+
+/* ---------- 즐겨찾기 백업 ----------
+   즐겨찾기는 이 브라우저에만 저장되므로, 테마 이름 목록을 JSON 파일이나 복사용 코드로 옮긴다.
+   형식: {"app":"log-library","kind":"theme-favs","version":1,"favs":["Peony", …]}
+   가져올 때는 지금 목록에 합치고, 예전 이름은 THEME_RENAMED로 바꾸며, 없는 테마는 건너뛴다. */
+function favMenu(open){
+  const menu = themePicker.querySelector('[data-tp-menu]');
+  menu.hidden = !open;
+  themePicker.querySelector('[data-tp-more]').setAttribute('aria-expanded', open);
+}
+document.addEventListener('click', e=>{ if (!e.target.closest('.tp-search-row')) favMenu(false); });
+document.addEventListener('keydown', e=>{ if (e.key === 'Escape') favMenu(false); });
+function favPayload(){
+  return JSON.stringify({ app:'log-library', kind:'theme-favs', version:1, favs:[...themeFavs] });
+}
+function favMerge(text){
+  let data;
+  try{ data = JSON.parse(text); }catch(err){ alert('즐겨찾기 코드를 읽지 못했습니다. 내보낸 JSON 내용을 그대로 붙여넣어 주세요.'); return; }
+  const list = Array.isArray(data) ? data : (data && Array.isArray(data.favs) ? data.favs : null);
+  if (!list){ alert('즐겨찾기 목록이 들어 있지 않은 파일입니다.'); return; }
+  let added = 0, skipped = 0;
+  list.forEach(raw => {
+    const n = THEME_RENAMED[raw] || raw;
+    if (!THEMES[n]){ skipped++; return; }
+    if (!themeFavs.has(n)){ themeFavs.add(n); added++; }
+  });
+  saveThemeFavs(); repaintChips();
+  alert(`즐겨찾기 ${added}개를 추가했습니다.` + (skipped ? ` (지금 없는 테마 ${skipped}개는 건너뜀)` : ''));
+}
+function favAction(act){
+  if (act === 'export'){
+    const blob = new Blob([favPayload()], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'log-library-favorites.json';
+    a.style.position = 'fixed'; a.style.left = '-9999px';
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ a.remove(); URL.revokeObjectURL(url); }, 100);
+  } else if (act === 'import'){
+    const input = document.createElement('input');
+    input.type = 'file'; input.accept = '.json,application/json';
+    input.addEventListener('change', ()=>{
+      const f = input.files && input.files[0]; if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => favMerge(ev.target.result);
+      r.readAsText(f);
+    });
+    input.click();
+  } else if (act === 'copy'){
+    const text = favPayload();
+    navigator.clipboard.writeText(text)
+      .then(()=> alert(`즐겨찾기 ${themeFavs.size}개를 코드로 복사했습니다. 다른 기기에서 ‘코드 붙여넣기’로 넣으세요.`))
+      .catch(()=> prompt('아래 코드를 복사하세요.', text));
+  } else if (act === 'paste'){
+    const text = prompt('복사해 둔 즐겨찾기 코드를 붙여넣으세요.');
+    if (text) favMerge(text);
+  } else if (act === 'clear'){
+    if (!themeFavs.size) return;
+    if (confirm(`즐겨찾기 ${themeFavs.size}개를 모두 지울까요? 지우기 전에 내보내기로 백업해 두면 되돌릴 수 있습니다.`)){
+      themeFavs.clear(); saveThemeFavs(); repaintChips();
+    }
+  }
+}
 
 /* ---------- COLOR PICKERS ---------- */
 THEME_KEYS.forEach(k=>{
