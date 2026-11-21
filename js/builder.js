@@ -605,6 +605,7 @@ ${hashTags}${bodyBox}
    F TYPE 빌더 — 레터 로그 (편지형)
    · 바탕 = 바깥 배경색(outerBg). 그림은 바탕색 베일로 덮고 아래로 바탕색에 녹아듦
    · 대사·속마음은 박스 없이 글자색만 (fQuoteInks)
+   · 하단부(Footer) 없음: 본문 끝 서명(— Your Name, LETTER LOG)이 마무리
    · 가운데 한 단짜리 편지지: 그림 위 가운데 제목 → 인용문 → 장 제목 → 본문 → 서명
    =================================================================== */
 function fQuoteInks(v){
@@ -632,8 +633,6 @@ function buildTypeF(o){
   const no    = val('f-fno');
   const chap  = val('f-fchap') || title;
   const mark  = val('f-fmark');
-  const footerCustom = val('f-footer');
-  const footerText = footerCustom || (author ? escapeHtml(author) : '');   // 다른 TYPE과 같음: 비우면 Your Name
 
   const page = v.outerBg;
   const ink  = readableInk(page, v.text);
@@ -643,6 +642,8 @@ function buildTypeF(o){
   // 제목만 따로: Georgia 이탤릭 굵게. Georgia가 없는 기기(Android 등)는 같은 글자 폭으로 만든 Gelasio 웹폰트를 @import로 받아 씀
   // 나머지 글자는 모두 다른 TYPE처럼 Body Font(f-font)를 따름
   const disp = `Georgia,'Gelasio',${font}`;
+  // 작은 라벨(작성자 줄·목차 라벨·서명 LETTER LOG)은 메시지 버블과 같은 고딕 (웹폰트 없이 기기 고딕으로)
+  const gothic = `'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',sans-serif`;
   const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@1,700&display=swap');`;
   const pad  = '4.167%';
   const wrapTxt = 'white-space:normal;word-break:keep-all;overflow-wrap:anywhere;';
@@ -665,7 +666,7 @@ function buildTypeF(o){
   const heroInk = mixHex(ink, mute, 0.3);
   const glow = (a)=>`text-shadow:0 0 10px ${hexToRgba(page, a)},0 0 2px ${hexToRgba(page, a)};`;
   const kicker = (AU || CH) ? `${AU ? `<div>${AU}</div>` : ''}${CH ? `<div>${CH}</div>` : ''}` : '&nbsp;';
-  const kickerCss = `font-size:9px;line-height:1.8;letter-spacing:.12em;color:${heroInk};${glow(0.9)}${wrapTxt}`;
+  const kickerCss = `font-family:${gothic};font-size:9px;line-height:1.8;letter-spacing:.12em;color:${heroInk};${glow(0.9)}${wrapTxt}`;
 
   const shell = (inner) => `${thumbImg}<div style="width:100%;max-width:${mw}px;margin:0 auto;background-color:${page};color:${ink};font-family:${font};">
 ${inner}
@@ -686,25 +687,20 @@ ${subtitle ? `<div style="margin-top:16px;font-family:${font};font-size:13px;lin
 <div style="font-family:${font};font-size:14px;line-height:1.9;font-style:italic;${wrapTxt}color:${mute};">${EP}</div>
 </div>` : '';
   const chapBlock = (sec || no || chap) ? `<div style="margin:44px 0 0;text-align:center;">
-${(sec || no) ? `<div style="font-size:10px;letter-spacing:.24em;color:${mute};">${escapeHtml([sec, no].filter(Boolean).join(' · '))}</div>` : ''}
+${(sec || no) ? `<div style="font-family:${gothic};font-size:10px;letter-spacing:.24em;color:${mute};">${escapeHtml([sec, no].filter(Boolean).join(' · '))}</div>` : ''}
 ${chap ? `<div style="margin-top:10px;font-family:${font};font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.02em;${wrapTxt}color:${ink};">${escapeHtml(chap)}</div>` : ''}
 <div style="margin-top:14px;font-size:14px;letter-spacing:.6em;padding-left:.6em;color:${mute};">&middot;&middot;&middot;</div>
 </div>` : '';
   const sign = (author || mark) ? `<div style="margin-top:30px;text-align:right;">
 ${author ? `<div style="font-size:16px;font-style:italic;color:${ink};">&mdash; ${escapeHtml(author)}</div>` : ''}
-${mark ? `<div style="margin-top:8px;font-size:10px;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : ''}
+${mark ? `<div style="margin-top:8px;font-family:${gothic};font-size:10px;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : ''}
 </div>` : '';
-  const body = `<div class="la-fl-${uid}" style="box-sizing:border-box;padding:36px 14% 40px;overflow-wrap:anywhere;color:${ink};">
+  const body = `<div class="la-fl-${uid}" style="box-sizing:border-box;padding:36px 14% 52px;overflow-wrap:anywhere;color:${ink};">
 ${bodyHTML}
 ${sign}
 </div>`;
-  // 푸터: A TYPE과 같은 모양 (가는 윗줄 + 가운데 12px), 색만 이 바탕 기준
-  const foot = footerText ? `<div style="margin:0 ${pad};padding:14px 0 30px 0;border-top:1px solid ${hexToRgba(mute,0.35)};text-align:center;color:${mute};">
-<div style="font-size:12px;line-height:1.2;"><span style="font-size:12px;">${footerText}</span></div>
-</div>` : '';
   return mobile + shell(`${hero}
 ${epiBlock}
 ${chapBlock}
-${body}
-${foot}`);
+${body}`);
 }
