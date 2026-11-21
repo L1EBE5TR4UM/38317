@@ -13,7 +13,7 @@ function processInline(text, v, plainQuotes){
   h = h.replace(/\*\*\*([^*\n]+?)\*\*\*/g, '<b><i>$1</i></b>');
   h = h.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
-  // plainQuotes: D TYPE 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
+  // plainQuotes: E TYPE(인물 소개) 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
   if (plainQuotes) return h.replace(/\n/g, '<br>');
   const diaInk = readableInk(v.hl, v.text);
   h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, inner)=>{
@@ -36,7 +36,7 @@ function processInline(text, v, plainQuotes){
 
 function buildHTML(){
   const v = state.themeVars;
-  const T = state.type; // 'A' | 'B' | 'C' | 'D'
+  const T = state.type; // 'A' | 'B' | 'C' | 'D' | 'E'
   const blockInk = readableInk(v.hl, v.text);
 
   const title     = $('f-title').value || '';
@@ -98,7 +98,7 @@ function buildHTML(){
       name = tokens[1];
       message = '';
     }
-    const messageHTML = message ? processInline(message, v, T === 'D') : '';
+    const messageHTML = message ? processInline(message, v, T === 'E') : '';
 
     const isSent = (kind === 'sent');
     const bubbleBg     = isSent ? '#007aff' : '#e5e5ea';
@@ -143,7 +143,7 @@ function buildHTML(){
       const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
       return `<p style="${pStyle}"${dataKe}><span style="display:inline-block;width:100%;border-top:1px solid ${hexToRgba(v.muted,0.35)};margin:6px 0">&nbsp;</span></p>`;
     }
-    const inner = processInline(trimmed, v, T === 'D');
+    const inner = processInline(trimmed, v, T === 'E');
     const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
     return `<p style="${pStyle}"${dataKe}>${inner}</p>`;
   }).filter(Boolean);
@@ -190,12 +190,12 @@ ${footerC}
   }
 
   // ===================================================================
-  //  D TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
+  //  E TYPE — 투명 배경 인물 소개 헤더 (DRAMATIS PERSONAE + INTRODUCTION)
   //  · 배경색 없음  · 두 인물은 2단 테이블로 모바일에서도 나란히
   //  · 사진 위치 옵션은 사진만 이동, 소개는 항상 양쪽 정렬
   //  · 이름 색: USER = hl(대사 강조 배경), CHAR = accent(플레이 버튼 배경), 반전 가능
   // ===================================================================
-  if (T === 'D'){
+  if (T === 'E'){
     const ink = v.text;
     const roleInk = hexToRgba(v.text, 0.5);
     const photoLeft = $('f-cphoto').value === 'left';
@@ -253,10 +253,10 @@ ${storyBlock}
   }
 
   // ===================================================================
-  //  E TYPE — 배너 제목 + 캐릭터 배지 (입력값은 A와 같음)
+  //  D TYPE — 배너 제목 + 캐릭터 배지 (입력값은 A와 같음)
   // ===================================================================
-  if (T === 'E'){
-    return buildTypeE({ v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
+  if (T === 'D'){
+    return buildTypeD({ v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
       useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign });
   }
 
@@ -506,13 +506,13 @@ ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;l
 }
 
 /* ===================================================================
-   E TYPE 빌더 — 배너 제목형 봇 카드
+   D TYPE 빌더 — 배너 제목 + 캐릭터 배지
    · 배너: Hero 이미지(아래쪽 어둡게) 또는 Muted 단색, 위에 작성자·제목·소제목
    · 배지 = Character Name (배너 아래 경계에 반쯤 걸침, 제목과 반대쪽)
    · 입력값은 A TYPE과 같음
    · 대사/속마음은 A·B·C와 같은 강조 박스
    =================================================================== */
-function buildTypeE(o){
+function buildTypeD(o){
   const { v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
           useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign } = o;
   const hasImg = useHero && img;

@@ -16,8 +16,10 @@ LOG LIBRARY는 블로그(티스토리 등)에 붙여넣을 로그(소설·롤플
 | A | 자막 + Play/EQ 바 | 서사 로그, 스토리 게시 |
 | B | Prompt·Model·Info 메타 바 | 봇 카탈로그, 캐릭터 소개 |
 | C | 북 재킷 커버 (이미지 표지 + 제목 밴드) | 표지가 있는 로그 |
-| D | 투명 배경 인물 소개 (CAST 1/CAST 2 + INTRODUCTION) | 인물 소개 헤더 |
-| E | 배너 제목 + 캐릭터 배지 (입력값은 A와 같음) | 그림 위에 제목을 얹는 로그 |
+| D | 배너 제목 + 캐릭터 배지 (입력값은 A와 같음) | 그림 위에 제목을 얹는 로그 |
+| E | 투명 배경 인물 소개 (CAST 1/CAST 2 + INTRODUCTION) | 인물 소개 헤더 |
+
+인물 소개 TYPE은 항상 **맨 마지막 글자**에 둡니다. 로그 TYPE을 새로 만들면 인물 소개 앞에 끼워 넣고, 인물 소개는 한 칸 뒤로 밉니다(3-5의 이전 절차를 따름).
 
 ## 2. 파일 구조
 
@@ -43,7 +45,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 ### 파일별 상세
 - **`js/utils.js`**: `$(id)`, `escapeHtml`, `eqToken`(문자열로 짧은 고유값 생성), `hexToRgba`, `relLuminance`, `contrastRatio`, `readableInk`(배경색 위에서 읽히는 글자색 선택).
 - **`js/themes.js`**: `THEMES`, `THEME_GROUPS`, `THEME_GROUP_OF`, `THEME_RENAMED`(바뀐 테마 이름), `THEME_KEYS`. 데이터만 있고 실행 코드는 없다.
-- **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지), `buildTypeE`(E TYPE 전체). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
+- **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지), `buildTypeD`(D TYPE 전체). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
 - **`js/app.js`**: `state`, 탭·TYPE 전환, 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
 
 ## 3. 꼭 지킬 규칙
@@ -72,7 +74,8 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - 프리셋은 `f-`, `t-`로 시작하는 `id`의 값을 자동으로 저장합니다(`snapshot()`).
 - 기존 `id`의 이름을 바꾸거나 지우면 저장된 프리셋에서 그 값이 사라집니다.
 - `PRESET_KEY`(`log-atelier-presets-v2`)를 바꾸면 모든 프리셋이 사라진 것처럼 보입니다.
-- 예전 프리셋의 TYPE `C`는 지금의 `D`로 옮겨 불러옵니다(`restore()`). 이 변환을 지우지 않습니다.
+- 인물 소개 TYPE의 글자는 스냅샷 버전에 따라 다릅니다: v1 `C` → v2 `D` → v3 `E`. `restore()`가 예전 스냅샷을 지금의 `E`로 옮겨 불러옵니다. 이 변환을 지우지 않습니다.
+- TYPE 글자를 다시 바꿀 때는 `snapshot()`의 `v`를 1 올리고, `restore()`에 `이전 v의 글자 → 새 글자` 변환을 추가합니다. `typeToggle` 버튼, `css/style.css`의 `body[data-type]` 규칙, `builder.js`의 `T === '…'`를 함께 고칩니다.
 - 이름을 바꾼 테마는 `THEME_RENAMED`(js/themes.js)로 새 이름에 연결합니다. 항목을 지우면 예전 프리셋이 테마를 못 찾습니다.
 - 즐겨찾기 백업 JSON의 형식(`{"app":"log-library","kind":"theme-favs","version":1,"favs":[…]}`)을 바꾸면 예전에 내보낸 백업을 못 읽습니다. 가져오기는 `favs` 배열이나 이름 배열 그대로를 받습니다.
 
@@ -84,16 +87,16 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
    - 선택 키: `pauseText`(일시정지 버튼 글자), `playBg`(플레이 버튼 배경)
 2. `THEME_GROUP_OF`에 분류(파스텔·내추럴·비비드·다크)를 지정합니다.
 3. 테마 메뉴 ‘전체’의 순서는 `THEMES`에 적힌 순서입니다.
-4. 4개 TYPE 모두에서 대사·속마음·제목 글자가 읽히는지 확인합니다.
+4. 모든 TYPE에서 대사·속마음·제목 글자가 읽히는지 확인합니다.
 5. 테마 이름을 바꿀 때는 `THEME_RENAMED`에 `예전 이름: '새 이름'`을 추가합니다. 저장된 프리셋과 즐겨찾기가 새 이름으로 옮겨집니다.
 
 ### 입력란 추가
 1. `index.html`에 `id="f-이름"`으로 추가합니다(프리셋에 자동 저장).
-2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `d-only`, `ab-only`, `ac-only`, `abc-only`, `not-c` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다. E TYPE은 A와 같은 입력란을 쓰므로 `b-only`, `d-only`만 숨깁니다.
+2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `e-only`, `ab-only`, `ac-only`, `abc-only`, `not-c` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다. D TYPE은 A와 같은 입력란을 쓰므로 `b-only`, `e-only`만 숨깁니다.
 3. `js/builder.js`의 `buildHTML()`에서 `$('f-이름').value`로 읽어 씁니다.
 
 ### 로그 모양 수정
-`js/builder.js`의 `buildHTML()` 안에서 `if (T === 'C')`, `if (T === 'D')`처럼 TYPE별로 나뉘어 있습니다. 해당 TYPE 부분만 고칩니다. E TYPE은 `buildTypeE()`에 따로 있습니다.
+`js/builder.js`의 `buildHTML()` 안에서 `if (T === 'C')`, `if (T === 'E')`처럼 TYPE별로 나뉘어 있습니다. 해당 TYPE 부분만 고칩니다. D TYPE은 `buildTypeD()`에 따로 있습니다.
 
 ## 5. 수정 후 확인
 

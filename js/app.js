@@ -227,7 +227,7 @@ THEME_KEYS.forEach(k=>{
   }
 });
 
-/* ---------- D TYPE 사진 조정 슬라이더 값 표시 ---------- */
+/* ---------- E TYPE(인물 소개) 사진 조정 슬라이더 값 표시 ---------- */
 ['u','c'].forEach(pre => ['zoom','fx','fy'].forEach(k => {
   const el = $(`f-${pre}-${k}`), lbl = $(`f-${pre}-${k}-v`);
   if (el && lbl) el.addEventListener('input', () => { lbl.textContent = el.value; });
@@ -310,9 +310,9 @@ document.querySelectorAll('input, select, textarea').forEach(el=>{
 /* ---------- RENDER ---------- */
 function render(){
   const html = buildHTML();
-  // D TYPE + 완전 투명 배경: 출력에 배경이 없으므로 미리보기도 테마 색을 깔지 않고
+  // E TYPE(인물 소개) + 완전 투명 배경: 출력에 배경이 없으므로 미리보기도 테마 색을 깔지 않고
   // 블로그에 붙여넣었을 때처럼 흰 바탕 위에 그대로 보여줌 (어두운 틀 위에서는 글자가 안 보이기 때문)
-  const previewTransparentC = state.type === 'D' && $('f-ctransparent').checked;
+  const previewTransparentC = state.type === 'E' && $('f-ctransparent').checked;
   $('previewFrame').style.background = previewTransparentC ? '#ffffff' : '';
   $('previewFrame').innerHTML = html;
   $('outputCode').textContent = html;
@@ -338,7 +338,7 @@ const PRESET_KEY = 'log-atelier-presets-v2';
 function loadPresets(){ try{ return JSON.parse(localStorage.getItem(PRESET_KEY)||'{}'); }catch{ return {}; } }
 function savePresets(o){ localStorage.setItem(PRESET_KEY, JSON.stringify(o)); }
 function snapshot(){
-  const s = { v: 2, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
+  const s = { v: 3, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
   document.querySelectorAll('[id^="f-"], [id^="t-"]').forEach(el=>{
     if(el.type==='checkbox') s.fields[el.id] = el.checked;
     else if(el.type==='color' || el.type==='text' || el.type==='url' || el.type==='number' || el.tagName==='SELECT' || el.tagName==='TEXTAREA') s.fields[el.id] = el.value;
@@ -348,9 +348,11 @@ function snapshot(){
 function restore(snap){
   if(!snap || typeof snap !== 'object') return;
 
-  // 스냅샷 v2 이전의 'C'는 지금의 D TYPE(인물 소개)이므로 D로 옮겨 불러옴
-  const snapType = (snap.type === 'C' && !(snap.v >= 2)) ? 'D' : snap.type;
-  if(snapType === 'A' || snapType === 'B' || snapType === 'C' || snapType === 'D'){
+  // 인물 소개 TYPE은 v2 이전엔 'C', v2에선 'D', v3부터 'E'. 예전 스냅샷은 지금의 E로 옮겨 불러옴
+  let snapType = snap.type;
+  if (snapType === 'C' && !(snap.v >= 2)) snapType = 'E';
+  else if (snapType === 'D' && !(snap.v >= 3)) snapType = 'E';
+  if(['A','B','C','D','E'].includes(snapType)){
     state.type = snapType;
     for (const btn of $('typeToggle').children){
       btn.classList.toggle('active', btn.dataset.type===state.type);
