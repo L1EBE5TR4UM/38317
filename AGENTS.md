@@ -94,6 +94,8 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 
 ### 입력란 추가
 1. `index.html`에 `id="f-이름"`으로 추가합니다(프리셋에 자동 저장).
+   - 입력란 이름은 `<label>한글 이름<em>English</em></label>`처럼 한글 뒤에 짧은 영문을 `<em>`으로 붙입니다(영문은 작은 대문자로 보임). 괄호 설명은 넣지 않고, 꼭 필요한 안내는 `placeholder`로 씁니다.
+   - 섹션 제목(`.section-title`)·탭·LOG/CAST 같은 대메뉴와 Copy 버튼은 영문으로 두고, 그 밖의 라벨·버튼·선택지·알림은 한글로 씁니다.
 2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `e-only`, `ab-only`, `ac-only`, `abc-only`, `not-c`, `f-only`, `not-f` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다. D TYPE은 A와 같은 입력란을 쓰므로 `b-only`, `e-only`만 숨깁니다.
 3. `js/builder.js`의 `buildHTML()`에서 `$('f-이름').value`로 읽어 씁니다.
 
