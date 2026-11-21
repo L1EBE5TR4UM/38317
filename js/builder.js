@@ -258,7 +258,7 @@ ${storyBlock}
   if (T === 'E'){
     const ev = ($('e-variant') && $('e-variant').value) || '1';
     return buildTypeE({ v, ev, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
-      useHero, img, fx, fy, hh, overlayDark, thumbImg, promptName, modelName, botLink });
+      useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign });
   }
 
   // ===================================================================
@@ -509,15 +509,15 @@ ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;l
 /* ===================================================================
    E TYPE 빌더 — 배너 제목형 봇 카드
    · 배너: Hero 이미지(아래쪽 어둡게) 또는 Muted 단색, 위에 작성자·제목·소제목
-   · 배지 = Character Name (배너 아래 경계에 반쯤 걸침), 메타 칩 = Model · Prompt · Info
+   · 배지 = Character Name (배너 아래 경계에 반쯤 걸침, Title 정렬을 따름)
+   · 입력값은 A TYPE과 같음
    · 대사/속마음은 A·B·C와 같은 강조 박스
    · ev: 배지 시안 '1' Play 버튼 색 / '2' 대사 강조 색 / '3' 카드색 + 선
    =================================================================== */
 function buildTypeE(o){
   const { v, ev, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
-          useHero, img, fx, fy, hh, overlayDark, thumbImg, promptName, modelName, botLink } = o;
+          useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign } = o;
   const hasImg = useHero && img;
-  const metaList = [modelName || 'Model', promptName || 'Prompt', botLink || 'Info'].map(escapeHtml);
 
   const scrollUid = eqToken(v.muted + '|' + v.card);
   const scrollStyle = boxScroll ? `<div><style>
@@ -552,7 +552,7 @@ ${bodyHTML}
   const subInk = hasImg ? v.subtitle : titleInk;
   const banner = `<div style="${bandBg}border-radius:14px 14px 0 0;">
 <div style="${shade}height:${hh}px;display:table;width:100%;box-sizing:border-box;border-radius:14px 14px 0 0;">
-<div style="display:table-cell;vertical-align:bottom;padding:24px 30px 42px 30px;color:${titleInk};${sh}">
+<div style="display:table-cell;vertical-align:bottom;padding:24px 30px 42px 30px;text-align:${validAlign};color:${titleInk};${sh}">
 ${byAu ? `<div style="font-size:11px;letter-spacing:0.16em;margin-bottom:8px;">${byAu}</div>` : ''}
 <div style="font-size:28px;font-weight:800;letter-spacing:-0.01em;line-height:1.2;color:${titleInk};">${escapeHtml(title)}</div>
 ${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:8px;color:${subInk};">${subtitle}</div>` : ''}
@@ -569,13 +569,9 @@ ${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:8px;color:${
   } else {
     badgeStyle = `background-color:${v.accent};color:${v.accentText};`;
   }
-  const badge = `<div style="display:inline-block;margin-top:-17px;padding:6px 16px;border-radius:999px;${badgeStyle}font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;box-shadow:0 3px 10px rgba(0,0,0,0.18);">${escapeHtml(character)}</div>`;
+  const badge = `<div style="display:inline-block;padding:6px 16px;border-radius:999px;${badgeStyle}font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;line-height:1.5;box-shadow:0 3px 10px rgba(0,0,0,0.18);">${escapeHtml(character)}</div>`;
 
-  const chips = metaList.map(t=>`<span style="display:inline-block;margin:0 0 4px 4px;padding:3px 10px;border:1px solid ${hexToRgba(v.muted,0.35)};border-radius:999px;font-size:11.5px;color:${v.muted};white-space:nowrap;">${t}</span>`).join('');
-  const row = `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;margin:0;"><tbody><tr>
-<td style="padding:0 0 0 26px;border:0;vertical-align:top;">${badge}</td>
-<td style="padding:10px 24px 0 0;border:0;vertical-align:top;text-align:right;">${chips}</td>
-</tr></tbody></table>`;
+  const row = `<div style="margin-top:-17px;padding:0 26px;text-align:${validAlign};">${badge}</div>`;
 
   return `${scrollStyle}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;box-sizing:border-box;font-family:${font};color:${v.text};background-color:${v.card};border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 ${banner}

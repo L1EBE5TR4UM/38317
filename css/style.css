@@ -220,8 +220,8 @@
   body[data-type="B"] .a-only, body[data-type="B"] .ac-only, body[data-type="B"] .d-only{ display:none }
   body[data-type="C"] .a-only, body[data-type="C"] .b-only, body[data-type="C"] .ab-only, body[data-type="C"] .not-c, body[data-type="C"] .d-only{ display:none }
   body[data-type="D"] .a-only, body[data-type="D"] .ac-only, body[data-type="D"] .b-only, body[data-type="D"] .ab-only, body[data-type="D"] .abc-only{ display:none }
-  /* E: A·B·C용 입력(Meta·Hero·Prompt/Model/Info·Subtitle)을 함께 쓰고, Title 정렬과 D 전용만 숨김 */
-  body[data-type="E"] .a-only, body[data-type="E"] .not-c, body[data-type="E"] .d-only{ display:none }
+  /* E: 입력값은 A와 같음 (B·D 전용만 숨김) */
+  body[data-type="E"] .b-only, body[data-type="E"] .d-only{ display:none }
   body:not([data-type="E"]) .e-only{ display:none }
   .cast-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   .cast-grid textarea{min-height:120px}
