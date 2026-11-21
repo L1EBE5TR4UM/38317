@@ -44,3 +44,18 @@ function readableInk(bgHex, preferred){
   const dark = '#1f1a14', light = '#f4f1ea';
   return contrastRatio(bgHex, dark) >= contrastRatio(bgHex, light) ? dark : light;
 }
+
+/* 색 a를 색 b 쪽으로 t(0~1)만큼 섞은 #hex */
+function mixHex(a, b, t){
+  const p = (h)=>{ h = String(h||'#000').replace('#',''); if(h.length===3) h = h.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(h.substr(i,2),16)||0); };
+  const x = p(a), y = p(b);
+  return '#' + x.map((c,i)=>Math.round(c + (y[i]-c)*t).toString(16).padStart(2,'0')).join('');
+}
+/* 색조는 살리면서 배경 위에서 읽히도록: hex를 ink 쪽으로 조금씩 섞어 대비 min 이상이 되는 첫 색 */
+function toneInk(hex, bg, ink, min){
+  for (let t = 0; t <= 1.0001; t += 0.05){
+    const c = mixHex(hex, ink, t);
+    if (contrastRatio(bg, c) >= min) return c;
+  }
+  return ink;
+}

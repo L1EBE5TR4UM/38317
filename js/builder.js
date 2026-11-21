@@ -14,6 +14,17 @@ function processInline(text, v, plainQuotes){
   h = h.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
   // plainQuotes: E TYPE(인물 소개) 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
+  //  · 객체 {dia, thought}를 넘기면(F TYPE) 배경 박스 대신 글자색만 바꿈 (속마음은 기울임)
+  if (plainQuotes && typeof plainQuotes === 'object'){
+    const q = plainQuotes;
+    const dia = (inner)=>`<span style="color:${q.dia};">${inner}</span>`;
+    const th  = (inner)=>`<span style="color:${q.thought};font-style:italic;padding-right:0.08em;">${inner}</span>`;
+    h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, i)=>dia(`&quot;${i}&quot;`));
+    h = h.replace(/&#8220;((?:(?!&#8221;).)+?)&#8221;/g, (_m, i)=>dia(`&#8220;${i}&#8221;`));
+    h = h.replace(/(^|[^A-Za-z0-9_])&#39;((?:(?!&#39;)[^\n])+?)&#39;(?![A-Za-z0-9_])/g, (_m, b, i)=>`${b}${th(`&#39;${i}&#39;`)}`);
+    h = h.replace(/&#8216;((?:(?!&#8217;).)+?)&#8217;/g, (_m, i)=>th(`&#8216;${i}&#8217;`));
+    return h.replace(/\n/g, '<br>');
+  }
   if (plainQuotes) return h.replace(/\n/g, '<br>');
   const diaInk = readableInk(v.hl, v.text);
   h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, inner)=>{
@@ -36,7 +47,7 @@ function processInline(text, v, plainQuotes){
 
 function buildHTML(){
   const v = state.themeVars;
-  const T = state.type; // 'A' | 'B' | 'C' | 'D' | 'E'
+  const T = state.type; // 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
   const blockInk = readableInk(v.hl, v.text);
 
   const title     = $('f-title').value || '';
@@ -98,7 +109,7 @@ function buildHTML(){
       name = tokens[1];
       message = '';
     }
-    const messageHTML = message ? processInline(message, v, T === 'E') : '';
+    const messageHTML = message ? processInline(message, v, quoteMode) : '';
 
     const isSent = (kind === 'sent');
     const bubbleBg     = isSent ? '#007aff' : '#e5e5ea';
@@ -120,8 +131,15 @@ function buildHTML(){
   const raw = $('f-body').value || '';
   const blocks = raw.split(/\n{2,}/);
 
+  // F TYPE: 대사·속마음을 박스 대신 글자색으로 (바탕 = 바깥 배경색)
+  const fQuote = (T === 'F') ? fQuoteInks(v) : null;
+  const quoteMode = (T === 'E') ? true : fQuote;
+
   let pStyle, spacer;
-  if (T !== 'A'){
+  if (T === 'F'){
+    pStyle = `margin:0 0 ${Math.round(fs*1.15)}px 0;line-height:${lh};letter-spacing:${ls}px;font-size:${fs}px;text-indent:${indent?'1em':'0'};text-align:${justify?'justify':'left'}`;
+    spacer = '';
+  } else if (T !== 'A'){
     pStyle = `margin:0;line-height:${lh};letter-spacing:${ls}px;font-size:${fs}px;text-indent:${indent?'1em':'0'}${justify?';text-align:justify':''}`;
     spacer = `<p><br></p>`;
   } else {
@@ -143,11 +161,19 @@ function buildHTML(){
       const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
       return `<p style="${pStyle}"${dataKe}><span style="display:inline-block;width:100%;border-top:1px solid ${hexToRgba(v.muted,0.35)};margin:6px 0">&nbsp;</span></p>`;
     }
-    const inner = processInline(trimmed, v, T === 'E');
+    const inner = processInline(trimmed, v, quoteMode);
     const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
     return `<p style="${pStyle}"${dataKe}>${inner}</p>`;
   }).filter(Boolean);
-  const bodyHTML = paragraphHTMLs.join('\n' + spacer + '\n');
+  const bodyHTML = paragraphHTMLs.join(spacer ? '\n' + spacer + '\n' : '\n');
+
+  // ===================================================================
+  //  F TYPE — 레터 로그 (책 펼침면: 그림 위 큰 이탤릭 제목 + 여백 단 본문)
+  // ===================================================================
+  if (T === 'F'){
+    return buildTypeF({ v, font, mw, bodyHTML, title, character, subtitle, author, tags,
+      useHero, img, fx, fy, hh, validAlign, thumbImg });
+  }
 
   // ===================================================================
   //  C TYPE — 북 재킷 커버 (이미지 표지 + 아래 제목 밴드 + 본문 + 푸터 띠)
@@ -573,4 +599,108 @@ ${row}
 ${hashTags}${bodyBox}
 </div>${footer}
 </div>`;
+}
+
+/* ===================================================================
+   F TYPE 빌더 — 레터 로그 (편지형)
+   · 바탕 = 바깥 배경색(outerBg). 그림은 바탕색 베일로 덮고 아래로 바탕색에 녹아듦
+   · 대사·속마음은 박스 없이 글자색만 (fQuoteInks)
+   · 하단부(Footer) 없음: 본문 끝 서명(— Your Name, LETTER LOG)이 마무리
+   · 가운데 한 단짜리 편지지: 그림 위 가운데 제목 → 인용문 → 장 제목 → 본문 → 서명
+   =================================================================== */
+function fQuoteInks(v){
+  const page = v.outerBg;
+  const ink = readableInk(page, v.text);
+  // 후보 색을 바탕 위에서 읽히게(대비 4.5) 조정한 뒤, 본문 글자·앞서 고른 색과 충분히 달라 보이는 첫 색을 씀
+  // (Default처럼 Play 버튼 색이 본문 글자색과 같은 테마에서 대사가 본문과 똑같아지는 것을 막음)
+  const rgb = (h)=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+  const dist = (a,b)=>{ const x = rgb(a), y = rgb(b); return Math.hypot(x[0]-y[0], x[1]-y[1], x[2]-y[2]); };
+  const pick = (cands, avoid)=>{
+    const tones = cands.filter(Boolean).map(c=>toneInk(c, page, ink, 4.5));
+    return tones.find(c=>avoid.every(a=>dist(c,a) >= 40)) || tones[0];
+  };
+  const dia = pick([v.accent, v.hl, v.muted, v.hl2], [ink]);
+  const thought = pick([v.hl2 || v.hl, v.hl, v.muted, v.accent], [ink, dia]);
+  return { dia, thought };
+}
+
+function buildTypeF(o){
+  const { v, font, mw, bodyHTML, title, character, subtitle, author, tags,
+          useHero, img, fx, fy, hh, thumbImg } = o;
+  const val = (id)=> ($(id) ? ($(id).value || '') : '').trim();
+  const epi   = val('f-fepi');
+  const sec   = val('f-fsec');
+  const no    = val('f-fno');
+  const chap  = val('f-fchap') || title;
+  const mark  = val('f-fmark');
+
+  const page = v.outerBg;
+  const ink  = readableInk(page, v.text);
+  const mute = toneInk(v.muted, page, ink, 4.5);   // 9~10px 작은 글씨라 대비 4.5 이상, 색조는 유지
+  const rule = hexToRgba(mute, 0.55);
+  const hasImg = useHero && img;
+  // 제목만 따로: Georgia 이탤릭 굵게. Georgia가 없는 기기(Android 등)는 같은 글자 폭으로 만든 Gelasio 웹폰트를 @import로 받아 씀
+  // 나머지 글자는 모두 다른 TYPE처럼 Body Font(f-font)를 따름
+  const disp = `Georgia,'Gelasio',${font}`;
+  // 작은 라벨(작성자 줄·목차 라벨·서명 LETTER LOG)은 메시지 버블과 같은 고딕 (웹폰트 없이 기기 고딕으로)
+  const gothic = `'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',sans-serif`;
+  const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@1,700&display=swap');`;
+  const pad  = '4.167%';
+  const wrapTxt = 'white-space:normal;word-break:keep-all;overflow-wrap:anywhere;';
+  const tMax = Math.max(48, Math.round(mw * 0.123));        // 960px → 118px, 650px → 80px
+  const tMin = Math.min(44, tMax);
+  const titleSize = `font-size:${tMin}px;font-size:clamp(${tMin}px,12vw,${tMax}px);`;
+  const T  = escapeHtml(title);
+  const AU = escapeHtml(author.toUpperCase());
+  const CH = escapeHtml(character);
+  const EP = escapeHtml(epi);
+
+  // 그림 + 바탕색 베일(60%) + 아래로 바탕색에 녹는 그라데이션
+  const heroBg = hasImg
+    ? `background-color:${page};background-image:url('${img}');background-size:cover;background-position:${fx}% ${fy}%;background-repeat:no-repeat;`
+    : `background-color:${page};`;
+  const veil = `background-color:${hexToRgba(page, hasImg ? 0.6 : 0)};background-image:linear-gradient(to bottom,${hexToRgba(page,0)} 45%,${hexToRgba(page,1)} 100%);`;
+
+  const uid = eqToken('letter|' + page + '|' + mw);
+  // 그림 위 글자: 그림 밝기를 알 수 없으므로 본문 글자색 쪽으로 진하게 + 바탕색 번짐 그림자로 어느 그림에서도 읽히게
+  const heroInk = mixHex(ink, mute, 0.3);
+  const glow = (a)=>`text-shadow:0 0 10px ${hexToRgba(page, a)},0 0 2px ${hexToRgba(page, a)};`;
+  const kicker = (AU || CH) ? `${AU ? `<div>${AU}</div>` : ''}${CH ? `<div>${CH}</div>` : ''}` : '&nbsp;';
+  const kickerCss = `font-family:${gothic};font-size:9px;line-height:1.8;letter-spacing:.12em;color:${heroInk};${glow(0.9)}${wrapTxt}`;
+
+  const shell = (inner) => `${thumbImg}<div style="width:100%;max-width:${mw}px;margin:0 auto;background-color:${page};color:${ink};font-family:${font};">
+${inner}
+</div>`;
+
+  // 휴대폰 폭에서는 본문 좌우 여백을 14% → 4.167%로
+  const mobile = `<div><style>${fontImport}
+@media (max-width:600px){.la-fl-${uid}{padding-left:${pad} !important;padding-right:${pad} !important;}}</style></div>`;
+  const hero = `<div style="box-sizing:border-box;display:table;width:100%;margin:0;padding:0;${heroBg}">
+<div style="box-sizing:border-box;display:table-cell;width:100%;height:${hh}px;margin:0;padding:40px ${pad} 34px;vertical-align:bottom;text-align:center;font-size:13px;line-height:normal;${veil}">
+<div style="${kickerCss}">${kicker}</div>
+<div style="margin-top:18px;text-align:center;font-family:${disp};${titleSize}line-height:.92;font-style:italic;font-weight:700;letter-spacing:-.06em;${wrapTxt}color:${ink};text-shadow:0 0 18px ${hexToRgba(page,0.55)};">${T}</div>
+${subtitle ? `<div style="margin-top:16px;font-family:${font};font-size:13px;line-height:1.6;${wrapTxt}color:${heroInk};${glow(0.85)}">${subtitle}</div>` : ''}
+</div>
+</div>`;
+  const epiBlock = EP ? `<div style="margin:6px auto 0;padding:0 14%;text-align:center;">
+<div style="width:1px;height:28px;margin:0 auto 16px;background-color:${rule};font-size:0;line-height:0;">&nbsp;</div>
+<div style="font-family:${font};font-size:14px;line-height:1.9;font-style:italic;${wrapTxt}color:${mute};">${EP}</div>
+</div>` : '';
+  const chapBlock = (sec || no || chap) ? `<div style="margin:44px 0 0;text-align:center;">
+${(sec || no) ? `<div style="font-family:${gothic};font-size:10px;letter-spacing:.24em;color:${mute};">${escapeHtml([sec, no].filter(Boolean).join(' · '))}</div>` : ''}
+${chap ? `<div style="margin-top:10px;font-family:${font};font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.02em;${wrapTxt}color:${ink};">${escapeHtml(chap)}</div>` : ''}
+<div style="margin-top:14px;font-size:14px;letter-spacing:.6em;padding-left:.6em;color:${mute};">&middot;&middot;&middot;</div>
+</div>` : '';
+  const sign = (author || mark) ? `<div style="margin-top:30px;text-align:right;">
+${author ? `<div style="font-size:16px;font-style:italic;color:${ink};">&mdash; ${escapeHtml(author)}</div>` : ''}
+${mark ? `<div style="margin-top:8px;font-family:${gothic};font-size:10px;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : ''}
+</div>` : '';
+  const body = `<div class="la-fl-${uid}" style="box-sizing:border-box;padding:36px 14% 52px;overflow-wrap:anywhere;color:${ink};">
+${bodyHTML}
+${sign}
+</div>`;
+  return mobile + shell(`${hero}
+${epiBlock}
+${chapBlock}
+${body}`);
 }
