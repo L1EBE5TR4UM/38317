@@ -46,7 +46,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - **`js/utils.js`**: `$(id)`, `escapeHtml`, `eqToken`(문자열로 짧은 고유값 생성), `hexToRgba`, `relLuminance`, `contrastRatio`, `readableInk`(배경색 위에서 읽히는 글자색 선택).
 - **`js/themes.js`**: `THEMES`, `THEME_GROUPS`, `THEME_GROUP_OF`, `THEME_RENAMED`(바뀐 테마 이름), `THEME_KEYS`. 데이터만 있고 실행 코드는 없다.
 - **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지), `buildTypeD`(D TYPE 전체). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
-- **`js/app.js`**: `state`, 탭·TYPE 전환, 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
+- **`js/app.js`**: `state`, 탭·TYPE 전환(드롭다운, `syncTypeUI()`), 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
 
 ## 3. 꼭 지킬 규칙
 
