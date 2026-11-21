@@ -13,17 +13,18 @@ $('tabs').addEventListener('click', (e)=>{
     p.style.display = (p.dataset.pane===tab) ? '' : 'none';
   });
 });
-/* TYPE 드롭다운: #typeBtn을 누르면 #typeToggle 목록이 열리고, 고르면 닫힘 */
+/* TYPE 선택 (접이식): #typeBtn을 누르면 툴바 아래 #typeToggle 목록이 펼쳐지고, 고르면 접힘 */
 function syncTypeUI(){
-  let name = '';
   $('typeToggle').querySelectorAll('[data-type]').forEach(btn=>{
     const on = btn.dataset.type === state.type;
     btn.classList.toggle('active', on);
     btn.setAttribute('aria-selected', on ? 'true' : 'false');
-    if (on) name = btn.dataset.name || '';
+    if (on){
+      $('typeBtnName').textContent = btn.dataset.name || '';
+      $('typeBtnUse').textContent = btn.dataset.use ? '· ' + btn.dataset.use : '';
+    }
   });
   $('typeBtnKey').textContent = state.type;
-  $('typeBtnName').textContent = name;
   document.body.setAttribute('data-type', state.type);
 }
 function setTypeMenu(open){
@@ -39,8 +40,6 @@ $('typeToggle').addEventListener('click', (e)=>{
   $('typeBtn').focus();
   render();
 });
-document.addEventListener('click', (e)=>{ if(!e.target.closest('.type-picker')) setTypeMenu(false); });
-document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !$('typeToggle').hidden){ setTypeMenu(false); $('typeBtn').focus(); } });
 
 /* ---------- THEMES UI ----------
    현재 테마 줄(미니 카드 + 이름 + ‹ ›) 아래에

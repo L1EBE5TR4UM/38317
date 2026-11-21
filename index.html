@@ -25,21 +25,22 @@
         <button class="active" data-tab="inputs">Inputs</button>
         <button data-tab="styles">Styles &amp; Presets</button>
       </div>
-      <!-- TYPE 선택: 드롭다운. 로그(LOG)와 인물 소개(CAST)를 나눠 묶음. 새 로그 TYPE은 LOG 묶음 끝에 추가 -->
-      <div class="type-picker">
-        <button type="button" class="type-btn" id="typeBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="typeToggle">
-          <span class="type-label">TYPE</span><b id="typeBtnKey">A</b><span id="typeBtnName">자막 + Play 바</span><span class="type-caret" aria-hidden="true">&#9662;</span>
-        </button>
-        <div class="type-menu" id="typeToggle" role="listbox" aria-label="TYPE 선택" hidden>
-          <div class="type-group">LOG</div>
-          <button type="button" role="option" class="active" aria-selected="true" data-type="A" data-name="자막 + Play 바"><b>A</b><span>자막 + Play 바 <small>· 서사 로그</small></span></button>
-          <button type="button" role="option" aria-selected="false" data-type="B" data-name="메타 바"><b>B</b><span>메타 바 <small>· 봇 카탈로그</small></span></button>
-          <button type="button" role="option" aria-selected="false" data-type="C" data-name="북 재킷"><b>C</b><span>북 재킷 <small>· 표지 로그</small></span></button>
-          <button type="button" role="option" aria-selected="false" data-type="D" data-name="배너 + 배지"><b>D</b><span>배너 + 배지 <small>· 그림 위 제목 로그</small></span></button>
-          <hr>
-          <div class="type-group">CAST</div>
-          <button type="button" role="option" aria-selected="false" data-type="E" data-name="인물 소개"><b>E</b><span>인물 소개 <small>· CAST 헤더</small></span></button>
-        </div>
+      <!-- TYPE 선택: 접이식. 평소엔 지금 TYPE 한 줄, 누르면 툴바 아래로 LOG·CAST 목록이 펼쳐짐. 새 로그 TYPE은 LOG 묶음 끝에 추가 -->
+      <button type="button" class="type-btn" id="typeBtn" aria-expanded="false" aria-controls="typeToggle">
+        <span class="type-label">TYPE</span><b id="typeBtnKey">A</b><span id="typeBtnName">자막 + Play 바</span><small id="typeBtnUse">· 서사 로그</small><span class="type-caret" aria-hidden="true">&#9662;</span>
+      </button>
+    </div>
+    <div class="type-panel" id="typeToggle" role="listbox" aria-label="TYPE 선택" hidden>
+      <div class="type-group">LOG</div>
+      <div class="type-list">
+            <button type="button" role="option" class="active" aria-selected="true" data-type="A" data-name="자막 + Play 바" data-use="서사 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:62%"></i><i class="dot" style="left:10%;top:44%;width:18%;height:10%"></i><i class="card" style="left:12%;top:56%;width:76%;height:44%"></i><i class="ln" style="left:20%;top:70%;width:56%"></i><i class="ln" style="left:20%;top:82%;width:44%"></i></span><span class="type-t"><b>A · 자막 + Play 바</b><small>서사 로그</small></span></button>
+            <button type="button" role="option" aria-selected="false" data-type="B" data-name="메타 바" data-use="봇 카탈로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:56%"></i><i class="dk" style="left:14%;top:46%;width:72%;height:14%"></i><i class="card" style="left:6%;top:66%;width:88%;height:34%"></i><i class="ln" style="left:14%;top:78%;width:60%"></i></span><span class="type-t"><b>B · 메타 바</b><small>봇 카탈로그</small></span></button>
+            <button type="button" role="option" aria-selected="false" data-type="C" data-name="북 재킷" data-use="표지 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:58%"></i><i class="card" style="left:0;top:58%;width:100%;height:42%"></i><i class="ln" style="left:10%;top:68%;width:44%;height:4px"></i><i class="ln" style="left:10%;top:84%;width:62%"></i></span><span class="type-t"><b>C · 북 재킷</b><small>표지 로그</small></span></button>
+            <button type="button" role="option" aria-selected="false" data-type="D" data-name="배너 + 배지" data-use="그림 위 제목 로그"><span class="type-mini" aria-hidden="true"><i class="img" style="left:0;top:0;width:100%;height:52%"></i><i class="card" style="left:0;top:52%;width:100%;height:48%"></i><i class="ln" style="left:10%;top:28%;width:40%;height:4px"></i><i class="dk" style="left:58%;top:45%;width:32%;height:14%"></i><i class="ln" style="left:10%;top:74%;width:72%"></i><i class="ln" style="left:10%;top:86%;width:56%"></i></span><span class="type-t"><b>D · 배너 + 배지</b><small>그림 위 제목 로그</small></span></button>
+      </div>
+      <div class="type-group">CAST</div>
+      <div class="type-list">
+            <button type="button" role="option" aria-selected="false" data-type="E" data-name="인물 소개" data-use="CAST 헤더"><span class="type-mini" aria-hidden="true"><i class="dot" style="left:16%;top:14%;width:22%;height:30%"></i><i class="dot" style="left:62%;top:14%;width:22%;height:30%"></i><i class="ln" style="left:12%;top:54%;width:30%"></i><i class="ln" style="left:58%;top:54%;width:30%"></i><i class="ln" style="left:12%;top:66%;width:26%"></i><i class="ln" style="left:58%;top:66%;width:26%"></i><i class="ln" style="left:10%;top:84%;width:80%;height:1px"></i></span><span class="type-t"><b>E · 인물 소개</b><small>CAST 헤더</small></span></button>
       </div>
     </div>
 

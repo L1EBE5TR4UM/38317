@@ -19,7 +19,7 @@ LOG LIBRARY는 블로그(티스토리 등)에 붙여넣을 로그(소설·롤플
 | D | 배너 제목 + 캐릭터 배지 (입력값은 A와 같음) | 그림 위에 제목을 얹는 로그 |
 | E | 투명 배경 인물 소개 (CAST 1/CAST 2 + INTRODUCTION) | 인물 소개 헤더 |
 
-TYPE은 툴바의 드롭다운(`#typeBtn` → `#typeToggle`)에서 고릅니다. 목록은 로그(LOG)와 인물 소개(CAST) 두 묶음이고, 인물 소개는 늘 맨 아래에 있습니다. 새 로그 TYPE은 다음 글자(F, G…)를 붙여 LOG 묶음 끝에 `data-type`·`data-name`을 가진 버튼으로 추가합니다. 이미 있는 TYPE의 글자는 바꾸지 않습니다.
+TYPE은 접이식 메뉴에서 고릅니다. 평소엔 툴바에 지금 TYPE 한 줄(`#typeBtn`)만 있고, 누르면 툴바 아래로 목록(`#typeToggle`)이 펼쳐집니다. 목록은 로그(LOG)와 인물 소개(CAST) 두 묶음이고, 인물 소개는 늘 맨 아래에 있습니다. 새 로그 TYPE은 다음 글자(F, G…)를 붙여 LOG 묶음 끝에 `data-type`·`data-name`·`data-use`와 모양 도식(`.type-mini`)을 가진 버튼으로 추가합니다. 이미 있는 TYPE의 글자는 바꾸지 않습니다.
 
 ## 2. 파일 구조
 
@@ -46,7 +46,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - **`js/utils.js`**: `$(id)`, `escapeHtml`, `eqToken`(문자열로 짧은 고유값 생성), `hexToRgba`, `relLuminance`, `contrastRatio`, `readableInk`(배경색 위에서 읽히는 글자색 선택).
 - **`js/themes.js`**: `THEMES`, `THEME_GROUPS`, `THEME_GROUP_OF`, `THEME_RENAMED`(바뀐 테마 이름), `THEME_KEYS`. 데이터만 있고 실행 코드는 없다.
 - **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지), `buildTypeD`(D TYPE 전체). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
-- **`js/app.js`**: `state`, 탭·TYPE 전환(드롭다운, `syncTypeUI()`), 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
+- **`js/app.js`**: `state`, 탭·TYPE 전환(접이식 메뉴, `syncTypeUI()`), 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
 
 ## 3. 꼭 지킬 규칙
 
