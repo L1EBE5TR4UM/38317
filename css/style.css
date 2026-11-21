@@ -85,7 +85,6 @@
   .type-btn{display:inline-flex; align-items:center; gap:8px; background:none; border:0; border-bottom:1px solid var(--field-line); border-radius:0;
     padding:4px 2px 6px; cursor:pointer; font-family:inherit; font-size:13.5px; color:var(--accent); min-width:0}
   .type-btn:hover, .type-btn[aria-expanded="true"]{border-bottom-color:var(--accent)}
-  .type-btn b{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:16px; color:var(--accent)}
   .type-btn small{font-size:12px; color:var(--ink-mute); white-space:nowrap}
   .type-caret{flex:none; width:14px; height:14px; margin-left:10px; color:var(--accent); transition:transform .2s}
   .type-btn[aria-expanded="true"] .type-caret{transform:rotate(180deg)}

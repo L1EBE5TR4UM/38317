@@ -22,9 +22,11 @@ function syncTypeUI(){
     if (on){
       $('typeBtnName').textContent = btn.dataset.name || '';
       $('typeBtnUse').textContent = btn.dataset.use ? '· ' + btn.dataset.use : '';
+      // 화면에는 TYPE 글자(A·B…) 대신 묶음 이름(LOG/CAST)을 보여 줌. 글자는 프리셋용 내부 구분값
+      const grp = btn.closest('.type-list')?.previousElementSibling;
+      $('typeBtnGroup').textContent = grp ? grp.textContent.trim() : 'TYPE';
     }
   });
-  $('typeBtnKey').textContent = state.type;
   document.body.setAttribute('data-type', state.type);
 }
 function setTypeMenu(open){
