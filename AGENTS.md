@@ -71,11 +71,12 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - 사용자 입력을 HTML에 넣을 때는 `escapeHtml`을 거칩니다.
 
 ### 3-5. 프리셋 호환성
-- 프리셋은 `f-`, `t-`로 시작하는 `id`의 값을 자동으로 저장합니다(`snapshot()`).
+- 프리셋은 지금 TYPE·테마 색과 `f-`, `t-`로 시작하는 `id`의 값을 이름 붙여 이 브라우저에 저장한 것입니다(`snapshot()`).
+- 형식: `{"app":"log-library","kind":"preset","v":3,"type":…,"theme":…,"vars":{…},"fields":{…}}`. `restore()`와 Import JSON은 이 형식(`PRESET_VERSION`과 같은 `v`)만 받습니다.
+- v3에서 새로 시작했습니다. 예전 형식(`log-atelier-presets-v2`, Log Atelier 내보내기)은 읽지 않습니다.
 - 기존 `id`의 이름을 바꾸거나 지우면 저장된 프리셋에서 그 값이 사라집니다.
-- `PRESET_KEY`(`log-atelier-presets-v2`)를 바꾸면 모든 프리셋이 사라진 것처럼 보입니다.
-- 인물 소개 TYPE의 글자는 스냅샷 버전에 따라 다릅니다: v1 `C` → v2 `D` → v3 `E`. `restore()`가 예전 스냅샷을 지금의 `E`로 옮겨 불러옵니다. 이 변환을 지우지 않습니다.
-- TYPE 글자를 다시 바꿀 때는 `snapshot()`의 `v`를 1 올리고, `restore()`에 `이전 v의 글자 → 새 글자` 변환을 추가합니다. `typeToggle` 버튼, `css/style.css`의 `body[data-type]` 규칙, `builder.js`의 `T === '…'`를 함께 고칩니다.
+- `PRESET_KEY`(`log-library-presets-v3`)를 바꾸면 모든 프리셋이 사라진 것처럼 보입니다.
+- 이미 있는 TYPE의 글자는 바꾸지 않습니다. 저장된 프리셋이 엉뚱한 TYPE으로 열립니다.
 - 이름을 바꾼 테마는 `THEME_RENAMED`(js/themes.js)로 새 이름에 연결합니다. 항목을 지우면 예전 프리셋이 테마를 못 찾습니다.
 - 즐겨찾기 백업 JSON의 형식(`{"app":"log-library","kind":"theme-favs","version":1,"favs":[…]}`)을 바꾸면 예전에 내보낸 백업을 못 읽습니다. 가져오기는 `favs` 배열이나 이름 배열 그대로를 받습니다.
 

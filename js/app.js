@@ -355,26 +355,28 @@ $('copyBtn').addEventListener('click', async ()=>{
 });
 
 /* ---------- PRESETS ---------- */
-const PRESET_KEY = 'log-atelier-presets-v2';
+/* 프리셋 = 지금 TYPE·테마 색·모든 입력란(f-, t-) 값을 이름 붙여 이 브라우저에 저장한 것.
+   v3에서 새로 시작: 예전(log-atelier-presets-v2, Log Atelier 내보내기) 형식은 읽지 않음 */
+const PRESET_KEY = 'log-library-presets-v3';
+const PRESET_VERSION = 3;
 function loadPresets(){ try{ return JSON.parse(localStorage.getItem(PRESET_KEY)||'{}'); }catch{ return {}; } }
 function savePresets(o){ localStorage.setItem(PRESET_KEY, JSON.stringify(o)); }
 function snapshot(){
-  const s = { v: 3, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
+  const s = { app: 'log-library', kind: 'preset', v: PRESET_VERSION, type: state.type, theme: state.theme, vars: {...state.themeVars}, fields: {} };
   document.querySelectorAll('[id^="f-"], [id^="t-"]').forEach(el=>{
     if(el.type==='checkbox') s.fields[el.id] = el.checked;
     else if(el.type==='color' || el.type==='text' || el.type==='url' || el.type==='number' || el.tagName==='SELECT' || el.tagName==='TEXTAREA') s.fields[el.id] = el.value;
   });
   return s;
 }
+function isPreset(snap){
+  return !!snap && typeof snap === 'object' && snap.app === 'log-library' && snap.kind === 'preset' && snap.v === PRESET_VERSION;
+}
 function restore(snap){
-  if(!snap || typeof snap !== 'object') return;
+  if(!isPreset(snap)) return false;
 
-  // 인물 소개 TYPE은 v2 이전엔 'C', v2에선 'D', v3부터 'E'. 예전 스냅샷은 지금의 E로 옮겨 불러옴
-  let snapType = snap.type;
-  if (snapType === 'C' && !(snap.v >= 2)) snapType = 'E';
-  else if (snapType === 'D' && !(snap.v >= 3)) snapType = 'E';
-  if(['A','B','C','D','E'].includes(snapType)){
-    state.type = snapType;
+  if($('typeToggle').querySelector(`[data-type="${snap.type}"]`)){
+    state.type = snap.type;
     syncTypeUI();
   }
 
@@ -383,20 +385,7 @@ function restore(snap){
     state.theme = THEME_RENAMED[snap.theme] || snap.theme;
   }
 
-  let vars = null;
-  if (snap.vars && typeof snap.vars === 'object') vars = snap.vars;
-  else if (snap.themeVars && typeof snap.themeVars === 'object') vars = snap.themeVars;
-  else if (snap.fields){
-    const reconstructed = {};
-    let foundAny = false;
-    for(const k of THEME_KEYS){
-      if (snap.fields['t-'+k] !== undefined){
-        reconstructed[k] = snap.fields['t-'+k];
-        foundAny = true;
-      }
-    }
-    if (foundAny) vars = reconstructed;
-  }
+  const vars = (snap.vars && typeof snap.vars === 'object') ? snap.vars : null;
   if (vars){
     state.themeVars = { ...THEMES.Default, ...state.themeVars, ...vars };
     for (const k of THEME_KEYS){
@@ -427,6 +416,7 @@ function restore(snap){
 
   repaintChips();
   render();
+  return true;
 }
 function refreshPresetList(){
   const sel = $('p-load'); const data = loadPresets();
@@ -447,7 +437,7 @@ $('p-delete').addEventListener('click', ()=>{
 });
 $('p-load').addEventListener('change', ()=>{
   const name = $('p-load').value; if(!name) return;
-  restore(loadPresets()[name]);
+  if(!restore(loadPresets()[name])) alert('이 preset을 불러오지 못했습니다.');
 });
 $('p-export').addEventListener('click', ()=>{
   try{
@@ -457,7 +447,7 @@ $('p-export').addEventListener('click', ()=>{
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = (($('p-name').value || '').trim() || 'log-atelier-theme') + '.json';
+    a.download = (($('p-name').value || '').trim() || 'log-library-preset') + '.json';
     a.style.position = 'fixed';
     a.style.left = '-9999px';
     document.body.appendChild(a);
@@ -493,30 +483,7 @@ $('p-import').addEventListener('click', ()=>{
         return;
       }
       try{
-        let normalised;
-        const isLogAtelierExport = snap && typeof snap === 'object' &&
-          ('cardBg' in snap || 'textColor' in snap || 'hiColor' in snap || 'footerColor' in snap);
-        if (isLogAtelierExport){
-          const mapped = {};
-          if (snap.outerBg !== undefined)            mapped.outerBg = snap.outerBg;
-          if (snap.cardBg !== undefined)             mapped.card = snap.cardBg;
-          if (snap.textColor !== undefined)          mapped.text = snap.textColor;
-          if (snap.hiColor !== undefined)            mapped.hl = snap.hiColor;
-          if (snap.hiColorB !== undefined)           mapped.hl2 = snap.hiColorB;
-          if (snap.playBtnBgVal !== undefined)       mapped.accent = snap.playBtnBgVal;
-          if (snap.playBtnTextVal !== undefined)     mapped.accentText = snap.playBtnTextVal;
-          if (snap.footerColor !== undefined)        mapped.muted = snap.footerColor;
-          if (snap.titleClusterColor !== undefined){ mapped.title = snap.titleClusterColor; mapped.char = snap.titleClusterColor; }
-          if (snap.heroSubtitleColor !== undefined)  mapped.subtitle = snap.heroSubtitleColor;
-          normalised = { vars: mapped };
-        } else if (snap && (snap.fields || snap.vars || snap.type || snap.theme)){
-          normalised = snap;
-        } else if (snap && typeof snap === 'object'){
-          normalised = { vars: snap };
-        } else {
-          throw new Error('알 수 없는 JSON 형식');
-        }
-        restore(normalised);
+        if(!restore(snap)) throw new Error('LOG LIBRARY v' + PRESET_VERSION + ' preset 파일이 아닙니다. (예전 형식은 지원하지 않음)');
         alert('Preset을 불러왔습니다.');
       }catch(err){
         alert('Preset 적용 중 오류가 발생했습니다.\n' + err.message);
