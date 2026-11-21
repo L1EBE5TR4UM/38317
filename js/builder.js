@@ -253,6 +253,15 @@ ${storyBlock}
   }
 
   // ===================================================================
+  //  E TYPE — 그라데이션 봇 카드 (시안 비교용: #e-variant 1·2·3)
+  // ===================================================================
+  if (T === 'E'){
+    const ev = ($('e-variant') && $('e-variant').value) || '1';
+    return buildTypeE({ v, ev, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
+      useHero, img, fx, fy, hh, overlayDark, thumbImg, promptName, modelName, botLink });
+  }
+
+  // ===================================================================
   //  B TYPE
   // ===================================================================
   if (T === 'B'){
@@ -495,4 +504,160 @@ ${topRow}
 ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid ${hexToRgba(mute,0.3)};color:${ink};">${subtitle}</div>` : ''}
 </div>
 </div>`;
+}
+
+/* ===================================================================
+   E TYPE 빌더 — 그라데이션 봇 카드
+   · 그라데이션 = 테마의 hl(대사 강조 배경) → hl과 accent의 중간색
+   · 배지 = Character Name, 메타 = Model · Prompt · Info (B TYPE 입력 공용)
+   · ev: '1' 레퍼런스형 / '2' 배너 제목형 / '3' 프로필 카드형
+   =================================================================== */
+function mixHex(a, b, t){
+  const p = (h)=>{ h = String(h||'#000000').replace('#',''); if(h.length===3) h = h.split('').map(c=>c+c).join(''); return [0,2,4].map(i=>parseInt(h.slice(i,i+2),16)||0); };
+  const A = p(a), B = p(b);
+  return '#' + A.map((x,i)=>Math.round(x*(1-t)+B[i]*t).toString(16).padStart(2,'0')).join('');
+}
+function buildTypeE(o){
+  const { v, ev, font, mw, boxScroll, cardH, title, character, subtitle, author, tags,
+          useHero, img, fx, fy, hh, overlayDark, thumbImg, promptName, modelName, botLink } = o;
+  let bodyHTML = o.bodyHTML;
+  const g1 = v.hl, g2 = mixHex(v.hl, v.accent, 0.5);
+  const grad = `linear-gradient(120deg,${g1},${g2})`;
+  const gradMid = mixHex(g1, g2, 0.5);
+  const gradInk = readableInk(gradMid, '#ffffff');
+  const hasImg = useHero && img;
+  const frameLine = hexToRgba(v.muted, 0.22);
+  const metaList = [modelName || 'Model', promptName || 'Prompt', botLink || 'Info'].map(escapeHtml);
+
+  // 대사·속마음 꾸밈을 시안별로 바꿈 (processInline이 만든 data-dia 스팬의 style만 교체)
+  const restyle = (dia, thought)=>{
+    bodyHTML = bodyHTML
+      .replace(/<span data-dia="1" style="[^"]*">/g, `<span data-dia="1" style="${dia}">`)
+      .replace(/<span data-dia="2" style="[^"]*">/g, `<span data-dia="2" style="${thought}">`);
+  };
+  if (ev === '1'){
+    const d1 = mixHex(g1, v.text, 0.45), d2 = mixHex(g2, v.text, 0.45);
+    const gt = (a,b)=>`color:${a};background-image:linear-gradient(90deg,${a},${b});-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:600;`;
+    restyle(gt(d1,d2), gt(d2,d1) + 'font-style:italic;');
+  } else if (ev === '3'){
+    const mk = (al)=>`background-image:linear-gradient(90deg,${hexToRgba(g1,al)},${hexToRgba(g2,al)});background-repeat:no-repeat;background-size:100% 42%;background-position:0 88%;-webkit-box-decoration-break:clone;box-decoration-break:clone;padding:0 2px;`;
+    restyle(mk(0.75) + 'font-weight:600;', mk(0.4) + 'font-style:italic;');
+  }
+  // ev === '2'는 A·B·C와 같은 대사/속마음 박스 그대로
+
+  const scrollUid = eqToken(v.muted + '|' + v.card);
+  const scrollStyle = boxScroll ? `<div><style>
+.la-scroll-${scrollUid}{scrollbar-width:thin;scrollbar-color:${hexToRgba(v.muted,0.45)} transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar{width:6px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-track{background:transparent;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb{background:${hexToRgba(v.muted,0.45)};border-radius:999px;}
+.la-scroll-${scrollUid}::-webkit-scrollbar-thumb:hover{background:${hexToRgba(v.muted,0.7)};}
+</style></div>` : '';
+  const bodyBox = boxScroll
+    ? `<div class="la-scroll-${scrollUid}" style="max-height: ${cardH}px; overflow-y: auto; overflow-x: hidden; padding-right: 10px; box-sizing: border-box; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;">
+${bodyHTML}
+</div>` : bodyHTML;
+
+  const footerCustom = ($('f-footer').value || '').trim();
+  const footerText = footerCustom ? footerCustom : (author ? escapeHtml(author) : '');
+  const footer = footerText ? `
+<div style="padding:14px 0 18px 0;margin:0 30px;border-top:1px solid ${hexToRgba(v.muted,0.25)};text-align:center;color:${v.muted};font-size:12px;letter-spacing:0.06em;">${footerText}</div>` : '';
+
+  const hashTags = (color)=> tags.length
+    ? `<div style="margin:0 0 14px 0;font-size:11.5px;letter-spacing:0.06em;color:${color};">${tags.map(t=>`<span style="margin-right:10px;white-space:nowrap;">#${escapeHtml(t)}</span>`).join('')}</div>` : '';
+  const byAu = author ? `by <b style="text-transform:uppercase;">${escapeHtml(author)}</b>` : '';
+  const shell = (inner, radius)=> `${scrollStyle}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;box-sizing:border-box;font-family:${font};color:${v.text};background-color:${v.card};border:1px solid ${frameLine};border-radius:${radius}px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+${inner}
+</div>`;
+
+  // ---------------- 시안 1 · 레퍼런스형 ----------------
+  if (ev === '1'){
+    const bandH = hasImg ? hh : 84;
+    const bandBg = hasImg
+      ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${gradMid};`
+      : `background:${grad};`;
+    const tint = hasImg ? `background:linear-gradient(120deg,${hexToRgba(g1,0.35)},${hexToRgba(g2,0.35)});` : '';
+    const band = `<div style="${bandBg}">
+<div style="${tint}height:${bandH}px;padding:14px 20px;box-sizing:border-box;text-align:right;font-size:9.5px;letter-spacing:0.2em;color:${hasImg ? v.title : gradInk};${hasImg ? 'text-shadow:0 1px 8px rgba(0,0,0,0.45);' : ''}">${byAu || '&nbsp;'}</div>
+</div>`;
+    const sep = `<span style="opacity:0.55;margin:0 8px;">|</span>`;
+    const row = `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;margin:18px 0 0 0;"><tbody><tr>
+<td style="padding:0 0 0 30px;border:0;vertical-align:middle;">
+<div style="display:inline-block;padding:8px;border-radius:16px;background-color:${hexToRgba(v.text,0.06)};">
+<div style="display:inline-block;padding:5px 13px;border-radius:10px;background:${grad};color:${gradInk};font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;">${escapeHtml(character)}</div>
+</div>
+</td>
+<td style="padding:0;border:0;vertical-align:middle;text-align:right;">
+<div style="display:inline-block;padding:7px 14px 7px 16px;border-radius:8px 0 0 8px;background-color:${v.accent};color:${v.accentText};font-size:12px;font-weight:500;letter-spacing:0.04em;word-break:keep-all;">${metaList.join(sep)}</div>
+</td>
+</tr></tbody></table>`;
+    const head = (title || subtitle) ? `<div style="padding:20px 30px 0 30px;">
+${title ? `<div style="font-size:22px;font-weight:700;letter-spacing:-0.01em;line-height:1.3;color:${v.text};">${escapeHtml(title)}</div>` : ''}
+${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:6px;color:${v.muted};">${subtitle}</div>` : ''}
+</div>` : '';
+    return shell(`${band}
+${row}
+${head}
+<div style="padding:20px 30px 28px 30px;">
+${hashTags(v.muted)}${bodyBox}
+</div>${footer}`, 18);
+  }
+
+  // ---------------- 시안 2 · 배너 제목형 ----------------
+  if (ev === '2'){
+    const od = overlayDark;
+    const bandBg = hasImg
+      ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${gradMid};`
+      : `background:${grad};`;
+    const shade = hasImg ? `background:linear-gradient(to top,rgba(0,0,0,${od}),rgba(0,0,0,${(od*0.15).toFixed(2)}));` : '';
+    const ink = hasImg ? v.title : gradInk;
+    const sh = hasImg ? 'text-shadow:0 1px 7px rgba(0,0,0,0.6);' : '';
+    const banner = `<div style="${bandBg}">
+<div style="${shade}height:${hh}px;display:table;width:100%;box-sizing:border-box;">
+<div style="display:table-cell;vertical-align:bottom;padding:24px 30px 42px 30px;color:${ink};${sh}">
+${byAu ? `<div style="font-size:11px;letter-spacing:0.16em;margin-bottom:8px;">${byAu}</div>` : ''}
+<div style="font-size:28px;font-weight:800;letter-spacing:-0.01em;line-height:1.2;color:${ink};">${escapeHtml(title)}</div>
+${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:8px;color:${hasImg ? v.subtitle : ink};">${subtitle}</div>` : ''}
+</div>
+</div>
+</div>`;
+    const chips = metaList.map(t=>`<span style="display:inline-block;margin:0 0 4px 4px;padding:3px 10px;border:1px solid ${hexToRgba(v.muted,0.35)};border-radius:999px;font-size:11.5px;color:${v.muted};white-space:nowrap;">${t}</span>`).join('');
+    const row = `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;margin:0;"><tbody><tr>
+<td style="padding:0 0 0 24px;border:0;vertical-align:top;">
+<div style="display:inline-block;margin-top:-20px;padding:4px;border-radius:999px;background-color:${v.card};box-shadow:0 3px 10px rgba(0,0,0,0.14);">
+<div style="display:inline-block;padding:6px 16px;border-radius:999px;background:${grad};color:${gradInk};font-size:14px;font-weight:700;white-space:nowrap;">${escapeHtml(character)}</div>
+</div>
+</td>
+<td style="padding:10px 24px 0 0;border:0;vertical-align:top;text-align:right;">${chips}</td>
+</tr></tbody></table>`;
+    return shell(`${banner}
+${row}
+<div style="padding:20px 30px 28px 30px;">
+${hashTags(v.muted)}${bodyBox}
+</div>${footer}`, 18);
+  }
+
+  // ---------------- 시안 3 · 프로필 카드형 ----------------
+  const thumbSize = 96;
+  const thumb = hasImg
+    ? `<div style="width:${thumbSize}px;height:${thumbSize}px;border-radius:18px;padding:3px;background:${grad};box-sizing:border-box;"><div style="width:100%;height:100%;border-radius:15px;background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${gradMid};">&nbsp;</div></div>`
+    : `<div style="width:${thumbSize}px;height:${thumbSize}px;border-radius:18px;background:${grad};">&nbsp;</div>`;
+  const metaLine = metaList.join(`<span style="margin:0 7px;color:${hexToRgba(v.muted,0.5)};">&middot;</span>`);
+  const profile = `<table style="width:100%;border-collapse:collapse;border:0;border-spacing:0;margin:0;"><tbody><tr>
+<td style="width:${thumbSize}px;padding:0;border:0;vertical-align:top;">${thumb}</td>
+<td style="padding:2px 0 0 18px;border:0;vertical-align:top;">
+<div style="display:inline-block;padding:1.5px;border-radius:999px;background:${grad};"><div style="display:inline-block;padding:3px 12px;border-radius:999px;background-color:${v.card};color:${v.text};font-size:12px;font-weight:700;letter-spacing:0.04em;white-space:nowrap;">${escapeHtml(character)}</div></div>
+<div style="font-size:21px;font-weight:700;letter-spacing:-0.01em;line-height:1.3;margin-top:10px;color:${v.text};">${escapeHtml(title)}</div>
+<div style="font-size:11.5px;letter-spacing:0.06em;margin-top:6px;color:${v.muted};word-break:keep-all;">${metaLine}</div>
+</td>
+</tr></tbody></table>`;
+  return shell(`<div style="height:6px;background:${grad};font-size:0;line-height:0;">&nbsp;</div>
+<div style="padding:24px 30px 0 30px;">
+${profile}
+${subtitle ? `<div style="font-size:13px;line-height:1.7;margin-top:16px;color:${v.muted};">${subtitle}</div>` : ''}
+<div style="height:1px;margin-top:18px;background-color:${hexToRgba(v.muted,0.2)};font-size:0;line-height:0;">&nbsp;</div>
+</div>
+<div style="padding:20px 30px 28px 30px;">
+${hashTags(v.muted)}${bodyBox}
+</div>${footer}`, 14);
 }

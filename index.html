@@ -32,12 +32,26 @@
           <button data-type="B" title="B TYPE · Prompt·Model·Info 메타 바 (봇 카탈로그 / 캐릭터 소개용)" aria-label="B TYPE">B</button>
           <button data-type="C" title="C TYPE · 북 재킷 커버 (이미지 표지 + 제목 밴드)" aria-label="C TYPE">C</button>
           <button data-type="D" title="D TYPE · 투명 배경 인물 소개 헤더 (USER/CHAR + INTRODUCTION)" aria-label="D TYPE">D</button>
+          <button data-type="E" title="E TYPE · 그라데이션 봇 카드 (배지 + 메타 탭)" aria-label="E TYPE">E</button>
         </div>
       </div>
     </div>
 
     <!-- ========== INPUTS TAB ========== -->
     <div data-pane="inputs">
+      <div class="section e-only">
+        <h3 class="section-title">E TYPE 시안</h3>
+        <div class="grid">
+          <div class="full"><label>시안 고르기 (비교용, 프리셋에 저장되지 않음)</label>
+            <select id="e-variant">
+              <option value="1" selected>시안 1 · 레퍼런스형 (배지 + 메타 탭, 그라데이션 대사)</option>
+              <option value="2">시안 2 · 배너 제목형 (배너 위 제목, 걸친 배지, 대사 박스)</option>
+              <option value="3">시안 3 · 프로필 카드형 (썸네일 + 얇은 띠, 형광펜 대사)</option>
+            </select>
+          </div>
+        </div>
+        <div class="help" style="margin-top:6px">그라데이션은 테마 색에서 자동으로 만듭니다 (대사 강조 배경 → Play 버튼 배경 쪽). 배지 = Character Name, 메타 = Model · Prompt · Info.</div>
+      </div>
       <div class="section abc-only">
         <h3 class="section-title">Meta</h3>
         <div class="grid">
@@ -45,10 +59,10 @@
           <div><label>Character Name (영문 표기)</label><input id="f-character" type="text" value="Character Name" /></div>
           <div><label>Title (hero, 큰 글씨)</label><input id="f-title" type="text" value="Short Story Title" /></div>
           <div><label>Tags (선택, 쉼표로 구분)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
-          <div class="b-only"><label>Prompt Name (B 타입)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
-          <div class="b-only"><label>Model (B 타입)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
-          <div class="full b-only"><label>Info (B 타입, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
-          <div class="full ac-only"><label>Hero Subtitle (A·C 타입, HTML 가능)</label>
+          <div class="b-only"><label>Prompt Name (B·E 타입)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
+          <div class="b-only"><label>Model (B·E 타입)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
+          <div class="full b-only"><label>Info (B·E 타입, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
+          <div class="full ac-only"><label>Hero Subtitle (A·C·E 타입, HTML 가능)</label>
             <input id="f-subtitle" type="text" value="a brief tale captures a moment trembling in secrecy." />
           </div>
           <div class="full"><label>Footer 텍스트 (HTML 가능, 비우면 Your Name 자동 생성)</label>
