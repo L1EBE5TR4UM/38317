@@ -222,7 +222,6 @@
   body[data-type="D"] .a-only, body[data-type="D"] .ac-only, body[data-type="D"] .b-only, body[data-type="D"] .ab-only, body[data-type="D"] .abc-only{ display:none }
   /* E: 입력값은 A와 같음 (B·D 전용만 숨김) */
   body[data-type="E"] .b-only, body[data-type="E"] .d-only{ display:none }
-  body:not([data-type="E"]) .e-only{ display:none }
   .cast-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   .cast-grid textarea{min-height:120px}
   .cast-col h4{margin:0 0 10px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:.24em; color:var(--ink-dim); font-weight:600}

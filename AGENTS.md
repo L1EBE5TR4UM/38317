@@ -10,13 +10,14 @@ LOG LIBRARY는 블로그(티스토리 등)에 붙여넣을 로그(소설·롤플
 - GitHub Pages로 배포하는 **정적 페이지**입니다. 서버도 빌드 과정도 없고, 저장소의 파일이 그대로 서비스됩니다.
 - 검색 노출을 막기 위해 `<meta name="robots" content="noindex, nofollow">`를 유지합니다.
 
-### TYPE 4종
+### TYPE 5종
 | TYPE | 모양 | 용도 |
 |---|---|---|
 | A | 자막 + Play/EQ 바 | 서사 로그, 스토리 게시 |
 | B | Prompt·Model·Info 메타 바 | 봇 카탈로그, 캐릭터 소개 |
 | C | 북 재킷 커버 (이미지 표지 + 제목 밴드) | 표지가 있는 로그 |
 | D | 투명 배경 인물 소개 (CAST 1/CAST 2 + INTRODUCTION) | 인물 소개 헤더 |
+| E | 배너 제목 + 캐릭터 배지 (입력값은 A와 같음) | 그림 위에 제목을 얹는 로그 |
 
 ## 2. 파일 구조
 
@@ -42,7 +43,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 ### 파일별 상세
 - **`js/utils.js`**: `$(id)`, `escapeHtml`, `eqToken`(문자열로 짧은 고유값 생성), `hexToRgba`, `relLuminance`, `contrastRatio`, `readableInk`(배경색 위에서 읽히는 글자색 선택).
 - **`js/themes.js`**: `THEMES`, `THEME_GROUPS`, `THEME_GROUP_OF`, `THEME_RENAMED`(바뀐 테마 이름), `THEME_KEYS`. 데이터만 있고 실행 코드는 없다.
-- **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
+- **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지), `buildTypeE`(E TYPE 전체). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
 - **`js/app.js`**: `state`, 탭·TYPE 전환, 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
 
 ## 3. 꼭 지킬 규칙
@@ -88,16 +89,16 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 
 ### 입력란 추가
 1. `index.html`에 `id="f-이름"`으로 추가합니다(프리셋에 자동 저장).
-2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `d-only`, `ab-only`, `ac-only`, `abc-only`, `not-c` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다.
+2. 특정 TYPE에만 보이게 하려면 `a-only`, `b-only`, `d-only`, `ab-only`, `ac-only`, `abc-only`, `not-c` 중 하나를 클래스로 붙입니다. 규칙은 `css/style.css`의 `body[data-type="…"]`에 있습니다. E TYPE은 A와 같은 입력란을 쓰므로 `b-only`, `d-only`만 숨깁니다.
 3. `js/builder.js`의 `buildHTML()`에서 `$('f-이름').value`로 읽어 씁니다.
 
 ### 로그 모양 수정
-`js/builder.js`의 `buildHTML()` 안에서 `if (T === 'C')`, `if (T === 'D')`처럼 TYPE별로 나뉘어 있습니다. 해당 TYPE 부분만 고칩니다.
+`js/builder.js`의 `buildHTML()` 안에서 `if (T === 'C')`, `if (T === 'D')`처럼 TYPE별로 나뉘어 있습니다. 해당 TYPE 부분만 고칩니다. E TYPE은 `buildTypeE()`에 따로 있습니다.
 
 ## 5. 수정 후 확인
 
 - [ ] `index.html`을 브라우저로 열었을 때 콘솔 오류가 없다
-- [ ] TYPE A·B·C·D 미리보기와 생성 코드가 모두 나온다
+- [ ] TYPE A·B·C·D·E 미리보기와 생성 코드가 모두 나온다
 - [ ] 테마를 바꾸면 미리보기 색이 바뀐다
 - [ ] 저장해 둔 프리셋을 불러와도 값이 들어간다
 - [ ] Copy 버튼이 작동한다

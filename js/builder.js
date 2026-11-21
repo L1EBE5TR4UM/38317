@@ -253,11 +253,10 @@ ${storyBlock}
   }
 
   // ===================================================================
-  //  E TYPE — 그라데이션 봇 카드 (시안 비교용: #e-variant 1·2·3)
+  //  E TYPE — 배너 제목 + 캐릭터 배지 (입력값은 A와 같음)
   // ===================================================================
   if (T === 'E'){
-    const ev = ($('e-variant') && $('e-variant').value) || '1';
-    return buildTypeE({ v, ev, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
+    return buildTypeE({ v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
       useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign });
   }
 
@@ -509,13 +508,12 @@ ${subtitle ? `<div style="font-family:${disp};font-style:italic;font-size:15px;l
 /* ===================================================================
    E TYPE 빌더 — 배너 제목형 봇 카드
    · 배너: Hero 이미지(아래쪽 어둡게) 또는 Muted 단색, 위에 작성자·제목·소제목
-   · 배지 = Character Name (배너 아래 경계에 반쯤 걸침, Title 정렬을 따름)
+   · 배지 = Character Name (배너 아래 경계에 반쯤 걸침, 제목과 반대쪽)
    · 입력값은 A TYPE과 같음
    · 대사/속마음은 A·B·C와 같은 강조 박스
-   · ev: 배지 시안 '1' Play 버튼 색 / '2' 대사 강조 색 / '3' 카드색 + 선
    =================================================================== */
 function buildTypeE(o){
-  const { v, ev, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
+  const { v, font, mw, boxScroll, cardH, bodyHTML, title, character, subtitle, author, tags,
           useHero, img, fx, fy, hh, overlayDark, thumbImg, validAlign } = o;
   const hasImg = useHero && img;
 
@@ -543,6 +541,7 @@ ${bodyHTML}
 
   // 배너: 이미지가 있으면 A·B처럼 아래쪽을 어둡게, 없으면 Muted 단색
   const od = overlayDark;
+  const bandH = Math.max(160, Math.round(hh * 0.8)); // A·B보다 배너를 조금 낮게 (기본 350 → 280)
   const bandBg = hasImg
     ? `background:url('${img}') ${fx}% ${fy}% / cover no-repeat;background-color:${v.muted};`
     : `background-color:${v.muted};`;
@@ -551,7 +550,7 @@ ${bodyHTML}
   const titleInk = hasImg ? v.title : readableInk(v.muted, v.title);
   const subInk = hasImg ? v.subtitle : titleInk;
   const banner = `<div style="${bandBg}border-radius:14px 14px 0 0;">
-<div style="${shade}height:${hh}px;display:table;width:100%;box-sizing:border-box;border-radius:14px 14px 0 0;">
+<div style="${shade}height:${bandH}px;display:table;width:100%;box-sizing:border-box;border-radius:14px 14px 0 0;">
 <div style="display:table-cell;vertical-align:bottom;padding:24px 30px 42px 30px;text-align:${validAlign};color:${titleInk};${sh}">
 ${byAu ? `<div style="font-size:11px;letter-spacing:0.16em;margin-bottom:8px;">${byAu}</div>` : ''}
 <div style="font-size:28px;font-weight:800;letter-spacing:-0.01em;line-height:1.2;color:${titleInk};">${escapeHtml(title)}</div>
@@ -560,18 +559,12 @@ ${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:8px;color:${
 </div>
 </div>`;
 
-  // 배지 시안 (그라데이션·흰 테두리 없이 단색)
-  let badgeStyle;
-  if (ev === '2'){
-    badgeStyle = `background-color:${v.hl};color:${readableInk(v.hl, v.text)};`;
-  } else if (ev === '3'){
-    badgeStyle = `background-color:${v.card};color:${v.text};border:1px solid ${hexToRgba(v.text,0.75)};`;
-  } else {
-    badgeStyle = `background-color:${v.accent};color:${v.accentText};`;
-  }
+  // 배지: Play 버튼 색 단색. 제목과 반대쪽에 두어 정보가 한쪽으로 쏠리지 않게 함 (가운데 정렬이면 가운데)
+  const badgeStyle = `background-color:${v.accent};color:${v.accentText};`;
+  const badgeAlign = validAlign === 'left' ? 'right' : (validAlign === 'right' ? 'left' : 'center');
   const badge = `<div style="display:inline-block;padding:6px 16px;border-radius:999px;${badgeStyle}font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;line-height:1.5;box-shadow:0 3px 10px rgba(0,0,0,0.18);">${escapeHtml(character)}</div>`;
 
-  const row = `<div style="margin-top:-17px;padding:0 26px;text-align:${validAlign};">${badge}</div>`;
+  const row = `<div style="margin-top:-17px;padding:0 26px;text-align:${badgeAlign};">${badge}</div>`;
 
   return `${scrollStyle}${thumbImg}<div style="max-width:${mw}px;margin:0 auto;padding:0;box-sizing:border-box;font-family:${font};color:${v.text};background-color:${v.card};border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 ${banner}
