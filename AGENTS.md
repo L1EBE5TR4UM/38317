@@ -43,7 +43,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - **`js/utils.js`**: `$(id)`, `escapeHtml`, `eqToken`(문자열로 짧은 고유값 생성), `hexToRgba`, `relLuminance`, `contrastRatio`, `readableInk`(배경색 위에서 읽히는 글자색 선택).
 - **`js/themes.js`**: `THEMES`, `THEME_GROUPS`, `THEME_GROUP_OF`, `THEME_RENAMED`(바뀐 테마 이름), `THEME_KEYS`. 데이터만 있고 실행 코드는 없다.
 - **`js/builder.js`**: `processInline`(따옴표·강조 등 본문 꾸밈), `buildHTML`(TYPE별 전체 HTML), `buildCoverC`(C TYPE 표지). 실행 코드 없이 함수만 정의한다. `state`는 `app.js`에 있지만 함수가 호출될 때 읽으므로 문제없다.
-- **`js/app.js`**: `state`, 탭·TYPE 전환, 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
+- **`js/app.js`**: `state`, 탭·TYPE 전환, 테마 선택 메뉴(즐겨찾기는 `localStorage`의 `log-library-theme-favs`, ‘★ 즐겨찾기’ 탭의 ⋯ 메뉴로 JSON·코드 백업과 가져오기), 스마트 따옴표, `render`, 복사 버튼, 프리셋 저장·불러오기·내보내기.
 
 ## 3. 꼭 지킬 규칙
 
@@ -73,6 +73,7 @@ CLAUDE.md         @AGENTS.md 한 줄 (Claude Code용 연결)
 - `PRESET_KEY`(`log-atelier-presets-v2`)를 바꾸면 모든 프리셋이 사라진 것처럼 보입니다.
 - 예전 프리셋의 TYPE `C`는 지금의 `D`로 옮겨 불러옵니다(`restore()`). 이 변환을 지우지 않습니다.
 - 이름을 바꾼 테마는 `THEME_RENAMED`(js/themes.js)로 새 이름에 연결합니다. 항목을 지우면 예전 프리셋이 테마를 못 찾습니다.
+- 즐겨찾기 백업 JSON의 형식(`{"app":"log-library","kind":"theme-favs","version":1,"favs":[…]}`)을 바꾸면 예전에 내보낸 백업을 못 읽습니다. 가져오기는 `favs` 배열이나 이름 배열 그대로를 받습니다.
 
 ## 4. 자주 하는 작업
 

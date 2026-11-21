@@ -963,6 +963,670 @@ const THEMES = {
     muted:'#56489a',
     title:'#ffffff', subtitle:'#ffffff', char:'#ddd3ff'
   },
+  // 밀크티 카드 + 찻잎 베이지 대사 + 연보라 속마음 + 라벤더 그레이 Play
+  'Milk Tea': {
+    outerBg:'#ece2d8', card:'#f8f3ee', text:'#000000',
+    hl:'#e6d2bf', hl2:'#e3dfee', playBg:'#e3dfee', pauseText:'#6a5e8e',
+    accent:'#7d6f9e', accentText:'#ffffff',
+    muted:'#7f604a',
+    title:'#fbf7f3', subtitle:'#ffffff', char:'#ecdccc'
+  },
+  // 라일락 안개 카드 + 라일락 대사 + 바닐라 속마음 + 바이올렛 Play
+  'Lilac Haze': {
+    outerBg:'#e9e2f2', card:'#f7f3fb', text:'#000000',
+    hl:'#dccdf0', hl2:'#f6e6cf', playBg:'#f6e6cf', pauseText:'#6e58a0',
+    accent:'#8d76b8', accentText:'#ffffff',
+    muted:'#6a5a8c',
+    title:'#fbf9fd', subtitle:'#ffffff', char:'#e6dbf5'
+  },
+  // 해 지기 직전 푸른 카드 + 블루 대사 + 장밋빛 속마음 + 인디고 Play
+  'Blue Hour': {
+    outerBg:'#dfe5f1', card:'#f3f6fb', text:'#000000',
+    hl:'#cdd9f0', hl2:'#f0dde3', playBg:'#f0dde3', pauseText:'#4a5c94',
+    accent:'#5b6fa8', accentText:'#ffffff',
+    muted:'#56628a',
+    title:'#f8fafd', subtitle:'#ffffff', char:'#dae3f5'
+  },
+  // 찹쌀떡 카드 + 딸기 모찌 대사 + 쑥 모찌 속마음 + 쑥색 Play
+  Mochi: {
+    outerBg:'#f3e6e6', card:'#fcf6f5', text:'#000000',
+    hl:'#f0d2d4', hl2:'#dcebd9', playBg:'#dcebd9', pauseText:'#4f6a46',
+    accent:'#7e9a74', accentText:'#1a2a16',
+    muted:'#7f5e5e',
+    title:'#fefafa', subtitle:'#ffffff', char:'#f3dadb'
+  },
+  // 성에 낀 유리 카드 + 얼음 대사 + 연보라 속마음 + 겨울 블루 Play
+  Frost: {
+    outerBg:'#e2ecf0', card:'#f4f9fa', text:'#000000',
+    hl:'#cde3ea', hl2:'#e8e0f2', playBg:'#e8e0f2', pauseText:'#5a6ca0',
+    accent:'#6c7fb0', accentText:'#ffffff',
+    muted:'#527080',
+    title:'#f8fcfc', subtitle:'#ffffff', char:'#d8eaf0'
+  },
+  // 라벤더 카드 + 라벤더 대사 + 바닐라 속마음 + 꿀색 Play
+  'Vanilla Lavender': {
+    outerBg:'#ebe5f3', card:'#faf7fc', text:'#000000',
+    hl:'#e1d6f2', hl2:'#f6ecd2', playBg:'#f6ecd2', pauseText:'#7a5e24',
+    accent:'#c9a45a', accentText:'#2a1e08',
+    muted:'#6e5e8a',
+    title:'#fdfbfe', subtitle:'#ffffff', char:'#e8dff5'
+  },
+  // 구름 회색 카드 + 하늘 그레이 대사 + 라일락 그레이 속마음 + 슬레이트 Play
+  Cloud: {
+    outerBg:'#e7e9ee', card:'#f6f7f9', text:'#000000',
+    hl:'#dde3ec', hl2:'#ece6ef', playBg:'#ece6ef', pauseText:'#5e6884',
+    accent:'#6e7894', accentText:'#ffffff',
+    muted:'#646a78',
+    title:'#fbfbfc', subtitle:'#ffffff', char:'#e2e6ee'
+  },
+  // 사과꽃 카드 + 꽃잎 대사 + 새싹 속마음 + 잎사귀 Play
+  'Apple Blossom': {
+    outerBg:'#f5e6e8', card:'#fdf7f8', text:'#000000',
+    hl:'#f4d4da', hl2:'#dfeedd', playBg:'#dfeedd', pauseText:'#4a7656',
+    accent:'#5e8a6a', accentText:'#ffffff',
+    muted:'#8c5e66',
+    title:'#fefafb', subtitle:'#ffffff', char:'#f6dbe0'
+  },
+  // 포도 대사 + 레몬 속마음 + 포도 보라 Play
+  'Grape Soda': {
+    outerBg:'#efe4ff', card:'#fbf8ff', text:'#000000',
+    hl:'#d8c0ff', hl2:'#ffe4a8', playBg:'#ffe4a8', pauseText:'#6a3fc8',
+    accent:'#6a3fc8', accentText:'#ffffff',
+    muted:'#6040a8',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e4d4ff'
+  },
+  // 흰 카드 + 울트라마린 연청 대사 + 민트 속마음 + 울트라마린 Play
+  'Ultramarine Pop': {
+    outerBg:'#e6e8ff', card:'#ffffff', text:'#000000',
+    hl:'#c0c6ff', hl2:'#c0f0e0', playBg:'#c0f0e0', pauseText:'#2a36c8',
+    accent:'#2a36c8', accentText:'#ffffff',
+    muted:'#2a36a0',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d0d4ff'
+  },
+  // 남색 벨벳 대사 + 회보라 속마음 + 살구 Play
+  'Navy Velvet': {
+    outerBg:'#141a26', card:'#1c2333', text:'#ebeef5',
+    hl:'#34466a', hl2:'#4a3f5a', playBg:'#4a3f5a', pauseText:'#f5dcc4',
+    accent:'#f0c8a0', accentText:'#141a26',
+    muted:'#9aa2b4',
+    title:'#ffffff', subtitle:'#ebeef5', char:'#f5dcc4'
+  },
+  // 숯 장미 대사 + 회색 속마음 + 연장미 Play
+  'Charcoal Rose': {
+    outerBg:'#1c1b1c', card:'#262425', text:'#f0ecec',
+    hl:'#5a474c', hl2:'#444548', playBg:'#444548', pauseText:'#f2d6d8',
+    accent:'#f0c4c8', accentText:'#1c1b1c',
+    muted:'#a29e9f',
+    title:'#ffffff', subtitle:'#f0ecec', char:'#f2d6d8'
+  },
+  // 별밤 남색 대사 + 보랏빛 속마음 + 별빛 노랑 Play
+  Starlight: {
+    outerBg:'#12141f', card:'#1a1d2c', text:'#eceef8',
+    hl:'#333a66', hl2:'#3e3354', playBg:'#3e3354', pauseText:'#fff4c8',
+    accent:'#fff0b0', accentText:'#12141f',
+    muted:'#9a9eb8',
+    title:'#ffffff', subtitle:'#eceef8', char:'#fff4c8'
+  },
+  // 흑요석 바탕 + 먹회색 대사 + 회청록 속마음 + 바이올렛 Play
+  Obsidian: {
+    outerBg:'#111113', card:'#18181b', text:'#ececf0',
+    hl:'#2e2e38', hl2:'#2a3434', playBg:'#2a3434', pauseText:'#d6ccff',
+    accent:'#b8a4ff', accentText:'#111113',
+    muted:'#96969e',
+    title:'#ffffff', subtitle:'#ececf0', char:'#d6ccff'
+  },
+  // 달그림자 대사 + 월석 베이지 속마음 + 달빛 Play
+  Lunar: {
+    outerBg:'#1a1c22', card:'#22252d', text:'#edeef2',
+    hl:'#48506a', hl2:'#4e4a40', playBg:'#4e4a40', pauseText:'#ece8da',
+    accent:'#e8e4d4', accentText:'#1a1c22',
+    muted:'#9ea0a8',
+    title:'#ffffff', subtitle:'#edeef2', char:'#ece8da'
+  },
+  // 한지 카드 + 닥나무 대사 + 먹물 번짐 속마음 + 먹 Play
+  Hanji: {
+    outerBg:'#f1ece0', card:'#fbf9f3', text:'#000000',
+    hl:'#e6dcc4', hl2:'#e0e4e0', playBg:'#e0e4e0', pauseText:'#3a3a3a',
+    accent:'#3a3a3a', accentText:'#fbf9f3',
+    muted:'#6e6a5e',
+    title:'#fdfcf9', subtitle:'#ffffff', char:'#ebe2ce'
+  },
+  // 군밤 대사 + 볏짚 속마음 + 밤껍질 Play
+  Chestnut: {
+    outerBg:'#efe2d4', card:'#fbf6f0', text:'#000000',
+    hl:'#e2c4a6', hl2:'#e6e0cc', playBg:'#e6e0cc', pauseText:'#5a3018',
+    accent:'#6a3a1e', accentText:'#ffffff',
+    muted:'#7e5a3e',
+    title:'#fdfaf7', subtitle:'#ffffff', char:'#e8ceb4'
+  },
+  // 돌 회색 대사 + 이끼 회청 속마음 + 현무암 Play
+  Stone: {
+    outerBg:'#e4e2dc', card:'#f4f3f0', text:'#000000',
+    hl:'#d6d3ca', hl2:'#dbe0e0', playBg:'#dbe0e0', pauseText:'#4a4a44',
+    accent:'#4a4a44', accentText:'#ffffff',
+    muted:'#66645c',
+    title:'#f9f9f7', subtitle:'#ffffff', char:'#dddad2'
+  },
+  // 상아 카드 + 양피지 대사 + 회청 속마음 + 만년필 잉크 Play
+  'Ivory Ink': {
+    outerBg:'#f5f1e6', card:'#fffdf7', text:'#000000',
+    hl:'#ece4cc', hl2:'#e4e8ee', playBg:'#e4e8ee', pauseText:'#1f2a44',
+    accent:'#1f2a44', accentText:'#ffffff',
+    muted:'#6a6450',
+    title:'#fffefb', subtitle:'#ffffff', char:'#efe8d4'
+  },
+  // 사암 대사 + 장밋빛 바위 속마음 + 협곡 갈색 Play
+  Sandstone: {
+    outerBg:'#f1e4d4', card:'#fcf7f0', text:'#000000',
+    hl:'#e8cca8', hl2:'#e4d8d8', playBg:'#e4d8d8', pauseText:'#7a4a2c',
+    accent:'#8a5a3a', accentText:'#ffffff',
+    muted:'#8a6446',
+    title:'#fefbf8', subtitle:'#ffffff', char:'#eed6b8'
+  },
+  // 밝은 카드 위에 어두운 블록: 먹색 대사 + 가지색 속마음 (글자는 자동으로 밝게)
+  Inverse: {
+    outerBg:'#f2f0ec', card:'#ffffff', text:'#000000',
+    hl:'#2a2a30', hl2:'#4a3f5a', playBg:'#e6e3dc', pauseText:'#2a2a30',
+    accent:'#2a2a30', accentText:'#ffffff',
+    muted:'#5a5850',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e6e3dc'
+  },
+  // 흰 카드 + 홀로그램 세 빛(하늘·핑크·라일락 Play)
+  Holographic: {
+    outerBg:'#eef0ff', card:'#ffffff', text:'#000000',
+    hl:'#d4f4ff', hl2:'#ffe0f8', playBg:'#ffe0f8', pauseText:'#5a40c8',
+    accent:'#9d7cff', accentText:'#1a0a40',
+    muted:'#6a6a98',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d8ccff'
+  },
+  // 완전 무채색 회색 + 빨간 Play 하나만 포인트
+  'Red Dot': {
+    outerBg:'#ededed', card:'#ffffff', text:'#000000',
+    hl:'#e0e0e0', hl2:'#f0f0f0', playBg:'#f0f0f0', pauseText:'#555555',
+    accent:'#e0302a', accentText:'#ffffff',
+    muted:'#666666',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e0e0e0'
+  },
+  // 빛바랜 사진: 세피아 한 계열로만, 진갈색 글자
+  'Sepia Photo': {
+    outerBg:'#e8dcc8', card:'#f4ecdc', text:'#2a1e12',
+    hl:'#dcc8a8', hl2:'#e6dac4', playBg:'#e6dac4', pauseText:'#5a3e24',
+    accent:'#5a3e24', accentText:'#f4ecdc',
+    muted:'#7a6248',
+    title:'#fbf6ec', subtitle:'#ffffff', char:'#e8d8bc'
+  },
+  // 메론소다: 메론 대사 + 바닐라 아이스크림 속마음 + 메론 초록 Play
+  'Melon Soda': {
+    outerBg:'#eef8ec', card:'#ffffff', text:'#000000',
+    hl:'#c4ecc8', hl2:'#fbf0d8', playBg:'#fbf0d8', pauseText:'#3f7a48',
+    accent:'#3f8a4e', accentText:'#ffffff',
+    muted:'#3f7a48',
+    title:'#ffffff', subtitle:'#ffffff', char:'#fbf0d8'
+  },
+  // 벨벳: 탁한 와인 대사 + 회남색 속마음 + 연장미 Play
+  Velvet: {
+    outerBg:'#18161a', card:'#211e23', text:'#f0eaed',
+    hl:'#563c48', hl2:'#3a3944', playBg:'#3a3944', pauseText:'#ecd6dc',
+    accent:'#ecc8d0', accentText:'#18161a',
+    muted:'#a59ca2',
+    title:'#ffffff', subtitle:'#f0eaed', char:'#ecc8d0'
+  },
+  // 푸른 흑연: 청회색 대사 + 회색 속마음 + 연하늘 Play
+  Graphite: {
+    outerBg:'#16181c', card:'#1e2126', text:'#eceef2',
+    hl:'#444b58', hl2:'#3a4048', playBg:'#3a4048', pauseText:'#e0e8f4',
+    accent:'#d6e2f0', accentText:'#16181c',
+    muted:'#9ca1aa',
+    title:'#ffffff', subtitle:'#eceef2', char:'#d6e2f0'
+  },
+  // 채도를 낮춘 인디고: 회청 대사 + 청회 속마음 + 연하늘 Play
+  'Indigo Ink': {
+    outerBg:'#15161f', card:'#1d1f2b', text:'#eceef6',
+    hl:'#383c60', hl2:'#2e3c48', playBg:'#2e3c48', pauseText:'#d8e2f8',
+    accent:'#c8d6f6', accentText:'#15161f',
+    muted:'#9c9fb4',
+    title:'#ffffff', subtitle:'#eceef6', char:'#c8d6f6'
+  },
+  // 신문지: 회색 지면 블록 + 벽돌 빨강 Play
+  Newsprint: {
+    outerBg:'#ebe8e2', card:'#fbfaf7', text:'#111111',
+    hl:'#dedad2', hl2:'#ece9e2', playBg:'#ece9e2', pauseText:'#9a3a30',
+    accent:'#9a3a30', accentText:'#ffffff',
+    muted:'#5a574f',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ece9e2'
+  },
+  // 클랭 블루 단색 (페리윙클 쪽으로 순하게 낮춤, 진한 코발트는 Cobalt Mono)
+  'Klein Mono': {
+    outerBg:'#eceffc', card:'#ffffff', text:'#000000',
+    hl:'#d2d8f8', hl2:'#e8ebfa', playBg:'#e8ebfa', pauseText:'#4a5cc8',
+    accent:'#4a5cc8', accentText:'#ffffff',
+    muted:'#44509a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e8ebfa'
+  },
+  // 깊은 코발트 한 색의 명도만 바꾼 단색
+  'Cobalt Mono': {
+    outerBg:'#e8ecf8', card:'#ffffff', text:'#000000',
+    hl:'#cbd5f2', hl2:'#e4e9f6', playBg:'#e4e9f6', pauseText:'#1c3494',
+    accent:'#1c3494', accentText:'#ffffff',
+    muted:'#2c3e86',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e4e9f6'
+  },
+  // 파스텔 형광펜: 연노랑 대사 + 연하늘 속마음 + 먹색 Play
+  Highlighter: {
+    outerBg:'#f6f6f4', card:'#ffffff', text:'#000000',
+    hl:'#fff3a8', hl2:'#cdeefb', playBg:'#cdeefb', pauseText:'#333333',
+    accent:'#222222', accentText:'#fff3a8',
+    muted:'#5a5a5a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#fff3a8'
+  },
+  // 바우하우스 삼원색을 낮은 채도로: 겨자 대사 + 하늘 속마음 + 벽돌 Play
+  Bauhaus: {
+    outerBg:'#efebe4', card:'#ffffff', text:'#000000',
+    hl:'#f2d784', hl2:'#b8cde8', playBg:'#b8cde8', pauseText:'#b04a38',
+    accent:'#b04a38', accentText:'#ffffff',
+    muted:'#4a4a4a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2d784'
+  },
+  // 청화백자: 흰 카드 + 코발트 물감 번진 대사 + 백자 회색 속마음 + 코발트 Play
+  Porcelain: {
+    outerBg:'#eef2f8', card:'#ffffff', text:'#000000',
+    hl:'#d6e0f2', hl2:'#eceff4', playBg:'#eceff4', pauseText:'#2c4a8a',
+    accent:'#2c4a8a', accentText:'#ffffff',
+    muted:'#4f6288',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eceff4'
+  },
+  // 설강화: 연초록 대사 + 연보라 속마음 + 슬레이트 Play
+  Snowdrop: {
+    outerBg:'#f1f4f2', card:'#ffffff', text:'#000000',
+    hl:'#dfe9e4', hl2:'#eee9f3', playBg:'#eee9f3', pauseText:'#5c6e8c',
+    accent:'#5c6e8c', accentText:'#ffffff',
+    muted:'#5a6a62',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eee9f3'
+  },
+  // 빙하: 얼음 청록 대사 + 연청보라 속마음 + 심해 Play
+  Glacier: {
+    outerBg:'#eaf2f6', card:'#ffffff', text:'#000000',
+    hl:'#d2e6ee', hl2:'#e6e8f4', playBg:'#e6e8f4', pauseText:'#3f6680',
+    accent:'#3f6680', accentText:'#ffffff',
+    muted:'#4a6a7a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e6e8f4'
+  },
+  // 안개 블루 대사 + 모래빛 속마음 + 네이비 그레이 Play
+  'Mist Blue': {
+    outerBg:'#edf0f5', card:'#ffffff', text:'#000000',
+    hl:'#dbe2ee', hl2:'#f0ebe8', playBg:'#f0ebe8', pauseText:'#4e5d7e',
+    accent:'#4e5d7e', accentText:'#ffffff',
+    muted:'#5a6478',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f0ebe8'
+  },
+  // 흰 카드 + 세이지 대사 + 연분홍 속마음 + 세이지 Play (Mochi 계열)
+  'Sage White': {
+    outerBg:'#f0f3ee', card:'#ffffff', text:'#000000',
+    hl:'#dce6d6', hl2:'#f2e6ea', playBg:'#f2e6ea', pauseText:'#4e6a4c',
+    accent:'#5a6e58', accentText:'#ffffff',
+    muted:'#5c6a5a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2e6ea'
+  },
+  // 벚잎: 연분홍 대사 + 새잎 속마음 + 잎 초록 Play (Apple Blossom 계열)
+  'Cherry Leaf': {
+    outerBg:'#f6f1f2', card:'#ffffff', text:'#000000',
+    hl:'#f2dce0', hl2:'#dfead8', playBg:'#dfead8', pauseText:'#4e6e52',
+    accent:'#4e6e52', accentText:'#ffffff',
+    muted:'#7a6064',
+    title:'#ffffff', subtitle:'#ffffff', char:'#dfead8'
+  },
+  // 회라벤더 대사 + 회청 속마음 + 짙은 회보라 Play
+  'Lavender Grey': {
+    outerBg:'#efeef3', card:'#ffffff', text:'#000000',
+    hl:'#e2dfec', hl2:'#e6eaee', playBg:'#e6eaee', pauseText:'#5a5670',
+    accent:'#5a5670', accentText:'#ffffff',
+    muted:'#605c70',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e6eaee'
+  },
+  // 흰 카드 + 페리윙클 대사 + 연분홍 회색 속마음 + 페리윙클 Play
+  'Periwinkle White': {
+    outerBg:'#eef0fb', card:'#ffffff', text:'#000000',
+    hl:'#dadff6', hl2:'#f3eef0', playBg:'#f3eef0', pauseText:'#5560b0',
+    accent:'#5560b0', accentText:'#ffffff',
+    muted:'#585f94',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f3eef0'
+  },
+  // 이슬: 물빛 대사 + 연보라 속마음 + 청보라 Play
+  Dew: {
+    outerBg:'#eef5f4', card:'#ffffff', text:'#000000',
+    hl:'#d6ebe8', hl2:'#e9e6f4', playBg:'#e9e6f4', pauseText:'#5a6a9c',
+    accent:'#5a6a9c', accentText:'#ffffff',
+    muted:'#527070',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e9e6f4'
+  },
+  // 달빛: 회청 대사 + 크림 속마음 + 밤색 네이비 Play (Lunar의 낮 버전)
+  'Moonlight White': {
+    outerBg:'#f2f2f6', card:'#ffffff', text:'#000000',
+    hl:'#e2e4f0', hl2:'#f2eee4', playBg:'#f2eee4', pauseText:'#3c4260',
+    accent:'#3c4260', accentText:'#ffffff',
+    muted:'#5e6074',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2eee4'
+  },
+  // 바탕까지 흰색: 흰 바탕 + 흰 카드 + 연회청 블록 + 먹색 Play
+  'Paper White': {
+    outerBg:'#ffffff', card:'#ffffff', text:'#000000',
+    hl:'#e8ebf2', hl2:'#f1f1f1', playBg:'#f1f1f1', pauseText:'#2a2a2a',
+    accent:'#2a2a2a', accentText:'#ffffff',
+    muted:'#6a6a6a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f1f1f1'
+  },
+  // 흰 바탕 + 연청 카드 대신 흰 카드 + 하늘 대사 + 라일락 속마음 + 하늘 블루 Play
+  'Cloud Nine': {
+    outerBg:'#ffffff', card:'#ffffff', text:'#000000',
+    hl:'#dceafa', hl2:'#ece6f8', playBg:'#ece6f8', pauseText:'#3a64a8',
+    accent:'#3a64a8', accentText:'#ffffff',
+    muted:'#5a6a84',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ece6f8'
+  },
+  // 모눈종이: 하늘 격자색 대사 + 미색 속마음 + 청색 Play
+  'Graph Paper': {
+    outerBg:'#eef3f6', card:'#ffffff', text:'#000000',
+    hl:'#dce8f0', hl2:'#f2efe6', playBg:'#f2efe6', pauseText:'#3a6a8c',
+    accent:'#3a6a8c', accentText:'#ffffff',
+    muted:'#4f6878',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2efe6'
+  },
+  // 활판 인쇄: 흰 종이 + 미색 대사 + 회청 속마음 + 짙은 적색 잉크 Play
+  Letterpress: {
+    outerBg:'#f4f1ea', card:'#ffffff', text:'#000000',
+    hl:'#e6dfd2', hl2:'#e6e9ee', playBg:'#e6e9ee', pauseText:'#8a2a2a',
+    accent:'#8a2a2a', accentText:'#ffffff',
+    muted:'#6a5e52',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e6e9ee'
+  },
+  // 항공우편 봉투: 흰 카드 + 연빨강 대사 + 연파랑 속마음 + 우표 남색 Play
+  Airmail: {
+    outerBg:'#f2eee8', card:'#ffffff', text:'#000000',
+    hl:'#f2dede', hl2:'#dde4f2', playBg:'#dde4f2', pauseText:'#2e4a8a',
+    accent:'#2e4a8a', accentText:'#ffffff',
+    muted:'#6a6460',
+    title:'#ffffff', subtitle:'#ffffff', char:'#dde4f2'
+  },
+  // 화지: 흰 카드 + 미색 대사 + 연녹회 속마음 + 짙은 녹회 Play
+  Washi: {
+    outerBg:'#f2efe9', card:'#ffffff', text:'#000000',
+    hl:'#e8e2d6', hl2:'#e6ebe6', playBg:'#e6ebe6', pauseText:'#4a5a4a',
+    accent:'#4a5a4a', accentText:'#ffffff',
+    muted:'#646860',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e6ebe6'
+  },
+  // 은빛 밤: 청회색 대사 + 회보라 속마음 + 은색 Play
+  'Silver Night': {
+    outerBg:'#15171b', card:'#1d2025', text:'#eceef2',
+    hl:'#3a404a', hl2:'#3a3a44', playBg:'#3a3a44', pauseText:'#e2e6ee',
+    accent:'#d8dde6', accentText:'#15171b',
+    muted:'#9c9fa6',
+    title:'#ffffff', subtitle:'#eceef2', char:'#d8dde6'
+  },
+  // 밤 서리: 청록 회색 대사 + 회보라 속마음 + 서리빛 Play
+  'Night Frost': {
+    outerBg:'#121820', card:'#1a212b', text:'#eaf0f4',
+    hl:'#2e4458', hl2:'#3a3a4c', playBg:'#3a3a4c', pauseText:'#d8eef6',
+    accent:'#cfe8f2', accentText:'#121820',
+    muted:'#98a4ae',
+    title:'#ffffff', subtitle:'#eaf0f4', char:'#cfe8f2'
+  },
+  // Inverse 남색판: 흰 카드 위 남색 대사 + 회남 속마음 (글자 자동 흰색)
+  'Inverse Navy': {
+    outerBg:'#eff1f5', card:'#ffffff', text:'#000000',
+    hl:'#24304c', hl2:'#3a4660', playBg:'#e3e6ee', pauseText:'#24304c',
+    accent:'#24304c', accentText:'#ffffff',
+    muted:'#545c70',
+    title:'#ffffff', subtitle:'#ffffff', char:'#3a4660'
+  },
+  // 반달: 대사는 짙은 남색 블록, 속마음은 연한 회청 블록으로 명암을 반씩
+  'Half Moon': {
+    outerBg:'#f0f1f4', card:'#ffffff', text:'#000000',
+    hl:'#2c2e3a', hl2:'#e8eaf2', playBg:'#e8eaf2', pauseText:'#2c2e3a',
+    accent:'#2c2e3a', accentText:'#ffffff',
+    muted:'#5a5c68',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e8eaf2'
+  },
+  // Holographic을 더 순하게: 진주빛 하늘 + 연보라 블록 + 라벤더 Play
+  'Pearl Holo': {
+    outerBg:'#f4f5fb', card:'#ffffff', text:'#000000',
+    hl:'#e0f0fb', hl2:'#f0e6fa', playBg:'#f0e6fa', pauseText:'#5a4ac0',
+    accent:'#7a6ad8', accentText:'#ffffff',
+    muted:'#646890',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e0f0fb'
+  },
+  // 오팔린 유리: 민트 대사 + 연분홍 속마음 + 페리윙클 Play
+  Opaline: {
+    outerBg:'#f3f6f6', card:'#ffffff', text:'#000000',
+    hl:'#dcf0ec', hl2:'#f4e6ee', playBg:'#f4e6ee', pauseText:'#5a66b8',
+    accent:'#6c78c8', accentText:'#ffffff',
+    muted:'#5a6c6c',
+    title:'#ffffff', subtitle:'#ffffff', char:'#dcf0ec'
+  },
+  // 간유리: 흰 카드 위 아주 옅은 블록 + 흐린 청회 Play
+  'Frosted Glass': {
+    outerBg:'#e9eef4', card:'#ffffff', text:'#000000',
+    hl:'#e2eaf3', hl2:'#eef1f5', playBg:'#eef1f5', pauseText:'#4a5a78',
+    accent:'#8a9ab8', accentText:'#1a2236',
+    muted:'#5a6478',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eef1f5'
+  },
+  // Red Dot의 다크 버전: 무채색 다크 + 한 톤 낮춘 빨간 Play
+  'Red Dot Night': {
+    outerBg:'#161618', card:'#1e1e21', text:'#ececee',
+    hl:'#3e3e44', hl2:'#303036', playBg:'#303036', pauseText:'#e6e6e8',
+    accent:'#c84a42', accentText:'#ffffff',
+    muted:'#9a9aa0',
+    title:'#ffffff', subtitle:'#ececee', char:'#c84a42'
+  },
+  // 세이지 초록 한 색의 명도만 바꾼 단색
+  'Sage Mono': {
+    outerBg:'#eef3ee', card:'#ffffff', text:'#000000',
+    hl:'#d4e4d4', hl2:'#eaf1ea', playBg:'#eaf1ea', pauseText:'#3e6a4a',
+    accent:'#3e6a4a', accentText:'#ffffff',
+    muted:'#4a6a52',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eaf1ea'
+  },
+  // 청록 한 색의 단색
+  'Teal Mono': {
+    outerBg:'#ebf4f4', card:'#ffffff', text:'#000000',
+    hl:'#cde6e6', hl2:'#e8f3f3', playBg:'#e8f3f3', pauseText:'#1f6a70',
+    accent:'#1f6a70', accentText:'#ffffff',
+    muted:'#3a6a6e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e8f3f3'
+  },
+  // 대사·속마음 둘 다 짙은 청회 블록 (글자는 자동 흰색)
+  'Inverse Slate': {
+    outerBg:'#eff1f4', card:'#ffffff', text:'#000000',
+    hl:'#3a4656', hl2:'#56627a', playBg:'#e6e9ee', pauseText:'#3a4656',
+    accent:'#3a4656', accentText:'#ffffff',
+    muted:'#566070',
+    title:'#ffffff', subtitle:'#ffffff', char:'#56627a'
+  },
+  // 다크의 반전: 어두운 카드 위에 밝은 대사 블록 (글자는 자동 검정)
+  Negative: {
+    outerBg:'#16181c', card:'#1e2126', text:'#eef0f4',
+    hl:'#dfe6f0', hl2:'#3a404a', playBg:'#3a404a', pauseText:'#dfe6f0',
+    accent:'#dfe6f0', accentText:'#16181c',
+    muted:'#9ca0a8',
+    title:'#ffffff', subtitle:'#eef0f4', char:'#dfe6f0'
+  },
+  // 자개: 분홍 진주 대사 + 물빛 속마음 + 청회 Play
+  'Mother of Pearl': {
+    outerBg:'#f5f4f8', card:'#ffffff', text:'#000000',
+    hl:'#f2e8ee', hl2:'#e4eef6', playBg:'#e4eef6', pauseText:'#5a6a90',
+    accent:'#6a7aa0', accentText:'#ffffff',
+    muted:'#666a80',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e4eef6'
+  },
+  // 소금 결정: 회청록 대사 + 모래 속마음 + 짙은 바다 Play
+  'Sea Salt': {
+    outerBg:'#f0f4f4', card:'#ffffff', text:'#000000',
+    hl:'#dfeaea', hl2:'#f2efea', playBg:'#f2efea', pauseText:'#3f5e66',
+    accent:'#3f5e66', accentText:'#ffffff',
+    muted:'#506468',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2efea'
+  },
+  // 색인 카드: 하늘 줄 대사 + 연빨강 여백선 속마음 + 빨강 Play
+  'Index Card': {
+    outerBg:'#eef2f7', card:'#ffffff', text:'#000000',
+    hl:'#dbe6f4', hl2:'#fbe4e4', playBg:'#fbe4e4', pauseText:'#b04040',
+    accent:'#b04040', accentText:'#ffffff',
+    muted:'#5a6474',
+    title:'#ffffff', subtitle:'#ffffff', char:'#fbe4e4'
+  },
+  // 장부: 연초록 줄 대사 + 연분홍 줄 속마음 + 장부 초록 Play
+  Ledger: {
+    outerBg:'#eef3ec', card:'#ffffff', text:'#000000',
+    hl:'#dcebd6', hl2:'#f6e4e0', playBg:'#f6e4e0', pauseText:'#2f5a3a',
+    accent:'#2f5a3a', accentText:'#ffffff',
+    muted:'#506650',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f6e4e0'
+  },
+  // 마닐라 서류철: 마닐라 대사 + 회청 속마음 + 남색 Play
+  'Manila Folder': {
+    outerBg:'#efe8d8', card:'#fffdf6', text:'#000000',
+    hl:'#ecdfb8', hl2:'#e4e8ee', playBg:'#e4e8ee', pauseText:'#3a4458',
+    accent:'#3a4458', accentText:'#ffffff',
+    muted:'#6a6248',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e4e8ee'
+  },
+  // 스프레드시트: 연초록 선택 셀 대사 + 회청 속마음 + 시트 초록 Play
+  Spreadsheet: {
+    outerBg:'#eef2ee', card:'#ffffff', text:'#000000',
+    hl:'#dbeedd', hl2:'#eef0f4', playBg:'#eef0f4', pauseText:'#1e7a46',
+    accent:'#1e7a46', accentText:'#ffffff',
+    muted:'#506458',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eef0f4'
+  },
+  // 구리 녹: 녹청 대사 + 구리 베이지 속마음 + 구리색 Play
+  Verdigris: {
+    outerBg:'#ecf3f1', card:'#ffffff', text:'#000000',
+    hl:'#c6e4dc', hl2:'#f0e6dc', playBg:'#f0e6dc', pauseText:'#8a5a3a',
+    accent:'#8a5a3a', accentText:'#ffffff',
+    muted:'#4a6a64',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f0e6dc'
+  },
+  // 올리브 잎: 연올리브 대사 + 회청 속마음 + 올리브 Play
+  'Olive Leaf': {
+    outerBg:'#f0f2ea', card:'#ffffff', text:'#000000',
+    hl:'#dfe4cc', hl2:'#e6ecf0', playBg:'#e6ecf0', pauseText:'#5a6630',
+    accent:'#5a6630', accentText:'#ffffff',
+    muted:'#5e6644',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e6ecf0'
+  },
+  // 여권: 금박 연금색 대사 + 회녹 면지 속마음 + 짙은 초록 표지 Play에 금박 아이콘
+  Passport: {
+    outerBg:'#eef1ef', card:'#ffffff', text:'#000000',
+    hl:'#f0e8cc', hl2:'#e2eae6', playBg:'#f2ecdc', pauseText:'#23463a',
+    accent:'#23463a', accentText:'#f2e4b8',
+    muted:'#50625a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e2eae6'
+  },
+  // 지폐: 미색 카드 + 녹색 무늬 대사 + 연보라 무늬 속마음 + 짙은 지폐 청록 Play
+  'Bank Note': {
+    outerBg:'#eef1ec', card:'#fbfcf8', text:'#000000',
+    hl:'#cfe6d6', hl2:'#e8e0f0', playBg:'#e8e0f0', pauseText:'#1f5a4a',
+    accent:'#1f5a4a', accentText:'#ffffff',
+    muted:'#586656',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e8e0f0'
+  },
+  // 바인더 색인 탭: 라일락 탭 대사 + 아쿠아 탭 속마음 + 먹색 Play
+  'Tab Divider': {
+    outerBg:'#f1f2f4', card:'#ffffff', text:'#000000',
+    hl:'#e6dff4', hl2:'#d6eeee', playBg:'#d6eeee', pauseText:'#3a3a44',
+    accent:'#3a3a44', accentText:'#ffffff',
+    muted:'#5c6070',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d6eeee'
+  },
+  // 등고선 지도: 평야 초록 대사 + 물 하늘 속마음 + 등고선 갈색 Play
+  'Topo Map': {
+    outerBg:'#f0f2ec', card:'#ffffff', text:'#000000',
+    hl:'#dcead4', hl2:'#d8e8f2', playBg:'#d8e8f2', pauseText:'#7a5a3e',
+    accent:'#7a5a3e', accentText:'#ffffff',
+    muted:'#5e6656',
+    title:'#ffffff', subtitle:'#ffffff', char:'#dcead4'
+  },
+  // 영화표 반쪽: 연분홍 표 대사 + 연청록 속마음 + 청록 Play
+  'Ticket Stub': {
+    outerBg:'#f4efee', card:'#ffffff', text:'#000000',
+    hl:'#f4dadb', hl2:'#d6ebe6', playBg:'#d6ebe6', pauseText:'#2a6a64',
+    accent:'#2a6a64', accentText:'#ffffff',
+    muted:'#6a5e60',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d6ebe6'
+  },
+  // 클립보드: 갈색 판 바탕 위 흰 종이 + 회색 대사 + 연녹 속마음 + 강철 클립 Play
+  Clipboard: {
+    outerBg:'#d9c7ae', card:'#ffffff', text:'#000000',
+    hl:'#e4e6e8', hl2:'#e2eee2', playBg:'#e2eee2', pauseText:'#4a5560',
+    accent:'#4a5560', accentText:'#ffffff',
+    muted:'#5c6268',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e2eee2'
+  },
+  // 어두운 카드 위 밝은 모래색 대사 블록
+  'Negative Sand': {
+    outerBg:'#1a1916', card:'#22211e', text:'#efece6',
+    hl:'#ece2d0', hl2:'#3a3833', playBg:'#3a3833', pauseText:'#ece2d0',
+    accent:'#ece2d0', accentText:'#1a1916',
+    muted:'#a09c94',
+    title:'#ffffff', subtitle:'#efece6', char:'#ece2d0'
+  },
+  // 초록 천 장정 책: 짙은 초록 바탕 + 흰 카드 + 회녹 대사 + 미색 속마음
+  'Green Cloth': {
+    outerBg:'#2f4a40', card:'#ffffff', text:'#000000',
+    hl:'#dbe8e0', hl2:'#f0ece2', playBg:'#f0ece2', pauseText:'#2f4a40',
+    accent:'#2f4a40', accentText:'#ffffff',
+    muted:'#5a6a62',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f0ece2'
+  },
+  // 회청 천 장정: 짙은 슬레이트 바탕 + 흰 카드 + 회청 대사 + 연녹 속마음
+  'Slate Cloth': {
+    outerBg:'#3e4650', card:'#ffffff', text:'#000000',
+    hl:'#dde2ea', hl2:'#e4eee6', playBg:'#e4eee6', pauseText:'#3e4650',
+    accent:'#3e4650', accentText:'#ffffff',
+    muted:'#5c636e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e4eee6'
+  },
+  // 와인 천 장정: 짙은 와인 바탕 + 흰 카드 + 연분홍 대사 + 회청 속마음
+  'Wine Cloth': {
+    outerBg:'#4e2a34', card:'#ffffff', text:'#000000',
+    hl:'#f2dfe2', hl2:'#e2e8ee', playBg:'#e2e8ee', pauseText:'#4e2a34',
+    accent:'#4e2a34', accentText:'#ffffff',
+    muted:'#6a5a5e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e2e8ee'
+  },
+  // 수영장 타일: 물빛 대사 + 흰 줄눈 회색 속마음 + 레인 로프 파랑 Play
+  'Swimming Pool': {
+    outerBg:'#e6f4f6', card:'#ffffff', text:'#000000',
+    hl:'#bfe6ec', hl2:'#eff1f2', playBg:'#eff1f2', pauseText:'#1f5f8a',
+    accent:'#1f5f8a', accentText:'#ffffff',
+    muted:'#46687a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eff1f2'
+  },
+  // 테라조 바닥: 흰 바탕에 박힌 분홍 돌 대사 + 초록 돌 속마음 + 회색 돌 Play
+  Terrazzo: {
+    outerBg:'#f4f2ef', card:'#ffffff', text:'#000000',
+    hl:'#ecdcd6', hl2:'#d6e6e0', playBg:'#d6e6e0', pauseText:'#4a5058',
+    accent:'#4a5058', accentText:'#ffffff',
+    muted:'#605c5a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d6e6e0'
+  },
+  // 수채화 번짐: 새싹 초록 물감 대사 + 황토 물감 속마음 + 인디고 물감 Play
+  Watercolor: {
+    outerBg:'#f6f6f4', card:'#ffffff', text:'#000000',
+    hl:'#e0f0e4', hl2:'#f2e8dc', playBg:'#f2e8dc', pauseText:'#3a5a7a',
+    accent:'#3a5a7a', accentText:'#ffffff',
+    muted:'#5c6670',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e0f0e4'
+  },
+  // 세이지 액자: 중간 밝기 세이지 바탕 + 흰 카드 + 연녹 대사 + 미색 속마음
+  'Sage Frame': {
+    outerBg:'#b9c9bd', card:'#ffffff', text:'#000000',
+    hl:'#dce8de', hl2:'#eeebe4', playBg:'#eeebe4', pauseText:'#3e5a48',
+    accent:'#3e5a48', accentText:'#ffffff',
+    muted:'#5a6a5e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#eeebe4'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
@@ -987,6 +1651,10 @@ const THEME_GROUP_OF = {
   Cocoa:'다크', Oxford:'다크', 'Ash Night':'다크',
   Nocturne:'다크', Pewter:'다크', Bergamot:'다크', Mink:'다크', Moth:'다크', Cashmere:'다크', Storm:'다크', 'Pressed Rose':'다크', Amethyst:'다크', Tiramisu:'다크', Sepia:'다크', Sumi:'다크',
   Bubblegum:'비비드', 'Lilac Pop':'비비드', 'Blue Raspberry':'비비드', 'Peach Soda':'비비드', Petunia:'비비드', 'Plum Soda':'비비드', 'Berry Yogurt':'비비드', Poppy:'비비드', Lemonade:'비비드', 'Violet Sky':'비비드', 'Lime Soda':'비비드', Marmalade:'비비드', 'Lilac Lime':'비비드', 'Sherbet Sky':'비비드', 'Mint Sky':'비비드', 'Lavender Mint':'비비드',
+  'Milk Tea':'파스텔', 'Lilac Haze':'파스텔', 'Blue Hour':'파스텔', Mochi:'파스텔', Frost:'파스텔', 'Vanilla Lavender':'파스텔', Cloud:'파스텔', 'Apple Blossom':'파스텔', Porcelain:'파스텔', Snowdrop:'파스텔', Glacier:'파스텔', 'Mist Blue':'파스텔', 'Sage White':'파스텔', 'Cherry Leaf':'파스텔', 'Lavender Grey':'파스텔', 'Periwinkle White':'파스텔', Dew:'파스텔', 'Moonlight White':'파스텔', 'Cloud Nine':'파스텔', 'Pearl Holo':'파스텔', Opaline:'파스텔', 'Frosted Glass':'파스텔', 'Teal Mono':'파스텔', 'Mother of Pearl':'파스텔', 'Sea Salt':'파스텔', 'Tab Divider':'파스텔', 'Ticket Stub':'파스텔', 'Swimming Pool':'파스텔', Watercolor:'파스텔',
+  'Grape Soda':'비비드', 'Ultramarine Pop':'비비드', Holographic:'비비드', 'Melon Soda':'비비드', 'Klein Mono':'비비드', 'Cobalt Mono':'비비드', Highlighter:'비비드', Bauhaus:'비비드',
+  'Navy Velvet':'다크', 'Charcoal Rose':'다크', Starlight:'다크', Obsidian:'다크', Lunar:'다크', Velvet:'다크', Graphite:'다크', 'Indigo Ink':'다크', 'Silver Night':'다크', 'Night Frost':'다크', 'Red Dot Night':'다크', Negative:'다크', 'Negative Sand':'다크', 'Green Cloth':'다크', 'Slate Cloth':'다크', 'Wine Cloth':'다크',
+  Hanji:'내추럴', Chestnut:'내추럴', Stone:'내추럴', 'Ivory Ink':'내추럴', Sandstone:'내추럴', Inverse:'내추럴', 'Red Dot':'내추럴', 'Sepia Photo':'내추럴', Newsprint:'내추럴', 'Paper White':'내추럴', 'Graph Paper':'내추럴', Letterpress:'내추럴', Airmail:'내추럴', Washi:'내추럴', 'Inverse Navy':'내추럴', 'Half Moon':'내추럴', 'Sage Mono':'내추럴', 'Inverse Slate':'내추럴', 'Index Card':'내추럴', Ledger:'내추럴', 'Manila Folder':'내추럴', Spreadsheet:'내추럴', Verdigris:'내추럴', 'Olive Leaf':'내추럴', Passport:'내추럴', 'Bank Note':'내추럴', 'Topo Map':'내추럴', Clipboard:'내추럴', Terrazzo:'내추럴', 'Sage Frame':'내추럴',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
