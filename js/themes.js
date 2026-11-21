@@ -1627,9 +1627,474 @@ const THEMES = {
     muted:'#5a6a5e',
     title:'#ffffff', subtitle:'#ffffff', char:'#eeebe4'
   },
+  /* ---- 2026-11 추가 58종 (시인성 기준: 본문 7:1, 대사 6:1, 속마음 6.5:1, Play 아이콘·푸터·제목·인물명 4.5:1) ---- */
+  // [파스텔] 회색 낀 라벤더
+  'Lavender Fog': {
+    outerBg:'#ecebf3', card:'#ffffff', text:'#000000',
+    hl:'#d6d3e6', hl2:'#e9e7f1',
+    accent:'#6f6a92', accentText:'#ffffff',
+    muted:'#6a677f',
+    title:'#f4f3f9', subtitle:'#f8f8fb', char:'#d6d3e6'
+  },
+  // [파스텔] 아쿠아 우유
+  'Aqua Milk': {
+    outerBg:'#e1f5f7', card:'#ffffff', text:'#000000',
+    hl:'#b8e6ec', hl2:'#dcf1f4',
+    accent:'#3a9fae', accentText:'#113034',
+    muted:'#47757c',
+    title:'#eefafc', subtitle:'#f5fcfd', char:'#b8e6ec'
+  },
+  // [파스텔] 커스터드 푸딩
+  Pudding: {
+    outerBg:'#fcf1dc', card:'#ffffff', text:'#000000',
+    hl:'#f3d9a4', hl2:'#faeccd',
+    accent:'#9a6a2a', accentText:'#fcfbfa',
+    muted:'#826a48',
+    title:'#fff8ea', subtitle:'#fffbf2', char:'#f3d9a4'
+  },
+  // [파스텔] 대사 하늘·속마음 분홍, 거품 목욕
+  'Bubble Bath': {
+    outerBg:'#f0ebfa', card:'#ffffff', text:'#000000',
+    hl:'#d4e6fa', hl2:'#f6dcef',
+    accent:'#a68ad8', accentText:'#322941',
+    muted:'#6d6684',
+    title:'#f8f5ff', subtitle:'#fbf9ff', char:'#f6dcef'
+  },
+  // [파스텔] 스위트피 꽃
+  'Sweet Pea': {
+    outerBg:'#fbebf4', card:'#ffffff', text:'#000000',
+    hl:'#e9d0f2', hl2:'#fbe0ee',
+    accent:'#c45c95', accentText:'#22101a',
+    muted:'#885f79',
+    title:'#fdf3f9', subtitle:'#fef8fb', char:'#f3c9e0'
+  },
+  // [파스텔] 실험: 민트·핑크·노랑 무지개 파스텔
+  Unicorn: {
+    outerBg:'#f3eefc', card:'#ffffff', text:'#000000',
+    hl:'#c9ecf2', hl2:'#fde2ef',
+    accent:'#f29ac0', accentText:'#4a1f35',
+    muted:'#74668b',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffe7a8'
+  },
+  // [파스텔] 크림소다
+  'Cream Soda': {
+    outerBg:'#fbf4e6', card:'#ffffff', text:'#000000',
+    hl:'#cdeee0', hl2:'#f6ead2',
+    accent:'#e8a35c', accentText:'#573d22',
+    muted:'#7b6e57',
+    title:'#fffaf0', subtitle:'#fffcf6', char:'#cdeee0'
+  },
+  // [파스텔] 복숭아 대사 + 하늘 속마음
+  'Peach Cloud': {
+    outerBg:'#fbeee8', card:'#ffffff', text:'#000000',
+    hl:'#f6d2c4', hl2:'#dfe6f4',
+    accent:'#c07a64', accentText:'#301e19',
+    muted:'#85665c',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f6d2c4'
+  },
+  // [파스텔] 커스터드 + 장밋빛 속마음
+  Custard: {
+    outerBg:'#faf2e0', card:'#ffffff', text:'#000000',
+    hl:'#f2dfae', hl2:'#f4e4e0',
+    accent:'#9a7a3a', accentText:'#1b150a',
+    muted:'#7d6a48',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2dfae'
+  },
+  // [파스텔] 흐린 장미 + 베이지
+  'Hazy Rose': {
+    outerBg:'#f4eaec', card:'#ffffff', text:'#000000',
+    hl:'#e8ccd2', hl2:'#ece6dc',
+    accent:'#9a6a74', accentText:'#080506',
+    muted:'#7e6268',
+    title:'#ffffff', subtitle:'#ffffff', char:'#e8ccd2'
+  },
+  // [내추럴] 점토
+  Clay: {
+    outerBg:'#ece3dc', card:'#fffbf8', text:'#2a201b',
+    hl:'#dcc7b9', hl2:'#ebe0d8',
+    accent:'#8c6552', accentText:'#ffffff',
+    muted:'#746257',
+    title:'#faf3ee', subtitle:'#fcf8f5', char:'#dcc7b9'
+  },
+  // [내추럴] 자작나무
+  Birch: {
+    outerBg:'#f2f1ec', card:'#ffffff', text:'#1d1d1a',
+    hl:'#dedcd2', hl2:'#ecebe5',
+    accent:'#4a4a42', accentText:'#f2f1ec',
+    muted:'#6f6e66',
+    title:'#fafaf6', subtitle:'#fcfcfa', char:'#dedcd2'
+  },
+  // [내추럴] 호두나무
+  Walnut: {
+    outerBg:'#eadfd3', card:'#fffaf4', text:'#2a1c12',
+    hl:'#d6bfa6', hl2:'#e9dccd',
+    accent:'#5a3a22', accentText:'#f4e7d7',
+    muted:'#795f4a',
+    title:'#f7eee4', subtitle:'#faf5ef', char:'#d6bfa6'
+  },
+  // [내추럴] 고사리
+  Fern: {
+    outerBg:'#e5ede3', card:'#fafdf9', text:'#17231a',
+    hl:'#c2d8c0', hl2:'#dde9db',
+    accent:'#3d6b4a', accentText:'#ffffff',
+    muted:'#576e61',
+    title:'#f0f6ef', subtitle:'#f6faf5', char:'#c2d8c0'
+  },
+  // [내추럴] 호밀빵
+  Rye: {
+    outerBg:'#ebe2d2', card:'#fdf9f1', text:'#251c10',
+    hl:'#d6c4a2', hl2:'#e7dcc6',
+    accent:'#4e3c22', accentText:'#efe4cf',
+    muted:'#74634a',
+    title:'#f7f0e2', subtitle:'#faf6ee', char:'#d6c4a2'
+  },
+  // [내추럴] 갯벌, 회색 진흙과 바다색 버튼
+  Mudflat: {
+    outerBg:'#e6e2dc', card:'#fbfaf8', text:'#221e1a',
+    hl:'#cfc6ba', hl2:'#e2ddd5',
+    accent:'#4c5a5e', accentText:'#ffffff',
+    muted:'#69645e',
+    title:'#f5f3f0', subtitle:'#f9f8f6', char:'#c5d0d2'
+  },
+  // [내추럴] 식물 표본: 대사 마른 잎·속마음 마른 장미
+  Herbarium: {
+    outerBg:'#f1eee2', card:'#fffdf6', text:'#1e2016',
+    hl:'#d4dcc0', hl2:'#efe0dc',
+    accent:'#8a4a4a', accentText:'#ffffff',
+    muted:'#706c57',
+    title:'#faf8ef', subtitle:'#fcfbf5', char:'#e6c6c0'
+  },
+  // [내추럴] 풀밭 + 들장미
+  Meadow: {
+    outerBg:'#eceee2', card:'#fdfdf8', text:'#1e2218',
+    hl:'#d6dfc0', hl2:'#f0dcd8',
+    accent:'#6a7a3a', accentText:'#ffffff',
+    muted:'#5e6650',
+    title:'#f6f8f0', subtitle:'#fafbf6', char:'#f0dcd8'
+  },
+  // [내추럴] 마른 라벤더 + 마른 풀
+  'Dried Lavender': {
+    outerBg:'#eceae8', card:'#fdfcfb', text:'#201e22',
+    hl:'#dcd6e0', hl2:'#e4e6da',
+    accent:'#6a5e7a', accentText:'#ffffff',
+    muted:'#66606a',
+    title:'#f6f5f6', subtitle:'#faf9fa', char:'#dcd6e0'
+  },
+  // [비비드] 수영장 파랑 + 튜브 핑크
+  'Pool Party': {
+    outerBg:'#d6f6ff', card:'#ffffff', text:'#000000',
+    hl:'#7fdcff', hl2:'#c9f0ff',
+    accent:'#ff4fa3', accentText:'#4c1831',
+    muted:'#237694',
+    title:'#f0fbff', subtitle:'#f6fdff', char:'#ffd0e8'
+  },
+  // [비비드] 크레용 삼원색
+  Crayon: {
+    outerBg:'#fff7d6', card:'#ffffff', text:'#000000',
+    hl:'#9fd3ff', hl2:'#ffd0d0',
+    accent:'#ff3b30', accentText:'#400f0c',
+    muted:'#3b6bd6',
+    title:'#fffdf2', subtitle:'#fffef7', char:'#ffe14a'
+  },
+  // [비비드] 스프링클
+  Sprinkles: {
+    outerBg:'#fff6ec', card:'#ffffff', text:'#000000',
+    hl:'#ffc4e0', hl2:'#b8ecd8',
+    accent:'#6a4ae0', accentText:'#ffffff',
+    muted:'#8a5a3a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffe07a'
+  },
+  // [비비드] 과일 샐러드
+  'Fruit Salad': {
+    outerBg:'#f6fbe8', card:'#ffffff', text:'#000000',
+    hl:'#ffd27a', hl2:'#c4ee9a',
+    accent:'#e8502a', accentText:'#341209',
+    muted:'#5a7a2a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd27a'
+  },
+  // [다크] 다크 초콜릿
+  'Dark Chocolate': {
+    outerBg:'#1a1210', card:'#241a17', text:'#efe5df',
+    hl:'#4a3530', hl2:'#372823',
+    accent:'#e8c3a8', accentText:'#1a1210',
+    muted:'#998479',
+    title:'#fff5ef', subtitle:'#fff9f5', char:'#f4e1d4'
+  },
+  // [다크] 실험: 기름막 무지갯빛
+  'Oil Slick': {
+    outerBg:'#0e0f14', card:'#16171f', text:'#e9eaf2',
+    hl:'#1f3d4a', hl2:'#3a2348',
+    accent:'#7ef0d0', accentText:'#0e0f14',
+    muted:'#8288a8',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f1e1ff'
+  },
+  // [다크] 자단목
+  Rosewood: {
+    outerBg:'#1c1414', card:'#261b1b', text:'#f0e4e2',
+    hl:'#533634', hl2:'#3d2928',
+    accent:'#d89a8e', accentText:'#1c1414',
+    muted:'#9e8482',
+    title:'#fff4f2', subtitle:'#fff8f7', char:'#f6e3df'
+  },
+  // [다크] 석유빛 청록 + 황동
+  Petrol: {
+    outerBg:'#0f1416', card:'#162024', text:'#e4eef0',
+    hl:'#1e3a42', hl2:'#2e2e40',
+    accent:'#e0c07a', accentText:'#0f1416',
+    muted:'#869498',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f7efde'
+  },
+  // [레트로] 50년대 다이너: 체리 레드 + 민트
+  Diner: {
+    outerBg:'#fdf1e3', card:'#ffffff', text:'#1a1a1a',
+    hl:'#ffb3b3', hl2:'#c9ece6',
+    accent:'#e63946', accentText:'#22090a',
+    muted:'#317a73',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd6d6'
+  },
+  // [레트로] 70년대 아보카도 주방
+  'Avocado Kitchen': {
+    outerBg:'#ecebcf', card:'#fbfaee', text:'#262614',
+    hl:'#c2c27a', hl2:'#e8d8a8',
+    accent:'#a5671a', accentText:'#ffffff',
+    muted:'#6b6a32',
+    title:'#fbfae6', subtitle:'#fdfcf0', char:'#e8d088'
+  },
+  // [레트로] 폴라로이드 바랜 색
+  Polaroid: {
+    outerBg:'#ecebe6', card:'#fffef9', text:'#222222',
+    hl:'#f2d7a8', hl2:'#c8dde0',
+    accent:'#3d6f8a', accentText:'#ffffff',
+    muted:'#6e6961',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2d7a8'
+  },
+  // [레트로] 80년대 오락실
+  Arcade: {
+    outerBg:'#0b0b1a', card:'#141428', text:'#f0f0ff',
+    hl:'#3a1f5a', hl2:'#1f3a3a',
+    accent:'#ffe14a', accentText:'#0b0b1a',
+    muted:'#7575af',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffc3ea'
+  },
+  // [레트로] 햇볕에 바랜 사진
+  Sunbleached: {
+    outerBg:'#f2e7da', card:'#fdf8f2', text:'#2a2420',
+    hl:'#e8c6b4', hl2:'#cfdcd8',
+    accent:'#c07a5c', accentText:'#301e17',
+    muted:'#72665e',
+    title:'#fdf8f2', subtitle:'#fefbf7', char:'#e8c6b4'
+  },
+  // [레트로] 코다크롬 필름
+  Kodachrome: {
+    outerBg:'#f5ead0', card:'#fffbf0', text:'#1c1a14',
+    hl:'#f5c04a', hl2:'#a8d0d8',
+    accent:'#c8312a', accentText:'#ffffff',
+    muted:'#3f6f7a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f5c04a'
+  },
+  // [레트로] 볼링장 카펫
+  'Bowling Alley': {
+    outerBg:'#f2e3ee', card:'#ffffff', text:'#1c1420',
+    hl:'#c8b8f0', hl2:'#ffd0b8',
+    accent:'#2a3a8a', accentText:'#ffffff',
+    muted:'#8a4a7a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd0b8'
+  },
+  // [레트로] Y2K 크롬 실버
+  'Y2K Chrome': {
+    outerBg:'#e6ecf5', card:'#ffffff', text:'#10141c',
+    hl:'#c6d4ea', hl2:'#eadcf5',
+    accent:'#7a8aa8', accentText:'#1e222a',
+    muted:'#5e6a83',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d8f0ff'
+  },
+  // [레트로] 미드센추리 가구
+  'Mid Century': {
+    outerBg:'#efe6d2', card:'#fbf6ea', text:'#1f1a12',
+    hl:'#e8b04a', hl2:'#b8d0c4',
+    accent:'#2e6a6a', accentText:'#ffffff',
+    muted:'#9c5429',
+    title:'#fff8ea', subtitle:'#fffbf2', char:'#eab658'
+  },
+  // [레트로] 길가 모텔 간판
+  Motel: {
+    outerBg:'#fbe8d8', card:'#ffffff', text:'#1e1410',
+    hl:'#7fd0c8', hl2:'#ffd2b4',
+    accent:'#e8553a', accentText:'#34130d',
+    muted:'#287570',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd2b4'
+  },
+  // [레트로] 실험: 초록 도트 액정
+  'Game Boy': {
+    outerBg:'#c4cfa1', card:'#e0e8c4', text:'#0f380f',
+    hl:'#9bbc0f', hl2:'#c8d898',
+    accent:'#306230', accentText:'#e0e8c4',
+    muted:'#415d33',
+    title:'#e0f8d0', subtitle:'#ecfbe3', char:'#c4e070'
+  },
+  // [레트로] 빈티지 엽서
+  Postcard: {
+    outerBg:'#f6e8d4', card:'#fffaf2', text:'#1e1a14',
+    hl:'#a8d4e8', hl2:'#f6d0b8',
+    accent:'#d0452a', accentText:'#ffffff',
+    muted:'#2f6f8f',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f6d0b8'
+  },
+  // [레트로] 밀크셰이크: 딸기 + 민트
+  Milkshake: {
+    outerBg:'#fdf0f2', card:'#ffffff', text:'#1a1416',
+    hl:'#ffc8d4', hl2:'#c8ecf0',
+    accent:'#c83a5a', accentText:'#ffffff',
+    muted:'#8a5a66',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffc8d4'
+  },
+  // [레트로] 자동차 극장 노을
+  'Drive-in': {
+    outerBg:'#eef0f6', card:'#ffffff', text:'#14161e',
+    hl:'#ffd0a8', hl2:'#c8d4f4',
+    accent:'#2a3a8a', accentText:'#ffffff',
+    muted:'#6a5a7a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffd0a8'
+  },
+  // [레트로] LP 레코드 + 금색 라벨
+  'Vinyl Record': {
+    outerBg:'#141414', card:'#1e1e1e', text:'#ececec',
+    hl:'#5a2a2a', hl2:'#2a3a3a',
+    accent:'#f2c84a', accentText:'#141414',
+    muted:'#948e88',
+    title:'#ffffff', subtitle:'#ffffff', char:'#faecc0'
+  },
+  // [레트로] 8mm 홈비디오
+  'Super 8': {
+    outerBg:'#f2e8d6', card:'#fffaf0', text:'#22180e',
+    hl:'#f0c890', hl2:'#c8d8c0',
+    accent:'#a8481c', accentText:'#ffffff',
+    muted:'#6e5a40',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f0c890'
+  },
+  // [레트로] 옛날 밀폐 용기
+  Tupperware: {
+    outerBg:'#f4f4ea', card:'#ffffff', text:'#14160e',
+    hl:'#f8c8a0', hl2:'#b8e0d0',
+    accent:'#e86a3a', accentText:'#401d10',
+    muted:'#4d7869',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f8c8a0'
+  },
+  // [레트로] 아이스크림 가게
+  'Ice Cream Parlor': {
+    outerBg:'#fbf3ec', card:'#ffffff', text:'#1a1410',
+    hl:'#f8cad4', hl2:'#cfe8d8',
+    accent:'#c85a6a', accentText:'#1e0e10',
+    muted:'#7a5a54',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f8cad4'
+  },
+  // [레트로] 유리병 탄산
+  'Pop Bottle': {
+    outerBg:'#fff0dc', card:'#ffffff', text:'#1e140a',
+    hl:'#ffc070', hl2:'#c8e8c0',
+    accent:'#d8502a', accentText:'#200c06',
+    muted:'#8a5a28',
+    title:'#ffffff', subtitle:'#ffffff', char:'#ffc070'
+  },
+  // [레트로] 슬라이드 필름
+  'Slide Film': {
+    outerBg:'#f2f0ea', card:'#ffffff', text:'#161614',
+    hl:'#f6d48a', hl2:'#b8d4e8',
+    accent:'#d8402a', accentText:'#0b0302',
+    muted:'#3a6a8a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f6d48a'
+  },
+  // [레트로] 빨래방
+  Laundromat: {
+    outerBg:'#e8f4f4', card:'#ffffff', text:'#101c1c',
+    hl:'#c0e6e8', hl2:'#f8d8e0',
+    accent:'#2a8a8a', accentText:'#061515',
+    muted:'#4a7270',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f8d8e0'
+  },
+  // [레트로] 티키 바
+  Tiki: {
+    outerBg:'#f4ead6', card:'#fffaf0', text:'#1e160c',
+    hl:'#f8c08a', hl2:'#a8dcc8',
+    accent:'#2a7a5a', accentText:'#ffffff',
+    muted:'#7a5a30',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f8c08a'
+  },
+  // [레트로] 50년대 아토믹 디자인
+  Atomic: {
+    outerBg:'#eef0e8', card:'#ffffff', text:'#141810',
+    hl:'#f6c8a8', hl2:'#b8dcd8',
+    accent:'#2a7a8a', accentText:'#ffffff',
+    muted:'#6a6a5a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f6c8a8'
+  },
+  // [레트로] 대학 점퍼
+  Varsity: {
+    outerBg:'#f2ede4', card:'#ffffff', text:'#14161c',
+    hl:'#f2c8c0', hl2:'#c8d4e4',
+    accent:'#1a2a5a', accentText:'#ffffff',
+    muted:'#7a3a3a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f2c8c0'
+  },
+  // [보석] 청금석: 남색 + 금 반점
+  Lapis: {
+    outerBg:'#1a2a6c', card:'#f4f6fd', text:'#0b1238',
+    hl:'#c4cdf2', hl2:'#e2e6f9',
+    accent:'#2a3fa8', accentText:'#f5c84a',
+    muted:'#8594d2',
+    title:'#fef7e4', subtitle:'#fefaef', char:'#ffffff'
+  },
+  // [보석] 연수정
+  'Smoky Quartz': {
+    outerBg:'#2a2420', card:'#342d28', text:'#f0e8e0',
+    hl:'#5a4a3c', hl2:'#463b32',
+    accent:'#c8a888', accentText:'#2a2420',
+    muted:'#968a7f',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f1e9e1'
+  },
+  // [보석] 비취 + 금
+  'Imperial Jade': {
+    outerBg:'#e2f2e6', card:'#fbfffc', text:'#062214',
+    hl:'#9ad8b0', hl2:'#d4f0de',
+    accent:'#0a6a3a', accentText:'#f5d76a',
+    muted:'#407756',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f5d76a'
+  },
+  // [보석] 남동석 + 공작석 얼룩
+  Azurite: {
+    outerBg:'#eaf0f8', card:'#ffffff', text:'#0a1630',
+    hl:'#c6d8f0', hl2:'#d8ece6',
+    accent:'#1a4a9a', accentText:'#ffffff',
+    muted:'#4e6488',
+    title:'#ffffff', subtitle:'#ffffff', char:'#d8ece6'
+  },
+  // [전통] 단청: 뇌록·주홍·석간주
+  Dancheong: {
+    outerBg:'#e8f0ea', card:'#fffdf6', text:'#1a1a14',
+    hl:'#f2c2b0', hl2:'#c8e2d4',
+    accent:'#c8382a', accentText:'#ffffff',
+    muted:'#2f6a5a',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f5d76a'
+  },
+  // [전통] 매화
+  Maehwa: {
+    outerBg:'#fbeff2', card:'#ffffff', text:'#1e0a10',
+    hl:'#f0c0cc', hl2:'#e8ecd8',
+    accent:'#8a2a42', accentText:'#ffffff',
+    muted:'#866666',
+    title:'#ffffff', subtitle:'#ffffff', char:'#f0c0cc'
+  },
+  // [실험] 칠판 + 분필
+  Chalkboard: {
+    outerBg:'#1f2c25', card:'#34463a', text:'#f0f4ea',
+    hl:'#45624d', hl2:'#575849',
+    accent:'#fff7a8', accentText:'#2a3a30',
+    muted:'#889e8e',
+    title:'#ffffff', subtitle:'#ffffff', char:'#fff6f9'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
-const THEME_GROUPS = ['파스텔','내추럴','비비드','다크'];
+const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로','보석','전통','실험'];
 const THEME_GROUP_OF = {
   Default:'내추럴', Sage:'내추럴', 'Old Money Light':'내추럴', City:'내추럴',
   Linen:'내추럴', Driftwood:'내추럴', Latte:'내추럴', Seaside:'내추럴', Surf:'내추럴',
@@ -1655,6 +2120,7 @@ const THEME_GROUP_OF = {
   'Grape Soda':'비비드', 'Ultramarine Pop':'비비드', Holographic:'비비드', 'Melon Soda':'비비드', 'Klein Mono':'비비드', 'Cobalt Mono':'비비드', Highlighter:'비비드', Bauhaus:'비비드',
   'Navy Velvet':'다크', 'Charcoal Rose':'다크', Starlight:'다크', Obsidian:'다크', Lunar:'다크', Velvet:'다크', Graphite:'다크', 'Indigo Ink':'다크', 'Silver Night':'다크', 'Night Frost':'다크', 'Red Dot Night':'다크', Negative:'다크', 'Negative Sand':'다크', 'Green Cloth':'다크', 'Slate Cloth':'다크', 'Wine Cloth':'다크',
   Hanji:'내추럴', Chestnut:'내추럴', Stone:'내추럴', 'Ivory Ink':'내추럴', Sandstone:'내추럴', Inverse:'내추럴', 'Red Dot':'내추럴', 'Sepia Photo':'내추럴', Newsprint:'내추럴', 'Paper White':'내추럴', 'Graph Paper':'내추럴', Letterpress:'내추럴', Airmail:'내추럴', Washi:'내추럴', 'Inverse Navy':'내추럴', 'Half Moon':'내추럴', 'Sage Mono':'내추럴', 'Inverse Slate':'내추럴', 'Index Card':'내추럴', Ledger:'내추럴', 'Manila Folder':'내추럴', Spreadsheet:'내추럴', Verdigris:'내추럴', 'Olive Leaf':'내추럴', Passport:'내추럴', 'Bank Note':'내추럴', 'Topo Map':'내추럴', Clipboard:'내추럴', Terrazzo:'내추럴', 'Sage Frame':'내추럴',
+  'Lavender Fog':'파스텔', 'Aqua Milk':'파스텔', Pudding:'파스텔', 'Bubble Bath':'파스텔', 'Sweet Pea':'파스텔', Unicorn:'파스텔', 'Cream Soda':'파스텔', 'Peach Cloud':'파스텔', Custard:'파스텔', 'Hazy Rose':'파스텔', Clay:'내추럴', Birch:'내추럴', Walnut:'내추럴', Fern:'내추럴', Rye:'내추럴', Mudflat:'내추럴', Herbarium:'내추럴', Meadow:'내추럴', 'Dried Lavender':'내추럴', 'Pool Party':'비비드', Crayon:'비비드', Sprinkles:'비비드', 'Fruit Salad':'비비드', 'Dark Chocolate':'다크', 'Oil Slick':'다크', Rosewood:'다크', Petrol:'다크', Diner:'레트로', 'Avocado Kitchen':'레트로', Polaroid:'레트로', Arcade:'레트로', Sunbleached:'레트로', Kodachrome:'레트로', 'Bowling Alley':'레트로', 'Y2K Chrome':'레트로', 'Mid Century':'레트로', Motel:'레트로', 'Game Boy':'레트로', Postcard:'레트로', Milkshake:'레트로', 'Drive-in':'레트로', 'Vinyl Record':'레트로', 'Super 8':'레트로', Tupperware:'레트로', 'Ice Cream Parlor':'레트로', 'Pop Bottle':'레트로', 'Slide Film':'레트로', Laundromat:'레트로', Tiki:'레트로', Atomic:'레트로', Varsity:'레트로', Lapis:'보석', 'Smoky Quartz':'보석', 'Imperial Jade':'보석', Azurite:'보석', Dancheong:'전통', Maehwa:'전통', Chalkboard:'실험',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
