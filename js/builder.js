@@ -14,6 +14,17 @@ function processInline(text, v, plainQuotes){
   h = h.replace(/\*\*([^*\n]+?)\*\*/g, '<strong>$1</strong>');
   h = h.replace(/(^|[^*])\*([^*\n]+?)\*(?!\*)/g, '$1<em>$2</em>');
   // plainQuotes: E TYPE(인물 소개) 전용. 따옴표는 그대로 두고 강조 배경(대사/속마음 박스)만 씌우지 않음
+  //  · 객체 {dia, thought}를 넘기면(F TYPE) 배경 박스 대신 글자색만 바꿈 (속마음은 기울임)
+  if (plainQuotes && typeof plainQuotes === 'object'){
+    const q = plainQuotes;
+    const dia = (inner)=>`<span style="color:${q.dia};">${inner}</span>`;
+    const th  = (inner)=>`<span style="color:${q.thought};font-style:italic;padding-right:0.08em;">${inner}</span>`;
+    h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, i)=>dia(`&quot;${i}&quot;`));
+    h = h.replace(/&#8220;((?:(?!&#8221;).)+?)&#8221;/g, (_m, i)=>dia(`&#8220;${i}&#8221;`));
+    h = h.replace(/(^|[^A-Za-z0-9_])&#39;((?:(?!&#39;)[^\n])+?)&#39;(?![A-Za-z0-9_])/g, (_m, b, i)=>`${b}${th(`&#39;${i}&#39;`)}`);
+    h = h.replace(/&#8216;((?:(?!&#8217;).)+?)&#8217;/g, (_m, i)=>th(`&#8216;${i}&#8217;`));
+    return h.replace(/\n/g, '<br>');
+  }
   if (plainQuotes) return h.replace(/\n/g, '<br>');
   const diaInk = readableInk(v.hl, v.text);
   h = h.replace(/&quot;((?:(?!&quot;).)+?)&quot;/g, (_m, inner)=>{
@@ -36,7 +47,7 @@ function processInline(text, v, plainQuotes){
 
 function buildHTML(){
   const v = state.themeVars;
-  const T = state.type; // 'A' | 'B' | 'C' | 'D' | 'E'
+  const T = state.type; // 'A' | 'B' | 'C' | 'D' | 'E' | 'F'
   const blockInk = readableInk(v.hl, v.text);
 
   const title     = $('f-title').value || '';
@@ -98,7 +109,7 @@ function buildHTML(){
       name = tokens[1];
       message = '';
     }
-    const messageHTML = message ? processInline(message, v, T === 'E') : '';
+    const messageHTML = message ? processInline(message, v, quoteMode) : '';
 
     const isSent = (kind === 'sent');
     const bubbleBg     = isSent ? '#007aff' : '#e5e5ea';
@@ -120,8 +131,15 @@ function buildHTML(){
   const raw = $('f-body').value || '';
   const blocks = raw.split(/\n{2,}/);
 
+  // F TYPE: 대사·속마음을 박스 대신 글자색으로 (바탕 = 바깥 배경색)
+  const fQuote = (T === 'F') ? fQuoteInks(v) : null;
+  const quoteMode = (T === 'E') ? true : fQuote;
+
   let pStyle, spacer;
-  if (T !== 'A'){
+  if (T === 'F'){
+    pStyle = `margin:0 0 ${Math.round(fs*1.15)}px 0;line-height:${lh};letter-spacing:${ls}px;font-size:${fs}px;text-indent:${indent?'1em':'0'};text-align:${justify?'justify':'left'}`;
+    spacer = '';
+  } else if (T !== 'A'){
     pStyle = `margin:0;line-height:${lh};letter-spacing:${ls}px;font-size:${fs}px;text-indent:${indent?'1em':'0'}${justify?';text-align:justify':''}`;
     spacer = `<p><br></p>`;
   } else {
@@ -143,11 +161,19 @@ function buildHTML(){
       const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
       return `<p style="${pStyle}"${dataKe}><span style="display:inline-block;width:100%;border-top:1px solid ${hexToRgba(v.muted,0.35)};margin:6px 0">&nbsp;</span></p>`;
     }
-    const inner = processInline(trimmed, v, T === 'E');
+    const inner = processInline(trimmed, v, quoteMode);
     const dataKe = (T==='A') ? ' data-ke-size="size16"' : '';
     return `<p style="${pStyle}"${dataKe}>${inner}</p>`;
   }).filter(Boolean);
-  const bodyHTML = paragraphHTMLs.join('\n' + spacer + '\n');
+  const bodyHTML = paragraphHTMLs.join(spacer ? '\n' + spacer + '\n' : '\n');
+
+  // ===================================================================
+  //  F TYPE — 레터 로그 (책 펼침면: 그림 위 큰 이탤릭 제목 + 여백 단 본문)
+  // ===================================================================
+  if (T === 'F'){
+    return buildTypeF({ v, font, mw, bodyHTML, title, character, subtitle, author, tags,
+      useHero, img, fx, fy, hh, validAlign, thumbImg });
+  }
 
   // ===================================================================
   //  C TYPE — 북 재킷 커버 (이미지 표지 + 아래 제목 밴드 + 본문 + 푸터 띠)
@@ -573,4 +599,166 @@ ${row}
 ${hashTags}${bodyBox}
 </div>${footer}
 </div>`;
+}
+
+/* ===================================================================
+   F TYPE 빌더 — 레터 로그 (책 펼침면)
+   · 바탕 = 바깥 배경색(outerBg). 그림은 바탕색 베일로 덮고 아래로 바탕색에 녹아듦
+   · 대사·속마음은 박스 없이 글자색만 (fQuoteInks)
+   · 스타일 3종(f-fstyle): folio(원본형) · margin(여백 주석형) · letter(편지형)
+   =================================================================== */
+function fQuoteInks(v){
+  const page = v.outerBg;
+  const ink = readableInk(page, v.text);
+  return {
+    dia: toneInk(v.accent, page, ink, 4.5),
+    thought: toneInk(v.hl2 || v.hl, page, ink, 4.5),
+  };
+}
+
+function buildTypeF(o){
+  const { v, font, mw, bodyHTML, title, character, subtitle, author, tags,
+          useHero, img, fx, fy, hh, thumbImg } = o;
+  const val = (id)=> ($(id) ? ($(id).value || '') : '').trim();
+  const style = val('f-fstyle') || 'folio';
+  const epi   = val('f-fepi');
+  const sec   = val('f-fsec');
+  const no    = val('f-fno');
+  const chap  = val('f-fchap') || title;
+  const mark  = val('f-fmark');
+  const footerCustom = val('f-footer');
+  const footerText = footerCustom || escapeHtml([author, title].filter(Boolean).join(' · ').toUpperCase());
+
+  const page = v.outerBg;
+  const ink  = readableInk(page, v.text);
+  const mute = readableInk(page, v.muted);
+  const rule = hexToRgba(mute, 0.55);
+  const hasImg = useHero && img;
+  const sans = `Arial,sans-serif`;
+  const disp = `Georgia,'Times New Roman',Times,serif`;
+  const pad  = '4.167%';
+  const wrapTxt = 'white-space:normal;word-break:keep-all;overflow-wrap:anywhere;';
+  const tdZ = 'padding:0;border:0;';
+  const tMax = Math.max(48, Math.round(mw * 0.123));        // 960px → 118px, 650px → 80px
+  const tMin = Math.min(44, tMax);
+  const titleSize = `font-size:${tMin}px;font-size:clamp(${tMin}px,12vw,${tMax}px);`;
+  const T  = escapeHtml(title);
+  const AU = escapeHtml(author.toUpperCase());
+  const CH = escapeHtml(character);
+  const EP = escapeHtml(epi);
+
+  // 그림 + 바탕색 베일(60%) + 아래로 바탕색에 녹는 그라데이션
+  const heroBg = hasImg
+    ? `background-color:${page};background-image:url('${img}');background-size:cover;background-position:${fx}% ${fy}%;background-repeat:no-repeat;`
+    : `background-color:${page};`;
+  const veil = `background-color:${hexToRgba(page, hasImg ? 0.6 : 0)};background-image:linear-gradient(to bottom,${hexToRgba(page,0)} 45%,${hexToRgba(page,1)} 100%);`;
+
+  const uid = eqToken(style + '|' + page + '|' + mw);
+  const kicker = (AU || CH) ? `${AU ? `<div style="color:${mute};">${AU}</div>` : ''}${CH ? `<div style="color:${mute};">${CH}</div>` : ''}` : '&nbsp;';
+  const kickerCss = `font-family:${sans};font-size:9px;line-height:1.8;letter-spacing:.12em;${wrapTxt}`;
+  const epiCss = `font-family:${font};font-size:13px;line-height:1.8;font-weight:400;color:${mute};${wrapTxt}`;
+
+  const mark2 = mark ? `<div style="margin-top:18px;text-align:right;font-family:${sans};font-size:10px;line-height:1.2;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : '';
+  const footerRow = footerText ? `<div style="clear:both;margin-top:22px;padding-bottom:12px;border-bottom:1px solid ${rule};color:${mute};font-family:${sans};font-size:10px;line-height:1.6;letter-spacing:.2em;">${footerText}</div>` : '';
+  const shell = (inner, extraCss='') => `${thumbImg}<div style="width:${mw}px;max-width:100%;margin:0 auto;background-color:${page};color:${ink};font-family:${font};${extraCss}">
+${inner}
+</div>`;
+
+  // ---------- 1) FOLIO: 원본형 ----------
+  if (style === 'folio'){
+    const mobile = `<div><style>@media (max-width:600px){.la-fg-${uid}{display:none !important;}}</style></div>`;
+    const hero = `<div style="box-sizing:border-box;display:table;width:100%;margin:0;padding:0;${heroBg}">
+<div style="box-sizing:border-box;display:table-cell;width:100%;height:${hh}px;margin:0;padding:44px ${pad} 24px;vertical-align:top;text-align:left;font-size:13px;line-height:normal;${veil}">
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;border:0;border-collapse:collapse;table-layout:fixed;"><tbody><tr style="border:0;">
+<td style="width:47%;${tdZ}vertical-align:top;${kickerCss}">${kicker}</td>
+<td style="width:53%;padding:2px 0 0 4%;border:0;vertical-align:top;text-align:right;${epiCss}">${EP || '&nbsp;'}</td>
+</tr></tbody></table>
+<div style="width:100%;margin:52px 0 0;margin-top:clamp(52px,8.125vw,78px);text-align:right;font-family:${disp};${titleSize}line-height:.88;font-style:italic;font-weight:700;letter-spacing:-.07em;${wrapTxt}color:${ink};">${T}</div>
+${subtitle ? `<div style="margin:14px 2.5% 0 0;text-align:right;font-family:${font};font-size:13px;line-height:1.6;${wrapTxt}color:${mute};">${subtitle}</div>` : ''}
+</div>
+</div>`;
+    const secRow = sec ? `<div style="box-sizing:border-box;padding:36px ${pad} 20px;font-family:${font};font-size:18px;font-weight:700;line-height:1.4;letter-spacing:-.025em;${wrapTxt}color:${ink};">${escapeHtml(sec)}</div>` : '';
+    const chapRow = (no || chap) ? `<div style="box-sizing:border-box;width:100%;padding:24px ${pad} 24px;font-family:${font};font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.02em;${wrapTxt}color:${ink};">${no ? `<span style="display:inline-block;margin-right:14px;vertical-align:baseline;font-family:${sans};font-size:11px;font-weight:600;letter-spacing:.12em;color:${mute};">${escapeHtml(no)}</span>` : ''}${escapeHtml(chap)}</div>` : '';
+    const body = `<div style="margin:0 ${pad};padding:44px 0 46px;overflow-wrap:anywhere;color:${ink};">
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;border:0;border-collapse:collapse;table-layout:fixed;"><tbody><tr style="border:0;">
+<td class="la-fg-${uid}" style="width:26%;${tdZ}vertical-align:top;">&nbsp;</td>
+<td class="la-fg-${uid}" style="width:4%;${tdZ}">&nbsp;</td>
+<td style="${tdZ}vertical-align:top;">
+${bodyHTML}
+</td>
+</tr></tbody></table>
+</div>`;
+    return mobile + shell(`${hero}
+${secRow}
+${chapRow}
+${body}
+<div style="margin:0 ${pad};padding-bottom:20px;">${footerRow}${mark2}</div>`);
+  }
+
+  // ---------- 2) MARGIN: 여백 주석형 ----------
+  if (style === 'margin'){
+    // 모바일에서는 여백 단이 본문 위로 올라감
+    const mobile = `<div><style>@media (max-width:600px){.la-fm-${uid} td{display:block !important;width:auto !important;}.la-fm-${uid} .la-fs-${uid}{display:none !important;}.la-fm-${uid} .la-fn-${uid}{padding-bottom:26px !important;border-bottom:1px solid ${rule} !important;margin-bottom:26px !important;}}</style></div>`;
+    const hero = `<div style="box-sizing:border-box;display:table;width:100%;margin:0;padding:0;${heroBg}">
+<div style="box-sizing:border-box;display:table-cell;width:100%;height:${hh}px;margin:0;padding:40px ${pad} 30px;vertical-align:bottom;text-align:left;font-size:13px;line-height:normal;${veil}">
+${EP ? `<div style="max-width:58%;margin:0 0 0 auto;text-align:right;${epiCss}">${EP}</div>` : ''}
+<div style="margin-top:clamp(60px,10vw,110px);${kickerCss}">${kicker}</div>
+<div style="margin-top:10px;text-align:left;font-family:${disp};${titleSize}line-height:.9;font-style:italic;font-weight:700;letter-spacing:-.06em;${wrapTxt}color:${ink};">${T}</div>
+${subtitle ? `<div style="margin-top:14px;font-family:${font};font-size:13px;line-height:1.6;${wrapTxt}color:${mute};">${subtitle}</div>` : ''}
+</div>
+</div>`;
+    const tagLines = tags.map(t=>`<div>#${escapeHtml(t)}</div>`).join('');
+    const note = `${sec ? `<div style="font-family:${sans};font-size:9px;letter-spacing:.2em;color:${mute};">${escapeHtml(sec)}</div>` : ''}
+${no ? `<div style="margin-top:10px;font-family:${disp};font-size:46px;line-height:1;font-style:italic;font-weight:700;letter-spacing:-.04em;color:${ink};">${escapeHtml(no)}</div>` : ''}
+${chap ? `<div style="margin-top:12px;font-family:${font};font-size:15px;line-height:1.5;font-weight:700;letter-spacing:-.02em;${wrapTxt}color:${ink};">${escapeHtml(chap)}</div>` : ''}
+<div style="width:24px;height:1px;margin:16px 0 14px;background-color:${rule};font-size:0;line-height:0;">&nbsp;</div>
+${tagLines ? `<div style="font-family:${sans};font-size:10px;line-height:1.9;letter-spacing:.06em;color:${mute};">${tagLines}</div>` : ''}`;
+    const body = `<div style="margin:0 ${pad};padding:40px 0 46px;border-top:1px solid ${rule};overflow-wrap:anywhere;color:${ink};">
+<table class="la-fm-${uid}" border="0" cellpadding="0" cellspacing="0" style="width:100%;border:0;border-collapse:collapse;table-layout:fixed;"><tbody><tr style="border:0;">
+<td class="la-fn-${uid}" style="width:26%;${tdZ}vertical-align:top;">
+${note}
+</td>
+<td class="la-fs-${uid}" style="width:4%;${tdZ}">&nbsp;</td>
+<td style="${tdZ}vertical-align:top;">
+${bodyHTML}
+</td>
+</tr></tbody></table>
+</div>`;
+    return mobile + shell(`${hero}
+${body}
+<div style="margin:0 ${pad};padding-bottom:20px;">${footerRow}${mark2}</div>`);
+  }
+
+  // ---------- 3) LETTER: 편지형 (가운데 한 단) ----------
+  const mobile = `<div><style>@media (max-width:600px){.la-fl-${uid}{padding-left:${pad} !important;padding-right:${pad} !important;}}</style></div>`;
+  const hero = `<div style="box-sizing:border-box;display:table;width:100%;margin:0;padding:0;${heroBg}">
+<div style="box-sizing:border-box;display:table-cell;width:100%;height:${hh}px;margin:0;padding:40px ${pad} 34px;vertical-align:bottom;text-align:center;font-size:13px;line-height:normal;${veil}">
+<div style="${kickerCss}">${kicker}</div>
+<div style="margin-top:18px;text-align:center;font-family:${disp};${titleSize}line-height:.92;font-style:italic;font-weight:700;letter-spacing:-.06em;${wrapTxt}color:${ink};">${T}</div>
+${subtitle ? `<div style="margin-top:16px;font-family:${font};font-size:13px;line-height:1.6;${wrapTxt}color:${mute};">${subtitle}</div>` : ''}
+</div>
+</div>`;
+  const epiBlock = EP ? `<div style="margin:6px auto 0;padding:0 14%;text-align:center;">
+<div style="width:1px;height:28px;margin:0 auto 16px;background-color:${rule};font-size:0;line-height:0;">&nbsp;</div>
+<div style="font-family:${font};font-size:14px;line-height:1.9;font-style:italic;${wrapTxt}color:${mute};">${EP}</div>
+</div>` : '';
+  const chapBlock = (sec || no || chap) ? `<div style="margin:44px 0 0;text-align:center;">
+${(sec || no) ? `<div style="font-family:${sans};font-size:10px;letter-spacing:.24em;color:${mute};">${escapeHtml([sec, no].filter(Boolean).join(' · '))}</div>` : ''}
+${chap ? `<div style="margin-top:10px;font-family:${font};font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.02em;${wrapTxt}color:${ink};">${escapeHtml(chap)}</div>` : ''}
+<div style="margin-top:14px;font-family:${disp};font-size:14px;letter-spacing:.6em;padding-left:.6em;color:${mute};">&middot;&middot;&middot;</div>
+</div>` : '';
+  const sign = (author || mark) ? `<div style="margin-top:30px;text-align:right;">
+${author ? `<div style="font-family:${disp};font-size:17px;font-style:italic;color:${ink};">&mdash; ${escapeHtml(author)}</div>` : ''}
+${mark ? `<div style="margin-top:8px;font-family:${sans};font-size:10px;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : ''}
+</div>` : '';
+  const body = `<div class="la-fl-${uid}" style="box-sizing:border-box;padding:36px 14% 40px;overflow-wrap:anywhere;color:${ink};">
+${bodyHTML}
+${sign}
+</div>`;
+  const foot = footerText ? `<div style="margin:0 ${pad};padding:14px 0 22px;border-top:1px solid ${rule};text-align:center;color:${mute};font-family:${sans};font-size:10px;line-height:1.6;letter-spacing:.2em;">${footerText}</div>` : '';
+  return mobile + shell(`${hero}
+${epiBlock}
+${chapBlock}
+${body}
+${foot}`);
 }

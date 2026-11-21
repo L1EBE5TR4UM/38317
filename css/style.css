@@ -239,13 +239,15 @@
   }
   .help{font-size:12px; color:var(--ink-dim); margin-top:8px; line-height:1.7}
   /* Type-specific field visibility — toggled by body[data-type] */
-  /* a-only: A · b-only: B · ac-only: A·C · ab-only: A·B · abc-only: A·B·C · not-c: C 제외 · e-only: E(인물 소개)
+  /* a-only: A · b-only: B · ac-only: A·C · ab-only: A·B · abc-only: A·B·C · not-c: C 제외 · e-only: E(인물 소개) · f-only: F(레터 로그) · not-f: F 제외
      D는 A와 같은 입력값을 씀 (B·E 전용만 숨김) */
   body[data-type="A"] .b-only, body[data-type="A"] .e-only{ display:none }
   body[data-type="B"] .a-only, body[data-type="B"] .ac-only, body[data-type="B"] .e-only{ display:none }
   body[data-type="C"] .a-only, body[data-type="C"] .b-only, body[data-type="C"] .ab-only, body[data-type="C"] .not-c, body[data-type="C"] .e-only{ display:none }
   body[data-type="D"] .b-only, body[data-type="D"] .e-only{ display:none }
   body[data-type="E"] .a-only, body[data-type="E"] .ac-only, body[data-type="E"] .b-only, body[data-type="E"] .ab-only, body[data-type="E"] .abc-only{ display:none }
+  body[data-type="F"] .b-only, body[data-type="F"] .e-only, body[data-type="F"] .not-f{ display:none }
+  body:not([data-type="F"]) .f-only{ display:none }
   .cast-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   .cast-grid textarea{min-height:120px}
   .cast-col h4{margin:0 0 10px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:.24em; color:var(--ink-dim); font-weight:600}
