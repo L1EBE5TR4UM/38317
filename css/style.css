@@ -161,6 +161,7 @@
   .tp-arrow{background:none; border:0; color:var(--ink-mute); font-size:20px; line-height:1; padding:4px 8px; cursor:pointer; border-radius:6px}
   .tp-arrow:hover{color:var(--ink)}
   .tp-body{margin-top:14px; display:grid; grid-template-columns:auto minmax(0,1fr)}
+  .tp-body[hidden]{display:none}
   .tp-side{display:flex; flex-direction:column; gap:2px; padding-right:16px; border-right:1px solid rgba(221,209,184,.14)}
   .tp-tab{background:none; border:0; padding:5px 0; color:var(--ink-mute); font:inherit; font-size:12.5px; cursor:pointer; text-align:left; white-space:nowrap}
   .tp-tab sup{font-size:9.5px; margin-left:2px; opacity:.7}
