@@ -562,7 +562,7 @@ ${subtitle ? `<div style="font-size:13px;line-height:1.6;margin-top:8px;color:${
   // 배지: Play 버튼 색 단색. 제목과 반대쪽에 두어 정보가 한쪽으로 쏠리지 않게 함 (가운데 정렬이면 가운데)
   const badgeStyle = `background-color:${v.accent};color:${v.accentText};`;
   const badgeAlign = validAlign === 'left' ? 'right' : (validAlign === 'right' ? 'left' : 'center');
-  const badge = `<div style="display:inline-block;padding:6px 16px;border-radius:999px;${badgeStyle}font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;line-height:1.5;box-shadow:0 3px 10px rgba(0,0,0,0.18);">${escapeHtml(character)}</div>`;
+  const badge = `<div style="display:inline-block;padding:6px 16px;border-radius:999px;${badgeStyle}font-size:14px;font-weight:700;letter-spacing:0.02em;white-space:nowrap;line-height:1.5;">${escapeHtml(character)}</div>`;
 
   const row = `<div style="margin-top:-17px;padding:0 26px;text-align:${badgeAlign};">${badge}</div>`;
 
