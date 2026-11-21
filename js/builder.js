@@ -633,15 +633,17 @@ function buildTypeF(o){
   const chap  = val('f-fchap') || title;
   const mark  = val('f-fmark');
   const footerCustom = val('f-footer');
-  const footerText = footerCustom || escapeHtml([author, title].filter(Boolean).join(' · ').toUpperCase());
+  const footerText = footerCustom || (author ? escapeHtml(author) : '');   // 다른 TYPE과 같음: 비우면 Your Name
 
   const page = v.outerBg;
   const ink  = readableInk(page, v.text);
   const mute = toneInk(v.muted, page, ink, 4.5);   // 9~10px 작은 글씨라 대비 4.5 이상, 색조는 유지
   const rule = hexToRgba(mute, 0.55);
   const hasImg = useHero && img;
-  const sans = `Arial,sans-serif`;
-  const disp = `Georgia,'Times New Roman',Times,serif`;
+  // 제목만 따로: Georgia 이탤릭 굵게. Georgia가 없는 기기(Android 등)는 같은 글자 폭으로 만든 Gelasio 웹폰트를 @import로 받아 씀
+  // 나머지 글자는 모두 다른 TYPE처럼 Body Font(f-font)를 따름
+  const disp = `Georgia,'Gelasio',${font}`;
+  const fontImport = `@import url('https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@1,700&display=swap');`;
   const pad  = '4.167%';
   const wrapTxt = 'white-space:normal;word-break:keep-all;overflow-wrap:anywhere;';
   const tMax = Math.max(48, Math.round(mw * 0.123));        // 960px → 118px, 650px → 80px
@@ -663,14 +665,15 @@ function buildTypeF(o){
   const heroInk = mixHex(ink, mute, 0.3);
   const glow = (a)=>`text-shadow:0 0 10px ${hexToRgba(page, a)},0 0 2px ${hexToRgba(page, a)};`;
   const kicker = (AU || CH) ? `${AU ? `<div>${AU}</div>` : ''}${CH ? `<div>${CH}</div>` : ''}` : '&nbsp;';
-  const kickerCss = `font-family:${sans};font-size:9px;line-height:1.8;letter-spacing:.12em;color:${heroInk};${glow(0.9)}${wrapTxt}`;
+  const kickerCss = `font-size:9px;line-height:1.8;letter-spacing:.12em;color:${heroInk};${glow(0.9)}${wrapTxt}`;
 
   const shell = (inner) => `${thumbImg}<div style="width:100%;max-width:${mw}px;margin:0 auto;background-color:${page};color:${ink};font-family:${font};">
 ${inner}
 </div>`;
 
   // 휴대폰 폭에서는 본문 좌우 여백을 14% → 4.167%로
-  const mobile = `<div><style>@media (max-width:600px){.la-fl-${uid}{padding-left:${pad} !important;padding-right:${pad} !important;}}</style></div>`;
+  const mobile = `<div><style>${fontImport}
+@media (max-width:600px){.la-fl-${uid}{padding-left:${pad} !important;padding-right:${pad} !important;}}</style></div>`;
   const hero = `<div style="box-sizing:border-box;display:table;width:100%;margin:0;padding:0;${heroBg}">
 <div style="box-sizing:border-box;display:table-cell;width:100%;height:${hh}px;margin:0;padding:40px ${pad} 34px;vertical-align:bottom;text-align:center;font-size:13px;line-height:normal;${veil}">
 <div style="${kickerCss}">${kicker}</div>
@@ -683,19 +686,22 @@ ${subtitle ? `<div style="margin-top:16px;font-family:${font};font-size:13px;lin
 <div style="font-family:${font};font-size:14px;line-height:1.9;font-style:italic;${wrapTxt}color:${mute};">${EP}</div>
 </div>` : '';
   const chapBlock = (sec || no || chap) ? `<div style="margin:44px 0 0;text-align:center;">
-${(sec || no) ? `<div style="font-family:${sans};font-size:10px;letter-spacing:.24em;color:${mute};">${escapeHtml([sec, no].filter(Boolean).join(' · '))}</div>` : ''}
+${(sec || no) ? `<div style="font-size:10px;letter-spacing:.24em;color:${mute};">${escapeHtml([sec, no].filter(Boolean).join(' · '))}</div>` : ''}
 ${chap ? `<div style="margin-top:10px;font-family:${font};font-size:20px;line-height:1.4;font-weight:700;letter-spacing:-.02em;${wrapTxt}color:${ink};">${escapeHtml(chap)}</div>` : ''}
-<div style="margin-top:14px;font-family:${disp};font-size:14px;letter-spacing:.6em;padding-left:.6em;color:${mute};">&middot;&middot;&middot;</div>
+<div style="margin-top:14px;font-size:14px;letter-spacing:.6em;padding-left:.6em;color:${mute};">&middot;&middot;&middot;</div>
 </div>` : '';
   const sign = (author || mark) ? `<div style="margin-top:30px;text-align:right;">
-${author ? `<div style="font-family:${disp};font-size:17px;font-style:italic;color:${ink};">&mdash; ${escapeHtml(author)}</div>` : ''}
-${mark ? `<div style="margin-top:8px;font-family:${sans};font-size:10px;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : ''}
+${author ? `<div style="font-size:16px;font-style:italic;color:${ink};">&mdash; ${escapeHtml(author)}</div>` : ''}
+${mark ? `<div style="margin-top:8px;font-size:10px;letter-spacing:2px;color:${mute};">${escapeHtml(mark)}</div>` : ''}
 </div>` : '';
   const body = `<div class="la-fl-${uid}" style="box-sizing:border-box;padding:36px 14% 40px;overflow-wrap:anywhere;color:${ink};">
 ${bodyHTML}
 ${sign}
 </div>`;
-  const foot = footerText ? `<div style="margin:0 ${pad};padding:14px 0 22px;border-top:1px solid ${rule};text-align:center;color:${mute};font-family:${sans};font-size:10px;line-height:1.6;letter-spacing:.2em;">${footerText}</div>` : '';
+  // 푸터: A TYPE과 같은 모양 (가는 윗줄 + 가운데 12px), 색만 이 바탕 기준
+  const foot = footerText ? `<div style="margin:0 ${pad};padding:14px 0 30px 0;border-top:1px solid ${hexToRgba(mute,0.35)};text-align:center;color:${mute};">
+<div style="font-size:12px;line-height:1.2;"><span style="font-size:12px;">${footerText}</span></div>
+</div>` : '';
   return mobile + shell(`${hero}
 ${epiBlock}
 ${chapBlock}
