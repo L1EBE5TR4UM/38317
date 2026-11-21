@@ -25,14 +25,20 @@
         <button class="active" data-tab="inputs">Inputs</button>
         <button data-tab="styles">Styles &amp; Presets</button>
       </div>
+      <!-- TYPE 선택: 드롭다운. 로그(LOG)와 인물 소개(CAST)를 나눠 묶음. 새 로그 TYPE은 LOG 묶음 끝에 추가 -->
       <div class="type-picker">
-        <span class="type-label">TYPE</span>
-        <div class="type-toggle" id="typeToggle">
-          <button class="active" data-type="A" title="A TYPE · 자막 + Play/EQ 바 (서사 로그 / 스토리 게시용)" aria-label="A TYPE">A</button>
-          <button data-type="B" title="B TYPE · Prompt·Model·Info 메타 바 (봇 카탈로그 / 캐릭터 소개용)" aria-label="B TYPE">B</button>
-          <button data-type="C" title="C TYPE · 북 재킷 커버 (이미지 표지 + 제목 밴드)" aria-label="C TYPE">C</button>
-          <button data-type="D" title="D TYPE · 배너 제목 + 캐릭터 배지" aria-label="D TYPE">D</button>
-          <button data-type="E" title="E TYPE · 투명 배경 인물 소개 헤더 (USER/CHAR + INTRODUCTION)" aria-label="E TYPE">E</button>
+        <button type="button" class="type-btn" id="typeBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="typeToggle">
+          <span class="type-label">TYPE</span><b id="typeBtnKey">A</b><span id="typeBtnName">자막 + Play 바</span><span class="type-caret" aria-hidden="true">&#9662;</span>
+        </button>
+        <div class="type-menu" id="typeToggle" role="listbox" aria-label="TYPE 선택" hidden>
+          <div class="type-group">LOG</div>
+          <button type="button" role="option" class="active" aria-selected="true" data-type="A" data-name="자막 + Play 바"><b>A</b><span>자막 + Play 바 <small>· 서사 로그</small></span></button>
+          <button type="button" role="option" aria-selected="false" data-type="B" data-name="메타 바"><b>B</b><span>메타 바 <small>· 봇 카탈로그</small></span></button>
+          <button type="button" role="option" aria-selected="false" data-type="C" data-name="북 재킷"><b>C</b><span>북 재킷 <small>· 표지 로그</small></span></button>
+          <button type="button" role="option" aria-selected="false" data-type="D" data-name="배너 + 배지"><b>D</b><span>배너 + 배지 <small>· 그림 위 제목 로그</small></span></button>
+          <hr>
+          <div class="type-group">CAST</div>
+          <button type="button" role="option" aria-selected="false" data-type="E" data-name="인물 소개"><b>E</b><span>인물 소개 <small>· CAST 헤더</small></span></button>
         </div>
       </div>
     </div>
@@ -49,7 +55,7 @@
           <div class="b-only"><label>Prompt Name (B 타입)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
           <div class="b-only"><label>Model (B 타입)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
           <div class="full b-only"><label>Info (B 타입, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
-          <div class="full ac-only"><label>Hero Subtitle (A·C·E 타입, HTML 가능)</label>
+          <div class="full ac-only"><label>Hero Subtitle (A·C·D 타입, HTML 가능)</label>
             <input id="f-subtitle" type="text" value="a brief tale captures a moment trembling in secrecy." />
           </div>
           <div class="full"><label>Footer 텍스트 (HTML 가능, 비우면 Your Name 자동 생성)</label>

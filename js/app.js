@@ -13,13 +13,34 @@ $('tabs').addEventListener('click', (e)=>{
     p.style.display = (p.dataset.pane===tab) ? '' : 'none';
   });
 });
-$('typeToggle').addEventListener('click', (e)=>{
-  const b = e.target.closest('button'); if(!b) return;
-  for (const btn of $('typeToggle').children) btn.classList.toggle('active', btn===b);
-  state.type = b.dataset.type;
+/* TYPE 드롭다운: #typeBtn을 누르면 #typeToggle 목록이 열리고, 고르면 닫힘 */
+function syncTypeUI(){
+  let name = '';
+  $('typeToggle').querySelectorAll('[data-type]').forEach(btn=>{
+    const on = btn.dataset.type === state.type;
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    if (on) name = btn.dataset.name || '';
+  });
+  $('typeBtnKey').textContent = state.type;
+  $('typeBtnName').textContent = name;
   document.body.setAttribute('data-type', state.type);
+}
+function setTypeMenu(open){
+  $('typeToggle').hidden = !open;
+  $('typeBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+$('typeBtn').addEventListener('click', ()=> setTypeMenu($('typeToggle').hidden));
+$('typeToggle').addEventListener('click', (e)=>{
+  const b = e.target.closest('[data-type]'); if(!b) return;
+  state.type = b.dataset.type;
+  syncTypeUI();
+  setTypeMenu(false);
+  $('typeBtn').focus();
   render();
 });
+document.addEventListener('click', (e)=>{ if(!e.target.closest('.type-picker')) setTypeMenu(false); });
+document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && !$('typeToggle').hidden){ setTypeMenu(false); $('typeBtn').focus(); } });
 
 /* ---------- THEMES UI ----------
    현재 테마 줄(미니 카드 + 이름 + ‹ ›) 아래에
@@ -354,10 +375,7 @@ function restore(snap){
   else if (snapType === 'D' && !(snap.v >= 3)) snapType = 'E';
   if(['A','B','C','D','E'].includes(snapType)){
     state.type = snapType;
-    for (const btn of $('typeToggle').children){
-      btn.classList.toggle('active', btn.dataset.type===state.type);
-    }
-    document.body.setAttribute('data-type', state.type);
+    syncTypeUI();
   }
 
   if(snap.theme){
@@ -518,6 +536,6 @@ $('p-import').addEventListener('click', ()=>{
 });
 
 refreshPresetList();
-document.body.setAttribute('data-type', state.type);
+syncTypeUI();
 repaintChips();
 render();

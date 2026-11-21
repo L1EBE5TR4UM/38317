@@ -80,11 +80,27 @@
     font-family:inherit; font-size:13.5px; letter-spacing:.05em; transition:.2s;
   }
   .tabs button.active{background:var(--ink); color:var(--on-ink); box-shadow:0 2px 10px rgba(0,0,0,.4)}
-  .type-picker{display:inline-flex; align-items:center; gap:10px}
-  .type-label{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:13px; letter-spacing:.28em; color:var(--ink-mute)}
-  .type-toggle{gap:2px}
-  .type-toggle button{width:34px; height:30px; padding:0; font-family:'Cormorant Garamond',serif; font-size:15px; font-weight:600; letter-spacing:0}
-  .type-toggle button.active{background:var(--toggle-on); color:var(--ink); box-shadow:inset 0 0 0 1px rgba(217,200,156,.35)}
+  .type-picker{position:relative; display:inline-flex}
+  .type-label{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:13px; letter-spacing:.22em; color:var(--ink-mute)}
+  .type-btn{display:inline-flex; align-items:center; gap:8px; background:var(--well); border:1px solid var(--line); border-radius:999px;
+    padding:7px 14px 7px 16px; cursor:pointer; font-family:inherit; font-size:13.5px; letter-spacing:.04em; color:var(--ink)}
+  .type-btn:hover, .type-btn[aria-expanded="true"]{border-color:var(--field-line)}
+  .type-btn b{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:15px; color:var(--accent)}
+  .type-caret{color:var(--ink-mute); font-size:10px}
+  .type-menu{position:absolute; right:0; top:calc(100% + 6px); z-index:6; min-width:250px; max-width:calc(100vw - 32px); display:grid; gap:1px; padding:6px;
+    background:var(--panel); border:1px solid var(--line); border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,.5)}
+  .type-menu[hidden]{display:none}
+  @media (max-width:600px){ .type-menu{left:0; right:auto} }
+  .type-menu hr{border:0; border-top:1px solid var(--line); margin:4px 0}
+  .type-group{font-family:'Cormorant Garamond',serif; font-size:11px; letter-spacing:.3em; color:var(--ink-mute); padding:6px 10px 2px}
+  .type-menu button{display:flex; align-items:baseline; gap:10px; background:none; border:0; text-align:left; padding:8px 10px; border-radius:6px;
+    cursor:pointer; font-family:inherit; color:var(--ink-dim)}
+  .type-menu button:hover, .type-menu button:focus-visible{background:var(--btn-2); color:var(--ink); outline:none}
+  .type-menu button b{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:15px; width:14px; color:var(--ink-mute)}
+  .type-menu button span{font-size:12.5px}
+  .type-menu button small{color:var(--ink-mute)}
+  .type-menu button.active b, .type-menu button.active span{color:var(--accent)}
+  .type-menu button.active::after{content:'\2713'; margin-left:auto; color:var(--accent); font-size:12px}
 
   .section{padding:18px 22px; border-bottom:1px solid var(--line)}
   .section:last-child{border-bottom:0}
