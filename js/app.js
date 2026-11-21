@@ -421,24 +421,24 @@ function restore(snap){
 }
 function refreshPresetList(){
   const sel = $('p-load'); const data = loadPresets();
-  sel.innerHTML = '<option value="">— 저장된 preset 선택 —</option>';
+  sel.innerHTML = '<option value="">— 저장된 프리셋 선택 —</option>';
   Object.keys(data).sort().forEach(name=>{
     const o = document.createElement('option'); o.value=name; o.textContent=name; sel.appendChild(o);
   });
 }
 $('p-save').addEventListener('click', ()=>{
-  const name = ($('p-name').value||'').trim(); if(!name){ alert('Preset 이름을 입력하세요.'); return; }
+  const name = ($('p-name').value||'').trim(); if(!name){ alert('프리셋 이름을 입력하세요.'); return; }
   const all = loadPresets(); all[name] = snapshot(); savePresets(all);
   refreshPresetList(); alert(`"${name}" 저장됨`);
 });
 $('p-delete').addEventListener('click', ()=>{
   const name = $('p-load').value || ($('p-name').value||'').trim();
-  if(!name){ alert('삭제할 preset을 선택하세요.'); return; }
+  if(!name){ alert('삭제할 프리셋을 선택하세요.'); return; }
   const all = loadPresets(); delete all[name]; savePresets(all); refreshPresetList();
 });
 $('p-load').addEventListener('change', ()=>{
   const name = $('p-load').value; if(!name) return;
-  if(!restore(loadPresets()[name])) alert('이 preset을 불러오지 못했습니다.');
+  if(!restore(loadPresets()[name])) alert('이 프리셋을 불러오지 못했습니다.');
 });
 $('p-export').addEventListener('click', ()=>{
   try{
@@ -458,7 +458,7 @@ $('p-export').addEventListener('click', ()=>{
       URL.revokeObjectURL(url);
     }, 100);
   }catch(err){
-    alert('Export 중 오류: ' + err.message);
+    alert('내보내기 중 오류: ' + err.message);
     console.error(err);
   }
 });
@@ -484,10 +484,10 @@ $('p-import').addEventListener('click', ()=>{
         return;
       }
       try{
-        if(!restore(snap)) throw new Error('LOG LIBRARY v' + PRESET_VERSION + ' preset 파일이 아닙니다. (예전 형식은 지원하지 않음)');
-        alert('Preset을 불러왔습니다.');
+        if(!restore(snap)) throw new Error('LOG LIBRARY v' + PRESET_VERSION + ' 프리셋 파일이 아닙니다. (예전 형식은 지원하지 않음)');
+        alert('프리셋을 불러왔습니다.');
       }catch(err){
-        alert('Preset 적용 중 오류가 발생했습니다.\n' + err.message);
+        alert('프리셋 적용 중 오류가 발생했습니다.\n' + err.message);
         console.error(err);
       }finally{
         if(input.parentNode) document.body.removeChild(input);

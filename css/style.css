@@ -119,10 +119,15 @@
   .grid{display:grid; grid-template-columns:1fr 1fr; gap:14px}
   .full{grid-column:1 / -1}
 
+  /* 입력란 이름: 한글 이름 + 작은 영문 병기(<em>) */
   label{
-    display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase;
-    color:var(--ink-mute); margin-bottom:6px;
-    font-family:'Cormorant Garamond', serif; font-weight:600;
+    display:block; font-size:12.5px; letter-spacing:.02em;
+    color:var(--ink-dim); margin-bottom:6px; font-weight:600;
+  }
+  label em{
+    font-style:normal; font-family:'Cormorant Garamond', serif; font-weight:600;
+    font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--ink-mute); margin-left:7px;
   }
   input[type=text], input[type=url], input[type=number], select, textarea{
     width:100%; background:var(--field); border:1px solid var(--field-line);
@@ -252,7 +257,7 @@
   .cast-col h4{margin:0 0 10px; font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:.24em; color:var(--ink-dim); font-weight:600}
   .cast-col > div{margin-bottom:10px}
   .photo-adjust > div{margin-bottom:6px}
-  .photo-adjust label{text-transform:none; letter-spacing:.06em; font-size:12.5px; margin-bottom:2px}
+  .photo-adjust label{margin-bottom:2px}
   .photo-adjust .rv{color:var(--accent); letter-spacing:0; font-weight:700; margin-left:4px}
   @media (max-width: 560px){ .cast-grid{grid-template-columns:1fr} }
   .help code{

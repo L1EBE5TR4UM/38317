@@ -50,18 +50,18 @@
       <div class="section abc-only">
         <h3 class="section-title">Meta</h3>
         <div class="grid">
-          <div><label>Your Name (by ___)</label><input id="f-author" type="text" value="Your Name" /></div>
-          <div><label>Character Name (영문 표기)</label><input id="f-character" type="text" value="Character Name" /></div>
-          <div><label>Title (hero, 큰 글씨)</label><input id="f-title" type="text" value="Short Story Title" /></div>
-          <div><label>Tags (선택, 쉼표로 구분)</label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
-          <div class="b-only"><label>Prompt Name (메타 바)</label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
-          <div class="b-only"><label>Model (메타 바)</label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
-          <div class="full b-only"><label>Info (메타 바, 자유 텍스트)</label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
-          <div class="full ac-only"><label>Hero Subtitle (메타 바 제외, HTML 가능)</label>
+          <div><label>작성자<em>Your Name</em></label><input id="f-author" type="text" value="Your Name" /></div>
+          <div><label>캐릭터 이름<em>Character</em></label><input id="f-character" type="text" value="Character Name" /></div>
+          <div><label>제목<em>Title</em></label><input id="f-title" type="text" value="Short Story Title" /></div>
+          <div><label>태그<em>Tags</em></label><input id="f-tags" type="text" placeholder="예: Short Log, Drama" /></div>
+          <div class="b-only"><label>프롬프트<em>Prompt</em></label><input id="f-prompt" type="text" value="Prompt" placeholder="예: Sonnet v3" /></div>
+          <div class="b-only"><label>모델<em>Model</em></label><input id="f-model" type="text" value="Model" placeholder="예: Claude 3.5" /></div>
+          <div class="full b-only"><label>정보<em>Info</em></label><input id="f-link" type="text" placeholder="예: Bot Link, Notion, 메모 등" /></div>
+          <div class="full ac-only"><label>부제<em>Subtitle</em></label>
             <input id="f-subtitle" type="text" value="a brief tale captures a moment trembling in secrecy." />
           </div>
-          <div class="full not-f"><label>Footer 텍스트 (HTML 가능, 비우면 Your Name 자동 생성)</label>
-            <input id="f-footer" type="text" placeholder="예: &copy; 2025 Your Name &middot; do not repost" />
+          <div class="full not-f"><label>꼬리말<em>Footer</em></label>
+            <input id="f-footer" type="text" placeholder="비우면 작성자 이름으로 자동 생성" />
           </div>
         </div>
       </div>
@@ -70,15 +70,15 @@
       <div class="section e-only">
         <h3 class="section-title">Cast</h3>
         <div class="grid">
-          <div><label>대제목</label><input id="f-ctitle" type="text" value="DRAMATIS PERSONAE" /></div>
-          <div><label>부제</label><input id="f-csub" type="text" value="CAST" /></div>
-          <div><label>인물 사진 위치</label>
+          <div><label>대제목<em>Heading</em></label><input id="f-ctitle" type="text" value="DRAMATIS PERSONAE" /></div>
+          <div><label>부제<em>Subheading</em></label><input id="f-csub" type="text" value="CAST" /></div>
+          <div><label>사진 정렬<em>Photo Align</em></label>
             <select id="f-cphoto">
               <option value="center" selected>가운데</option>
               <option value="left">왼쪽</option>
             </select>
           </div>
-          <div><label>스토리 항목명</label><input id="f-cstory" type="text" value="INTRODUCTION" /></div>
+          <div><label>소개 항목 이름<em>Story Label</em></label><input id="f-cstory" type="text" value="INTRODUCTION" /></div>
         </div>
         <label class="check" style="margin-top:12px">
           <input id="f-ctransparent" type="checkbox" checked /> 완전 투명 배경 <span style="opacity:.7">(해제하면 테마의 바깥 배경색을 깔아줌)</span>
@@ -89,32 +89,28 @@
         <div class="cast-grid" style="margin-top:16px">
           <div class="cast-col">
             <h4>CAST 1</h4>
-            <div><label>분류</label><input id="f-u-role" type="text" value="USER" /></div>
-            <div><label>이름</label><input id="f-u-name" type="text" value="Name" /></div>
-            <div><label>사진 URL</label><input id="f-u-img" type="url" placeholder="https://..." /></div>
+            <div><label>분류<em>Role</em></label><input id="f-u-role" type="text" value="USER" /></div>
+            <div><label>이름<em>Name</em></label><input id="f-u-name" type="text" value="Name" /></div>
+            <div><label>사진 주소<em>Photo URL</em></label><input id="f-u-img" type="url" placeholder="https://..." /></div>
             <div class="photo-adjust">
-              <div><label>Zoom <span class="rv"><span id="f-u-zoom-v">100</span>%</span></label><input id="f-u-zoom" type="range" min="100" max="300" step="1" value="100" /></div>
-              <div><label>Focus X (좌우) <span class="rv"><span id="f-u-fx-v">50</span>%</span></label><input id="f-u-fx" type="range" min="0" max="100" step="1" value="50" /></div>
-              <div><label>Focus Y (상하) <span class="rv"><span id="f-u-fy-v">50</span>%</span></label><input id="f-u-fy" type="range" min="0" max="100" step="1" value="50" /></div>
+              <div><label>확대<em>Zoom</em> <span class="rv"><span id="f-u-zoom-v">100</span>%</span></label><input id="f-u-zoom" type="range" min="100" max="300" step="1" value="100" /></div>
+              <div><label>가로 위치<em>Focus X</em> <span class="rv"><span id="f-u-fx-v">50</span>%</span></label><input id="f-u-fx" type="range" min="0" max="100" step="1" value="50" /></div>
+              <div><label>세로 위치<em>Focus Y</em> <span class="rv"><span id="f-u-fy-v">50</span>%</span></label><input id="f-u-fy" type="range" min="0" max="100" step="1" value="50" /></div>
             </div>
-            <div><label>소개</label><textarea id="f-u-desc" placeholder="인물 소개"></textarea></div>
+            <div><label>소개<em>Intro</em></label><textarea id="f-u-desc" placeholder="인물 소개"></textarea></div>
           </div>
           <div class="cast-col">
             <h4>CAST 2</h4>
-            <div><label>분류</label><input id="f-c-role" type="text" value="CHAR" /></div>
-            <div><label>이름</label><input id="f-c-name" type="text" value="Name" /></div>
-            <div><label>사진 URL</label><input id="f-c-img" type="url" placeholder="https://..." /></div>
+            <div><label>분류<em>Role</em></label><input id="f-c-role" type="text" value="CHAR" /></div>
+            <div><label>이름<em>Name</em></label><input id="f-c-name" type="text" value="Name" /></div>
+            <div><label>사진 주소<em>Photo URL</em></label><input id="f-c-img" type="url" placeholder="https://..." /></div>
             <div class="photo-adjust">
-              <div><label>Zoom <span class="rv"><span id="f-c-zoom-v">100</span>%</span></label><input id="f-c-zoom" type="range" min="100" max="300" step="1" value="100" /></div>
-              <div><label>Focus X (좌우) <span class="rv"><span id="f-c-fx-v">50</span>%</span></label><input id="f-c-fx" type="range" min="0" max="100" step="1" value="50" /></div>
-              <div><label>Focus Y (상하) <span class="rv"><span id="f-c-fy-v">50</span>%</span></label><input id="f-c-fy" type="range" min="0" max="100" step="1" value="50" /></div>
+              <div><label>확대<em>Zoom</em> <span class="rv"><span id="f-c-zoom-v">100</span>%</span></label><input id="f-c-zoom" type="range" min="100" max="300" step="1" value="100" /></div>
+              <div><label>가로 위치<em>Focus X</em> <span class="rv"><span id="f-c-fx-v">50</span>%</span></label><input id="f-c-fx" type="range" min="0" max="100" step="1" value="50" /></div>
+              <div><label>세로 위치<em>Focus Y</em> <span class="rv"><span id="f-c-fy-v">50</span>%</span></label><input id="f-c-fy" type="range" min="0" max="100" step="1" value="50" /></div>
             </div>
-            <div><label>소개</label><textarea id="f-c-desc" placeholder="인물 소개"></textarea></div>
+            <div><label>소개<em>Intro</em></label><textarea id="f-c-desc" placeholder="인물 소개"></textarea></div>
           </div>
-        </div>
-        <div class="help" style="margin-top:6px">
-          바탕은 투명합니다(블로그 배경이 그대로 보임). 소개글은 항상 양쪽 정렬이고, 이름 색은 테마를 따릅니다 (CAST 1 = 대사 강조 배경색, CAST 2 = 플레이 버튼 배경색, 반전 가능).<br>
-          인물 소개에서는 <code>"대사"</code> · <code>'속마음'</code>에 강조 배경을 씌우지 않고 일반 글자로 표시합니다. <code>**굵게**</code> · <code>*기울임*</code>은 그대로 적용됩니다.
         </div>
       </div>
 
@@ -122,30 +118,29 @@
       <div class="section f-only">
         <h3 class="section-title">Letter</h3>
         <div class="grid">
-          <div><label>목차 라벨 (비우면 숨김)</label><input id="f-fsec" type="text" value="목차" /></div>
-          <div><label>장 번호</label><input id="f-fno" type="text" value="01" /></div>
-          <div><label>장 제목 (비우면 Title)</label><input id="f-fchap" type="text" placeholder="비우면 Title과 같음" /></div>
-          <div class="full"><label>인용문 (제목 아래 가운데, 비우면 숨김)</label><input id="f-fepi" type="text" value="a single line that opens the letter." /></div>
-          <div><label>서명 (본문 끝 오른쪽 작은 글씨)</label><input id="f-fmark" type="text" value="LETTER LOG" /></div>
+          <div><label>목차 라벨<em>Section</em></label><input id="f-fsec" type="text" value="목차" /></div>
+          <div><label>장 번호<em>No.</em></label><input id="f-fno" type="text" value="01" /></div>
+          <div><label>장 제목<em>Chapter</em></label><input id="f-fchap" type="text" placeholder="비우면 제목과 같음" /></div>
+          <div class="full"><label>인용문<em>Epigraph</em></label><input id="f-fepi" type="text" value="a single line that opens the letter." /></div>
+          <div><label>서명<em>Signature</em></label><input id="f-fmark" type="text" value="LETTER LOG" /></div>
         </div>
-        <div class="help">제목 위 두 줄은 Your Name · Character Name, 본문 끝 서명 줄은 “— Your Name”, 바탕은 테마의 바깥 배경색입니다. <code>"대사"</code>·<code>'속마음'</code>은 강조 박스 없이 글자색으로 표시됩니다. 큰 제목은 Georgia 이탤릭(없는 기기는 Gelasio 웹폰트), 작성자 줄·목차 라벨·서명은 메시지 버블과 같은 고딕, 나머지 글자는 Body Font를 따릅니다.</div>
       </div>
 
       <div class="section abc-only">
         <h3 class="section-title">Hero</h3>
         <label class="check" style="margin-bottom:12px">
-          <input id="f-usehero" type="checkbox" checked /> Use Hero Image
+          <input id="f-usehero" type="checkbox" checked /> 대표 이미지 사용
         </label>
         <div class="grid">
-          <div class="full"><label>Image URL</label><input id="f-img" type="url" value="https://upload.wikimedia.org/wikipedia/commons/8/83/The_Swing_%28P430%29.jpg" /></div>
-          <div><label>Focus X (%)</label><input id="f-fx" type="number" value="50" /></div>
-          <div><label>Focus Y (%)</label><input id="f-fy" type="number" value="70" /></div>
-          <div><label>Hero Height (px)</label><input id="f-hheight" type="number" value="350" /></div>
-          <div class="not-c not-f"><label>Title 정렬 (3줄 텍스트)</label>
+          <div class="full"><label>이미지 주소<em>Image URL</em></label><input id="f-img" type="url" value="https://upload.wikimedia.org/wikipedia/commons/8/83/The_Swing_%28P430%29.jpg" /></div>
+          <div><label>가로 위치<em>Focus X</em></label><input id="f-fx" type="number" value="50" /></div>
+          <div><label>세로 위치<em>Focus Y</em></label><input id="f-fy" type="number" value="70" /></div>
+          <div><label>이미지 높이<em>Height</em></label><input id="f-hheight" type="number" value="350" /></div>
+          <div class="not-c not-f"><label>제목 정렬<em>Align</em></label>
             <select id="f-tpos">
-              <option value="left" selected>Left</option>
-              <option value="center">Center</option>
-              <option value="right">Right</option>
+              <option value="left" selected>왼쪽</option>
+              <option value="center">가운데</option>
+              <option value="right">오른쪽</option>
             </select>
           </div>
         </div>
@@ -154,12 +149,12 @@
       <div class="section">
         <h3 class="section-title">Layout</h3>
         <div class="grid">
-          <div><label>Container Max Width (px)</label><input id="f-mw" type="number" value="650" /></div>
-          <div><label>Body Font Size (px)</label><input id="f-fs" type="number" step="0.1" value="15.4" /></div>
-          <div><label>Line Height</label><input id="f-lh" type="number" step="0.05" value="1.9" /></div>
-          <div><label>Letter Spacing (px)</label><input id="f-ls" type="number" step="0.01" value="-0.93" /></div>
-          <div class="abc-only not-f"><label>Card Body Height (px)</label><input id="f-cardh" type="number" value="420" /></div>
-          <div><label>Body Font</label>
+          <div><label>최대 너비<em>Max Width</em></label><input id="f-mw" type="number" value="650" /></div>
+          <div><label>글자 크기<em>Font Size</em></label><input id="f-fs" type="number" step="0.1" value="15.4" /></div>
+          <div><label>줄 간격<em>Line Height</em></label><input id="f-lh" type="number" step="0.05" value="1.9" /></div>
+          <div><label>자간<em>Letter Spacing</em></label><input id="f-ls" type="number" step="0.01" value="-0.93" /></div>
+          <div class="abc-only not-f"><label>상자 높이<em>Card Height</em></label><input id="f-cardh" type="number" value="420" /></div>
+          <div><label>본문 글꼴<em>Body Font</em></label>
             <select id="f-font">
               <option value="'Noto Serif KR','Nanum Myeongjo','Apple Myungjo',Batang, Georgia, serif" selected>Noto Serif KR (기본)</option>
               <option value="'Nanum Myeongjo',Batang, serif">Nanum Myeongjo</option>
@@ -167,10 +162,10 @@
               <option value="Georgia, serif">Georgia</option>
               <option value="'Batang', serif">Batang</option>
               <option value="Pretendard,'Pretendard Variable','Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',sans-serif">Pretendard</option>
-              <option value="custom">Custom (아래 스택 사용)</option>
+              <option value="custom">직접 입력 (아래 칸 사용)</option>
             </select>
           </div>
-          <div><label>Custom Font Stack</label><input id="f-fontcustom" type="text" value="'Noto Serif KR', Georgia, serif" /></div>
+          <div><label>직접 입력 글꼴<em>Font Stack</em></label><input id="f-fontcustom" type="text" value="'Noto Serif KR', Georgia, serif" /></div>
         </div>
       </div>
 
@@ -225,48 +220,48 @@ She laughs—pink silk catching the sun. "Playfulness," I whisper, "masks a code
       <div class="section">
         <h3 class="section-title">Outer / Surface</h3>
         <div class="grid">
-          <div><label>Outer Background (프레임)</label><div class="color-row"><input type="color" id="t-outerBg" value="#faf9f7" /><span id="t-outerBg-v">#faf9f7</span></div></div>
-          <div><label>Card Background</label><div class="color-row"><input type="color" id="t-card" value="#ffffff" /><span id="t-card-v">#ffffff</span></div></div>
-          <div><label>Body Text</label><div class="color-row"><input type="color" id="t-text" value="#1c1b1a" /><span id="t-text-v">#1c1b1a</span></div></div>
+          <div><label>바깥 배경<em>Outer</em></label><div class="color-row"><input type="color" id="t-outerBg" value="#faf9f7" /><span id="t-outerBg-v">#faf9f7</span></div></div>
+          <div><label>카드 배경<em>Card</em></label><div class="color-row"><input type="color" id="t-card" value="#ffffff" /><span id="t-card-v">#ffffff</span></div></div>
+          <div><label>본문 글자색<em>Text</em></label><div class="color-row"><input type="color" id="t-text" value="#1c1b1a" /><span id="t-text-v">#1c1b1a</span></div></div>
         </div>
       </div>
 
       <div class="section">
         <h3 class="section-title">Dialog &amp; Accent</h3>
         <div class="grid">
-          <div><label>"대사" 강조 배경 (큰따옴표)</label><div class="color-row"><input type="color" id="t-hl" value="#e6e6e6" /><span id="t-hl-v">#e6e6e6</span></div></div>
-          <div><label>'속마음' 강조 배경 (작은따옴표)</label><div class="color-row"><input type="color" id="t-hl2" value="#e9e6df" /><span id="t-hl2-v">#e9e6df</span></div></div>
-          <div><label>Play 버튼 배경 (Accent)</label><div class="color-row"><input type="color" id="t-accent" value="#f4f0e3" /><span id="t-accent-v">#f4f0e3</span></div></div>
-          <div><label>Play 버튼 글자색</label><div class="color-row"><input type="color" id="t-accentText" value="#212420" /><span id="t-accentText-v">#212420</span></div></div>
-          <div><label>Muted (Pause / Footer)</label><div class="color-row"><input type="color" id="t-muted" value="#6b635e" /><span id="t-muted-v">#6b635e</span></div></div>
+          <div><label>"대사" 강조 배경<em>Dialogue</em></label><div class="color-row"><input type="color" id="t-hl" value="#e6e6e6" /><span id="t-hl-v">#e6e6e6</span></div></div>
+          <div><label>'속마음' 강조 배경<em>Thought</em></label><div class="color-row"><input type="color" id="t-hl2" value="#e9e6df" /><span id="t-hl2-v">#e9e6df</span></div></div>
+          <div><label>플레이 버튼 배경<em>Accent</em></label><div class="color-row"><input type="color" id="t-accent" value="#f4f0e3" /><span id="t-accent-v">#f4f0e3</span></div></div>
+          <div><label>플레이 버튼 글자색<em>Accent Text</em></label><div class="color-row"><input type="color" id="t-accentText" value="#212420" /><span id="t-accentText-v">#212420</span></div></div>
+          <div><label>흐린 글자색<em>Muted</em></label><div class="color-row"><input type="color" id="t-muted" value="#6b635e" /><span id="t-muted-v">#6b635e</span></div></div>
         </div>
       </div>
 
       <div class="section">
         <h3 class="section-title">Hero Overlay</h3>
         <div class="grid">
-          <div><label>Title 색</label><div class="color-row"><input type="color" id="t-title" value="#ffffff" /><span id="t-title-v">#ffffff</span></div></div>
-          <div><label>Character Name 색</label><div class="color-row"><input type="color" id="t-char" value="#ffffff" /><span id="t-char-v">#ffffff</span></div></div>
-          <div><label>Subtitle 색 (B)</label><div class="color-row"><input type="color" id="t-subtitle" value="#ffffff" /><span id="t-subtitle-v">#ffffff</span></div></div>
-          <div><label>Overlay 어둠 (0~1)</label><input id="t-overlayDark" type="number" step="0.05" min="0" max="1" value="0.55" /></div>
+          <div><label>제목 색<em>Title</em></label><div class="color-row"><input type="color" id="t-title" value="#ffffff" /><span id="t-title-v">#ffffff</span></div></div>
+          <div><label>캐릭터 이름 색<em>Character</em></label><div class="color-row"><input type="color" id="t-char" value="#ffffff" /><span id="t-char-v">#ffffff</span></div></div>
+          <div><label>부제 색<em>Subtitle</em></label><div class="color-row"><input type="color" id="t-subtitle" value="#ffffff" /><span id="t-subtitle-v">#ffffff</span></div></div>
+          <div><label>이미지 어둡게<em>Overlay</em></label><input id="t-overlayDark" type="number" step="0.05" min="0" max="1" value="0.55" /></div>
         </div>
       </div>
 
       <div class="section">
         <h3 class="section-title">Preset</h3>
         <div class="grid">
-          <div><label>Preset Name</label><input id="p-name" type="text" placeholder="My Sage v1" /></div>
+          <div><label>프리셋 이름<em>Name</em></label><input id="p-name" type="text" placeholder="My Sage v1" /></div>
           <div style="display:flex; gap:8px; align-items:flex-end">
-            <button class="copy-btn" id="p-save">Save</button>
-            <button class="copy-btn" id="p-delete" style="background:var(--btn-del);color:var(--ink)">Delete</button>
+            <button class="copy-btn" id="p-save">저장</button>
+            <button class="copy-btn" id="p-delete" style="background:var(--btn-del);color:var(--ink)">삭제</button>
           </div>
-          <div class="full"><label>Load Preset</label>
-            <select id="p-load"><option value="">— 저장된 preset 선택 —</option></select>
+          <div class="full"><label>불러오기<em>Load</em></label>
+            <select id="p-load"><option value="">— 저장된 프리셋 선택 —</option></select>
           </div>
-          <div><button class="copy-btn" id="p-export" style="background:var(--btn-2);color:var(--ink); width:100%">Export JSON</button></div>
-          <div><button class="copy-btn" id="p-import" style="background:var(--btn-2);color:var(--ink); width:100%">Import JSON</button></div>
+          <div><button class="copy-btn" id="p-export" style="background:var(--btn-2);color:var(--ink); width:100%">내보내기</button></div>
+          <div><button class="copy-btn" id="p-import" style="background:var(--btn-2);color:var(--ink); width:100%">가져오기</button></div>
         </div>
-        <div class="help">Preset는 브라우저 로컬에 저장됩니다. 백업하려면 JSON으로 내보내세요.</div>
+        <div class="help">프리셋은 이 브라우저에 저장됩니다. 백업하려면 JSON으로 내보내세요.</div>
       </div>
     </div>
   </section>
