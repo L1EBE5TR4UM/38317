@@ -2300,6 +2300,54 @@ const THEMES = {
     muted:'#4f5235',
     title:'#fffef2', subtitle:'#f7f6e2', char:'#f6e39a'
   },
+  // 터키석: 하늘빛 돌 사이로 지나가는 갈색 맥, 본문 글자는 테마 색조를 띤 짙은 색
+  'Turquoise Matrix': {
+    outerBg:'#c4e3ea', card:'#fbfdfc', text:'#3a1c01',
+    hl:'#a4d6e0', hl2:'#e6d8c8',
+    accent:'#5a3e2b', accentText:'#f2fbf9',
+    muted:'#455b55',
+    title:'#f3fbf9', subtitle:'#e3f4f1', char:'#a9e0d7'
+  },
+  // 데님: 인디고 원단과 주황 스티치, 본문 글자는 테마 색조를 띤 짙은 색
+  Denim: {
+    outerBg:'#3d5a80', card:'#f6f8fb', text:'#02233f',
+    hl:'#c7d4e8', hl2:'#f4d6bd',
+    accent:'#a8531c', accentText:'#ffffff',
+    muted:'#465568',
+    title:'#ffffff', subtitle:'#eaf0f8', char:'#f6c79e'
+  },
+  // 망고 라씨: 걸쭉한 망고 노랑과 카다멈 초록, 본문 글자는 테마 색조를 띤 짙은 색
+  'Mango Lassi': {
+    outerBg:'#fdd9a0', card:'#fffcf2', text:'#371e00',
+    hl:'#fbc06a', hl2:'#d6e6b8',
+    accent:'#b0620a', accentText:'#ffffff',
+    muted:'#66512c',
+    title:'#fffaea', subtitle:'#fff0cc', char:'#fcd98a'
+  },
+  // 우키요에: 프러시안 블루 파도와 바랜 종이, 주홍 낙관, 본문 글자는 테마 색조를 띤 짙은 색
+  'Ukiyo-e': {
+    outerBg:'#e9dfc8', card:'#faf5e9', text:'#022041',
+    hl:'#b9c7dc', hl2:'#f1cdb8',
+    accent:'#1d3a66', accentText:'#faf5e9',
+    muted:'#4d4a42',
+    title:'#fbf6ea', subtitle:'#f0e8d4', char:'#f0c2a8'
+  },
+  // 볼펜 필기: 흰 노트에 파란 볼펜 글씨 (실험적), 본문 글자는 테마 색조를 띤 짙은 색
+  Ballpoint: {
+    outerBg:'#e9edf3', card:'#ffffff', text:'#0b205f',
+    hl:'#fbf0b4', hl2:'#dde6f4',
+    accent:'#1f3fa8', accentText:'#ffffff',
+    muted:'#4c5670',
+    title:'#ffffff', subtitle:'#eef2fa', char:'#d8e2f8'
+  },
+  // 먹지 복사: 연노랑 사본지에 번진 보라 글씨 (실험적), 본문 글자는 테마 색조를 띤 짙은 색
+  'Carbon Copy': {
+    outerBg:'#efe9c9', card:'#fdfbee', text:'#301451',
+    hl:'#e0cdee', hl2:'#efe8cc',
+    accent:'#5b2f8c', accentText:'#fdfbee',
+    muted:'#55506a',
+    title:'#fffdf2', subtitle:'#f6f2dc', char:'#ddd4f2'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로'];
@@ -2329,7 +2377,7 @@ const THEME_GROUP_OF = {
   'Navy Velvet':'다크', 'Charcoal Rose':'다크', Starlight:'다크', Obsidian:'다크', Lunar:'다크', Velvet:'다크', Graphite:'다크', 'Indigo Ink':'다크', 'Silver Night':'다크', 'Night Frost':'다크', 'Red Dot Night':'다크', Negative:'다크', 'Negative Sand':'다크', 'Green Cloth':'다크', 'Slate Cloth':'다크', 'Wine Cloth':'다크',
   Hanji:'내추럴', Chestnut:'내추럴', Stone:'내추럴', 'Ivory Ink':'내추럴', Sandstone:'내추럴', Inverse:'내추럴', 'Red Dot':'내추럴', 'Sepia Photo':'내추럴', Newsprint:'내추럴', 'Paper White':'내추럴', 'Graph Paper':'내추럴', Letterpress:'내추럴', Airmail:'내추럴', Washi:'내추럴', 'Inverse Navy':'내추럴', 'Half Moon':'내추럴', 'Sage Mono':'내추럴', 'Inverse Slate':'내추럴', 'Index Card':'내추럴', Ledger:'내추럴', 'Manila Folder':'내추럴', Spreadsheet:'내추럴', Verdigris:'내추럴', 'Olive Leaf':'내추럴', Passport:'내추럴', 'Bank Note':'내추럴', 'Topo Map':'내추럴', Clipboard:'내추럴', Terrazzo:'내추럴', 'Sage Frame':'내추럴',
   'Lavender Fog':'파스텔', 'Aqua Milk':'파스텔', Pudding:'파스텔', 'Bubble Bath':'파스텔', 'Sweet Pea':'파스텔', Unicorn:'파스텔', 'Cream Soda':'파스텔', 'Peach Cloud':'파스텔', Custard:'파스텔', 'Hazy Rose':'파스텔', Clay:'내추럴', Birch:'내추럴', Walnut:'내추럴', Fern:'내추럴', Rye:'내추럴', Mudflat:'내추럴', Herbarium:'내추럴', Meadow:'내추럴', 'Dried Lavender':'내추럴', 'Pool Party':'비비드', Crayon:'비비드', Sprinkles:'비비드', 'Fruit Salad':'비비드', 'Dark Chocolate':'다크', 'Oil Slick':'다크', Rosewood:'다크', Petrol:'다크', Diner:'레트로', 'Avocado Kitchen':'레트로', Polaroid:'레트로', Arcade:'레트로', Sunbleached:'레트로', Kodachrome:'레트로', 'Bowling Alley':'레트로', 'Y2K Chrome':'레트로', 'Mid Century':'레트로', Motel:'레트로', 'Game Boy':'레트로', Postcard:'레트로', Milkshake:'레트로', 'Drive-in':'레트로', 'Vinyl Record':'레트로', 'Super 8':'레트로', Tupperware:'레트로', 'Ice Cream Parlor':'레트로', 'Pop Bottle':'레트로', 'Slide Film':'레트로', Laundromat:'레트로', Tiki:'레트로', Atomic:'레트로', Varsity:'레트로', Lapis:'비비드', 'Smoky Quartz':'다크', 'Imperial Jade':'내추럴', Azurite:'파스텔', Dancheong:'내추럴', Maehwa:'파스텔', Chalkboard:'다크',
-  'Iris Garden':'비비드', 'Kraft Paper':'내추럴', Bruise:'파스텔', 'Tomato Garden':'비비드', Rooibos:'내추럴', 'Sakura Night':'다크', Pomegranate:'비비드', 'Desert Night':'다크', 'E-ink':'내추럴', 'Coral Reef':'비비드', Hojicha:'내추럴', 'Duotone Plum Lime':'비비드', 'Blueberry Muffin':'파스텔', Camellia:'비비드', Wasabi:'비비드', Illuminated:'레트로', Infrared:'파스텔', Fresco:'내추럴', Marigold:'비비드', Peacock:'다크', Basalt:'다크', Chamomile:'파스텔',
+  'Iris Garden':'비비드', 'Kraft Paper':'내추럴', Bruise:'파스텔', 'Tomato Garden':'비비드', Rooibos:'내추럴', 'Sakura Night':'다크', Pomegranate:'비비드', 'Desert Night':'다크', 'E-ink':'내추럴', 'Coral Reef':'비비드', Hojicha:'내추럴', 'Duotone Plum Lime':'비비드', 'Blueberry Muffin':'파스텔', Camellia:'비비드', Wasabi:'비비드', Illuminated:'레트로', Infrared:'파스텔', Fresco:'내추럴', Marigold:'비비드', Peacock:'다크', Basalt:'다크', Chamomile:'파스텔', 'Turquoise Matrix':'내추럴', Denim:'비비드', 'Mango Lassi':'파스텔', 'Ukiyo-e':'레트로', Ballpoint:'내추럴', 'Carbon Copy':'파스텔',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
