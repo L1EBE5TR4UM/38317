@@ -114,6 +114,38 @@ const THEMES = {
     muted:'#8a9aa8',
     title:'#dfcdc8', subtitle:'#fafafa', char:'#e1eeff'
   },
+  // City 구조에 아주 옅은 Klein 파랑 바탕 + City 갈색 계열 코코아 Play(#5a4036), 본문 글자는 순검정
+  'Cocoa Snow': {
+    outerBg:'#f5f6fe', card:'#ffffff', text:'#000000',
+    hl:'#dee3fa', hl2:'#f0f2fd',
+    accent:'#5a4036', accentText:'#f5ece6',
+    muted:'#5a66b0',
+    title:'#e5d6cf', subtitle:'#fafafa', char:'#f0f2fd'
+  },
+  // City 구조에 Klein Mono 파랑(#eceffc·#d2d8f8) + 회보라 모브 Play(#86596f), 본문 글자는 순검정
+  'Blue Mauve': {
+    outerBg:'#eceffc', card:'#ffffff', text:'#000000',
+    hl:'#d2d8f8', hl2:'#e8ebfa',
+    accent:'#86596f', accentText:'#ffffff',
+    muted:'#5a66b0',
+    title:'#ecdbe3', subtitle:'#fafafa', char:'#e8ebfa'
+  },
+  // Blue Mauve와 일부러 닮게 둠(ΔE 3.9): 바탕을 짙은 코발트 쪽(#e3e8fa·#c4cef4)으로 내리고, Play는 더 어둡고 회색 섞인 히더(#6e5470)
+  Heather: {
+    outerBg:'#e3e8fa', card:'#ffffff', text:'#000000',
+    hl:'#c4cef4', hl2:'#dfe5f8',
+    accent:'#6e5470', accentText:'#f6eff6',
+    muted:'#3e4c9e',
+    title:'#e4d8e5', subtitle:'#fafafa', char:'#dfe5f8'
+  },
+  // City 구조에 하늘색 쪽 파랑 바탕 + 푸른 기가 도는 유칼립투스 Play(#4f6f68), 본문 글자는 순검정
+  Eucalyptus: {
+    outerBg:'#e7effc', card:'#ffffff', text:'#000000',
+    hl:'#cbdaf4', hl2:'#e3ecf9',
+    accent:'#4f6f68', accentText:'#ffffff',
+    muted:'#4a68a6',
+    title:'#d8e6e2', subtitle:'#fafafa', char:'#e3ecf9'
+  },
   // 귤빛 바탕 + 연두 잎 Play 버튼(#7fb558)에 진초록 아이콘(#173a10), 정지 버튼은 연한 귤색, 본문 글자는 순검정
   Tangerine: {
     outerBg:'#ffeedd', card:'#ffffff', text:'#000000',
@@ -2096,7 +2128,7 @@ const THEMES = {
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로'];
 const THEME_GROUP_OF = {
-  Default:'내추럴', Sage:'내추럴', 'Old Money Light':'내추럴', City:'내추럴',
+  Default:'내추럴', Sage:'내추럴', 'Old Money Light':'내추럴', City:'내추럴', 'Cocoa Snow':'내추럴', 'Blue Mauve':'내추럴', Heather:'내추럴', Eucalyptus:'내추럴',
   Linen:'내추럴', Driftwood:'내추럴', Latte:'내추럴', Seaside:'내추럴', Surf:'내추럴',
   Peony:'파스텔', Lavender:'파스텔', Sky:'파스텔', 'Cotton Candy':'파스텔', Apricot:'파스텔',
   Blush:'파스텔', 'Baby Blue':'파스텔', Pistachio:'파스텔', Periwinkle:'파스텔',
