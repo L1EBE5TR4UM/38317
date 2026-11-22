@@ -2348,6 +2348,62 @@ const THEMES = {
     muted:'#55506a',
     title:'#fffdf2', subtitle:'#f6f2dc', char:'#ddd4f2'
   },
+  // 플라밍고: 분홍 깃털과 검은 부리, 본문 글자는 테마 색조를 띤 짙은 색
+  Flamingo: {
+    outerBg:'#f9d3d8', card:'#fffafa', text:'#4a011d',
+    hl:'#f6b0bd', hl2:'#eadfd6',
+    accent:'#1f1a1c', accentText:'#ffd9df',
+    muted:'#68444e',
+    title:'#fff3f5', subtitle:'#ffe4e9', char:'#f7b3c0'
+  },
+  // 비단잉어 연못: 회청색 물과 주홍 잉어, 본문 글자는 테마 색조를 띤 짙은 색
+  'Koi Pond': {
+    outerBg:'#b9cfcc', card:'#ffffff', text:'#491400',
+    hl:'#f7c3a6', hl2:'#d3e2df',
+    accent:'#c03e1a', accentText:'#ffffff',
+    muted:'#4a5654',
+    title:'#fff6f0', subtitle:'#eef4f3', char:'#f6b08e'
+  },
+  // 말차 라테: 말차 초록과 우유 거품, 본문 글자는 테마 색조를 띤 짙은 색
+  'Matcha Latte': {
+    outerBg:'#ece6d8', card:'#fbfaf3', text:'#182600',
+    hl:'#c3d39b', hl2:'#eee4d3',
+    accent:'#3f5a1f', accentText:'#ffffff',
+    muted:'#4e593c',
+    title:'#fafcf2', subtitle:'#eef3dd', char:'#e8dcc4'
+  },
+  // 분청사기: 회청색 흙에 바른 흰 분장, 본문 글자는 테마 색조를 띤 짙은 색
+  Buncheong: {
+    outerBg:'#9fb2b2', card:'#f3f2ec', text:'#002127',
+    hl:'#d4d6cd', hl2:'#e4dccb',
+    accent:'#2f4f55', accentText:'#f3f2ec',
+    muted:'#3a4341',
+    title:'#fafaf6', subtitle:'#e9eae4', char:'#e0d7c2'
+  },
+  // 다육식물: 분청록 잎과 분홍 잎끝, 본문 글자는 테마 색조를 띤 짙은 색
+  Succulent: {
+    outerBg:'#cdd9d3', card:'#fbfcfa', text:'#002a21',
+    hl:'#b6cfc6', hl2:'#f2d4d6',
+    accent:'#3f6a5e', accentText:'#ffffff',
+    muted:'#445751',
+    title:'#f8fbfa', subtitle:'#e8f0ec', char:'#f2c9cd'
+  },
+  // 원고지: 흰 종이에 주홍 칸선 (실험적), 본문 글자는 테마 색조를 띤 짙은 색
+  'Manuscript Paper': {
+    outerBg:'#f3e9e2', card:'#ffffff', text:'#4a1201',
+    hl:'#f8d6cc', hl2:'#eef0e4',
+    accent:'#c23a1e', accentText:'#ffffff',
+    muted:'#6a4a40',
+    title:'#fff8f4', subtitle:'#fdebe4', char:'#f6c0b0'
+  },
+  // 지하철 노선도: 흰 바탕에 초록·주황 노선 (실험적), 본문 글자는 테마 색조를 띤 짙은 색
+  'Subway Map': {
+    outerBg:'#eef0ee', card:'#ffffff', text:'#002d04',
+    hl:'#cfe8cf', hl2:'#fbdcbc',
+    accent:'#23752e', accentText:'#ffffff',
+    muted:'#4e5250',
+    title:'#ffffff', subtitle:'#eef6ee', char:'#f9c896'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로'];
@@ -2377,7 +2433,7 @@ const THEME_GROUP_OF = {
   'Navy Velvet':'다크', 'Charcoal Rose':'다크', Starlight:'다크', Obsidian:'다크', Lunar:'다크', Velvet:'다크', Graphite:'다크', 'Indigo Ink':'다크', 'Silver Night':'다크', 'Night Frost':'다크', 'Red Dot Night':'다크', Negative:'다크', 'Negative Sand':'다크', 'Green Cloth':'다크', 'Slate Cloth':'다크', 'Wine Cloth':'다크',
   Hanji:'내추럴', Chestnut:'내추럴', Stone:'내추럴', 'Ivory Ink':'내추럴', Sandstone:'내추럴', Inverse:'내추럴', 'Red Dot':'내추럴', 'Sepia Photo':'내추럴', Newsprint:'내추럴', 'Paper White':'내추럴', 'Graph Paper':'내추럴', Letterpress:'내추럴', Airmail:'내추럴', Washi:'내추럴', 'Inverse Navy':'내추럴', 'Half Moon':'내추럴', 'Sage Mono':'내추럴', 'Inverse Slate':'내추럴', 'Index Card':'내추럴', Ledger:'내추럴', 'Manila Folder':'내추럴', Spreadsheet:'내추럴', Verdigris:'내추럴', 'Olive Leaf':'내추럴', Passport:'내추럴', 'Bank Note':'내추럴', 'Topo Map':'내추럴', Clipboard:'내추럴', Terrazzo:'내추럴', 'Sage Frame':'내추럴',
   'Lavender Fog':'파스텔', 'Aqua Milk':'파스텔', Pudding:'파스텔', 'Bubble Bath':'파스텔', 'Sweet Pea':'파스텔', Unicorn:'파스텔', 'Cream Soda':'파스텔', 'Peach Cloud':'파스텔', Custard:'파스텔', 'Hazy Rose':'파스텔', Clay:'내추럴', Birch:'내추럴', Walnut:'내추럴', Fern:'내추럴', Rye:'내추럴', Mudflat:'내추럴', Herbarium:'내추럴', Meadow:'내추럴', 'Dried Lavender':'내추럴', 'Pool Party':'비비드', Crayon:'비비드', Sprinkles:'비비드', 'Fruit Salad':'비비드', 'Dark Chocolate':'다크', 'Oil Slick':'다크', Rosewood:'다크', Petrol:'다크', Diner:'레트로', 'Avocado Kitchen':'레트로', Polaroid:'레트로', Arcade:'레트로', Sunbleached:'레트로', Kodachrome:'레트로', 'Bowling Alley':'레트로', 'Y2K Chrome':'레트로', 'Mid Century':'레트로', Motel:'레트로', 'Game Boy':'레트로', Postcard:'레트로', Milkshake:'레트로', 'Drive-in':'레트로', 'Vinyl Record':'레트로', 'Super 8':'레트로', Tupperware:'레트로', 'Ice Cream Parlor':'레트로', 'Pop Bottle':'레트로', 'Slide Film':'레트로', Laundromat:'레트로', Tiki:'레트로', Atomic:'레트로', Varsity:'레트로', Lapis:'비비드', 'Smoky Quartz':'다크', 'Imperial Jade':'내추럴', Azurite:'파스텔', Dancheong:'내추럴', Maehwa:'파스텔', Chalkboard:'다크',
-  'Iris Garden':'비비드', 'Kraft Paper':'내추럴', Bruise:'파스텔', 'Tomato Garden':'비비드', Rooibos:'내추럴', 'Sakura Night':'다크', Pomegranate:'비비드', 'Desert Night':'다크', 'E-ink':'내추럴', 'Coral Reef':'비비드', Hojicha:'내추럴', 'Duotone Plum Lime':'비비드', 'Blueberry Muffin':'파스텔', Camellia:'비비드', Wasabi:'비비드', Illuminated:'레트로', Infrared:'파스텔', Fresco:'내추럴', Marigold:'비비드', Peacock:'다크', Basalt:'다크', Chamomile:'파스텔', 'Turquoise Matrix':'내추럴', Denim:'비비드', 'Mango Lassi':'파스텔', 'Ukiyo-e':'레트로', Ballpoint:'내추럴', 'Carbon Copy':'파스텔',
+  'Iris Garden':'비비드', 'Kraft Paper':'내추럴', Bruise:'파스텔', 'Tomato Garden':'비비드', Rooibos:'내추럴', 'Sakura Night':'다크', Pomegranate:'비비드', 'Desert Night':'다크', 'E-ink':'내추럴', 'Coral Reef':'비비드', Hojicha:'내추럴', 'Duotone Plum Lime':'비비드', 'Blueberry Muffin':'파스텔', Camellia:'비비드', Wasabi:'비비드', Illuminated:'레트로', Infrared:'파스텔', Fresco:'내추럴', Marigold:'비비드', Peacock:'다크', Basalt:'다크', Chamomile:'파스텔', 'Turquoise Matrix':'내추럴', Denim:'비비드', 'Mango Lassi':'파스텔', 'Ukiyo-e':'레트로', Ballpoint:'내추럴', 'Carbon Copy':'파스텔', Flamingo:'비비드', 'Koi Pond':'비비드', 'Matcha Latte':'파스텔', Buncheong:'내추럴', Succulent:'내추럴', 'Manuscript Paper':'레트로', 'Subway Map':'비비드',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
