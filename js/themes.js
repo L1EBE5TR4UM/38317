@@ -2220,6 +2220,86 @@ const THEMES = {
     muted:'#6b5a6e',
     title:'#f6fbe6', subtitle:'#eef5d3', char:'#d9e8a6'
   },
+  // 블루베리 머핀: 보랏빛 남색 열매와 구운 머핀 갈색, 본문 글자는 테마 색조를 띤 짙은 색
+  'Blueberry Muffin': {
+    outerBg:'#e7e3ee', card:'#fdfbf7', text:'#181b5a',
+    hl:'#cdc8e6', hl2:'#ecdcc4',
+    accent:'#3a3570', accentText:'#fdfbf7',
+    muted:'#4e4a6a',
+    title:'#f6f3ff', subtitle:'#ede9fa', char:'#efd9b8'
+  },
+  // 동백: 붉은 동백꽃과 윤이 나는 짙은 초록 잎, 본문 글자는 테마 색조를 띤 짙은 색
+  Camellia: {
+    outerBg:'#e6ede6', card:'#fffdfb', text:'#002c1a',
+    hl:'#f2bdbd', hl2:'#cfe0d2',
+    accent:'#1f4a35', accentText:'#ffffff',
+    muted:'#3f5246',
+    title:'#fff4f3', subtitle:'#ffe9e8', char:'#f4b8b8'
+  },
+  // 고추냉이: 연두 고추냉이와 간장 검정, 본문 글자는 테마 색조를 띤 짙은 색
+  Wasabi: {
+    outerBg:'#e3ecc9', card:'#fbfdf4', text:'#1e2700',
+    hl:'#cfe39a', hl2:'#e1e2d8',
+    accent:'#1e1f19', accentText:'#e8f2c6',
+    muted:'#45502b',
+    title:'#f8fde8', subtitle:'#eef6d6', char:'#d6eba0'
+  },
+  // 채색 필사본: 양피지에 울트라마린과 금박, 본문 글자는 테마 색조를 띤 짙은 색
+  Illuminated: {
+    outerBg:'#eadfc6', card:'#fbf5e8', text:'#011a55',
+    hl:'#c7cff0', hl2:'#efdca6',
+    accent:'#24398f', accentText:'#fbf5e8',
+    muted:'#4f4433',
+    title:'#fff7e6', subtitle:'#f6e8c8', char:'#f0d68a'
+  },
+  // 적외선 사진: 하얗게 바랜 나무와 분홍빛 잎, 청록 하늘 (실험적), 본문 글자는 테마 색조를 띤 짙은 색
+  Infrared: {
+    outerBg:'#f3e6ee', card:'#fffcfd', text:'#02282e',
+    hl:'#f2c6dc', hl2:'#cde5e9',
+    accent:'#24636e', accentText:'#ffffff',
+    muted:'#5a4458',
+    title:'#fff7fb', subtitle:'#fbeaf3', char:'#c9e9ee'
+  },
+  // 프레스코: 석회벽에 바랜 테라코타와 청금석, 본문 글자는 테마 색조를 띤 짙은 색
+  Fresco: {
+    outerBg:'#eadfd2', card:'#f9f5ef', text:'#021f41',
+    hl:'#e7bfa4', hl2:'#c9d3e4',
+    accent:'#2f4a7a', accentText:'#f9f5ef',
+    muted:'#5a4a3f',
+    title:'#fff6ee', subtitle:'#f4e9dd', char:'#e9b796'
+  },
+  // 금잔화: 주황빛 금잔화와 짙은 자주 꽃심, 본문 글자는 테마 색조를 띤 짙은 색
+  Marigold: {
+    outerBg:'#f8e3c4', card:'#fffaf2', text:'#450d2c',
+    hl:'#f8c27a', hl2:'#ead2df',
+    accent:'#5a1a3d', accentText:'#fffaf2',
+    muted:'#5a3e45',
+    title:'#fff4e3', subtitle:'#ffe9cc', char:'#fbc67e'
+  },
+  // 공작: 짙은 청록 깃털과 남보라 눈 무늬, 금빛, 본문 글자는 테마 색조를 띤 짙은 색
+  Peacock: {
+    outerBg:'#0c2629', card:'#123236', text:'#c4f3fa',
+    hl:'#2f3f6e', hl2:'#1f4a4c',
+    accent:'#d6b65e', accentText:'#0c2629',
+    muted:'#9db9b6',
+    title:'#f6fcfb', subtitle:'#dcefeb', char:'#e2c779'
+  },
+  // 현무암: 검회색 화산석과 식은 용암 주황, 본문 글자는 테마 색조를 띤 짙은 색
+  Basalt: {
+    outerBg:'#1c1c1e', card:'#262628', text:'#fee6dd',
+    hl:'#5a3426', hl2:'#3a3a3d',
+    accent:'#d9774a', accentText:'#1c1c1e',
+    muted:'#acaaa5',
+    title:'#fff5ef', subtitle:'#ece7e2', char:'#e9a07c'
+  },
+  // 카모마일: 흰 꽃잎과 노란 꽃심, 연둣빛 찻물, 본문 글자는 테마 색조를 띤 짙은 색
+  Chamomile: {
+    outerBg:'#eef2e0', card:'#ffffff', text:'#232901',
+    hl:'#f6e7a0', hl2:'#dbe8c6',
+    accent:'#5c6a1f', accentText:'#ffffff',
+    muted:'#4f5235',
+    title:'#fffef2', subtitle:'#f7f6e2', char:'#f6e39a'
+  },
 };
 /* 테마 선택 메뉴의 분위기 묶음 (‘전체’는 위 THEMES 순서 그대로) */
 const THEME_GROUPS = ['파스텔','내추럴','비비드','다크','레트로'];
@@ -2249,7 +2329,7 @@ const THEME_GROUP_OF = {
   'Navy Velvet':'다크', 'Charcoal Rose':'다크', Starlight:'다크', Obsidian:'다크', Lunar:'다크', Velvet:'다크', Graphite:'다크', 'Indigo Ink':'다크', 'Silver Night':'다크', 'Night Frost':'다크', 'Red Dot Night':'다크', Negative:'다크', 'Negative Sand':'다크', 'Green Cloth':'다크', 'Slate Cloth':'다크', 'Wine Cloth':'다크',
   Hanji:'내추럴', Chestnut:'내추럴', Stone:'내추럴', 'Ivory Ink':'내추럴', Sandstone:'내추럴', Inverse:'내추럴', 'Red Dot':'내추럴', 'Sepia Photo':'내추럴', Newsprint:'내추럴', 'Paper White':'내추럴', 'Graph Paper':'내추럴', Letterpress:'내추럴', Airmail:'내추럴', Washi:'내추럴', 'Inverse Navy':'내추럴', 'Half Moon':'내추럴', 'Sage Mono':'내추럴', 'Inverse Slate':'내추럴', 'Index Card':'내추럴', Ledger:'내추럴', 'Manila Folder':'내추럴', Spreadsheet:'내추럴', Verdigris:'내추럴', 'Olive Leaf':'내추럴', Passport:'내추럴', 'Bank Note':'내추럴', 'Topo Map':'내추럴', Clipboard:'내추럴', Terrazzo:'내추럴', 'Sage Frame':'내추럴',
   'Lavender Fog':'파스텔', 'Aqua Milk':'파스텔', Pudding:'파스텔', 'Bubble Bath':'파스텔', 'Sweet Pea':'파스텔', Unicorn:'파스텔', 'Cream Soda':'파스텔', 'Peach Cloud':'파스텔', Custard:'파스텔', 'Hazy Rose':'파스텔', Clay:'내추럴', Birch:'내추럴', Walnut:'내추럴', Fern:'내추럴', Rye:'내추럴', Mudflat:'내추럴', Herbarium:'내추럴', Meadow:'내추럴', 'Dried Lavender':'내추럴', 'Pool Party':'비비드', Crayon:'비비드', Sprinkles:'비비드', 'Fruit Salad':'비비드', 'Dark Chocolate':'다크', 'Oil Slick':'다크', Rosewood:'다크', Petrol:'다크', Diner:'레트로', 'Avocado Kitchen':'레트로', Polaroid:'레트로', Arcade:'레트로', Sunbleached:'레트로', Kodachrome:'레트로', 'Bowling Alley':'레트로', 'Y2K Chrome':'레트로', 'Mid Century':'레트로', Motel:'레트로', 'Game Boy':'레트로', Postcard:'레트로', Milkshake:'레트로', 'Drive-in':'레트로', 'Vinyl Record':'레트로', 'Super 8':'레트로', Tupperware:'레트로', 'Ice Cream Parlor':'레트로', 'Pop Bottle':'레트로', 'Slide Film':'레트로', Laundromat:'레트로', Tiki:'레트로', Atomic:'레트로', Varsity:'레트로', Lapis:'비비드', 'Smoky Quartz':'다크', 'Imperial Jade':'내추럴', Azurite:'파스텔', Dancheong:'내추럴', Maehwa:'파스텔', Chalkboard:'다크',
-  'Iris Garden':'비비드', 'Kraft Paper':'내추럴', Bruise:'파스텔', 'Tomato Garden':'비비드', Rooibos:'내추럴', 'Sakura Night':'다크', Pomegranate:'비비드', 'Desert Night':'다크', 'E-ink':'내추럴', 'Coral Reef':'비비드', Hojicha:'내추럴', 'Duotone Plum Lime':'비비드',
+  'Iris Garden':'비비드', 'Kraft Paper':'내추럴', Bruise:'파스텔', 'Tomato Garden':'비비드', Rooibos:'내추럴', 'Sakura Night':'다크', Pomegranate:'비비드', 'Desert Night':'다크', 'E-ink':'내추럴', 'Coral Reef':'비비드', Hojicha:'내추럴', 'Duotone Plum Lime':'비비드', 'Blueberry Muffin':'파스텔', Camellia:'비비드', Wasabi:'비비드', Illuminated:'레트로', Infrared:'파스텔', Fresco:'내추럴', Marigold:'비비드', Peacock:'다크', Basalt:'다크', Chamomile:'파스텔',
 };
 /* 이름을 바꾼 테마: 예전 이름 → 지금 이름. 저장된 프리셋·즐겨찾기를 불러올 때 새 이름으로 옮김 (지우지 말 것) */
 const THEME_RENAMED = { Butter:'Butter Bar' };
